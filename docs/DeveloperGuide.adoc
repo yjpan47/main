@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= Du - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
