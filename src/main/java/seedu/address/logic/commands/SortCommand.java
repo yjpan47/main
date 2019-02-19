@@ -7,6 +7,10 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
+
+/**
+ * Sorts all persons in the address book.
+ */
 public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
