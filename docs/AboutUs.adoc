@@ -29,7 +29,7 @@ Responsibilities: Duty Assignment Algorithm
 '''
 
 === Cho Ming En
-image::mechome.jpg[width="150", align="left"]
+image::mechome.png[width="150", align="left"]
 {empty}[https://github.com/mechome[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
@@ -38,7 +38,7 @@ Responsibilities: Graphic User Interface
 '''
 
 === Ng Wei Le
-image::exactlyprecise.jpg[width="150", align="left"]
+image::exactlyprecise.png[width="150", align="left"]
 {empty}[https://github.com/exactlyprecise[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
