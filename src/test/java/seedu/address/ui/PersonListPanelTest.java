@@ -70,8 +70,8 @@ public class PersonListPanelTest extends GuiUnitTest {
             initUi(backingList);
             guiRobot.interact(backingList::clear
             );
-        }, "Creation and deletion of " +
-                "person cards exceeded time limit");
+        }, "Creation and deletion of "
+                + "person cards exceeded time limit");
     }
 
     /**
