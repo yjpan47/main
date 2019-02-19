@@ -19,7 +19,7 @@ Responsibilites: Authentication features
 
 '''
 
-=== Pan Yong Jing
+=== Pan Yongjing
 image::yjpan47.png[width="150", align="left"]
 {empty}[https://github.com/yjpan47[github]] [<<johndoe#, portfolio>>]
 
