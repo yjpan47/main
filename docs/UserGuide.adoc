@@ -48,12 +48,14 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
-=== Viewing help : `help`
+=== User Features
+
+==== Viewing help : `help`
 
 Lists out a list of commands & instructions +
 Format: `help`
 
-=== Log in : `login` `Not implemented yet`
+==== Log in : `login` `Not implemented yet`
 
 Log user into their account. +
 NRIC and password are case-sensitive. +
@@ -63,11 +65,11 @@ Example:
 
 * `login n/S01234567Z pw/cs2103noteasy`
 
-=== Log out : `logout` `Not implemented yet`
+==== Log out : `logout` `Not implemented yet`
 Logs the user out of the account +
 Format : `logout`
 
-=== Change password : `chpass` `Not implemented yet`
+==== Change password : `chpass` `Not implemented yet`
 Changes password of the user to a new one. The system will prompt the user to reconfirm the new password. +
 Format: `chpass pw/CURRENT_PASSWORD pw/NEW_PASSWORD
 
@@ -75,11 +77,11 @@ Example:
 
 * `chpass pw/cs2103noteasy pw/cs2103veryhard`
 
-=== View duties assigned to user : `view` `Not implemented yet`
+==== View duties assigned to user : `view` `Not implemented yet`
 The user can see their details about their own duties assigned to them and their upcoming duties ranked by recency. +
 Format: `view`
 
-=== View duties assigned to other users : `view` `Not implemented yet`
+==== View duties assigned to other users : `view` `Not implemented yet`
 The user can see their details about their own duties assigned to other users. +
 Format: `view NAME`
 
@@ -87,7 +89,7 @@ Example:
 
 * `view Cassell`
 
-=== View roster : `roster` `Not implemented yet`
+==== View roster : `roster` `Not implemented yet`
 The user can see the full duty rosters for particular months. +
 Format: `roster MONTH`
 
@@ -95,7 +97,7 @@ Example:
 
 * `roster February`
 
-=== Block dates : `block`
+==== Block dates : `block`
 The user can block dates and set which dates they are unavailable to duties for upcoming months. A user can block up to 15 days per month. +
 Format: `block MONTH DAY DAY DAY ...`
 
@@ -103,7 +105,7 @@ Example:
 
 * `block March 3 6 15 21 30`
 
-=== View blocked dates : `block`
+==== View blocked dates : `block`
 The user can view the dates they have blocked for a particular month. +
 Format: `block MONTH`
 
@@ -111,11 +113,11 @@ Example:
 
 * `block March`
 
-=== Find who is assigned duty today : `who`
+==== Find who is assigned duty today : `who`
 The user can find out which person is assigned duty today. +
 Format: `who`
 
-=== Find who is assigned duty on a given day : `who`
+==== Find who is assigned duty on a given day : `who`
 The user can find out which person is assigned duty on a given day. +
 Format: `who DATE`
 
@@ -123,7 +125,7 @@ Example:
 
 * `who 14022019`
 
-=== Make a swap request with another user : `swap`
+==== Make a swap request with another user : `swap`
 The user can request for a duty swap with another user. This will be subject to the agreement of the other user and approval of the admin (i.e. commander). +
 The other user and admin will be notified upon login and they will be prompted to accept or decline the request. + 
 Format: `swap d/CURRENTDUTYDATE d/DESIREDDUTYDATE [t/MESSAGE]
@@ -132,233 +134,96 @@ Example:
 
 * `swap d/14022019 d/21022019 t/Please help a bro out!`
 
-=== Finding another person: `find`
+==== Finding another person: `find`
 The user can find people whose names contain any of the given keywords. Information of the person’s rank. company, section and contact number can be seen. +
 Format: `find KEYWORD [MORE KEYWORDS]`
 
-=== Filter people: `filter`
+==== Filter people: `filter`
 The user can list out the people who are within the filtered rank, date, or company. The list can be sorted in ascending or descending order. +
 Format: `filter [A or D] [s/STARTDATE] [e/ENDDATE] [r/RANK] [c/COMPANY] [s/SQUAD]`
 
-====
+=====
 * Default ordering is alphabetical order, ascending
 * A or D specifies if ordering is ascending or descending
 * Dates to be entered in ddmmyyyy format.
-====
+=====
 
 Examples:
 
-* `filter`
+* `filter` +
 Lists down all personnel, without any filtering, sorted in ascending order by default
 
-* `filter D s/11022019 e/11032019 r/PTE`
+* `filter D s/11022019 e/11032019 r/PTE` +
 Lists down all personnel with rank Private and available dates between 11-Feb-2019 and 11-March-2019, in descending alphabetical order.
 
-=== Exit : `exit`
+==== Exit : `exit`
 Exits the program. User will be logged out automatically. +
 Format: `exit`
 
+=== Admin Features
 
+==== Viewing help for admin : `helpadmin`
+Lists out a list of commands & instructions for admin. +
+Format: `helpadmin`
 
-=== Adding a person: `add`
+==== Add a user : `add`
+Add a user to the system with the corresponding NRIC, password, company, section, rank and contact number. +
+Format: `add n/NRIC pw/PASSWORD c/COMPANY s/SECTION r/RANK n/NAME p/CONTACTNUMBER`
 
-Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+==== Delete a user : `delete`
+Delete a user from the system with the corresponding NRIC. The admin will be prompted with a confirmation message. +
+Format: `delete NRIC`
 
-[TIP]
-A person can have any number of tags (including 0)
+==== Update a user’s details : `edit`
+Updates a existing user’s details given an NRIC. +
+Format: `edit [n/NRIC] [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONENUMBER]`
 
-Examples:
+==== Import personal details from a file : `import`
+Imports personal details of users from a TXT file. +
+Format: `import [FILE_NAME.txt]`
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
-=== Listing all persons : `list`
-
-Shows a list of all persons in the address book. +
+==== List all the users: `list`
+Lists out all users in the system with their details. +
 Format: `list`
 
-=== Editing a person : `edit`
+==== Scheduling duties : `schedule` 
+This command schedules the duties for the upcoming month. It takes into account the block out dates of each guard duty personnel and their extras. It will sort by available dates and distribute duties accordingly. After the algorithm computes a plausible schedule, the schedule will be displayed and admin will be prompted to either confirm the schedule or rerun the scheduler algorithm. +
+Format: `schedule MONTH`
 
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+==== Extra duty : `extra` 
+Automatically allocates extra duties for a selected personnel in the upcoming month. +
+Format: `extra n/NRIC d/NUMBEROFDAYS`
 
-****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
-****
+Example: 
 
-Examples:
-
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-=== Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-****
-
-Examples:
-
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
-
-=== Deleting a person : `delete`
-
-Deletes the specified person from the address book. +
-Format: `delete INDEX`
-
-****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
-
-Examples:
-
-* `list` +
-`delete 2` +
-Deletes the 2nd person in the address book.
-* `find Betsy` +
-`delete 1` +
-Deletes the 1st person in the results of the `find` command.
-
-=== Selecting a person : `select`
-
-Selects the person identified by the index number used in the displayed person list. +
-Format: `select INDEX`
-
-****
-* Selects the person and loads the Google search page the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* `1, 2, 3, ...`
-****
-
-Examples:
-
-* `list` +
-`select 2` +
-Selects the 2nd person in the address book.
-* `find Betsy` +
-`select 1` +
-Selects the 1st person in the results of the `find` command.
-
-=== Listing entered commands : `history`
-
-Lists all the commands that you have entered in reverse chronological order. +
-Format: `history`
-
-[NOTE]
-====
-Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
-====
-
-// tag::undoredo[]
-=== Undoing previous command : `undo`
-
-Restores the address book to the state before the previous _undoable_ command was executed. +
-Format: `undo`
-
-[NOTE]
-====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
-====
-
-Examples:
-
-* `delete 1` +
-`list` +
-`undo` (reverses the `delete 1` command) +
-
-* `select 1` +
-`list` +
-`undo` +
-The `undo` command fails as there are no undoable commands executed previously.
-
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-
-=== Redoing the previously undone command : `redo`
-
-Reverses the most recent `undo` command. +
-Format: `redo`
-
-Examples:
-
-* `delete 1` +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
-
-* `delete 1` +
-`redo` +
-The `redo` command fails as there are no `undo` commands executed previously.
-
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
-`redo` (reapplies the `clear` command) +
-// end::undoredo[]
-
-=== Clearing all entries : `clear`
-
-Clears all entries from the address book. +
-Format: `clear`
-
-=== Exiting the program : `exit`
-
-Exits the program. +
-Format: `exit`
+*`extra n/S9876543A d/7`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+Duty roster data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
-
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
-
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
 
 == FAQ
 
-*Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*Q*: What if I want to swap my duty with another person? +
+*A*: Contact the administrator with the request.
 
 == Command Summary
-
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *List* : `list`
-* *Help* : `help`
-* *Select* : `select INDEX` +
-e.g.`select 2`
-* *History* : `history`
-* *Undo* : `undo`
-* *Redo* : `redo`
+General User
+* *Viewing help* : `help`
+* *Log in* : `login n/NRIC  pw/PASSWORD`
+* *Log out* : `logout`
+* *View* : `view KEYWORD [MORE KEYWORDS]`
+* *Blocking dates* : `block d/date d/date d/date …`
+* *Finding a person* : `find KEYWORD [MORE KEYWORDS]`
+* *Filter* : `filter [A or D] [s/STARTDATE] [e/ENDDATE] [r/RANK] [c/COMPANY] [s/SQUAD]`
+* *Change password* : `chpass pw/CURRENT_PASSWORD pw/NEW_PASSWORD`
+* *Exit* : `exit`
+Admin
+* *Command help for admin* : `helpAdmin`
+* *Add a user* : `addUser n/NRIC pw/PASSWORD c/COMPANY s/SECTION r/RANK n/NAME p/PHONENUMBER`
+* *Delete a user* : `deleteUser n/NRIC`
+* *Edit a user* : `editUser [n/NRIC] [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONENUMBER]`
+* *Import personal details from a file* : `import [FILE_NAME.txt]`
+* *List all the users* : `listUser`
+* *Scheduling duties* : `schedule m/MONTH`
