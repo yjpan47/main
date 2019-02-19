@@ -50,13 +50,13 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 === Viewing help : `help`
 
-Lists out a list of commands & instructions
+Lists out a list of commands & instructions +
 Format: `help`
 
 === Log in : `login` `Not implemented yet`
 
-Log user into their account.
-NRIC and password are case-sensitive.
+Log user into their account. +
+NRIC and password are case-sensitive. +
 Format: `login n/NRIC pw/PASSWORD`
 
 Example:
@@ -64,11 +64,11 @@ Example:
 * `login n/S01234567Z pw/cs2103noteasy`
 
 === Log out : `logout` `Not implemented yet`
-Logs the user out of the account
+Logs the user out of the account +
 Format : `logout`
 
 === Change password : `chpass` `Not implemented yet`
-Changes password of the user to a new one. The system will prompt the user to reconfirm the new password.
+Changes password of the user to a new one. The system will prompt the user to reconfirm the new password. +
 Format: `chpass pw/CURRENT_PASSWORD pw/NEW_PASSWORD
 
 Example: 
@@ -76,11 +76,11 @@ Example:
 * `chpass pw/cs2103noteasy pw/cs2103veryhard`
 
 === View duties assigned to user : `view` `Not implemented yet`
-The user can see their details about their own duties assigned to them and their upcoming duties ranked by recency.
+The user can see their details about their own duties assigned to them and their upcoming duties ranked by recency. +
 Format: `view`
 
 === View duties assigned to other users : `view` `Not implemented yet`
-The user can see their details about their own duties assigned to other users.
+The user can see their details about their own duties assigned to other users. +
 Format: `view NAME`
 
 Example:
@@ -88,7 +88,7 @@ Example:
 * `view Cassell`
 
 === View roster : `roster` `Not implemented yet`
-The user can see the full duty rosters for particular months.
+The user can see the full duty rosters for particular months. +
 Format: `roster MONTH`
 
 Example:
@@ -96,7 +96,7 @@ Example:
 * `roster February`
 
 === Block dates : `block`
-The user can block dates and set which dates they are unavailable to duties for upcoming months. A user can block up to 15 days per month.
+The user can block dates and set which dates they are unavailable to duties for upcoming months. A user can block up to 15 days per month. +
 Format: `block MONTH DAY DAY DAY ...`
 
 Example:
@@ -104,7 +104,7 @@ Example:
 * `block March 3 6 15 21 30`
 
 === View blocked dates : `block`
-The user can view the dates they have blocked for a particular month.
+The user can view the dates they have blocked for a particular month. +
 Format: `block MONTH`
 
 Example:
@@ -112,11 +112,11 @@ Example:
 * `block March`
 
 === Find who is assigned duty today : `who`
-The user can find out which person is assigned duty today.
+The user can find out which person is assigned duty today. +
 Format: `who`
 
 === Find who is assigned duty on a given day : `who`
-The user can find out which person is assigned duty on a given day
+The user can find out which person is assigned duty on a given day. +
 Format: `who DATE`
 
 Example:
@@ -124,8 +124,8 @@ Example:
 * `who 14022019`
 
 === Make a swap request with another user : `swap`
-The user can request for a duty swap with another user. This will be subject to the agreement of the other user and approval of the admin (i.e. commander).
-The other user and admin will be notified upon login and they will be prompted to accept or decline the request. 
+The user can request for a duty swap with another user. This will be subject to the agreement of the other user and approval of the admin (i.e. commander). +
+The other user and admin will be notified upon login and they will be prompted to accept or decline the request. + 
 Format: `swap d/CURRENTDUTYDATE d/DESIREDDUTYDATE [t/MESSAGE]
 
 Example:
@@ -133,11 +133,11 @@ Example:
 * `swap d/14022019 d/21022019 t/Please help a bro out!`
 
 === Finding another person: `find`
-The user can find people whose names contain any of the given keywords. Information of the person’s rank. company, section and contact number can be seen.
+The user can find people whose names contain any of the given keywords. Information of the person’s rank. company, section and contact number can be seen. +
 Format: `find KEYWORD [MORE KEYWORDS]`
 
 === Filter people: `filter`
-The user can list out the people who are within the filtered rank, date, or company. The list can be sorted in ascending or descending order. 
+The user can list out the people who are within the filtered rank, date, or company. The list can be sorted in ascending or descending order. +
 Format: `filter [A or D] [s/STARTDATE] [e/ENDDATE] [r/RANK] [c/COMPANY] [s/SQUAD]`
 
 ====
@@ -155,7 +155,7 @@ Lists down all personnel, without any filtering, sorted in ascending order by de
 Lists down all personnel with rank Private and available dates between 11-Feb-2019 and 11-March-2019, in descending alphabetical order.
 
 === Exit : `exit`
-Exits the program. User will be logged out automatically.
+Exits the program. User will be logged out automatically. +
 Format: `exit`
 
 
