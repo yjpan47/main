@@ -1,4 +1,4 @@
-= Du - Developer Guide
+= Duty - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
