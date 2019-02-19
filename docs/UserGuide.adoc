@@ -37,7 +37,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Refer to <<Features>> for details of each command.
 
 [[Features]]
-== Features
+== User Features
 
 ====
 *Command Format*
@@ -48,14 +48,12 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
-=== User Features
-
-==== Viewing help : `help`
+=== Viewing help : `help`
 
 Lists out a list of commands & instructions +
 Format: `help`
 
-==== Log in : `login` `Not implemented yet`
+=== Log in : `login` `Not implemented yet`
 
 Log user into their account. +
 NRIC and password are case-sensitive. +
@@ -65,11 +63,11 @@ Example:
 
 * `login n/S01234567Z pw/cs2103noteasy`
 
-==== Log out : `logout` `Not implemented yet`
+=== Log out : `logout` `Not implemented yet`
 Logs the user out of the account +
 Format : `logout`
 
-==== Change password : `chpass` `Not implemented yet`
+=== Change password : `chpass` `Not implemented yet`
 Changes password of the user to a new one. The system will prompt the user to reconfirm the new password. +
 Format: `chpass pw/CURRENT_PASSWORD pw/NEW_PASSWORD
 
@@ -77,11 +75,11 @@ Example:
 
 * `chpass pw/cs2103noteasy pw/cs2103veryhard`
 
-==== View duties assigned to user : `view` `Not implemented yet`
+=== View duties assigned to user : `view` `Not implemented yet`
 The user can see their details about their own duties assigned to them and their upcoming duties ranked by recency. +
 Format: `view`
 
-==== View duties assigned to other users : `view` `Not implemented yet`
+=== View duties assigned to other users : `view` `Not implemented yet`
 The user can see their details about their own duties assigned to other users. +
 Format: `view NAME`
 
@@ -89,7 +87,7 @@ Example:
 
 * `view Cassell`
 
-==== View roster : `roster` `Not implemented yet`
+=== View roster : `roster` `Not implemented yet`
 The user can see the full duty rosters for particular months. +
 Format: `roster MONTH`
 
@@ -97,7 +95,7 @@ Example:
 
 * `roster February`
 
-==== Block dates : `block`
+=== Block dates : `block`
 The user can block dates and set which dates they are unavailable to duties for upcoming months. A user can block up to 15 days per month. +
 Format: `block MONTH DAY DAY DAY ...`
 
@@ -105,7 +103,7 @@ Example:
 
 * `block March 3 6 15 21 30`
 
-==== View blocked dates : `block`
+=== View blocked dates : `block`
 The user can view the dates they have blocked for a particular month. +
 Format: `block MONTH`
 
@@ -113,11 +111,11 @@ Example:
 
 * `block March`
 
-==== Find who is assigned duty today : `who`
+=== Find who is assigned duty today : `who`
 The user can find out which person is assigned duty today. +
 Format: `who`
 
-==== Find who is assigned duty on a given day : `who`
+=== Find who is assigned duty on a given day : `who`
 The user can find out which person is assigned duty on a given day. +
 Format: `who DATE`
 
@@ -125,7 +123,7 @@ Example:
 
 * `who 14022019`
 
-==== Make a swap request with another user : `swap`
+=== Make a swap request with another user : `swap`
 The user can request for a duty swap with another user. This will be subject to the agreement of the other user and approval of the admin (i.e. commander). +
 The other user and admin will be notified upon login and they will be prompted to accept or decline the request. + 
 Format: `swap d/CURRENTDUTYDATE d/DESIREDDUTYDATE [t/MESSAGE]
@@ -134,19 +132,19 @@ Example:
 
 * `swap d/14022019 d/21022019 t/Please help a bro out!`
 
-==== Finding another person: `find`
+=== Finding another person: `find`
 The user can find people whose names contain any of the given keywords. Information of the person’s rank. company, section and contact number can be seen. +
 Format: `find KEYWORD [MORE KEYWORDS]`
 
-==== Filter people: `filter`
+=== Filter people: `filter`
 The user can list out the people who are within the filtered rank, date, or company. The list can be sorted in ascending or descending order. +
 Format: `filter [A or D] [s/STARTDATE] [e/ENDDATE] [r/RANK] [c/COMPANY] [s/SQUAD]`
 
-=====
+====
 * Default ordering is alphabetical order, ascending
 * A or D specifies if ordering is ascending or descending
 * Dates to be entered in ddmmyyyy format.
-=====
+====
 
 Examples:
 
@@ -156,41 +154,41 @@ Lists down all personnel, without any filtering, sorted in ascending order by de
 * `filter D s/11022019 e/11032019 r/PTE` +
 Lists down all personnel with rank Private and available dates between 11-Feb-2019 and 11-March-2019, in descending alphabetical order.
 
-==== Exit : `exit`
+=== Exit : `exit`
 Exits the program. User will be logged out automatically. +
 Format: `exit`
 
-=== Admin Features
+== Admin Features
 
-==== Viewing help for admin : `helpadmin`
+=== Viewing help for admin : `helpadmin`
 Lists out a list of commands & instructions for admin. +
 Format: `helpadmin`
 
-==== Add a user : `add`
+=== Add a user : `add`
 Add a user to the system with the corresponding NRIC, password, company, section, rank and contact number. +
 Format: `add n/NRIC pw/PASSWORD c/COMPANY s/SECTION r/RANK n/NAME p/CONTACTNUMBER`
 
-==== Delete a user : `delete`
+=== Delete a user : `delete`
 Delete a user from the system with the corresponding NRIC. The admin will be prompted with a confirmation message. +
 Format: `delete NRIC`
 
-==== Update a user’s details : `edit`
+=== Update a user’s details : `edit`
 Updates a existing user’s details given an NRIC. +
 Format: `edit [n/NRIC] [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONENUMBER]`
 
-==== Import personal details from a file : `import`
+=== Import personal details from a file : `import`
 Imports personal details of users from a TXT file. +
 Format: `import [FILE_NAME.txt]`
 
-==== List all the users: `list`
+=== List all the users: `list`
 Lists out all users in the system with their details. +
 Format: `list`
 
-==== Scheduling duties : `schedule` 
+=== Scheduling duties : `schedule` 
 This command schedules the duties for the upcoming month. It takes into account the block out dates of each guard duty personnel and their extras. It will sort by available dates and distribute duties accordingly. After the algorithm computes a plausible schedule, the schedule will be displayed and admin will be prompted to either confirm the schedule or rerun the scheduler algorithm. +
 Format: `schedule MONTH`
 
-==== Extra duty : `extra` 
+=== Extra duty : `extra` 
 Automatically allocates extra duties for a selected personnel in the upcoming month. +
 Format: `extra n/NRIC d/NUMBEROFDAYS`
 
@@ -209,21 +207,21 @@ There is no need to save manually.
 *A*: Contact the administrator with the request.
 
 == Command Summary
-General User
-* *Viewing help* : `help`
-* *Log in* : `login n/NRIC  pw/PASSWORD`
-* *Log out* : `logout`
-* *View* : `view KEYWORD [MORE KEYWORDS]`
-* *Blocking dates* : `block d/date d/date d/date …`
-* *Finding a person* : `find KEYWORD [MORE KEYWORDS]`
-* *Filter* : `filter [A or D] [s/STARTDATE] [e/ENDDATE] [r/RANK] [c/COMPANY] [s/SQUAD]`
-* *Change password* : `chpass pw/CURRENT_PASSWORD pw/NEW_PASSWORD`
-* *Exit* : `exit`
-Admin
-* *Command help for admin* : `helpAdmin`
-* *Add a user* : `addUser n/NRIC pw/PASSWORD c/COMPANY s/SECTION r/RANK n/NAME p/PHONENUMBER`
-* *Delete a user* : `deleteUser n/NRIC`
-* *Edit a user* : `editUser [n/NRIC] [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONENUMBER]`
-* *Import personal details from a file* : `import [FILE_NAME.txt]`
-* *List all the users* : `listUser`
-* *Scheduling duties* : `schedule m/MONTH`
+General User +
+* *Viewing help* : `help` +
+* *Log in* : `login n/NRIC  pw/PASSWORD` +
+* *Log out* : `logout` +
+* *View* : `view KEYWORD [MORE KEYWORDS]` +
+* *Blocking dates* : `block d/date d/date d/date …` +
+* *Finding a person* : `find KEYWORD [MORE KEYWORDS]` +
+* *Filter* : `filter [A or D] [s/STARTDATE] [e/ENDDATE] [r/RANK] [c/COMPANY] [s/SQUAD]` +
+* *Change password* : `chpass pw/CURRENT_PASSWORD pw/NEW_PASSWORD` +
+* *Exit* : `exit` +
+Admin +
+* *Command help for admin* : `helpAdmin` +
+* *Add a user* : `addUser n/NRIC pw/PASSWORD c/COMPANY s/SECTION r/RANK n/NAME p/PHONENUMBER` +
+* *Delete a user* : `deleteUser n/NRIC` +
+* *Edit a user* : `editUser [n/NRIC] [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONENUMBER]` +
+* *Import personal details from a file* : `import [FILE_NAME.txt]` +
+* *List all the users* : `listUser` +
+* *Scheduling duties* : `schedule m/MONTH` +
