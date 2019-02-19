@@ -1,4 +1,6 @@
-= Duty Pl - Developer Guide
+
+= Duty Allocation - Developer Guide
+
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
