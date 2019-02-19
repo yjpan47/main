@@ -60,6 +60,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         setPersons(newData.getPersonList());
     }
 
+    // Sort the persons in the address book by name
+    public void sort() {
+        this.persons.sort();
+    }
+
     //// person-level operations
 
     /**
