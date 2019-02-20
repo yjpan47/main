@@ -206,6 +206,24 @@ There is no need to save manually.
 *Q*: What if I want to swap my duty with another person? +
 *A*: Contact the administrator with the request.
 
+*Q*: What is the main feature of this app? +
+*A*: The main feature is the automated scheduling algorithm, which significantly minimizes the amount of work that +
+the admin has to do.
+
+*Q*: What is my username and password? +
+*A*: Your username is by default your NRIC, used so prevalently in the SAF. +
+Your password will be set by the admin when they create your account but you can change the password later on +
+using the chpass command.
+
+*Q*: What should I do if I need help with the app? +
+*A*: You can enter 'help' in the command line, or press Help > Help, or simply press F1. +
+This will open up the User Guide in a new window.
+
+*Q*: What's the difference between 'add' and 'import'? +
+*A*: 'Add' is only able to add one user at a time and requires all the details of the user on +
+the command line. This is very cumbersome for the admin so we added an 'import' command that reads a +
+.txt file containing multiple user details, with the same parameters format as the 'add' command.
+
 == Command Summary
 General User +
 * *Viewing help* : `help` +
