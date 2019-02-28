@@ -50,7 +50,7 @@
           </padding>
         </StackPane>
 
-        <Accordion expandedPane="$contactList" VBox.vgrow="ALWAYS">
+        <Accordion fx:id="accordion" expandedPane="$contactList" VBox.vgrow="ALWAYS">
           <panes>
             <TitledPane fx:id="contactList" text="Contact List">
               <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">

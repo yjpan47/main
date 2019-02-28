@@ -4,8 +4,10 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Accordion;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.control.TitledPane;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -58,6 +60,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private VBox calendarViewPlaceholder;
+
+    @FXML
+    private Accordion accordion;
+
+    @FXML
+    private TitledPane contactList;
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -176,6 +184,11 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    @FXML
+    public void handleList() {
+        accordion.setExpandedPane(contactList);
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -197,6 +210,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isList()) {
+                handleList();
             }
 
             return commandResult;
