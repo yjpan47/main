@@ -50,7 +50,9 @@ public class CommandResult {
         return exit;
     }
 
-    public boolean isList() { return list; }
+    public boolean isList() {
+        return list;
+    }
 
     @Override
     public boolean equals(Object other) {
