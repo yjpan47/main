@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Calendar;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -9,8 +8,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.VBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;

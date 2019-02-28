@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Logger;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,9 +13,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
 
-public class CalendarView extends UiPart<Region>{
+/**
+ * The Calendar. Allows user to see dates with duties.
+ */
+public class CalendarView extends UiPart<Region> {
     private static final String FXML = "CalendarView.fxml";
     private final Logger logger = LogsCenter.getLogger(CalendarView.class);
 
@@ -31,13 +34,13 @@ public class CalendarView extends UiPart<Region>{
     private GridPane gridPaneDays;
 
     @FXML
-    private VBox VBoxCalendar;
+    private VBox vBoxCalendar;
 
     public CalendarView() {
         super(FXML);
         initializeChoices();
-        gridPaneDates.prefWidthProperty().bind(VBoxCalendar.widthProperty().subtract(10));
-        gridPaneDates.prefHeightProperty().bind(VBoxCalendar.heightProperty().subtract(20));
+        gridPaneDates.prefWidthProperty().bind(vBoxCalendar.widthProperty().subtract(10));
+        gridPaneDates.prefHeightProperty().bind(vBoxCalendar.heightProperty().subtract(20));
     }
 
     public int getCurrentMonth() {
@@ -52,6 +55,9 @@ public class CalendarView extends UiPart<Region>{
         return Integer.valueOf(dateFormat.format(date));
     }
 
+    /**
+     * Fills up all choiceboxes with months and years based on the date application was run.
+     */
     public void initializeChoices() {
         monthSelection.getSelectionModel().select(getCurrentMonth() - 1);
         int currentYear = getCurrentYear();

@@ -16,7 +16,7 @@
 <?import java.lang.String?>
 
 <?import javafx.scene.control.ScrollPane?>
-<VBox fx:id="VBoxCalendar" maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity"
+<VBox fx:id="vBoxCalendar" maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity"
       xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
 
     <VBox BorderPane.alignment="CENTER" prefHeight="60" VBox.vgrow="NEVER" HBox.hgrow="ALWAYS">
