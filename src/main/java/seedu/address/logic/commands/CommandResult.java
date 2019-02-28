@@ -11,18 +11,21 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
+    /**application should expand list. */
+
+    private final boolean list;
+
     /** Help information should be shown to the user. */
     private final boolean showHelp;
 
     /** The application should exit. */
     private final boolean exit;
 
-    /**application should expand list. */
-    public final boolean list;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
+
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean list) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
