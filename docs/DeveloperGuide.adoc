@@ -1,4 +1,6 @@
-= Duty Pl - Developer Guide
+
+= Duty Allocation - Developer Guide
+
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -827,6 +829,12 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
+|`* * *` |Administrator |see Admin Help |refer to instructions specific to the administrator privileges
+
+|`* * *` |Administrator |choose 2 users to swap duties |allow them to have their desired duty slot
+
+|`* * *` |user |log in |access my information
+
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
 |`* * *` |user |add a new person |
@@ -834,6 +842,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |user |delete a person |remove entries that I no longer need
 
 |`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+
+|`* * *` |user |request an administrator to swap duty with another person |get my desired duty
 
 |`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
