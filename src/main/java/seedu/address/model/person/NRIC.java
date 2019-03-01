@@ -4,33 +4,35 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's address in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidUnit(String)}
+ * Represents a Person's NRIC in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidNRIC(String)}
  */
-public class Unit {
+public class NRIC {
 
-    public static final String MESSAGE_CONSTRAINTS = "Unit represent the unit which the soldier is attached to number followed by letters";
+    public static final String MESSAGE_CONSTRAINTS = "NRIC is the IC number of the soldier";
 
 
-    public static final String VALIDATION_REGEX = "[\\d{1,3}\\s+]";
+
+    public static final String VALIDATION_REGEX = "\\s\\d{7}\\s";
+
 
     public final String value;
 
     /**
-     * Constructs an {@code Address}.
+     * Constructs an {@code NRIC}.
      *
-     * @param unit A valid unit.
+     * @param nric A valid nric.
      */
-    public Unit(String unit) {
-        requireNonNull(unit);
-        checkArgument(isValidUnit(unit), MESSAGE_CONSTRAINTS);
-        value = unit;
+    public NRIC(String nric) {
+        requireNonNull(nric);
+        checkArgument(isValidNRIC(nric), MESSAGE_CONSTRAINTS);
+        value = nric;
     }
 
     /**
      * Returns true if a given string is a valid email.
      */
-    public static boolean isValidUnit(String test) {
+    public static boolean isValidNRIC(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -42,8 +44,8 @@ public class Unit {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Address // instanceof handles nulls
-                && value.equals(((Address) other).value)); // state check
+                || (other instanceof NRIC // instanceof handles nulls
+                && value.equals(((NRIC) other).value)); // state check
     }
 
     @Override
