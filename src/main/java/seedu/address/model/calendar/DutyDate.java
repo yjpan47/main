@@ -1,8 +1,12 @@
 package seedu.address.model.calendar;
 
+import java.util.ArrayList;
+
 import seedu.address.model.person.Person;
 
-import java.util.ArrayList;
+/**
+ * Represents a day with duty details
+ */
 public class DutyDate {
 
     private ArrayList<Person> dutyForThatDay;

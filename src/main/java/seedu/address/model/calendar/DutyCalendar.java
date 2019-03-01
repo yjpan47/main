@@ -3,6 +3,9 @@ package seedu.address.model.calendar;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+/**
+ * Represents a Calendar that contains duties for the current and the following months
+ */
 public class DutyCalendar {
 
     private DutyMonth currentMonth;
