@@ -1,7 +1,11 @@
-package seedu.address.model.Duty;
+package seedu.address.model.duty;
 import java.time.LocalDate;
+
 import seedu.address.model.person.Person;
 
+/**
+ * Duty class
+ */
 public class Duty {
     private LocalDate date;
     private Type type;
