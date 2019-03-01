@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -28,19 +29,22 @@ public class CalendarView extends UiPart<Region> {
     private ChoiceBox<Integer> yearSelection;
 
     @FXML
-    private GridPane gridPaneDates;
+    private GridPane gridPaneBottom;
 
     @FXML
-    private GridPane gridPaneDays;
+    private GridPane gridPaneTop;
 
     @FXML
     private VBox vBoxCalendar;
 
+    @FXML
+    private ScrollPane scrollPane;
+
     public CalendarView() {
         super(FXML);
         initializeChoices();
-        gridPaneDates.prefWidthProperty().bind(vBoxCalendar.widthProperty().subtract(10));
-        gridPaneDates.prefHeightProperty().bind(vBoxCalendar.heightProperty().subtract(20));
+        gridPaneBottom.prefHeightProperty().bind(vBoxCalendar.heightProperty().subtract(20));
+        scrollPane.setFitToWidth(true);
     }
 
     public int getCurrentMonth() {
@@ -69,3 +73,4 @@ public class CalendarView extends UiPart<Region> {
         yearSelection.getSelectionModel().select(4);
     }
 }
+
