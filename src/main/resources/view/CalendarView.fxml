@@ -57,61 +57,10 @@
                     <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="&gt;" />
                 </children>
             </HBox>
-            <GridPane fx:id="gridPaneDays">
-                <columnConstraints>
-                    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
-                    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
-                    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
-                    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
-                    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
-                    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
-                    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
-                </columnConstraints>
-                <rowConstraints>
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
-                </rowConstraints>
-                <children>
-                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SUN">
-                        <font>
-                            <Font size="20.0" />
-                        </font>
-                    </Text>
-                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="MON" GridPane.columnIndex="1">
-                        <font>
-                            <Font size="20.0" />
-                        </font>
-                    </Text>
-                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TUE" GridPane.columnIndex="2">
-                        <font>
-                            <Font size="20.0" />
-                        </font>
-                    </Text>
-                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="THU" GridPane.columnIndex="4">
-                        <font>
-                            <Font size="20.0" />
-                        </font>
-                    </Text>
-                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="WED" GridPane.columnIndex="3">
-                        <font>
-                            <Font size="20.0" />
-                        </font>
-                    </Text>
-                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FRI" GridPane.columnIndex="5">
-                        <font>
-                            <Font size="20.0" />
-                        </font>
-                    </Text>
-                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SAT" GridPane.columnIndex="6">
-                        <font>
-                            <Font size="20.0" />
-                        </font>
-                    </Text>
-                </children>
-            </GridPane>
         </children>
     </VBox>
-    <ScrollPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" prefHeight="300" minWidth="210.0">
-        <GridPane gridLinesVisible="true" fx:id="gridPaneDates" prefHeight="300" prefWidth="1000" BorderPane.alignment="CENTER" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+    <ScrollPane fx:id="scrollPane" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" prefHeight="300" minWidth="210.0">
+        <GridPane gridLinesVisible="true" fx:id="gridPaneBottom" prefHeight="300" prefWidth="1000" BorderPane.alignment="CENTER" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
             <columnConstraints>
                 <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" />
                 <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" />
@@ -122,17 +71,54 @@
                 <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints minHeight="60.0" vgrow="ALWAYS" />
-                <RowConstraints minHeight="60.0" vgrow="ALWAYS" />
-                <RowConstraints minHeight="60.0" vgrow="ALWAYS" />
-                <RowConstraints minHeight="60.0" vgrow="ALWAYS" />
-                <RowConstraints minHeight="60.0" vgrow="ALWAYS" />
-                <RowConstraints minHeight="60.0" vgrow="ALWAYS" />
+                <RowConstraints minHeight="60.0" vgrow="NEVER" />
+                <RowConstraints minHeight="60.0" vgrow="NEVER" />
                 <RowConstraints minHeight="60.0" vgrow="ALWAYS" />
             </rowConstraints>
-            <opaqueInsets>
-                <Insets />
-            </opaqueInsets>
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SUN">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Text>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="MON" GridPane.columnIndex="1">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Text>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TUE" GridPane.columnIndex="2">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Text>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="THU" GridPane.columnIndex="4">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Text>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="WED" GridPane.columnIndex="3">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Text>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FRI" GridPane.columnIndex="5">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Text>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SAT" GridPane.columnIndex="6">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Text>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="John Adam" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="John Beng" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="John Chew" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="John Tan" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="John Lim" GridPane.columnIndex="4" GridPane.rowIndex="1"/>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Chao Keng" GridPane.columnIndex="5" GridPane.rowIndex="1"/>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="John Travolta" GridPane.columnIndex="6" GridPane.rowIndex="1"/>
+            </children>
         </GridPane>
     </ScrollPane>
 
