@@ -13,7 +13,7 @@ public class NRIC {
 
 
 
-    public static final String VALIDATION_REGEX = "[\\s\\d{7}\\s]";
+    public static final String VALIDATION_REGEX = "\\s\\d{7}\\s";
 
 
     public final String value;
@@ -30,7 +30,7 @@ public class NRIC {
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if a given string is a valid NRIC.
      */
     public static boolean isValidNRIC(String test) {
         return test.matches(VALIDATION_REGEX);
