@@ -1,19 +1,24 @@
 package seedu.address.model.Duty;
+import java.time.LocalDate;
 import seedu.address.model.person.Person;
 
-import java.time.LocalDate;
-
 public class Duty {
-    public LocalDate date;
-    public Type type;
-    public Person person;
+    private LocalDate date;
+    private Type type;
+    private Person person;
 
+    /**
+     * Constructs a duty
+     */
     public Duty(LocalDate date, String type) {
         this.date = date;
         this.type = Type.valueOf(type.toUpperCase());
         this.person = null;
     }
 
+    /**
+     * Check whether this duty has been taken by a person
+     */
     public boolean isTaken() {
         return (this.person != null);
     }
@@ -22,14 +27,11 @@ public class Duty {
     public String toString() {
         return "Duty on " + this.date.toString() + " (" + this.type.toString() + ")";
     }
-
-    public static void main(String[] args) {
-        Duty d = new Duty(LocalDate.now(), "am");
-        System.out.println(d);
-    }
-
 }
 
+/**
+ * Constant indicating whether a duty is AM or PM
+ */
 enum Type {
     AM,
     PM
