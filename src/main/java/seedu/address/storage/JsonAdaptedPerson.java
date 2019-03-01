@@ -15,6 +15,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Unit;
+import seedu.address.model.person.NRIC;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,6 +30,8 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String unit;
+    private final String nric;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -35,12 +39,14 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("email") String email, @JsonProperty("address") String address, @JsonProperty("unit") String unit, @JsonProperty("nric") String nric,
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.unit = unit;
+        this.nric = nric;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -54,6 +60,8 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        nric = source.getNRIC().value;
+        unit = source.getUnit().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -102,8 +110,24 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (unit == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Unit.class.getSimpleName()));
+        }
+        if (!Unit.isValidUnit(unit)) {
+            throw new IllegalValueException(Unit.MESSAGE_CONSTRAINTS);
+        }
+        final Unit modelUnit = new Unit(unit);
+
+        if (nric == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, NRIC.class.getSimpleName()));
+        }
+        if (!NRIC.isValidNRIC(nric)) {
+            throw new IllegalValueException(NRIC.MESSAGE_CONSTRAINTS);
+        }
+        final NRIC modelNRIC = new NRIC(nric);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelUnit, modelNRIC, modelTags);
     }
 
 }

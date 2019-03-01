@@ -13,6 +13,8 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Unit;
+import seedu.address.model.person.NRIC;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -94,7 +96,24 @@ public class ParserUtil {
         }
         return new Email(trimmedEmail);
     }
+    public static Unit parseUnit(String unit) throws ParseException {
+        requireNonNull(unit);
+        String trimmedUnit = unit.trim();
+        System.out.print(unit);
+        if (!Unit.isValidUnit(trimmedUnit)) {
+           throw new ParseException(Unit.MESSAGE_CONSTRAINTS);
+        }
+        return new Unit(trimmedUnit);
 
+    }
+    public static NRIC parseNRIC(String nric) throws ParseException {
+        requireNonNull(nric);
+        String trimmedNRIC = nric.trim();
+        if (!NRIC.isValidNRIC(trimmedNRIC)) {
+            throw new ParseException(NRIC.MESSAGE_CONSTRAINTS);
+        }
+        return new NRIC(trimmedNRIC);
+    }
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
