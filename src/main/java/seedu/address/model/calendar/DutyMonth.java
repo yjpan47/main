@@ -1,49 +1,56 @@
 package seedu.address.model.calendar;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.InputMismatchException;
+import java.util.List;
+
 /**
  * Represents a month in DutyCalendar containing duty details of each day
  */
 public class DutyMonth {
 
-    private int month;
+    private String month;
+    private int monthIndex;
     private int firstDayIndex;
     private int numOfDays;
+    private List<DutyDate> dates;
 
-    public DutyMonth(int month, int firstDayIndex) {
-        this.month = month;
-        this.firstDayIndex = firstDayIndex;
-        setNumOfDays(month);
-    }
-
-    public int getWeekOfDay(int day) {
-        return (this.firstDayIndex + day - 1) % 7;
-    }
-
-    private void setNumOfDays(int month) {
-        switch (month) {
-        case 1:
-        case 3:
-        case 5:
-        case 7:
-        case 8:
-        case 10:
-        case 12:
-            this.numOfDays = 31;
-            break;
-        case 4:
-        case 6:
-        case 9:
-        case 11:
-            this.numOfDays = 30;
-            break;
-        case 2:
-            this.numOfDays = 28;
-            break;
-        default:
-            System.out.println("Invalid month.");
-            this.numOfDays = 31;
-            break;
+    public DutyMonth(int monthIndex, int firstDayIndex) {
+        if (monthIndex >= 1 && monthIndex <= 12
+                && firstDayIndex >= 0 && firstDayIndex <= 7)  {
+            this.monthIndex = monthIndex;
+            this.month = getMonth();
+            this.firstDayIndex = firstDayIndex;
+            this.numOfDays = getNumOfDays();
+            this.dates = new ArrayList<>();
+        } else {
+            throw new InputMismatchException("Invalid Month Index or first Day Index");
         }
+    }
+
+    public String getMonth() {
+        String[] months = {"January", "February", "March",
+                "April", "May", "June", "July", "August",
+                "September", "October", "November", "December"};
+        return months[this.monthIndex - 1];
+    }
+
+    private int getNumOfDays() {
+        if (Arrays.asList(1, 3, 5, 7, 8, 10, 12).contains(this.monthIndex)) {
+            return 31;
+        } else if (Arrays.asList(4, 6, 9, 11).contains(this.monthIndex)) {
+            return 30;
+        } else if (this.monthIndex == 2){
+            return 28;
+        } else {
+            throw new InputMismatchException("Invalid Month Index.");
+        }
+    }
+
+    public static void main(String[] args) {
+        Day day = Day.FRIDAY;
+        System.out.println(day.getIndex());
     }
 
 }
