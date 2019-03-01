@@ -13,7 +13,7 @@ public class NRIC {
 
 
 
-    public static final String VALIDATION_REGEX = "\\s\\d{7}\\s";
+    public static final String VALIDATION_REGEX = "[\\s\\d{7}\\s]";
 
 
     public final String value;

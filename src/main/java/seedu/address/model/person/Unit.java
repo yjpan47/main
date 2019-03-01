@@ -9,10 +9,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Unit {
 
-    public static final String MESSAGE_CONSTRAINTS = "Unit represent the unit which the soldier is attached to 1 to 3 numbers followed by letters";
+    public static final String MESSAGE_CONSTRAINTS = "Represents the unit which the soldier is attached to 1 to 3 numbers followed by letters";
 
 
-    public static final String VALIDATION_REGEX = "\\d{1,3}\\s";
+    public static final String VALIDATION_REGEX = "[\\d{1,3}\\s+]";
 
     public final String value;
 
