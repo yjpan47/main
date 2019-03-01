@@ -99,7 +99,6 @@ public class ParserUtil {
     public static Unit parseUnit(String unit) throws ParseException {
         requireNonNull(unit);
         String trimmedUnit = unit.trim();
-        System.out.print(unit);
         if (!Unit.isValidUnit(trimmedUnit)) {
            throw new ParseException(Unit.MESSAGE_CONSTRAINTS);
         }
