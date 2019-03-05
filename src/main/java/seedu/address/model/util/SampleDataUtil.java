@@ -7,15 +7,7 @@ import java.util.stream.Collectors;
 import seedu.address.model.PersonnelDatabase;
 import seedu.address.model.ReadOnlyPersonnelDatabase;
 
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Company;
-import seedu.address.model.person.Section;
-import seedu.address.model.person.Rank;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Unit;
-import seedu.address.model.person.NRIC;
 import seedu.address.model.tag.Tag;
 
 /**
