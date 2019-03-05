@@ -11,7 +11,7 @@ We are from CS2103 Team W15-4 based in the http://www.comp.nus.edu.sg[School of 
 == Project Team
 
 === Valavan Rajarajan
-image::valatheking.png[width="150", align="left"]
+image::Valatheking.png[width="150", align="left"]
 {empty}[https://github.com/Valatheking[github]] [<<johndoe#, portfolio>>]
 
 Role: Team Lead +
