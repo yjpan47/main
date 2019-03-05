@@ -17,6 +17,7 @@ public class Person {
 
     // Identity fields
     private final Name name;
+
     private final Nric nric;
 
     // Data fields
@@ -29,6 +30,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
+
     public Person(Nric nric, Company company, Section section, Rank rank, Name name,
                   Phone phone, Set<Tag> tags) {
         requireAllNonNull(nric, company, section, rank, name, phone, tags);
@@ -57,6 +59,14 @@ public class Person {
         return phone;
     }
 
+
+    public Unit getUnit() {
+        return unit;
+    }
+
+    public NRIC getNRIC() {
+        return nric;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -106,6 +116,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
+
         return Objects.hash(nric, company, section, rank, name, phone, tags);
     }
 

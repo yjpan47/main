@@ -17,6 +17,8 @@ import seedu.address.model.person.Rank;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Unit;
+import seedu.address.model.person.NRIC;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -32,14 +34,13 @@ class JsonAdaptedPerson {
     private final String rank;
     private final String name;
     private final String phone;
-
-
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
+
     public JsonAdaptedPerson(@JsonProperty("nric") String nric, @JsonProperty("company") String company,
                              @JsonProperty("section") String section, @JsonProperty("rank") String rank,
                              @JsonProperty("name") String name, @JsonProperty("phone") String phone,
@@ -65,6 +66,7 @@ class JsonAdaptedPerson {
         rank = source.getRank().value;
         name = source.getName().fullName;
         phone = source.getPhone().value;
+
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -128,6 +130,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
         final Phone modelPhone = new Phone(phone);
+
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelNric, modelCompany, modelSection, modelRank, modelName, modelPhone, modelTags);

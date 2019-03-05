@@ -10,6 +10,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Unit;
+import seedu.address.model.person.NRIC;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,6 +38,8 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
+        descriptor.setUnit(person.getUnit());
+        descriptor.setNRIC(person.getNRIC());
         descriptor.setTags(person.getTags());
     }
 
@@ -70,7 +74,20 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(new Address(address));
         return this;
     }
-
+    /**
+     * Sets the {@code Unit} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withUnit(String unit) {
+        descriptor.setUnit(new Unit(unit));
+        return this;
+    }
+    /**
+     * Sets the {@code NRIC} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withNRIC(String nric) {
+        descriptor.setNRIC(new NRIC(nric));
+        return this;
+    }
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
      * that we are building.

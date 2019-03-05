@@ -14,6 +14,8 @@ import seedu.address.model.person.Rank;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Unit;
+import seedu.address.model.person.NRIC;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -22,6 +24,7 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
+
 //            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
 //                new Address("Blk 30 Geylang Street 29, #06-40"),
 //                getTagSet("friends")),
