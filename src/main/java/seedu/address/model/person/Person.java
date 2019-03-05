@@ -17,7 +17,6 @@ public class Person {
 
     // Identity fields
     private final Name name;
-
     private final Nric nric;
 
     // Data fields
@@ -57,15 +56,6 @@ public class Person {
 
     public Phone getPhone() {
         return phone;
-    }
-
-
-    public Unit getUnit() {
-        return unit;
-    }
-
-    public NRIC getNRIC() {
-        return nric;
     }
 
     /**
