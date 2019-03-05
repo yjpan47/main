@@ -48,12 +48,12 @@ public interface Model {
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setAddressBook(ReadOnlyPersonnelDatabase addressBook);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the PersonnelDatabase */
+    ReadOnlyPersonnelDatabase getAddressBook();
 
-    /** Sorts the AddressBook by name */
+    /** Sorts the PersonnelDatabase by name */
     void sortAddressBook();
 
     /**
