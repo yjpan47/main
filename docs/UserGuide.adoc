@@ -42,7 +42,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `login n/NRIC`, `NRIC` is a parameter which can be used as `add n/S01234567Z`.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `login nr/NRIC`, `NRIC` is a parameter which can be used as `add n/S01234567Z`.
 * Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -57,7 +57,7 @@ Format: `help`
 
 Log user into their account. +
 NRIC and password are case-sensitive. +
-Format: `login n/NRIC pw/PASSWORD`
+Format: `login nr/NRIC pw/PASSWORD`
 
 Example:
 
@@ -165,16 +165,16 @@ Lists out a list of commands & instructions for admin. +
 Format: `helpadmin`
 
 === Add a user : `add`
-Add a user to the system with the corresponding NRIC, password, company, section, rank and contact number. +
-Format: `add n/NRIC pw/PASSWORD c/COMPANY s/SECTION r/RANK n/NAME p/CONTACTNUMBER`
+Add a user to the system with the corresponding NRIC, password, company, section, rank, name and contact number. +
+Format: `add nr/NRIC pw/PASSWORD c/COMPANY s/SECTION r/RANK n/NAME p/CONTACTNUMBER`
 
 === Delete a user : `delete`
 Delete a user from the system with the corresponding NRIC. The admin will be prompted with a confirmation message. +
-Format: `delete NRIC`
+Format: `delete nr/NRIC`
 
 === Update a user’s details : `edit`
 Updates a existing user’s details given an NRIC. +
-Format: `edit [n/NRIC] [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONENUMBER]`
+Format: `edit [nr/NRIC] [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONENUMBER]`
 
 === Import personal details from a file : `import`
 Imports personal details of users from a TXT file. +
@@ -190,7 +190,7 @@ Format: `schedule MONTH`
 
 === Extra duty : `extra`
 Automatically allocates extra duties for a selected personnel in the upcoming month. +
-Format: `extra n/NRIC d/NUMBEROFDAYS`
+Format: `extra nr/NRIC d/NUMBEROFDAYS`
 
 Example:
 
@@ -227,7 +227,7 @@ the command line. This is very cumbersome for the admin so we added an 'import' 
 == Command Summary
 General User +
 * *Viewing help* : `help` +
-* *Log in* : `login n/NRIC  pw/PASSWORD` +
+* *Log in* : `login nr/NRIC  pw/PASSWORD` +
 * *Log out* : `logout` +
 * *View* : `view KEYWORD [MORE KEYWORDS]` +
 * *Blocking dates* : `block d/date d/date d/date …` +
@@ -237,9 +237,9 @@ General User +
 * *Exit* : `exit` +
 Admin +
 * *Command help for admin* : `helpAdmin` +
-* *Add a user* : `addUser n/NRIC pw/PASSWORD c/COMPANY s/SECTION r/RANK n/NAME p/PHONENUMBER` +
-* *Delete a user* : `deleteUser n/NRIC` +
-* *Edit a user* : `editUser [n/NRIC] [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONENUMBER]` +
+* *Add a user* : `addUser nr/NRIC pw/PASSWORD c/COMPANY s/SECTION r/RANK n/NAME p/PHONENUMBER` +
+* *Delete a user* : `deleteUser nr/NRIC` +
+* *Edit a user* : `editUser [nr/NRIC] [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONENUMBER]` +
 * *Import personal details from a file* : `import [FILE_NAME.txt]` +
 * *List all the users* : `listUser` +
 * *Scheduling duties* : `schedule m/MONTH` +
