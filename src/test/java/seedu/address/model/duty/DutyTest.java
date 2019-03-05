@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
+import seedu.address.model.calendar.Duty;
+
 public class DutyTest {
 
     @Test

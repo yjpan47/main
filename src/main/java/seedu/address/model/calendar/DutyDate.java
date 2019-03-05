@@ -1,28 +1,29 @@
 package seedu.address.model.calendar;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-
-import seedu.address.model.person.Person;
+import java.util.List;
 
 /**
  * Represents a day with duty details
  */
 public class DutyDate {
 
-    private ArrayList<Person> dutyForThatDay;
-    private String dutyCommander;
+    private LocalDate date;
+    private Day day;
+    private List<Duty> duties;
+    private int numOfDuties;
 
-    public DutyDate(String dutyCommander) {
-        this.dutyForThatDay = new ArrayList<>();
-        this.dutyCommander = dutyCommander;
+    public DutyDate(LocalDate date, Day day) {
+        this.date = date;
+        this.day = day;
+        this.duties = new ArrayList<>();
+        this.numOfDuties = 2;
+        setDuties();
     }
 
-    public void addPersonToDuty(Person person) {
-        dutyForThatDay.add(person);
+    private void setDuties() {
+        this.duties.add(new Duty(this.date, Meridiem.AM));
+        this.duties.add(new Duty(this.date, Meridiem.AM));
     }
-
-    public void removePersonFromDuty(Person person) {
-        dutyForThatDay.remove(person);
-    }
-
 }
