@@ -49,6 +49,7 @@ public class PersonListPanel extends UiPart<Region> {
                 personListView.getSelectionModel().clearAndSelect(index);
             }
         });
+
     }
 
     /**
