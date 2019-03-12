@@ -33,5 +33,6 @@ endif::[]
 _Marco Jakob_.
 * Libraries used: https://github.com/TestFX/TestFX[TextFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit5[JUnit5]
 * Adapted from the https://github.com/se-edu/addressbook-level4[addressbook-level4] project created by the https://github.com/se-edu[se-edu initiative]
+
 == Licence : link:LICENSE[MIT]
 
