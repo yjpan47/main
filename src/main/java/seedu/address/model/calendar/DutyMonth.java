@@ -20,7 +20,7 @@ public class DutyMonth {
         if (monthIndex >= 1 && monthIndex <= 12
                 && firstDayIndex >= 0 && firstDayIndex <= 7)  {
             this.monthIndex = monthIndex;
-            this.month = getMonth();
+            this.month = this.getMonth();
             this.firstDayIndex = firstDayIndex;
             this.numOfDays = getNumOfDays();
             this.dates = new ArrayList<>();
@@ -47,10 +47,4 @@ public class DutyMonth {
             throw new InputMismatchException("Invalid Month Index.");
         }
     }
-
-    public static void main(String[] args) {
-        Day day = Day.FRIDAY;
-        System.out.println(day.getIndex());
-    }
-
 }
