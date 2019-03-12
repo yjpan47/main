@@ -10,6 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyPersonnelDatabase;
 import seedu.address.model.person.Person;
+import seedu.address.model.calendar.Duty;
 
 /**
  * API of the Logic component
@@ -33,6 +34,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
+
+    /** returns an unmodifiable view of duty for dates */
+    ObservableList<Person> getDutyForDates();
 
     /**
      * Returns an unmodifiable view of the list of commands entered by the user.
