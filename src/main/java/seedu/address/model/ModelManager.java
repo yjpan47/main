@@ -16,7 +16,9 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.calendar.DutyCalendar;
+import seedu.address.model.calendar.TempClass;
 import seedu.address.model.person.Person;
+import seedu.address.model.calendar.Duty;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
@@ -26,9 +28,10 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final VersionedPersonnelDatabase versionedAddressBook;
-    private final DutyCalendar dutyCalendar;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final TempClass tempClass;
+    private final ObservableList<Person> dutyForDates;
     private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
 
     /**
@@ -41,10 +44,14 @@ public class ModelManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         versionedAddressBook = new VersionedPersonnelDatabase(addressBook);
-        dutyCalendar = new DutyCalendar();
+        tempClass = new TempClass();
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         filteredPersons.addListener(this::ensureSelectedPersonIsValid);
+        /*
+        Note: just a test method for UI, remove when done
+        */
+        dutyForDates = tempClass.getDutyPersons();
     }
 
     public ModelManager() {
@@ -138,6 +145,9 @@ public class ModelManager implements Model {
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
     }
+
+    @Override
+    public ObservableList<Person> getDutyForDates() {return dutyForDates; }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {

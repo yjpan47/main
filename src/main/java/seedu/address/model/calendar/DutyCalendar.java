@@ -1,5 +1,7 @@
 package seedu.address.model.calendar;
 
+import javafx.collections.ObservableList;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 

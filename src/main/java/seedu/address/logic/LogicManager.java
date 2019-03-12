@@ -16,6 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyPersonnelDatabase;
 import seedu.address.model.person.Person;
+import seedu.address.model.calendar.Duty;
 import seedu.address.storage.Storage;
 
 /**
@@ -75,6 +76,9 @@ public class LogicManager implements Logic {
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
     }
+
+    @Override
+    public ObservableList<Person> getDutyForDates() {return model.getDutyForDates(); }
 
     @Override
     public ObservableList<String> getHistory() {
