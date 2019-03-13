@@ -8,8 +8,11 @@ import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.UserType;
+import seedu.address.logic.commands.AdminCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.GeneralCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -43,14 +46,21 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public CommandResult execute(String commandText) throws CommandException, ParseException {
+    public CommandResult execute(String commandText, UserType user) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         addressBookModified = false;
 
         CommandResult commandResult;
         try {
-            Command command = addressBookParser.parseCommand(commandText);
-            commandResult = command.execute(model, history);
+            if(user == UserType.ADMIN) {
+                AdminCommand command = addressBookParser.parseCommand(commandText);
+                commandResult = command.executeAdmin(model, history);
+            } else if (user == UserType.GENERAL) {
+                GeneralCommand command = addressBookParser.parseCommand(commandText);
+                commandResult = command.executeGeneral(model, history);
+            } else {
+                throw new CommandException("USER NOT FOUND");
+            }
         } finally {
             history.add(commandText);
         }

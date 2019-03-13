@@ -24,4 +24,14 @@ public class SortCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+    @Override
+    public CommandResult executeGeneral(Model model, CommandHistory history) throws CommandException {
+        return execute(model, history);
+    }
+
+    @Override
+    public CommandResult executeAdmin(Model model, CommandHistory history) throws CommandException {
+        return execute(model, history);
+    }
 }

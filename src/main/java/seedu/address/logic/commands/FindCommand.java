@@ -35,6 +35,16 @@ public class FindCommand extends Command {
     }
 
     @Override
+    public CommandResult executeGeneral(Model model, CommandHistory history) {
+        return execute(model, history);
+    }
+
+    @Override
+    public CommandResult executeAdmin(Model model, CommandHistory history) {
+        return execute(model, history);
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FindCommand // instanceof handles nulls

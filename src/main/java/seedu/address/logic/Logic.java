@@ -5,12 +5,12 @@ import java.nio.file.Path;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.UserType;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyPersonnelDatabase;
 import seedu.address.model.person.Person;
-import seedu.address.model.calendar.Duty;
 
 /**
  * API of the Logic component
@@ -23,7 +23,7 @@ public interface Logic {
      * @throws CommandException If an error occurs during command execution.
      * @throws ParseException If an error occurs during parsing.
      */
-    CommandResult execute(String commandText) throws CommandException, ParseException;
+    CommandResult execute(String commandText, UserType user) throws CommandException, ParseException;
 
     /**
      * Returns the PersonnelDatabase.

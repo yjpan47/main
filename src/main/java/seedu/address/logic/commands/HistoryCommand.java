@@ -30,4 +30,14 @@ public class HistoryCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, String.join("\n", previousCommands)));
     }
 
+    @Override
+    public CommandResult executeGeneral(Model model, CommandHistory history) {
+        return execute(model, history);
+    }
+
+    @Override
+    public CommandResult executeAdmin(Model model, CommandHistory history) {
+        return execute(model, history);
+    }
+
 }
