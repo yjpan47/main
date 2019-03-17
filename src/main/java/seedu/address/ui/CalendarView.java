@@ -119,7 +119,7 @@ public class CalendarView extends UiPart<Region> {
         calendar.setTime(date);
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
         Label toAppend = dateLabels[dayOfWeek - 1];
-        toAppend.setText(currentDate[0] + " " + monthArray[currentDate[1]] + "\n" + toAppend.getText());
+        toAppend.setText(currentDate[0] + " " + monthArray[currentDate[1] - 1] + "\n" + toAppend.getText());
     }
 }
 
