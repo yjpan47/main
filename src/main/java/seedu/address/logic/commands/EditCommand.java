@@ -194,7 +194,7 @@ public class EditCommand extends Command {
         public void setRank(Rank rank) { this.rank = rank; }
 
         public Optional<Rank> getRank() { return Optional.ofNullable(rank); }
-        
+
         public void setName(Name name) {
             this.name = name;
         }
