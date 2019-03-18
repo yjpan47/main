@@ -3,10 +3,10 @@ package seedu.address.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalPersonnelDatabase;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -24,7 +24,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
-
+S
 public class PersonnelDatabaseTest {
 
     @Rule
@@ -44,8 +44,8 @@ public class PersonnelDatabaseTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        PersonnelDatabase newData = getTypicalAddressBook();
+    public void resetData_withValidReadOnlyPersonnelDatabase_replacesData() {
+        PersonnelDatabase newData = getTypicalPersonnelDatabase();
         personnelDatabase.resetData(newData);
         assertEquals(newData, personnelDatabase);
     }
@@ -53,7 +53,7 @@ public class PersonnelDatabaseTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         PersonnelDatabaseStub newData = new PersonnelDatabaseStub(newPersons);
@@ -69,20 +69,20 @@ public class PersonnelDatabaseTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInPersonnelDatabase_returnsFalse() {
         assertFalse(personnelDatabase.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInPersonnelDatabase_returnsTrue() {
         personnelDatabase.addPerson(ALICE);
         assertTrue(personnelDatabase.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasPerson_personWithSameIdentityFieldsInPersonnelDatabase_returnsTrue() {
         personnelDatabase.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(personnelDatabase.hasPerson(editedAlice));
     }
