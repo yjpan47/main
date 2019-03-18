@@ -172,9 +172,9 @@ Format: `add nr/NRIC pw/PASSWORD c/COMPANY s/SECTION r/RANK n/NAME p/CONTACTNUMB
 Delete a user from the system with the corresponding NRIC. The admin will be prompted with a confirmation message. +
 Format: `delete nr/NRIC`
 
-=== Update a user’s details : `edit`
-Updates a existing user’s details given an NRIC. +
-Format: `edit [nr/NRIC] [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONENUMBER]`
+=== Edit a user’s details : `edit`
+Edits an existing user’s details based on the index number in the list. Can edit one or more fields.
+Format: `edit INDEX [nr/NRIC] [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONENUMBER]`
 
 === Import personal details from a file : `import`
 Imports personal details of users from a TXT file. +
