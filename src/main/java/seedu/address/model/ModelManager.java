@@ -15,10 +15,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.calendar.DutyCalendar;
 import seedu.address.model.calendar.TempClass;
 import seedu.address.model.person.Person;
-import seedu.address.model.calendar.Duty;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
@@ -28,6 +26,7 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final VersionedPersonnelDatabase versionedAddressBook;
+    private final DutyCalendar dutyCalendar;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final TempClass tempClass;
@@ -35,15 +34,16 @@ public class ModelManager implements Model {
     private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given personnelDatabse, dutyCalendar and userPrefs.
      */
-    public ModelManager(ReadOnlyPersonnelDatabase addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyPersonnelDatabase personnelDatabse, DutyCalendar dutyCalendar, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(personnelDatabse, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with personnel database: " + personnelDatabse + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedPersonnelDatabase(addressBook);
+        versionedAddressBook = new VersionedPersonnelDatabase(personnelDatabse);
+        this.dutyCalendar = dutyCalendar;
         tempClass = new TempClass();
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
@@ -55,7 +55,7 @@ public class ModelManager implements Model {
     }
 
     public ModelManager() {
-        this(new PersonnelDatabase(), new UserPrefs());
+        this(new PersonnelDatabase(), new DutyCalendar(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -146,8 +146,8 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
-    @Override
-    public ObservableList<Person> getDutyForDates() {return dutyForDates; }
+    //@Override
+    //public ObservableList<Person> getDutyForDates() {return dutyForDates; }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {

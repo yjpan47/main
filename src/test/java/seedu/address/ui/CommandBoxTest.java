@@ -32,7 +32,7 @@ public class CommandBoxTest extends GuiUnitTest {
                 return new CommandResult("Command successful");
             }
             throw new CommandException("Command failed");
-        }, history);
+        }, null, history);
         commandBoxHandle = new CommandBoxHandle(getChildNode(commandBox.getRoot(),
                 CommandBoxHandle.COMMAND_INPUT_FIELD_ID));
         uiPartRule.setUiPart(commandBox);
