@@ -85,7 +85,7 @@ public interface Model {
     ObservableList<Person> getFilteredPersonList();
 
     /** Returns an unmodifiable view of the duty for dates */
-    ObservableList<Person> getDutyForDates();
+    //ObservableList<Person> getDutyForDates();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
