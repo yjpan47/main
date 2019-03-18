@@ -13,7 +13,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_SECTION = new Prefix("s/");
     public static final Prefix PREFIX_RANK = new Prefix("r/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
-    public static final Prefix PREFIX_UNIT = new Prefix("u/");
 
 
 }

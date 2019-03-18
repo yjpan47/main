@@ -16,16 +16,20 @@ import seedu.address.model.person.Person;
 public class PersonCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
     private static final String NAME_FIELD_ID = "#name";
-    private static final String ADDRESS_FIELD_ID = "#address";
     private static final String PHONE_FIELD_ID = "#phone";
-    private static final String EMAIL_FIELD_ID = "#email";
+    private static final String COMPANY_FIELD_ID = "#company";
+    private static final String SECTION_FIELD_ID = "#section";
+    private static final String RANK_FIELD_ID = "#rank";
+    private static final String NRIC_FIELD_ID = "#nric";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private final Label idLabel;
     private final Label nameLabel;
-    private final Label addressLabel;
     private final Label phoneLabel;
-    private final Label emailLabel;
+    private final Label companyLabel;
+    private final Label sectionLabel;
+    private final Label rankLabel;
+    private final Label nricLabel;
     private final List<Label> tagLabels;
 
     public PersonCardHandle(Node cardNode) {
@@ -33,9 +37,11 @@ public class PersonCardHandle extends NodeHandle<Node> {
 
         idLabel = getChildNode(ID_FIELD_ID);
         nameLabel = getChildNode(NAME_FIELD_ID);
-        addressLabel = getChildNode(ADDRESS_FIELD_ID);
         phoneLabel = getChildNode(PHONE_FIELD_ID);
-        emailLabel = getChildNode(EMAIL_FIELD_ID);
+        companyLabel = getChildNode(COMPANY_FIELD_ID);
+        sectionLabel = getChildNode(SECTION_FIELD_ID);
+        rankLabel = getChildNode(RANK_FIELD_ID);
+        nricLabel = getChildNode(NRIC_FIELD_ID);
 
         Region tagsContainer = getChildNode(TAGS_FIELD_ID);
         tagLabels = tagsContainer
@@ -53,16 +59,24 @@ public class PersonCardHandle extends NodeHandle<Node> {
         return nameLabel.getText();
     }
 
-    public String getAddress() {
-        return addressLabel.getText();
-    }
-
     public String getPhone() {
         return phoneLabel.getText();
     }
 
-    public String getEmail() {
-        return emailLabel.getText();
+    public String getCompany() {
+        return companyLabel.getText();
+    }
+
+    public String getSection() {
+        return sectionLabel.getText();
+    }
+
+    public String getRank() {
+        return rankLabel.getText();
+    }
+
+    public String getNric() {
+        return nricLabel.getText();
     }
 
     public List<String> getTags() {

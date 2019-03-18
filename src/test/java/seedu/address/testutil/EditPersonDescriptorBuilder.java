@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.person.Company;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
@@ -71,10 +72,18 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Unit} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Section} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withSection(String section) {
         descriptor.setSection(new Section(section));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Company} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withCompany(String company) {
+        descriptor.setCompany(new Company(company));
         return this;
     }
 

@@ -30,7 +30,7 @@ public class AddCommand extends Command{
             + PREFIX_SECTION + "1 "
             + PREFIX_RANK + "CPL "
             + PREFIX_NAME + "Brandon Foo "
-            + PREFIX_PHONE + "99899989 "
+            + PREFIX_PHONE + "91234567 "
             + PREFIX_TAG + "injury";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";

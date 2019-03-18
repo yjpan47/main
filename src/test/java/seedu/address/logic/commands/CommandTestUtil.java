@@ -4,8 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RANK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SECTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import java.util.ArrayList;
@@ -30,25 +32,27 @@ public class CommandTestUtil {
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
-    public static final String VALID_EMAIL_AMY = "amy@example.com";
-    public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
-    public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
+    public static final String VALID_COMPANY_AMY = "Echo";
+    public static final String VALID_COMPANY_BOB = "Charlie";
     public static final String VALID_SECTION_AMY = "1SIR";
     public static final String VALID_SECTION_BOB = "2SIR";
+    public static final String VALID_RANK_AMY = "LTA";
+    public static final String VALID_RANK_BOB = "CPL";
     public static final String VALID_NRIC_AMY = "S1234567A";
     public static final String VALID_NRIC_BOB = "S1234567B";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-    public static final String VALID_RANK_AMY = "LTA";
-    public static final String VALID_RANK_BOB = "CPL";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
-    public static final String UNIT_DESC_AMY = " " + PREFIX_UNIT + VALID_SECTION_AMY;
-    public static final String UNIT_DESC_BOB = " " + PREFIX_UNIT + VALID_SECTION_BOB;
+    public static final String COMPANY_DESC_AMY = " " + PREFIX_COMPANY + VALID_COMPANY_AMY;
+    public static final String COMPANY_DESC_BOB = " " + PREFIX_COMPANY + VALID_COMPANY_BOB;
+    public static final String SECTION_DESC_AMY = " " + PREFIX_SECTION + VALID_SECTION_AMY;
+    public static final String SECTION_DESC_BOB = " " + PREFIX_SECTION + VALID_SECTION_BOB;
+    public static final String RANK_DESC_AMY = " " + PREFIX_RANK + VALID_RANK_AMY;
+    public static final String RANK_DESC_BOB = " " + PREFIX_RANK + VALID_RANK_BOB;
     public static final String NRIC_DESC_AMY = " " + PREFIX_NRIC + VALID_NRIC_AMY;
     public static final String NRIC_DESC_BOB = " " + PREFIX_NRIC + VALID_NRIC_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
@@ -56,7 +60,7 @@ public class CommandTestUtil {
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
-    public static final String INVALID_UNIT_DESC = " " + PREFIX_UNIT + "SIR"; // missing number infront
+    public static final String INVALID_SECTION_DESC = " " + PREFIX_SECTION + "SIR"; // missing number infront
     public static final String INVALID_NRIC_DESC = " " + PREFIX_NRIC + "1238675A"; // missing first number
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
@@ -68,13 +72,13 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withSection(VALID_SECTION_AMY)
-                .withNric(VALID_NRIC_AMY).withRank(VALID_RANK_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withPhone(VALID_PHONE_AMY).withCompany(VALID_COMPANY_AMY)
+                .withSection(VALID_SECTION_AMY).withNric(VALID_NRIC_AMY)
+                .withRank(VALID_RANK_AMY).withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withSection(VALID_SECTION_BOB)
-                .withNric(VALID_NRIC_BOB).withRank(VALID_RANK_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withPhone(VALID_PHONE_BOB).withCompany(VALID_COMPANY_BOB)
+                .withSection(VALID_SECTION_BOB).withNric(VALID_NRIC_BOB)
+                .withRank(VALID_RANK_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
     /**
