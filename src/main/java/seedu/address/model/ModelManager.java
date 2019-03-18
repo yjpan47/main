@@ -15,10 +15,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.calendar.DutyCalendar;
 import seedu.address.model.calendar.TempClass;
 import seedu.address.model.person.Person;
-import seedu.address.model.calendar.Duty;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
@@ -83,30 +81,30 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getPersonnelDatabaseFilePath() {
+        return userPrefs.getPersonnelDatabaseFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setPersonnelDatabaseFilePath(Path personnelDatabaseFilePath) {
+        requireNonNull(personnelDatabaseFilePath);
+        userPrefs.setPersonnelDatabaseFilePath(personnelDatabaseFilePath);
     }
 
     //=========== PersonnelDatabase ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyPersonnelDatabase addressBook) {
-        versionedAddressBook.resetData(addressBook);
+    public void setPersonnelDatabase(ReadOnlyPersonnelDatabase personnelDatabase) {
+        versionedAddressBook.resetData(personnelDatabase);
     }
 
     @Override
-    public ReadOnlyPersonnelDatabase getAddressBook() {
+    public ReadOnlyPersonnelDatabase getPersonnelDatabase() {
         return versionedAddressBook;
     }
 
     @Override
-    public void sortAddressBook() {
+    public void sortPersonnelDatabase() {
         versionedAddressBook.sort();
     }
 
@@ -159,27 +157,27 @@ public class ModelManager implements Model {
     //=========== Undo/Redo =================================================================================
 
     @Override
-    public boolean canUndoAddressBook() {
+    public boolean canUndoPersonnelDatabase() {
         return versionedAddressBook.canUndo();
     }
 
     @Override
-    public boolean canRedoAddressBook() {
+    public boolean canRedoPersonnelDatabase() {
         return versionedAddressBook.canRedo();
     }
 
     @Override
-    public void undoAddressBook() {
+    public void undoPersonnelDatabase() {
         versionedAddressBook.undo();
     }
 
     @Override
-    public void redoAddressBook() {
+    public void redoPersonnelDatabase() {
         versionedAddressBook.redo();
     }
 
     @Override
-    public void commitAddressBook() {
+    public void commitPersonnelDatabase() {
         versionedAddressBook.commit();
     }
 
