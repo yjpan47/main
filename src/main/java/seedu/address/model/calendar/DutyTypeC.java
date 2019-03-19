@@ -1,15 +1,11 @@
 package seedu.address.model.calendar;
 
-public class DutyTypeC extends Duty {
+class DutyTypeC extends Duty {
 
     /**
-     * Constructs a duty
-     *
-     * @param monthIndex
-     * @param dayIndex
-     * @param weekIndex
+     * Constructs a duty of Type C
      */
-    public DutyTypeC(int monthIndex, int dayIndex, int weekIndex) {
+    DutyTypeC(int monthIndex, int dayIndex, int weekIndex) {
         super(monthIndex, dayIndex, weekIndex);
         this.numOfVacancies = 2;
         this.pointsAwards = 2;

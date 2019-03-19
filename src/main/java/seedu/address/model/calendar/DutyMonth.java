@@ -5,13 +5,10 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.InputMismatchException;
-import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -170,23 +167,6 @@ public class DutyMonth {
         return pq;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * Gets current month in String format
      */
@@ -195,6 +175,7 @@ public class DutyMonth {
             "August", "September", "October", "November", "December"};
         return months[this.monthIndex - 1];
     }
+
     /**
      * Returns current month
      */
@@ -218,5 +199,4 @@ public class DutyMonth {
             throw new InputMismatchException("Invalid Month Index.");
         }
     }
-
 }
