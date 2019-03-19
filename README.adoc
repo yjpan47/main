@@ -19,7 +19,7 @@ endif::[]
 
 * This is a desktop Scheduler application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface). It is meant for army personnel to use to schedule and assign guard duties to personnel.
 * Duty can be assigned for the upcoming months and soldiers can see their duties assigned to them as well as perform various different actions.
-* This will save a lot of time for commanders planning duties as this will automatically allocate duties and make the process completely automated
+* This will save a lot of time for commanders planning duties as this will automatically allocate duties and make the process completely automated.
 
 
 == Site Map
