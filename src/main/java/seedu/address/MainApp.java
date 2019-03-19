@@ -15,11 +15,20 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.*;
+import seedu.address.model.DutyCalendar;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.PersonnelDatabase;
+import seedu.address.model.ReadOnlyPersonnelDatabase;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.*;
 import seedu.address.storage.JsonPersonnelDatabaseStorage;
+import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.PersonnelDatabaseStorage;
+import seedu.address.storage.Storage;
+import seedu.address.storage.StorageManager;
+import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -48,7 +57,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        PersonnelDatabaseStorage personnelDatabaseStorage = new JsonPersonnelDatabaseStorage(userPrefs.getAddressBookFilePath());
+        PersonnelDatabaseStorage personnelDatabaseStorage =
+                new JsonPersonnelDatabaseStorage(userPrefs.getAddressBookFilePath());
         storage = new StorageManager(personnelDatabaseStorage, userPrefsStorage);
 
         initLogging(config);
@@ -78,11 +88,13 @@ public class MainApp extends Application {
             // dutyCalendar storage to be implemented
             dutyCalendar = new DutyCalendar();
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty PersonnelDatabase and Calendar");
+            logger.warning("Data file not in the correct format. Will be "
+                    + "starting with an empty PersonnelDatabase and Calendar");
             initialData = new PersonnelDatabase();
             dutyCalendar = new DutyCalendar();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty PersonnelDatabase and Calendar");
+            logger.warning("Problem while reading from the file. Will be "
+                    + "starting with an empty PersonnelDatabase and Calendar");
             initialData = new PersonnelDatabase();
             dutyCalendar = new DutyCalendar();
         }
@@ -148,7 +160,8 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty PersonnelDatabase");
+            logger.warning("Problem while reading from the file. "
+                    + "Will be starting with an empty PersonnelDatabase");
             initializedPrefs = new UserPrefs();
         }
 

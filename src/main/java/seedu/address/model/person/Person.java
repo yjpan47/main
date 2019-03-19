@@ -48,13 +48,21 @@ public class Person {
         this.tags.addAll(tags);
     }
 
-    public Nric getNric() { return nric; }
+    public Nric getNric() {
+        return nric;
+    }
 
-    public Company getCompany() { return company; }
+    public Company getCompany() {
+        return company;
+    }
 
-    public Section getSection() { return section; }
+    public Section getSection() {
+        return section;
+    }
 
-    public Rank getRank() { return rank; }
+    public Rank getRank() {
+        return rank;
+    }
 
     public Name getName() {
         return name;

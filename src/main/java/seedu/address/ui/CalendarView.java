@@ -28,13 +28,13 @@ import javax.swing.*;
  * The Calendar. Allows user to see dates with duties.
  */
 public class CalendarView extends UiPart<Region> {
-    private static final String FXML = "CalendarView.fxml";
-    private final Logger logger = LogsCenter.getLogger(CalendarView.class);
-    private Label[] dateLabels;
-    private static final String[] dayArray = {"SUN", "MON ", "TUE", "WED", "THU", "FRI", "SAT"};
-    private static final String[] monthArray =
-            {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
     private static Date date;
+    private static final String FXML = "CalendarView.fxml";
+    //private final Logger logger = LogsCenter.getLogger(CalendarView.class);
+    private static final String[] dayArray = {"SUN", "MON ", "TUE", "WED", "THU", "FRI", "SAT"};
+    private static final String[] monthArray = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG",
+        "SEP", "OCT", "NOV", "DEC"};
+    private Label[] dateLabels;
 
     @FXML
     private ChoiceBox<String> monthSelection;
@@ -78,13 +78,15 @@ public class CalendarView extends UiPart<Region> {
         int[] result = {day, month, year};
         return result;
     }
-
+    /**
+     * Creates labels for each date.
+     */
     private void initdateLabels() {
         dateLabels = new Label[7];
         for (int i = 0; i <= 6; i++) {
             dateLabels[i] = new Label(dayArray[i]);
         }
-        for (int i = 0; i <=6; i++) {
+        for (int i = 0; i <= 6; i++) {
             gridPaneBottom.add(dateLabels[i], i, 0);
             dateLabels[i].maxWidthProperty().bind(gridPaneBottom.widthProperty().divide(7));
             dateLabels[i].setWrapText(true);

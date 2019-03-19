@@ -30,12 +30,12 @@ public class RedoCommand extends Command {
     }
 
     @Override
-    public CommandResult executeGeneral(Model model, CommandHistory history) throws CommandException{
+    public CommandResult executeGeneral(Model model, CommandHistory history) throws CommandException {
         return execute(model, history);
     }
 
     @Override
-    public CommandResult executeAdmin(Model model, CommandHistory history) throws CommandException{
+    public CommandResult executeAdmin(Model model, CommandHistory history) throws CommandException {
         return execute(model, history);
     }
 }

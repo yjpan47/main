@@ -10,7 +10,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UserType;
 import seedu.address.logic.commands.AdminCommand;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.GeneralCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -19,7 +18,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyPersonnelDatabase;
 import seedu.address.model.person.Person;
-import seedu.address.model.calendar.Duty;
 import seedu.address.storage.Storage;
 
 /**
@@ -52,7 +50,7 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         try {
-            if(user == UserType.ADMIN) {
+            if (user == UserType.ADMIN) {
                 AdminCommand command = addressBookParser.parseCommand(commandText);
                 commandResult = command.executeAdmin(model, history);
             } else if (user == UserType.GENERAL) {

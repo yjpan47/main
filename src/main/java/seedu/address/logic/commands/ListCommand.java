@@ -24,7 +24,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public CommandResult executeGeneral(Model model, CommandHistory history)     {
+    public CommandResult executeGeneral(Model model, CommandHistory history) {
         return execute(model, history);
     }
 
