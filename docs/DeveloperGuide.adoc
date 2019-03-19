@@ -363,7 +363,19 @@ Each `Duty` class should contain the details such as the day index, list of `Per
 
 *Algorithm*
 
-*Yong Jing do leh*
+* Each Person is assigned a duty score that is initialized at a fixed value. Each Person can earn duty points by covering
+duties. Weekday duties are worth 2 points; Friday duties are worth 3 points; Weekend duties are worth 4 points.
+
+* Preparation of data
+1. The list of persons will be sorted according to their points in ascending order.
+2. The list of duties will be sorted in the order Weekend >> Friday >> Weekday.
+3. Person with lower duty points will be assigned to weekend duties
+
+* Assignment
+1. Starting from the top of the duties list, the first person from the persons list who is available (didn't block out the date) for that day will be assigned
+the duty. This ensures that lower score persons are given priority for weekend duties.
+2. The algorithm ensure that the duty score of the persons will be normalized as much as possible at the end of each month.
+
 
 ==== Design Considerations
 ===== Aspect: need for DutyDate classes
