@@ -4,50 +4,62 @@ package seedu.address.model.calendar;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+
+
+import seedu.address.model.person.Company;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rank;
+import seedu.address.model.person.Section;
 import seedu.address.model.tag.Tag;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.*;
-
+/**
+ * A temporary class to be deleted before submission
+ */
 public class TempClass {
 
-    Nric nric1 = new Nric("S9875493J");
-    Nric nric2 = new Nric("S8798473L");
-    Nric nric3 = new Nric("S8698443K");
+    private Company company1 = new Company("Alpha");
+    private Company company2 = new Company("Beta");
+    private Company company3 = new Company("Gamma");
 
-    Name name1 = new Name("John1");
-    Name name2 = new Name("John2");
-    Name name3 = new Name("John3");
+    private Name name1 = new Name("John1");
+    private Name name2 = new Name("John2");
+    private Name name3 = new Name("John3");
 
-    Company company1 = new Company("Alpha");
-    Company company2 = new Company("Beta");
-    Company company3 = new Company("Gamma");
+    private Nric nric1 = new Nric("S9875493J");
+    private Nric nric2 = new Nric("S8798473L");
+    private Nric nric3 = new Nric("S8698443K");
 
-    Section section1 = new Section("1");
-    Section section2 = new Section("2");
-    Section section3 = new Section("3");
+    private Phone phone1 = new Phone("09403942");
+    private Phone phone2 = new Phone("798749374");
+    private Phone phone3 = new Phone("473974983");
+    private Rank rank1 = new Rank("REC");
+    private Rank rank2 = new Rank("CPL");
+    private Rank rank3 = new Rank("MAJ");
 
-    Rank rank1 = new Rank("REC");
-    Rank rank2 = new Rank("CPL");
-    Rank rank3 = new Rank("MAJ");
+    private Section section1 = new Section("1");
+    private Section section2 = new Section("2");
+    private Section section3 = new Section("3");
 
-    Phone phone1 = new Phone("09403942");
-    Phone phone2 = new Phone("798749374");
-    Phone phone3 = new Phone("473974983");
+    private Set<Tag> tags = new HashSet<>();
 
-    Set<Tag> tags = new HashSet<>();
+    private Person person1 = new Person(nric1, company1, section1, rank1, name1, phone1, tags);
+    private Person person2 = new Person(nric2, company2, section2, rank2, name2, phone2, tags);
+    private Person person3 = new Person(nric3, company3, section3, rank3, name3, phone3, tags);
 
-    Person person1 = new Person(nric1, company1, section1, rank1, name1, phone1, tags);
-    Person person2 = new Person(nric2, company2, section2, rank2, name2, phone2, tags);
-    Person person3 = new Person(nric3, company3, section3, rank3, name3, phone3, tags);
+    private List<Person> persons = new ArrayList<>();
 
-    public List<Person> persons = new ArrayList<>();
+    private LocalDate date = LocalDate.now();
 
-    public LocalDate date = LocalDate.now();
-
-    public Duty duty;
+    private Duty duty;
 
     public TempClass() {
         persons.add(person1);
