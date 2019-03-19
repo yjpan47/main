@@ -43,7 +43,7 @@ public class TempClass {
     private Phone phone1 = new Phone("09403942");
     private Phone phone2 = new Phone("798749374");
     private Phone phone3 = new Phone("473974983");
-  
+    
     private Rank rank1 = new Rank("REC");
     private Rank rank2 = new Rank("CPL");
     private Rank rank3 = new Rank("MAJ");
