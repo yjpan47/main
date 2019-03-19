@@ -37,8 +37,8 @@ public class JsonPersonnelDatabaseStorageTest {
     }
 
     private java.util.Optional<ReadOnlyPersonnelDatabase> readPersonnelDatabase(String filePath) throws Exception {
-        return new JsonPersonnelDatabaseStorage(Paths.get(filePath)).
-                readPersonnelDatabase(addToTestDataPathIfNotNull(filePath));
+        return new JsonPersonnelDatabaseStorage(Paths.get(filePath))
+                .readPersonnelDatabase(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -110,10 +110,10 @@ public class JsonPersonnelDatabaseStorageTest {
     /**
      * Saves {@code personnelDatabase} at the specified {@code filePath}.
      */
-    private void savePersonnelDatabase(ReadOnlyPersonnelDatabase PersonnelDatabase, String filePath) {
+    private void savePersonnelDatabase(ReadOnlyPersonnelDatabase personnelDatabase, String filePath) {
         try {
             new JsonPersonnelDatabaseStorage(Paths.get(filePath))
-                    .savePersonnelDatabase(PersonnelDatabase, addToTestDataPathIfNotNull(filePath));
+                    .savePersonnelDatabase(personnelDatabase, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

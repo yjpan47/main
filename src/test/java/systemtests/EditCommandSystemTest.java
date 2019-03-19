@@ -190,18 +190,20 @@ public class EditCommandSystemTest extends PersonnelDatabaseSystemTest {
         assertTrue(getModel().getPersonnelDatabase().getPersonList().contains(BOB));
         index = INDEX_FIRST_PERSON;
         assertFalse(getModel().getFilteredPersonList().get(index.getZeroBased()).equals(BOB));
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NRIC_DESC_BOB + COMPANY_DESC_BOB +
-                SECTION_DESC_BOB + RANK_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NRIC_DESC_BOB + COMPANY_DESC_BOB
+                + SECTION_DESC_BOB + RANK_DESC_BOB + NAME_DESC_BOB
+                + PHONE_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: edit a person with new values same as another person's values but with different tags -> rejected */
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NRIC_DESC_BOB + COMPANY_DESC_BOB +
-                SECTION_DESC_BOB + RANK_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + TAG_DESC_HUSBAND;
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NRIC_DESC_BOB + COMPANY_DESC_BOB
+                + SECTION_DESC_BOB + RANK_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: edit a person with new values same as another person's values but with different phone -> rejected */
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NRIC_DESC_BOB + COMPANY_DESC_BOB +
-                SECTION_DESC_BOB + RANK_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NRIC_DESC_BOB + COMPANY_DESC_BOB
+                + SECTION_DESC_BOB + RANK_DESC_BOB + NAME_DESC_BOB
+                + PHONE_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
