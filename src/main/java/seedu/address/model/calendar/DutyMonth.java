@@ -50,7 +50,6 @@ public class DutyMonth {
 
     /**
      * Import all Persons involved in duty scheduling for the month
-     * @param personList
      */
     private void importPersons(UniquePersonList personList) {
         for (Person person : personList) {
