@@ -21,8 +21,7 @@ public class DutyMonth {
     private int monthIndex;
     private int firstDayWeekIndex;
     private int numOfDays;
-
-
+    
     private List<Duty> duties;
     private List<Person> persons;
 
