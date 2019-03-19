@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.*;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -11,7 +12,7 @@ import seedu.address.model.person.Person;
 /**
  * Adds a person to the address book.
  */
-public class AddCommand extends Command {
+public class AddCommand extends Command{
 
     public static final String COMMAND_WORD = "add";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the duty planner. "
@@ -29,7 +30,7 @@ public class AddCommand extends Command {
             + PREFIX_SECTION + "1 "
             + PREFIX_RANK + "CPL "
             + PREFIX_NAME + "Brandon Foo "
-            + PREFIX_PHONE + "99899989 "
+            + PREFIX_PHONE + "91234567 "
             + PREFIX_TAG + "injury";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
@@ -56,6 +57,16 @@ public class AddCommand extends Command {
         model.addPerson(toAdd);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+    }
+
+    @Override
+    public CommandResult executeGeneral(Model model, CommandHistory history) throws CommandException {
+        throw new CommandException(Messages.MESSAGE_NO_AUTHORITY);
+    }
+
+    @Override
+    public CommandResult executeAdmin(Model model, CommandHistory history) throws CommandException {
+        return execute(model, history);
     }
 
     @Override

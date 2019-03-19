@@ -2,6 +2,7 @@ package seedu.address.model.calendar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.InputMismatchException;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class DutyMonth {
         if (monthIndex >= 1 && monthIndex <= 12
                 && firstDayIndex >= 0 && firstDayIndex <= 7)  {
             this.monthIndex = monthIndex;
-            this.month = getMonth();
+            this.month = this.getMonth();
             this.firstDayIndex = firstDayIndex;
             this.numOfDays = getNumOfDays();
             this.dates = new ArrayList<>();
@@ -36,6 +37,12 @@ public class DutyMonth {
         return months[this.monthIndex - 1];
     }
 
+    public boolean isCurrentMonth() {
+        Calendar cal = Calendar.getInstance();
+        int currentMonth = cal.get(Calendar.MONTH);
+        return (this.monthIndex == currentMonth);
+    }
+
     private int getNumOfDays() {
         if (Arrays.asList(1, 3, 5, 7, 8, 10, 12).contains(this.monthIndex)) {
             return 31;
@@ -46,11 +53,6 @@ public class DutyMonth {
         } else {
             throw new InputMismatchException("Invalid Month Index.");
         }
-    }
-
-    public static void main(String[] args) {
-        Day day = Day.FRIDAY;
-        System.out.println(day.getIndex());
     }
 
 }

@@ -38,6 +38,13 @@ public class Duty {
                 && this.dutyOfficer != null;
     }
 
+    /*
+    Temporary method.
+     */
+    public void addDutyMen(List<Person> dutyMen) {
+        this.dutyMen = dutyMen;
+    }
+
     @Override
     public String toString() {
         return "Duty on " + this.date.toString() + " (" + this.meridiem.toString() + ")";

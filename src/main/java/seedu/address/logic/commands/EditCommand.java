@@ -29,8 +29,6 @@ import seedu.address.model.person.Rank;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Unit;
-import seedu.address.model.person.NRIC;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -94,6 +92,16 @@ public class EditCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+    }
+
+    @Override
+    public CommandResult executeGeneral(Model model, CommandHistory history) throws CommandException {
+        throw new CommandException(Messages.MESSAGE_NO_AUTHORITY);
+    }
+
+    @Override
+    public CommandResult executeAdmin(Model model, CommandHistory history) throws CommandException {
+        return execute(model, history);
     }
 
     /**
@@ -186,7 +194,7 @@ public class EditCommand extends Command {
         public void setRank(Rank rank) { this.rank = rank; }
 
         public Optional<Rank> getRank() { return Optional.ofNullable(rank); }
-        
+
         public void setName(Name name) {
             this.name = name;
         }

@@ -2,11 +2,14 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.calendar.Duty;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -17,7 +20,6 @@ public class Person {
 
     // Identity fields
     private final Name name;
-
     private final Nric nric;
 
     // Data fields
@@ -26,6 +28,9 @@ public class Person {
     private final Rank rank;
     private final Phone phone;
     private final Set<Tag> tags = new HashSet<>();
+
+    // Duty
+    private List<Duty> duties = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
@@ -57,15 +62,6 @@ public class Person {
 
     public Phone getPhone() {
         return phone;
-    }
-
-
-    public Unit getUnit() {
-        return unit;
-    }
-
-    public NRIC getNRIC() {
-        return nric;
     }
 
     /**
@@ -118,6 +114,12 @@ public class Person {
         // use this method for custom fields hashing instead of implementing your own
 
         return Objects.hash(nric, company, section, rank, name, phone, tags);
+    }
+
+    // Duty methods
+
+    public List<Duty> getDuties() {
+        return duties;
     }
 
     @Override

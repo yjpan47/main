@@ -16,6 +16,7 @@
 <?import java.lang.String?>
 
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ListView?>
 <VBox fx:id="vBoxCalendar" maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity"
       xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
 
@@ -28,31 +29,8 @@
                 <children>
                     <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="&lt;" />
                     <Region prefHeight="200.0" HBox.hgrow="ALWAYS" />
-                    <ChoiceBox fx:id="monthSelection" prefWidth="150.0" >
-                        <items>
-                            <FXCollections fx:factory="observableArrayList">
-                                <String fx:value="JAN" />
-                                <String fx:value="FEB" />
-                                <String fx:value="MAR" />
-                                <String fx:value="APR" />
-                                <String fx:value="MAY" />
-                                <String fx:value="JUN" />
-                                <String fx:value="JUL" />
-                                <String fx:value="AUG" />
-                                <String fx:value="SEP" />
-                                <String fx:value="OCT" />
-                                <String fx:value="NOV" />
-                                <String fx:value="DEC" />
-
-                            </FXCollections>
-                        </items>
-                    </ChoiceBox>
-                    <ChoiceBox fx:id="yearSelection" prefWidth="150.0" >
-                        <items>
-                            <FXCollections fx:factory="observableArrayList">
-                            </FXCollections>
-                        </items>
-                    </ChoiceBox>
+                    <ChoiceBox fx:id="monthSelection" prefWidth="150.0" />
+                    <ChoiceBox fx:id="yearSelection" prefWidth="150.0" />
                     <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
                     <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="&gt;" />
                 </children>
@@ -76,41 +54,6 @@
                 <RowConstraints minHeight="60.0" vgrow="ALWAYS" />
             </rowConstraints>
             <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SUN">
-                    <font>
-                        <Font size="20.0" />
-                    </font>
-                </Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="MON" GridPane.columnIndex="1">
-                    <font>
-                        <Font size="20.0" />
-                    </font>
-                </Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TUE" GridPane.columnIndex="2">
-                    <font>
-                        <Font size="20.0" />
-                    </font>
-                </Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="THU" GridPane.columnIndex="4">
-                    <font>
-                        <Font size="20.0" />
-                    </font>
-                </Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="WED" GridPane.columnIndex="3">
-                    <font>
-                        <Font size="20.0" />
-                    </font>
-                </Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FRI" GridPane.columnIndex="5">
-                    <font>
-                        <Font size="20.0" />
-                    </font>
-                </Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SAT" GridPane.columnIndex="6">
-                    <font>
-                        <Font size="20.0" />
-                    </font>
-                </Text>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="John Adam" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="John Beng" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="John Chew" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
@@ -118,6 +61,7 @@
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="John Lim" GridPane.columnIndex="4" GridPane.rowIndex="1"/>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Chao Keng" GridPane.columnIndex="5" GridPane.rowIndex="1"/>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="John Travolta" GridPane.columnIndex="6" GridPane.rowIndex="1"/>
+                <ListView fx:id="dutyPersonListView" VBox.vgrow="ALWAYS" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
             </children>
         </GridPane>
     </ScrollPane>
