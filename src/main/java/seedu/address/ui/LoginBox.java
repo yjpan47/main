@@ -18,7 +18,9 @@ public class LoginBox {
     private TextField textField2;
     private TextArea textArea;
     private Stage window;
-
+    /**
+     * Display box parameters.
+     */
     public UserType display() {
         window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
