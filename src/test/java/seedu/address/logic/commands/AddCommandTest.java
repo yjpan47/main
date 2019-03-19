@@ -19,8 +19,8 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.PersonnelDatabase;
 import seedu.address.model.Model;
+import seedu.address.model.PersonnelDatabase;
 import seedu.address.model.ReadOnlyPersonnelDatabase;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
@@ -113,12 +113,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getPersonnelDatabaseFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setPersonnelDatabaseFilePath(Path personnelDatabaseFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -128,17 +128,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyPersonnelDatabase newData) {
+        public void setPersonnelDatabase(ReadOnlyPersonnelDatabase newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyPersonnelDatabase getAddressBook() {
+        public ReadOnlyPersonnelDatabase getPersonnelDatabase() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void sortAddressBook() {
+        public void sortPersonnelDatabase() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -168,27 +168,27 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean canUndoAddressBook() {
+        public boolean canUndoPersonnelDatabase() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoAddressBook() {
+        public boolean canRedoPersonnelDatabase() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void undoAddressBook() {
+        public void undoPersonnelDatabase() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoAddressBook() {
+        public void redoPersonnelDatabase() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitPersonnelDatabase() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -245,12 +245,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitPersonnelDatabase() {
             // called by {@code AddCommand#execute()}
         }
 
         @Override
-        public ReadOnlyPersonnelDatabase getAddressBook() {
+        public ReadOnlyPersonnelDatabase getPersonnelDatabase() {
             return new PersonnelDatabase();
         }
     }

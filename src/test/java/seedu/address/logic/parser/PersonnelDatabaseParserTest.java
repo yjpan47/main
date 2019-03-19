@@ -38,7 +38,7 @@ public class PersonnelDatabaseParserTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final PersonnelDatabaseParser parser = new PersonnelDatabaseParser();
 
     @Test
     public void parseCommand_add() throws Exception {

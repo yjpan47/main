@@ -29,9 +29,6 @@ public class Person {
     private final Phone phone;
     private final Set<Tag> tags = new HashSet<>();
 
-    // Duty
-    private List<Duty> duties = new ArrayList<>();
-
     /**
      * Every field must be present and not null.
      */
@@ -122,12 +119,6 @@ public class Person {
         // use this method for custom fields hashing instead of implementing your own
 
         return Objects.hash(nric, company, section, rank, name, phone, tags);
-    }
-
-    // Duty methods
-
-    public List<Duty> getDuties() {
-        return duties;
     }
 
     @Override
