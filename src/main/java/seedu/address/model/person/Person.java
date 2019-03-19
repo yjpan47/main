@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.tag.Tag;
 import seedu.address.model.calendar.Duty;
+import seedu.address.model.tag.Tag;
 
 
 /**
@@ -92,6 +92,9 @@ public class Person {
         return duties;
     }
 
+    /**
+     * Assign a duty to a Person
+     */
     public void addDuty(Duty duty) {
         if (this.duties.contains(duty)) {
             throw new InvalidParameterException(duty + " is already assigned to " + this);
