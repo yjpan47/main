@@ -4,26 +4,26 @@ import seedu.address.model.PersonnelDatabase;
 import seedu.address.model.person.Person;
 
 /**
- * A utility class to help with building Addressbook objects.
+ * A utility class to help with building PersonnelDatabase objects.
  * Example usage: <br>
- *     {@code PersonnelDatabase ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code PersonnelDatabase ab = new PersonnelDatabaseBuilder().withPerson("John", "Doe").build();}
  */
-public class AddressBookBuilder {
+public class PersonnelDatabaseBuilder {
 
     private PersonnelDatabase personnelDatabase;
 
-    public AddressBookBuilder() {
+    public PersonnelDatabaseBuilder() {
         personnelDatabase = new PersonnelDatabase();
     }
 
-    public AddressBookBuilder(PersonnelDatabase personnelDatabase) {
+    public PersonnelDatabaseBuilder(PersonnelDatabase personnelDatabase) {
         this.personnelDatabase = personnelDatabase;
     }
 
     /**
      * Adds a new {@code Person} to the {@code PersonnelDatabase} that we are building.
      */
-    public AddressBookBuilder withPerson(Person person) {
+    public PersonnelDatabaseBuilder withPerson(Person person) {
         personnelDatabase.addPerson(person);
         return this;
     }

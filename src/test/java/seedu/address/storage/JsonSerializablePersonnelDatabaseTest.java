@@ -16,10 +16,11 @@ import seedu.address.testutil.TypicalPersons;
 
 public class JsonSerializablePersonnelDatabaseTest {
 
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializablePersonnelDatabaseTest");
-    private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsAddressBook.json");
-    private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonAddressBook.json");
-    private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonAddressBook.json");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data",
+            "JsonSerializablePersonnelDatabaseTest");
+    private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsPersonnelDatabase.json");
+    private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonPersonnelDatabase.json");
+    private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonPersonnelDatabase.json");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -29,7 +30,7 @@ public class JsonSerializablePersonnelDatabaseTest {
         JsonSerializablePersonnelDatabase dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
                 JsonSerializablePersonnelDatabase.class).get();
         PersonnelDatabase personnelDatabaseFromFile = dataFromFile.toModelType();
-        PersonnelDatabase typicalPersonsPersonnelDatabase = TypicalPersons.getTypicalAddressBook();
+        PersonnelDatabase typicalPersonsPersonnelDatabase = TypicalPersons.getTypicalPersonnelDatabase();
         assertEquals(personnelDatabaseFromFile, typicalPersonsPersonnelDatabase);
     }
 

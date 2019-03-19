@@ -16,16 +16,28 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Company;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rank;
+import seedu.address.model.person.Section;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.Assert;
 
 public class ParserUtilTest {
+    private static final String INVALID_NRIC = "GGG";
+    private static final String INVALID_COMPANY = " ";
+    private static final String INVALID_SECTION = " ";
+    private static final String INVALID_RANK = "Blah";
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "65";
     private static final String INVALID_TAG = "#friend";
 
+    private static final String VALID_NRIC = "S9019283J";
+    private static final String VALID_COMPANY = "Orion";
+    private static final String VALID_SECTION = "3";
+    private static final String VALID_RANK = "CFC";
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_TAG_1 = "friend";
@@ -56,6 +68,98 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseNric_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseNric((String) null));
+    }
+
+    @Test
+    public void parseNric_invalidValue_throwsParseException() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseNric(INVALID_NRIC));
+    }
+
+    @Test
+    public void parseNric_validValueWithoutWhitespace_returnsNric() throws Exception {
+        Nric expectedNric = new Nric(VALID_NRIC);
+        assertEquals(expectedNric, ParserUtil.parseNric(VALID_NRIC));
+    }
+
+    @Test
+    public void parseNric_validValueWithWhitespace_returnsTrimmedNric() throws Exception {
+        String nricWithWhitespace = WHITESPACE + VALID_NRIC + WHITESPACE;
+        Nric expectedNric = new Nric(VALID_NRIC);
+        assertEquals(expectedNric, ParserUtil.parseNric(nricWithWhitespace));
+    }
+
+    @Test
+    public void parseCompany_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseCompany((String) null));
+    }
+
+    @Test
+    public void parseCompany_invalidValue_throwsParseException() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseCompany(INVALID_COMPANY));
+    }
+
+    @Test
+    public void parseCompany_validValueWithoutWhitespace_returnsCompany() throws Exception {
+        Company expectedCompany = new Company(VALID_COMPANY);
+        assertEquals(expectedCompany, ParserUtil.parseCompany(VALID_COMPANY));
+    }
+
+    @Test
+    public void parseCompany_validValueWithWhitespace_returnsTrimmedCompany() throws Exception {
+        String companyWithWhitespace = WHITESPACE + VALID_COMPANY + WHITESPACE;
+        Company expectedCompany = new Company(VALID_COMPANY);
+        assertEquals(expectedCompany, ParserUtil.parseCompany(companyWithWhitespace));
+    }
+
+    @Test
+    public void parseSection_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseSection((String) null));
+    }
+
+    @Test
+    public void parseSection_invalidValue_throwsParseException() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseSection(INVALID_SECTION));
+    }
+
+    @Test
+    public void parseSection_validValueWithoutWhitespace_returnsSection() throws Exception {
+        Section expectedSection = new Section(VALID_SECTION);
+        assertEquals(expectedSection, ParserUtil.parseSection(VALID_SECTION));
+    }
+
+    @Test
+    public void parseSection_validValueWithWhitespace_returnsTrimmedSection() throws Exception {
+        String sectionWithWhitespace = WHITESPACE + VALID_SECTION + WHITESPACE;
+        Section expectedSection = new Section(VALID_SECTION);
+        assertEquals(expectedSection, ParserUtil.parseSection(sectionWithWhitespace));
+    }
+
+    @Test
+    public void parseRank_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseRank((String) null));
+    }
+
+    @Test
+    public void parseRank_invalidValue_throwsParseException() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseRank(INVALID_RANK));
+    }
+
+    @Test
+    public void parseRank_validValueWithoutWhitespace_returnsRank() throws Exception {
+        Rank expectedRank = new Rank(VALID_RANK);
+        assertEquals(expectedRank, ParserUtil.parseRank(VALID_RANK));
+    }
+
+    @Test
+    public void parseRank_validValueWithWhitespace_returnsTrimmedRank() throws Exception {
+        String rankWithWhitespace = WHITESPACE + VALID_RANK + WHITESPACE;
+        Rank expectedRank = new Rank(VALID_RANK);
+        assertEquals(expectedRank, ParserUtil.parseRank(rankWithWhitespace));
     }
 
     @Test

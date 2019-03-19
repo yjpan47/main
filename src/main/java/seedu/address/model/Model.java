@@ -36,47 +36,48 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' personnel database file path.
      */
-    Path getAddressBookFilePath();
+    Path getPersonnelDatabaseFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' personnel database file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setPersonnelDatabaseFilePath(Path personnelDatabaseFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces personnel database data with the data in {@code personnelDatabase}.
      */
-    void setAddressBook(ReadOnlyPersonnelDatabase addressBook);
+    void setPersonnelDatabase(ReadOnlyPersonnelDatabase personnelDatabase);
 
     /** Returns the PersonnelDatabase */
-    ReadOnlyPersonnelDatabase getAddressBook();
+    ReadOnlyPersonnelDatabase getPersonnelDatabase();
 
     /** Sorts the PersonnelDatabase by name */
-    void sortAddressBook();
+    void sortPersonnelDatabase();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in the personnel database.
      */
     boolean hasPerson(Person person);
 
     /**
      * Deletes the given person.
-     * The person must exist in the address book.
+     * The person must exist in the personnel database.
      */
     void deletePerson(Person target);
 
     /**
      * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * {@code person} must not already exist in the personnel database.
      */
     void addPerson(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in the personnel database.
+     * The person identity of {@code editedPerson} must not be the same as another existing person
+     * in the personnel database.
      */
     void setPerson(Person target, Person editedPerson);
 
@@ -94,29 +95,29 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Returns true if the model has previous address book states to restore.
+     * Returns true if the model has previous personnel database states to restore.
      */
-    boolean canUndoAddressBook();
+    boolean canUndoPersonnelDatabase();
 
     /**
-     * Returns true if the model has undone address book states to restore.
+     * Returns true if the model has undone personnel database states to restore.
      */
-    boolean canRedoAddressBook();
+    boolean canRedoPersonnelDatabase();
 
     /**
-     * Restores the model's address book to its previous state.
+     * Restores the model's personnel database to its previous state.
      */
-    void undoAddressBook();
+    void undoPersonnelDatabase();
 
     /**
-     * Restores the model's address book to its previously undone state.
+     * Restores the model's personnel database to its previously undone state.
      */
-    void redoAddressBook();
+    void redoPersonnelDatabase();
 
     /**
-     * Saves the current address book state for undo/redo.
+     * Saves the current personnel database state for undo/redo.
      */
-    void commitAddressBook();
+    void commitPersonnelDatabase();
 
     /**
      * Selected person in the filtered person list.

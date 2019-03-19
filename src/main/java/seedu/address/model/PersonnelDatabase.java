@@ -148,7 +148,9 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
     }
 
     @Override
-    public DutyCalendar getDutyCalendar() { return this.dutyCalendar; }
+    public DutyCalendar getDutyCalendar() {
+        return this.dutyCalendar;
+    }
 
     @Override
     public boolean equals(Object other) {

@@ -10,8 +10,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.calendar.Duty;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.calendar.Duty;
+
 
 /**
  * Represents a Person in the duty planner.
