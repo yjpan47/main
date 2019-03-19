@@ -29,7 +29,8 @@ public interface PersonnelDatabaseStorage {
     /**
      * @see #getPersonnelDatabaseFilePath()
      */
-    Optional<ReadOnlyPersonnelDatabase> readPersonnelDatabase(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyPersonnelDatabase> readPersonnelDatabase(Path filePath) throws DataConversionException,
+            IOException;
 
     /**
      * Saves the given {@link ReadOnlyPersonnelDatabase} to the storage.
