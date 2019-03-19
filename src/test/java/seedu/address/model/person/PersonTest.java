@@ -32,6 +32,7 @@ public class PersonTest {
         assertFalse(ALICE.isSamePerson(null));
 
         // different phone and email -> returns false
+
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withCompany(VALID_COMPANY_BOB)
                 .withSection(VALID_SECTION_BOB).withRank(VALID_RANK_BOB).withNric(VALID_NRIC_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
@@ -81,6 +82,7 @@ public class PersonTest {
         // different phone -> returns false
         editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
+
 
         // different company -> returns false
         editedAlice = new PersonBuilder(ALICE).withCompany(VALID_COMPANY_BOB).build();
