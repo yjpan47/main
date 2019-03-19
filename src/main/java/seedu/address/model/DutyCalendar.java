@@ -26,8 +26,8 @@ public class DutyCalendar {
 
     public DutyCalendar() {
         GregorianCalendar calendar = new GregorianCalendar();
-        this.currentMonth = new DutyMonth(1,1);
-        this.nextMonth = new DutyMonth(2,2);
+        this.currentMonth = new DutyMonth(1, 1);
+        this.nextMonth = new DutyMonth(2, 2);
     }
 
     void setDutyCalendar(DutyCalendar dutyCalendar) {
