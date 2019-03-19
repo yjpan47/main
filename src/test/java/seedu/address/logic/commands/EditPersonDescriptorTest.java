@@ -2,7 +2,15 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_RANK_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SECTION_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.Test;
 
@@ -23,23 +31,34 @@ public class EditPersonDescriptorTest {
         // null -> returns false
         assertFalse(DESC_AMY.equals(null));
 
-
         // different types -> returns false
         assertFalse(DESC_AMY.equals(5));
 
         // different values -> returns false
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
+        // different nric -> returns false
+        EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withNric(VALID_NRIC_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different company -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withCompany(VALID_COMPANY_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different section -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withSection(VALID_SECTION_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different rank -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withRank(VALID_RANK_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
         // different name -> returns false
-        EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different phone -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
-
-        // different nric -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withNric(VALID_NRIC_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false

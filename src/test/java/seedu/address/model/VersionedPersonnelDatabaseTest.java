@@ -14,285 +14,298 @@ import java.util.List;
 
 import org.junit.Test;
 
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.PersonnelDatabaseBuilder;
 
 public class VersionedPersonnelDatabaseTest {
 
-    private final ReadOnlyPersonnelDatabase addressBookWithAmy = new AddressBookBuilder().withPerson(AMY).build();
-    private final ReadOnlyPersonnelDatabase addressBookWithBob = new AddressBookBuilder().withPerson(BOB).build();
-    private final ReadOnlyPersonnelDatabase addressBookWithCarl = new AddressBookBuilder().withPerson(CARL).build();
-    private final ReadOnlyPersonnelDatabase emptyAddressBook = new AddressBookBuilder().build();
+    private final ReadOnlyPersonnelDatabase personnelDatabaseWithAmy =
+            new PersonnelDatabaseBuilder().withPerson(AMY).build();
+    private final ReadOnlyPersonnelDatabase personnelDatabaseWithBob =
+            new PersonnelDatabaseBuilder().withPerson(BOB).build();
+    private final ReadOnlyPersonnelDatabase personnelDatabaseWithCarl =
+            new PersonnelDatabaseBuilder().withPerson(CARL).build();
+    private final ReadOnlyPersonnelDatabase emptypersonnelDatabase =
+            new PersonnelDatabaseBuilder().build();
 
     @Test
-    public void commit_singleAddressBook_noStatesRemovedCurrentStateSaved() {
-        VersionedPersonnelDatabase versionedAddressBook = prepareAddressBookList(emptyAddressBook);
+    public void commit_singlePersonnelDatabase_noStatesRemovedCurrentStateSaved() {
+        VersionedPersonnelDatabase versionedPersonnelDatabase = preparePersonnelDatabaseList(emptypersonnelDatabase);
 
-        versionedAddressBook.commit();
-        assertAddressBookListStatus(versionedAddressBook,
-                Collections.singletonList(emptyAddressBook),
-                emptyAddressBook,
+        versionedPersonnelDatabase.commit();
+        assertPersonnelDatabaseListStatus(versionedPersonnelDatabase,
+                Collections.singletonList(emptypersonnelDatabase),
+                emptypersonnelDatabase,
                 Collections.emptyList());
     }
 
     @Test
-    public void commit_multipleAddressBookPointerAtEndOfStateList_noStatesRemovedCurrentStateSaved() {
-        VersionedPersonnelDatabase versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+    public void commit_multiplePersonnelDatabasePointerAtEndOfStateList_noStatesRemovedCurrentStateSaved() {
+        VersionedPersonnelDatabase versionedPersonnelDatabase = preparePersonnelDatabaseList(
+                emptypersonnelDatabase, personnelDatabaseWithAmy, personnelDatabaseWithBob);
 
-        versionedAddressBook.commit();
-        assertAddressBookListStatus(versionedAddressBook,
-                Arrays.asList(emptyAddressBook, addressBookWithAmy, addressBookWithBob),
-                addressBookWithBob,
+        versionedPersonnelDatabase.commit();
+        assertPersonnelDatabaseListStatus(versionedPersonnelDatabase,
+                Arrays.asList(emptypersonnelDatabase, personnelDatabaseWithAmy, personnelDatabaseWithBob),
+                personnelDatabaseWithBob,
                 Collections.emptyList());
     }
 
     @Test
-    public void commit_multipleAddressBookPointerNotAtEndOfStateList_statesAfterPointerRemovedCurrentStateSaved() {
-        VersionedPersonnelDatabase versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 2);
+    public void
+        commit_multiplePersonnelDatabasePointerNotAtEndOfStateList_statesAfterPointerRemovedCurrentStateSaved() {
+        VersionedPersonnelDatabase versionedPersonnelDatabase = preparePersonnelDatabaseList(
+                emptypersonnelDatabase, personnelDatabaseWithAmy, personnelDatabaseWithBob);
+        shiftCurrentStatePointerLeftwards(versionedPersonnelDatabase, 2);
 
-        versionedAddressBook.commit();
-        assertAddressBookListStatus(versionedAddressBook,
-                Collections.singletonList(emptyAddressBook),
-                emptyAddressBook,
+        versionedPersonnelDatabase.commit();
+        assertPersonnelDatabaseListStatus(versionedPersonnelDatabase,
+                Collections.singletonList(emptypersonnelDatabase),
+                emptypersonnelDatabase,
                 Collections.emptyList());
     }
 
     @Test
-    public void canUndo_multipleAddressBookPointerAtEndOfStateList_returnsTrue() {
-        VersionedPersonnelDatabase versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+    public void canUndo_multiplePersonnelDatabasePointerAtEndOfStateList_returnsTrue() {
+        VersionedPersonnelDatabase versionedPersonnelDatabase = preparePersonnelDatabaseList(
+                emptypersonnelDatabase, personnelDatabaseWithAmy, personnelDatabaseWithBob);
 
-        assertTrue(versionedAddressBook.canUndo());
+        assertTrue(versionedPersonnelDatabase.canUndo());
     }
 
     @Test
-    public void canUndo_multipleAddressBookPointerAtStartOfStateList_returnsTrue() {
-        VersionedPersonnelDatabase versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 1);
+    public void canUndo_multiplePersonnelDatabasePointerAtStartOfStateList_returnsTrue() {
+        VersionedPersonnelDatabase versionedPersonnelDatabase = preparePersonnelDatabaseList(
+                emptypersonnelDatabase, personnelDatabaseWithAmy, personnelDatabaseWithBob);
+        shiftCurrentStatePointerLeftwards(versionedPersonnelDatabase, 1);
 
-        assertTrue(versionedAddressBook.canUndo());
+        assertTrue(versionedPersonnelDatabase.canUndo());
     }
 
     @Test
-    public void canUndo_singleAddressBook_returnsFalse() {
-        VersionedPersonnelDatabase versionedAddressBook = prepareAddressBookList(emptyAddressBook);
+    public void canUndo_singlePersonnelDatabase_returnsFalse() {
+        VersionedPersonnelDatabase versionedPersonnelDatabase = preparePersonnelDatabaseList(emptypersonnelDatabase);
 
-        assertFalse(versionedAddressBook.canUndo());
+        assertFalse(versionedPersonnelDatabase.canUndo());
     }
 
     @Test
-    public void canUndo_multipleAddressBookPointerAtStartOfStateList_returnsFalse() {
-        VersionedPersonnelDatabase versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 2);
+    public void canUndo_multiplePersonnelDatabasePointerAtStartOfStateList_returnsFalse() {
+        VersionedPersonnelDatabase versionedPersonnelDatabase = preparePersonnelDatabaseList(
+                emptypersonnelDatabase, personnelDatabaseWithAmy, personnelDatabaseWithBob);
+        shiftCurrentStatePointerLeftwards(versionedPersonnelDatabase, 2);
 
-        assertFalse(versionedAddressBook.canUndo());
+        assertFalse(versionedPersonnelDatabase.canUndo());
     }
 
     @Test
-    public void canRedo_multipleAddressBookPointerNotAtEndOfStateList_returnsTrue() {
-        VersionedPersonnelDatabase versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 1);
+    public void canRedo_multiplePersonnelDatabasePointerNotAtEndOfStateList_returnsTrue() {
+        VersionedPersonnelDatabase versionedPersonnelDatabase = preparePersonnelDatabaseList(
+                emptypersonnelDatabase, personnelDatabaseWithAmy, personnelDatabaseWithBob);
+        shiftCurrentStatePointerLeftwards(versionedPersonnelDatabase, 1);
 
-        assertTrue(versionedAddressBook.canRedo());
+        assertTrue(versionedPersonnelDatabase.canRedo());
     }
 
     @Test
-    public void canRedo_multipleAddressBookPointerAtStartOfStateList_returnsTrue() {
-        VersionedPersonnelDatabase versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 2);
+    public void canRedo_multiplePersonnelDatabasePointerAtStartOfStateList_returnsTrue() {
+        VersionedPersonnelDatabase versionedPersonnelDatabase = preparePersonnelDatabaseList(
+                emptypersonnelDatabase, personnelDatabaseWithAmy, personnelDatabaseWithBob);
+        shiftCurrentStatePointerLeftwards(versionedPersonnelDatabase, 2);
 
-        assertTrue(versionedAddressBook.canRedo());
+        assertTrue(versionedPersonnelDatabase.canRedo());
     }
 
     @Test
-    public void canRedo_singleAddressBook_returnsFalse() {
-        VersionedPersonnelDatabase versionedAddressBook = prepareAddressBookList(emptyAddressBook);
+    public void canRedo_singlePersonnelDatabase_returnsFalse() {
+        VersionedPersonnelDatabase versionedPersonnelDatabase = preparePersonnelDatabaseList(emptypersonnelDatabase);
 
-        assertFalse(versionedAddressBook.canRedo());
+        assertFalse(versionedPersonnelDatabase.canRedo());
     }
 
     @Test
-    public void canRedo_multipleAddressBookPointerAtEndOfStateList_returnsFalse() {
-        VersionedPersonnelDatabase versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+    public void canRedo_multiplePersonnelDatabasePointerAtEndOfStateList_returnsFalse() {
+        VersionedPersonnelDatabase versionedPersonnelDatabase = preparePersonnelDatabaseList(
+                emptypersonnelDatabase, personnelDatabaseWithAmy, personnelDatabaseWithBob);
 
-        assertFalse(versionedAddressBook.canRedo());
+        assertFalse(versionedPersonnelDatabase.canRedo());
     }
 
     @Test
-    public void undo_multipleAddressBookPointerAtEndOfStateList_success() {
-        VersionedPersonnelDatabase versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+    public void undo_multiplePersonnelDatabasePointerAtEndOfStateList_success() {
+        VersionedPersonnelDatabase versionedPersonnelDatabase = preparePersonnelDatabaseList(
+                emptypersonnelDatabase, personnelDatabaseWithAmy, personnelDatabaseWithBob);
 
-        versionedAddressBook.undo();
-        assertAddressBookListStatus(versionedAddressBook,
-                Collections.singletonList(emptyAddressBook),
-                addressBookWithAmy,
-                Collections.singletonList(addressBookWithBob));
+        versionedPersonnelDatabase.undo();
+        assertPersonnelDatabaseListStatus(versionedPersonnelDatabase,
+                Collections.singletonList(emptypersonnelDatabase),
+                personnelDatabaseWithAmy,
+                Collections.singletonList(personnelDatabaseWithBob));
     }
 
     @Test
-    public void undo_multipleAddressBookPointerNotAtStartOfStateList_success() {
-        VersionedPersonnelDatabase versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 1);
+    public void undo_multiplePersonnelDatabasePointerNotAtStartOfStateList_success() {
+        VersionedPersonnelDatabase versionedPersonnelDatabase = preparePersonnelDatabaseList(
+                emptypersonnelDatabase, personnelDatabaseWithAmy, personnelDatabaseWithBob);
+        shiftCurrentStatePointerLeftwards(versionedPersonnelDatabase, 1);
 
-        versionedAddressBook.undo();
-        assertAddressBookListStatus(versionedAddressBook,
+        versionedPersonnelDatabase.undo();
+        assertPersonnelDatabaseListStatus(versionedPersonnelDatabase,
                 Collections.emptyList(),
-                emptyAddressBook,
-                Arrays.asList(addressBookWithAmy, addressBookWithBob));
+                emptypersonnelDatabase,
+                Arrays.asList(personnelDatabaseWithAmy, personnelDatabaseWithBob));
     }
 
     @Test
-    public void undo_singleAddressBook_throwsNoUndoableStateException() {
-        VersionedPersonnelDatabase versionedAddressBook = prepareAddressBookList(emptyAddressBook);
+    public void undo_singlePersonnelDatabase_throwsNoUndoableStateException() {
+        VersionedPersonnelDatabase versionedPersonnelDatabase = preparePersonnelDatabaseList(emptypersonnelDatabase);
 
-        assertThrows(VersionedPersonnelDatabase.NoUndoableStateException.class, versionedAddressBook::undo);
+        assertThrows(VersionedPersonnelDatabase.NoUndoableStateException.class, versionedPersonnelDatabase::undo);
     }
 
     @Test
-    public void undo_multipleAddressBookPointerAtStartOfStateList_throwsNoUndoableStateException() {
-        VersionedPersonnelDatabase versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 2);
+    public void undo_multiplePersonnelDatabasePointerAtStartOfStateList_throwsNoUndoableStateException() {
+        VersionedPersonnelDatabase versionedPersonnelDatabase = preparePersonnelDatabaseList(
+                emptypersonnelDatabase, personnelDatabaseWithAmy, personnelDatabaseWithBob);
+        shiftCurrentStatePointerLeftwards(versionedPersonnelDatabase, 2);
 
-        assertThrows(VersionedPersonnelDatabase.NoUndoableStateException.class, versionedAddressBook::undo);
+        assertThrows(VersionedPersonnelDatabase.NoUndoableStateException.class, versionedPersonnelDatabase::undo);
     }
 
     @Test
-    public void redo_multipleAddressBookPointerNotAtEndOfStateList_success() {
-        VersionedPersonnelDatabase versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 1);
+    public void redo_multiplePersonnelDatabasePointerNotAtEndOfStateList_success() {
+        VersionedPersonnelDatabase versionedPersonnelDatabase = preparePersonnelDatabaseList(
+                emptypersonnelDatabase, personnelDatabaseWithAmy, personnelDatabaseWithBob);
+        shiftCurrentStatePointerLeftwards(versionedPersonnelDatabase, 1);
 
-        versionedAddressBook.redo();
-        assertAddressBookListStatus(versionedAddressBook,
-                Arrays.asList(emptyAddressBook, addressBookWithAmy),
-                addressBookWithBob,
+        versionedPersonnelDatabase.redo();
+        assertPersonnelDatabaseListStatus(versionedPersonnelDatabase,
+                Arrays.asList(emptypersonnelDatabase, personnelDatabaseWithAmy),
+                personnelDatabaseWithBob,
                 Collections.emptyList());
     }
 
     @Test
-    public void redo_multipleAddressBookPointerAtStartOfStateList_success() {
-        VersionedPersonnelDatabase versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 2);
+    public void redo_multiplePersonnelDatabasePointerAtStartOfStateList_success() {
+        VersionedPersonnelDatabase versionedPersonnelDatabase = preparePersonnelDatabaseList(
+                emptypersonnelDatabase, personnelDatabaseWithAmy, personnelDatabaseWithBob);
+        shiftCurrentStatePointerLeftwards(versionedPersonnelDatabase, 2);
 
-        versionedAddressBook.redo();
-        assertAddressBookListStatus(versionedAddressBook,
-                Collections.singletonList(emptyAddressBook),
-                addressBookWithAmy,
-                Collections.singletonList(addressBookWithBob));
+        versionedPersonnelDatabase.redo();
+        assertPersonnelDatabaseListStatus(versionedPersonnelDatabase,
+                Collections.singletonList(emptypersonnelDatabase),
+                personnelDatabaseWithAmy,
+                Collections.singletonList(personnelDatabaseWithBob));
     }
 
     @Test
-    public void redo_singleAddressBook_throwsNoRedoableStateException() {
-        VersionedPersonnelDatabase versionedAddressBook = prepareAddressBookList(emptyAddressBook);
+    public void redo_singlePersonnelDatabase_throwsNoRedoableStateException() {
+        VersionedPersonnelDatabase versionedPersonnelDatabase = preparePersonnelDatabaseList(emptypersonnelDatabase);
 
-        assertThrows(VersionedPersonnelDatabase.NoRedoableStateException.class, versionedAddressBook::redo);
+        assertThrows(VersionedPersonnelDatabase.NoRedoableStateException.class, versionedPersonnelDatabase::redo);
     }
 
     @Test
-    public void redo_multipleAddressBookPointerAtEndOfStateList_throwsNoRedoableStateException() {
-        VersionedPersonnelDatabase versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+    public void redo_multiplePersonnelDatabasePointerAtEndOfStateList_throwsNoRedoableStateException() {
+        VersionedPersonnelDatabase versionedPersonnelDatabase = preparePersonnelDatabaseList(
+                emptypersonnelDatabase, personnelDatabaseWithAmy, personnelDatabaseWithBob);
 
-        assertThrows(VersionedPersonnelDatabase.NoRedoableStateException.class, versionedAddressBook::redo);
+        assertThrows(VersionedPersonnelDatabase.NoRedoableStateException.class, versionedPersonnelDatabase::redo);
     }
 
     @Test
     public void equals() {
-        VersionedPersonnelDatabase versionedAddressBook = prepareAddressBookList(addressBookWithAmy, addressBookWithBob);
+        VersionedPersonnelDatabase versionedPersonnelDatabase =
+                preparePersonnelDatabaseList(personnelDatabaseWithAmy, personnelDatabaseWithBob);
 
         // same values -> returns true
-        VersionedPersonnelDatabase copy = prepareAddressBookList(addressBookWithAmy, addressBookWithBob);
-        assertTrue(versionedAddressBook.equals(copy));
+        VersionedPersonnelDatabase copy =
+                preparePersonnelDatabaseList(personnelDatabaseWithAmy, personnelDatabaseWithBob);
+        assertTrue(versionedPersonnelDatabase.equals(copy));
 
         // same object -> returns true
-        assertTrue(versionedAddressBook.equals(versionedAddressBook));
+        assertTrue(versionedPersonnelDatabase.equals(versionedPersonnelDatabase));
 
         // null -> returns false
-        assertFalse(versionedAddressBook.equals(null));
+        assertFalse(versionedPersonnelDatabase.equals(null));
 
         // different types -> returns false
-        assertFalse(versionedAddressBook.equals(1));
+        assertFalse(versionedPersonnelDatabase.equals(1));
 
         // different state list -> returns false
-        VersionedPersonnelDatabase differentAddressBookList = prepareAddressBookList(addressBookWithBob, addressBookWithCarl);
-        assertFalse(versionedAddressBook.equals(differentAddressBookList));
+        VersionedPersonnelDatabase differentPersonnelDatabaseList =
+                preparePersonnelDatabaseList(personnelDatabaseWithBob, personnelDatabaseWithCarl);
+        assertFalse(versionedPersonnelDatabase.equals(differentPersonnelDatabaseList));
 
         // different current pointer index -> returns false
-        VersionedPersonnelDatabase differentCurrentStatePointer = prepareAddressBookList(
-                addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 1);
-        assertFalse(versionedAddressBook.equals(differentCurrentStatePointer));
+        VersionedPersonnelDatabase differentCurrentStatePointer = preparePersonnelDatabaseList(
+                personnelDatabaseWithAmy, personnelDatabaseWithBob);
+        shiftCurrentStatePointerLeftwards(versionedPersonnelDatabase, 1);
+        assertFalse(versionedPersonnelDatabase.equals(differentCurrentStatePointer));
     }
 
     /**
-     * Asserts that {@code versionedAddressBook} is currently pointing at {@code expectedCurrentState},
-     * states before {@code versionedAddressBook#currentStatePointer} is equal to {@code expectedStatesBeforePointer},
-     * and states after {@code versionedAddressBook#currentStatePointer} is equal to {@code expectedStatesAfterPointer}.
+     * Asserts that {@code versionedPersonnelDatabase} is currently pointing at {@code expectedCurrentState},
+     * states before {@code versionedPersonnelDatabase#currentStatePointer}
+     * is equal to {@code expectedStatesBeforePointer},
+     * and states after {@code versionedPersonnelDatabase#currentStatePointer}
+     * is equal to {@code expectedStatesAfterPointer}.
      */
-    private void assertAddressBookListStatus(VersionedPersonnelDatabase versionedAddressBook,
+    private void assertPersonnelDatabaseListStatus(VersionedPersonnelDatabase versionedPersonnelDatabase,
                                              List<ReadOnlyPersonnelDatabase> expectedStatesBeforePointer,
                                              ReadOnlyPersonnelDatabase expectedCurrentState,
                                              List<ReadOnlyPersonnelDatabase> expectedStatesAfterPointer) {
         // check state currently pointing at is correct
-        assertEquals(new PersonnelDatabase(versionedAddressBook), expectedCurrentState);
+        assertEquals(new PersonnelDatabase(versionedPersonnelDatabase), expectedCurrentState);
 
         // shift pointer to start of state list
-        while (versionedAddressBook.canUndo()) {
-            versionedAddressBook.undo();
+        while (versionedPersonnelDatabase.canUndo()) {
+            versionedPersonnelDatabase.undo();
         }
 
         // check states before pointer are correct
-        for (ReadOnlyPersonnelDatabase expectedAddressBook : expectedStatesBeforePointer) {
-            assertEquals(expectedAddressBook, new PersonnelDatabase(versionedAddressBook));
-            versionedAddressBook.redo();
+        for (ReadOnlyPersonnelDatabase expectedPersonnelDatabase : expectedStatesBeforePointer) {
+            assertEquals(expectedPersonnelDatabase, new PersonnelDatabase(versionedPersonnelDatabase));
+            versionedPersonnelDatabase.redo();
         }
 
         // check states after pointer are correct
-        for (ReadOnlyPersonnelDatabase expectedAddressBook : expectedStatesAfterPointer) {
-            versionedAddressBook.redo();
-            assertEquals(expectedAddressBook, new PersonnelDatabase(versionedAddressBook));
+        for (ReadOnlyPersonnelDatabase expectedPersonnelDatabase : expectedStatesAfterPointer) {
+            versionedPersonnelDatabase.redo();
+            assertEquals(expectedPersonnelDatabase, new PersonnelDatabase(versionedPersonnelDatabase));
         }
 
         // check that there are no more states after pointer
-        assertFalse(versionedAddressBook.canRedo());
+        assertFalse(versionedPersonnelDatabase.canRedo());
 
         // revert pointer to original position
-        expectedStatesAfterPointer.forEach(unused -> versionedAddressBook.undo());
+        expectedStatesAfterPointer.forEach(unused -> versionedPersonnelDatabase.undo());
     }
 
     /**
-     * Creates and returns a {@code VersionedPersonnelDatabase} with the {@code addressBookStates} added into it, and the
+     * Creates and returns a {@code VersionedPersonnelDatabase} with the
+     * {@code personnelDatabaseStates} added into it, and the
      * {@code VersionedPersonnelDatabase#currentStatePointer} at the end of list.
      */
-    private VersionedPersonnelDatabase prepareAddressBookList(ReadOnlyPersonnelDatabase... addressBookStates) {
-        assertFalse(addressBookStates.length == 0);
+    private VersionedPersonnelDatabase preparePersonnelDatabaseList(
+            ReadOnlyPersonnelDatabase... personnelDatabaseStates) {
+        assertFalse(personnelDatabaseStates.length == 0);
 
-        VersionedPersonnelDatabase versionedAddressBook = new VersionedPersonnelDatabase(addressBookStates[0]);
-        for (int i = 1; i < addressBookStates.length; i++) {
-            versionedAddressBook.resetData(addressBookStates[i]);
-            versionedAddressBook.commit();
+        VersionedPersonnelDatabase versionedPersonnelDatabase =
+                new VersionedPersonnelDatabase(personnelDatabaseStates[0]);
+        for (int i = 1; i < personnelDatabaseStates.length; i++) {
+            versionedPersonnelDatabase.resetData(personnelDatabaseStates[i]);
+            versionedPersonnelDatabase.commit();
         }
 
-        return versionedAddressBook;
+        return versionedPersonnelDatabase;
     }
 
     /**
-     * Shifts the {@code versionedAddressBook#currentStatePointer} by {@code count} to the left of its list.
+     * Shifts the {@code versionedPersonnelDatabase#currentStatePointer} by {@code count} to the left of its list.
      */
-    private void shiftCurrentStatePointerLeftwards(VersionedPersonnelDatabase versionedAddressBook, int count) {
+    private void shiftCurrentStatePointerLeftwards(VersionedPersonnelDatabase versionedPersonnelDatabase, int count) {
         for (int i = 0; i < count; i++) {
-            versionedAddressBook.undo();
+            versionedPersonnelDatabase.undo();
         }
     }
 }

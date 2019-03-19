@@ -28,7 +28,7 @@ public interface Logic {
     /**
      * Returns the PersonnelDatabase.
      *
-     * @see seedu.address.model.Model#getAddressBook()
+     * @see seedu.address.model.Model#getPersonnelDatabase()
      */
     ReadOnlyPersonnelDatabase getAddressBook();
 

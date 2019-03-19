@@ -1,0 +1,10 @@
+{
+  "persons": [ {
+    "nric": "E9543565P",
+    "company": "Echo",
+    "section": "4",
+    "rank": "CPL",
+    "name": "Hans Muster",
+    "phone": "9482424",
+  } ]
+}

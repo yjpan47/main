@@ -6,7 +6,7 @@ package seedu.address.model.calendar;
  *  <li>{@link #PM}</li>
 
  */
-enum Meridiem {
+public enum Meridiem {
     AM,
     PM
 }

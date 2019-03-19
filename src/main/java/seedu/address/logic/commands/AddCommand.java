@@ -61,7 +61,7 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        model.commitAddressBook();
+        model.commitPersonnelDatabase();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

@@ -1,0 +1,18 @@
+{
+  "persons": [ {
+    "nric": "S9765432A",
+    "company": "Delta",
+    "section": "2",
+    "rank": "CPL",
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "tagged": [ "friends" ]
+  }, {
+    "nric": "S9765432A",
+    "company": "Delta",
+    "section": "2",
+    "rank": "CPL",
+    "name": "Alice Pauline",
+    "phone": "94351253"
+  } ]
+}
