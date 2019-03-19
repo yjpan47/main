@@ -1,9 +1,10 @@
-package seedu.address.model.calendar;
-
-import javafx.collections.ObservableList;
+package seedu.address.model;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
+import seedu.address.model.calendar.DutyMonth;
+
 
 /**
  * Represents a Calendar that contains duties for the current and the following months
@@ -19,6 +20,11 @@ public class DutyCalendar {
     public DutyCalendar() {
         this.currentMonth = new DutyMonth(getTodayMonth(), dayOfFirstDayOfMonth(getTodayMonth()));
         this.nextMonth = new DutyMonth(getTodayMonth() + 1, dayOfFirstDayOfMonth(getTodayMonth() + 1));
+    }
+
+    public void setDutyCalendar(DutyCalendar dutyCalendar) {
+        this.currentMonth = dutyCalendar.currentMonth;
+        this.nextMonth = dutyCalendar.nextMonth;
     }
 
     private int getTodayMonth() {

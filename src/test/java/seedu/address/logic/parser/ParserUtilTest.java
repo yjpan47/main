@@ -156,7 +156,7 @@ public class ParserUtilTest {
         Rank expectedRank = new Rank(VALID_RANK);
         assertEquals(expectedRank, ParserUtil.parseRank(rankWithWhitespace));
     }
-    
+
     @Test
     public void parseName_null_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));

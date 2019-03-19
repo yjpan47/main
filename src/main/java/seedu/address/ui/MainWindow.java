@@ -34,7 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private Stage primaryStage;
     private Logic logic;
     //Clearance of the user
-    private UserType user = UserType.ADMIN;
+    private UserType user;
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
@@ -141,7 +141,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath(), logic.getAddressBook());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CalendarView calendarView = new CalendarView(logic.getDutyForDates());
+        //CalendarView calendarView = new CalendarView(logic.getDutyForDates());
         calendarViewPlaceholder.getChildren().add(calendarView.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand, user, logic.getHistory());
@@ -226,5 +226,9 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    public void setUserType(UserType userType) {
+        this.user = userType;
     }
 }

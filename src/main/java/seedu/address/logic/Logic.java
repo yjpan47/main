@@ -36,7 +36,7 @@ public interface Logic {
     ObservableList<Person> getFilteredPersonList();
 
     /** returns an unmodifiable view of duty for dates */
-    ObservableList<Person> getDutyForDates();
+    //ObservableList<Person> getDutyForDates();
 
     /**
      * Returns an unmodifiable view of the list of commands entered by the user.

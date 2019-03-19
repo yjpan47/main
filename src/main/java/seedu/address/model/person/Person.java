@@ -48,13 +48,21 @@ public class Person {
         this.tags.addAll(tags);
     }
 
-    public Nric getNric() { return nric; }
+    public Nric getNric() {
+        return nric;
+    }
 
-    public Company getCompany() { return company; }
+    public Company getCompany() {
+        return company;
+    }
 
-    public Section getSection() { return section; }
+    public Section getSection() {
+        return section;
+    }
 
-    public Rank getRank() { return rank; }
+    public Rank getRank() {
+        return rank;
+    }
 
     public Name getName() {
         return name;
@@ -76,13 +84,13 @@ public class Person {
      * Returns true if both persons of the same name have the same NRIC.
      */
     public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+        if (otherPerson.equals(this)) {
             return true;
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName())
-                && otherPerson.getNric().equals(getNric());
+                && otherPerson.getName().equals(this.getName())
+                && otherPerson.getNric().equals(this.getNric());
     }
 
     /**

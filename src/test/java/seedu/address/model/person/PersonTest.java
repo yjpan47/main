@@ -66,5 +66,29 @@ public class PersonTest {
         // different name -> returns false
         Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different phone -> returns false
+        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different company -> returns false
+        editedAlice = new PersonBuilder(ALICE).withCompany(VALID_COMPANY_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different section -> returns false
+        editedAlice = new PersonBuilder(ALICE).withSection(VALID_SECTION_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different rank -> returns false
+        editedAlice = new PersonBuilder(ALICE).withRank(VALID_RANK_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different NRIC -> returns false
+        editedAlice = new PersonBuilder(ALICE).withNric(VALID_NRIC_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different tags -> returns false
+        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(ALICE.equals(editedAlice));
     }
 }

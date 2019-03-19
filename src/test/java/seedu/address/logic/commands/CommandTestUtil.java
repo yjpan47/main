@@ -2,7 +2,13 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RANK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SECTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import java.util.ArrayList;
 import java.util.Arrays;
