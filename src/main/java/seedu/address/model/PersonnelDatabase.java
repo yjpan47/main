@@ -87,7 +87,8 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the personnel database.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the personnel database.
+     * The person identity of {@code editedPerson}
+     * must not be the same as another existing person in the personnel database.
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
