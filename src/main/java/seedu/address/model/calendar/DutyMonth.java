@@ -18,7 +18,7 @@ public class DutyMonth {
     private List<DutyDate> dates;
 
     public DutyMonth(int monthIndex, int firstDayIndex) {
-        if (monthIndex >= 1 && monthIndex <= 12 && firstDayIndex >= 0 && firstDayIndex <= 7)  {
+        if (monthIndex >= 1 && monthIndex <= 12 && firstDayIndex >= 0 && firstDayIndex <= 7) {
             this.monthIndex = monthIndex;
             this.month = this.getMonth();
             this.firstDayIndex = firstDayIndex;
@@ -32,8 +32,8 @@ public class DutyMonth {
      * Gets current month
      */
     public String getMonth() {
-        String[] months = {"January", "February", "March", "April", "May", "June", "July"
-                , "August", "September", "October", "November", "December"};
+        String[] months = {"January", "February", "March", "April", "May", "June", "July",
+                "August", "September", "October", "November", "December"};
         return months[this.monthIndex - 1];
     }
     /**
