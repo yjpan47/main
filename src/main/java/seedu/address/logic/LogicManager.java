@@ -57,7 +57,7 @@ public class LogicManager implements Logic {
                 GeneralCommand command = addressBookParser.parseCommand(commandText);
                 commandResult = command.executeGeneral(model, history);
             } else {
-                throw new CommandException("USER NOT FOUND");
+                throw new CommandException("The person index provided is invalid");
             }
         } finally {
             history.add(commandText);
