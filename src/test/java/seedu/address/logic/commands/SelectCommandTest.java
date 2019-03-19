@@ -24,8 +24,8 @@ import seedu.address.model.UserPrefs;
  * Contains integration tests (interaction with the Model) for {@code SelectCommand}.
  */
 public class SelectCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new DutyCalendar(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new DutyCalendar(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test

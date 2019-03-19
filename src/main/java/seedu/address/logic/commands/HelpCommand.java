@@ -21,12 +21,12 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public CommandResult executeGeneral(Model model, CommandHistory history){
+    public CommandResult executeGeneral(Model model, CommandHistory history) {
         return execute(model, history);
     }
 
     @Override
-    public CommandResult executeAdmin(Model model, CommandHistory history){
+    public CommandResult executeAdmin(Model model, CommandHistory history) {
         return execute(model, history);
     }
 }

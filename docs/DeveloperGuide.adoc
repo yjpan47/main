@@ -344,6 +344,37 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: `config.json`).
 
+=== Duty Calendar and allocation algorithm
+==== Current Implementation
+
+*DutyCalendar and other relevant classes*
+
+The class that contains all the information about duties is `DutyCalendar` which has been included as an attribute within `PersonnelDatabase`. `DutyCalendar` contains two `DutyMonth` objects, named `currentMonth` and `nextMonth` respectively. It implements the following operations:
+
+* `DutyCalendar#rollover()` `planned for v1.3` -- replaces `currentMonth` with `nextMonth`, run duty allocation algorithm on `nextMonth` automatically to allocate duties based on the current state of the month such as blocked dates of each personnel. New empty `nextMonth` object will be instantiated.
+* `DutyCalendar#clearMonth(DutyMonth)` `planned for v1.3` -- clear all duties fields or blocked dates in the `DutyMonth` object
+* `DutyCalendar#reallocate()` `planned for v1.3` -- rerun the algorithm to randomly reassign the duties again
+
+These operations are to be exposed in the `Model` interface as `Model#rolloverDutyCalendar()`, `Model#clearMonthDutyCalendar(DutyMonth)` and `Model#reallocate()` respectively *for v1.3*.
+
+Each `DutyMonth` class will contain the same number of `Duty` objects as the number of days in the month. For example, if it is January, it should contain exactly 31 `Duty` classes, and any less or more will raise an Exception.
+
+Each `Duty` class should contain the details such as the day index, list of `Person`s in duty that day and a list of `Person`s who have blocked that particular date. More details are to be confirm *by v1.3*.
+
+*Algorithm*
+
+*Yong Jing do leh*
+
+==== Design Considerations
+===== Aspect: need for DutyDate classes
+
+* **Alternative 1 (current choice):** `Duty` class also plays the role of `DutyDate` class
+** Pros: one less layer for simplicity
+** Cons: less flexible for extension of the project, hard to ensure that each `DutyMonth` contains the correct number of `Duty` objects
+* **Alternative 2:** create a separate `DutyDate` class that contains `Duty` as an attribute
+** Pros: Easy indexing and reference for UI and other purposes
+** Cons: `DutyDate` class does not have other roles, can be redundant
+
 == Documentation
 
 We use asciidoc for writing documentation.

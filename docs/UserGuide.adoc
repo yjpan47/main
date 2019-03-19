@@ -39,6 +39,12 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 [[Features]]
 == User Features
 
+=== Log in
+Logs user into account +
+NRIC and passwords are case-sensitive. +
+Enter in NRIC and password into the top and bottom text areas respectively, press enter. +
+Contact an administrator if you have trouble logging in.
+
 ====
 *Command Format*
 
@@ -53,15 +59,6 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 Lists out a list of commands & instructions +
 Format: `help`
 
-=== Log in : `login` `Not implemented yet`
-
-Log user into their account. +
-NRIC and password are case-sensitive. +
-Format: `login nr/NRIC pw/PASSWORD`
-
-Example:
-
-* `login n/S01234567Z pw/cs2103noteasy`
 
 === Log out : `logout` `Not implemented yet`
 Logs the user out of the account +
