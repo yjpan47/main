@@ -33,7 +33,7 @@ public class DutyMonth {
      */
     public String getMonth() {
         String[] months = {"January", "February", "March", "April", "May", "June", "July",
-                "August", "September", "October", "November", "December"};
+            "August", "September", "October", "November", "December"};
         return months[this.monthIndex - 1];
     }
     /**
