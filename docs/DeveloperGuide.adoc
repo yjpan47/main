@@ -394,7 +394,7 @@ There are currently 2 User Types found in commons.core.index: UserType.ADMIN and
 Note that Admin type user accounts are not only have access to more commands, but some commands (such as edit) have more functionalities as well. The Command class implements AdminCommand and GeneralCommand interfaces.
 
 Upon logging in to the correct account, the CommandBox will be initialized with the correct user type. The execute Command in logic will decide to initialize the commands as either AdminCommand or GeneralCommand,
-to ensure the user does not have access to the wrong authority level. 
+to ensure the user does not have access to the wrong authority level.
 
 ==== Design Considerations
 ===== Aspect: handling logging in and UserType
