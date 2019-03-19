@@ -5,13 +5,10 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.InputMismatchException;
-import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -24,8 +21,6 @@ public class DutyMonth {
     private int monthIndex;
     private int firstDayWeekIndex;
     private int numOfDays;
-
-
     private List<Duty> duties;
     private List<Person> persons;
 
@@ -48,6 +43,10 @@ public class DutyMonth {
         }
     }
 
+    public DutyMonth(int monthIndex, int firstDayWeekIndex) {
+        this(null, monthIndex, firstDayWeekIndex);
+    }
+    
     /**
      * Import all Persons involved in duty scheduling for the month
      */
@@ -88,10 +87,10 @@ public class DutyMonth {
         PriorityQueue<Person> personQueue = this.arrangePersons();
 
         for (Duty duty : dutyList) {
-            while (! duty.isFilled()) {
+            while (!duty.isFilled()) {
                 Person currPerson = personQueue.poll();
                 List<Person> tempList = new ArrayList<>();
-                while (! this.isAssignable(duty, currPerson)) {
+                while (!this.isAssignable(duty, currPerson)) {
                     tempList.add(currPerson);
                     currPerson = personQueue.poll();
                 }
@@ -122,7 +121,7 @@ public class DutyMonth {
             return false;
         } else if (duty.getPersons().contains(person)) {
             return false;
-        } else if (person.getDuties().contains(duty)){
+        } else if (person.getDuties().contains(duty)) {
             return false;
         } else if (person.getBlockedDates().contains(duty.getDayIndex())) {
             return false;
@@ -137,18 +136,18 @@ public class DutyMonth {
      * 2) Amongst each of the types, the duties are shuffled
      */
     private List<Duty> arrangeDuties() {
-        List<Duty> dutiesTypeA = this.duties.stream().
-                filter(duty -> duty instanceof DutyTypeA)
+        List<Duty> dutiesTypeA = this.duties.stream()
+                .filter(duty -> duty instanceof DutyTypeA)
                 .collect(Collectors.toList());
         Collections.shuffle(dutiesTypeA);
 
-        List<Duty> dutiesTypeB = this.duties.stream().
-                filter(duty -> duty instanceof DutyTypeA)
+        List<Duty> dutiesTypeB = this.duties.stream()
+                .filter(duty -> duty instanceof DutyTypeA)
                 .collect(Collectors.toList());
         Collections.shuffle(dutiesTypeB);
 
-        List<Duty> dutiesTypeC = this.duties.stream().
-                filter(duty -> duty instanceof DutyTypeA)
+        List<Duty> dutiesTypeC = this.duties.stream()
+                .filter(duty -> duty instanceof DutyTypeA)
                 .collect(Collectors.toList());
         Collections.shuffle(dutiesTypeC);
 
@@ -170,23 +169,6 @@ public class DutyMonth {
         return pq;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * Gets current month in String format
      */
@@ -195,6 +177,7 @@ public class DutyMonth {
             "August", "September", "October", "November", "December"};
         return months[this.monthIndex - 1];
     }
+
     /**
      * Returns current month
      */
@@ -218,5 +201,4 @@ public class DutyMonth {
             throw new InputMismatchException("Invalid Month Index.");
         }
     }
-
 }

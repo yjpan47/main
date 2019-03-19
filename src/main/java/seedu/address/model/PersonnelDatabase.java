@@ -29,7 +29,7 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
      */
     {
         persons = new UniquePersonList();
-        dutyCalendar = new DutyCalendar();
+        dutyCalendar = new DutyCalendar(persons);
     }
 
     public PersonnelDatabase() {}
