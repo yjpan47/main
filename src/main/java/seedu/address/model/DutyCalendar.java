@@ -22,7 +22,7 @@ public class DutyCalendar {
         this.nextMonth = new DutyMonth(getTodayMonth() + 1, dayOfFirstDayOfMonth(getTodayMonth() + 1));
     }
 
-    public void setDutyCalendar(DutyCalendar dutyCalendar) {
+    void setDutyCalendar(DutyCalendar dutyCalendar) {
         this.currentMonth = dutyCalendar.currentMonth;
         this.nextMonth = dutyCalendar.nextMonth;
     }
