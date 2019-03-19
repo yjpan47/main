@@ -1,7 +1,7 @@
 package seedu.address.ui;
 
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+//import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -9,6 +9,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.address.commons.core.UserType;
 
+/**
+ * Opens up a login box for users to enter their login details.
+ */
 public class LoginBox {
     private UserType userType = null;
     private TextField textField1;
@@ -40,7 +43,9 @@ public class LoginBox {
         return userType;
 
     }
-
+    /**
+     * Finds the account in the list of accounts and lets the user login.
+     */
     private void findAccount() {
         String test1 = textField1.getText();
         System.out.println("Text field 1 is " + test1);
