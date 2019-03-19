@@ -155,8 +155,8 @@ public class ModelManagerTest {
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(personnelDatabase, new DutyCalendar(), userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(personnelDatabase, new DutyCalendar(), userPrefs);
+        modelManager = new ModelManager(personnelDatabase, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(personnelDatabase, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -169,12 +169,12 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different personnelDatabase -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentPersonnelDatabase, new DutyCalendar(), userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentPersonnelDatabase, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(personnelDatabase, new DutyCalendar(), userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(personnelDatabase, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -182,6 +182,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(personnelDatabase, new DutyCalendar(), differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(personnelDatabase, differentUserPrefs)));
     }
 }

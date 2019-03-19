@@ -19,9 +19,9 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class PersonBuilder {
 
-    public static final String DEFAULT_NRIC = "S1234567A";
+    public static final String DEFAULT_NRIC = "S5234567A";
     public static final String DEFAULT_COMPANY = "Bravo";
-    public static final String DEFAULT_SECTION = "1";
+    public static final String DEFAULT_SECTION = "1SIR";
     public static final String DEFAULT_RANK = "CPL";
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_PHONE = "85355255";

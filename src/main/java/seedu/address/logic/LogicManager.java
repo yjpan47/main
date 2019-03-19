@@ -16,8 +16,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyPersonnelDatabase;
 import seedu.address.model.person.Person;
+import seedu.address.model.ReadOnlyPersonnelDatabase;
 import seedu.address.storage.Storage;
 
 /**
@@ -57,7 +57,7 @@ public class LogicManager implements Logic {
                 GeneralCommand command = addressBookParser.parseCommand(commandText);
                 commandResult = command.executeGeneral(model, history);
             } else {
-                throw new CommandException("USER NOT FOUND");
+                throw new CommandException("The person index provided is invalid");
             }
         } finally {
             history.add(commandText);
