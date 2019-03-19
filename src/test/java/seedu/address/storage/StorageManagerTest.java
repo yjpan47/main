@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalPersonnelDatabase;
 
 import java.nio.file.Path;
 
@@ -25,9 +25,9 @@ public class StorageManagerTest {
 
     @Before
     public void setUp() {
-        JsonPersonnelDatabaseStorage addressBookStorage = new JsonPersonnelDatabaseStorage(getTempFilePath("ab"));
+        JsonPersonnelDatabaseStorage personnelDatabaseStorage = new JsonPersonnelDatabaseStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(personnelDatabaseStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -50,20 +50,20 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void personnelDatabaseReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link JsonPersonnelDatabaseStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonPersonnelDatabaseStorageTest} class.
          */
-        PersonnelDatabase original = getTypicalAddressBook();
+        PersonnelDatabase original = getTypicalPersonnelDatabase();
         storageManager.savePersonnelDatabase(original);
         ReadOnlyPersonnelDatabase retrieved = storageManager.readPersonnelDatabase().get();
         assertEquals(original, new PersonnelDatabase(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
+    public void getPersonnelDatabaseFilePath() {
         assertNotNull(storageManager.getPersonnelDatabaseFilePath());
     }
 
