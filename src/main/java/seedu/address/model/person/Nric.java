@@ -4,35 +4,31 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's NRIC in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidNRIC(String)}
+ * Represents a Person's NRIC in the duty planner.
+ * Guarantees: immutable; is valid as declared in {@link #isValidNric(String)}
  */
-public class NRIC {
+public class Nric {
 
-    public static final String MESSAGE_CONSTRAINTS = "NRIC is the IC number of the soldier";
-
-
-
-    public static final String VALIDATION_REGEX = "\\s\\d{7}\\s";
-
+    public static final String MESSAGE_CONSTRAINTS = "NRICs should be of the format [S/T/F/G][7 digits][A-Z]";
+    public static final String VALIDATION_REGEX = "[STFG]\\d{7}[A-Z]";
 
     public final String value;
 
     /**
-     * Constructs an {@code NRIC}.
+     * Constructs an {@code Nric}.
      *
      * @param nric A valid nric.
      */
-    public NRIC(String nric) {
+    public Nric(String nric) {
         requireNonNull(nric);
-        checkArgument(isValidNRIC(nric), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidNric(nric), MESSAGE_CONSTRAINTS);
         value = nric;
     }
 
     /**
-     * Returns true if a given string is a valid NRIC.
+     * Returns if a given string is a valid nric.
      */
-    public static boolean isValidNRIC(String test) {
+    public static boolean isValidNric(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -44,8 +40,8 @@ public class NRIC {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof NRIC // instanceof handles nulls
-                && value.equals(((NRIC) other).value)); // state check
+                || (other instanceof Nric // instanceof handles nulls
+                && value.equals(((Nric) other).value)); // state check
     }
 
     @Override

@@ -17,6 +17,7 @@ import seedu.address.model.person.UniquePersonList;
 public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
 
     private final UniquePersonList persons;
+    private final DutyCalendar dutyCalendar;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
     /*
@@ -28,6 +29,7 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
      */
     {
         persons = new UniquePersonList();
+        dutyCalendar = new DutyCalendar();
     }
 
     public PersonnelDatabase() {}
@@ -52,12 +54,21 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
     }
 
     /**
+     * Replaces the contents of the duty calendar with {@code dutyCalendar}.
+     * {@code dutyCalendar} must not contain duplicate duties.
+     */
+    public void setDutyCalendar(DutyCalendar dutyCalendar) {
+        this.dutyCalendar.setDutyCalendar(dutyCalendar);
+    }
+
+    /**
      * Resets the existing data of this {@code PersonnelDatabase} with {@code newData}.
      */
     public void resetData(ReadOnlyPersonnelDatabase newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setDutyCalendar(newData.getDutyCalendar());
     }
 
     // Sort the persons in the personnel database by name
@@ -134,6 +145,9 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
+
+    @Override
+    public DutyCalendar getDutyCalendar() { return this.dutyCalendar; }
 
     @Override
     public boolean equals(Object other) {
