@@ -36,7 +36,8 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given personnelDatabse, dutyCalendar and userPrefs.
      */
-    public ModelManager(ReadOnlyPersonnelDatabase personnelDatabse, DutyCalendar dutyCalendar, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyPersonnelDatabase personnelDatabse, DutyCalendar dutyCalendar,
+                        ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(personnelDatabse, userPrefs);
 
