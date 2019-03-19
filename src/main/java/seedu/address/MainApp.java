@@ -68,21 +68,26 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyPersonnelDatabase> addressBookOptional;
         ReadOnlyPersonnelDatabase initialData;
+        DutyCalendar dutyCalendar;
         try {
             addressBookOptional = storage.readPersonnelDatabase();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample PersonnelDatabase");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSamplePersonnelDatabase);
+            // dutyCalendar storage to be implemented
+            dutyCalendar = new DutyCalendar();
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty PersonnelDatabase");
+            logger.warning("Data file not in the correct format. Will be starting with an empty PersonnelDatabase and Calendar");
             initialData = new PersonnelDatabase();
+            dutyCalendar = new DutyCalendar();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty PersonnelDatabase");
+            logger.warning("Problem while reading from the file. Will be starting with an empty PersonnelDatabase and Calendar");
             initialData = new PersonnelDatabase();
+            dutyCalendar = new DutyCalendar();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialData, dutyCalendar, userPrefs);
     }
 
     private void initLogging(Config config) {

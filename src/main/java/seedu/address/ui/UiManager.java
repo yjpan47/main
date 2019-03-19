@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.UserType;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 
@@ -40,6 +41,9 @@ public class UiManager implements Ui {
         try {
             mainWindow = new MainWindow(primaryStage, logic);
             mainWindow.show(); //This should be called before creating other UI parts
+            LoginBox loginBox = new LoginBox();
+            UserType userType = loginBox.display();
+            mainWindow.setUserType(userType);
             mainWindow.fillInnerParts();
 
         } catch (Throwable e) {

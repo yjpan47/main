@@ -13,12 +13,14 @@ import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Person;
 
 import javax.swing.*;
 
@@ -49,7 +51,10 @@ public class CalendarView extends UiPart<Region> {
     @FXML
     private ScrollPane scrollPane;
 
-    public CalendarView() {
+    @FXML
+    private ListView<Person> dutyPersonListView;
+
+    public CalendarView(ObservableList<Person> dutyForDates) {
         super(FXML);
         date = new Date();
         initializeChoices();
@@ -57,6 +62,7 @@ public class CalendarView extends UiPart<Region> {
         initializeDateDisplay();
         gridPaneBottom.prefHeightProperty().bind(vBoxCalendar.heightProperty().subtract(20));
         scrollPane.setFitToWidth(true);
+        dutyPersonListView.setItems(dutyForDates);
     }
 
     /**
@@ -113,7 +119,7 @@ public class CalendarView extends UiPart<Region> {
         calendar.setTime(date);
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
         Label toAppend = dateLabels[dayOfWeek - 1];
-        toAppend.setText(currentDate[0] + " " + monthArray[currentDate[1]] + "\n" + toAppend.getText());
+        toAppend.setText(currentDate[0] + " " + monthArray[currentDate[1] - 1] + "\n" + toAppend.getText());
     }
 }
 

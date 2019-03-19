@@ -19,4 +19,14 @@ public class HelpCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         return new CommandResult(SHOWING_HELP_MESSAGE, true, false, false);
     }
+
+    @Override
+    public CommandResult executeGeneral(Model model, CommandHistory history){
+        return execute(model, history);
+    }
+
+    @Override
+    public CommandResult executeAdmin(Model model, CommandHistory history){
+        return execute(model, history);
+    }
 }

@@ -6,6 +6,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.model.DutyCalendar;
 import seedu.address.model.PersonnelDatabase;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -26,8 +27,8 @@ public class ClearCommandTest {
 
     @Test
     public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalAddressBook(), new DutyCalendar(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new DutyCalendar(), new UserPrefs());
         expectedModel.setAddressBook(new PersonnelDatabase());
         expectedModel.commitAddressBook();
 

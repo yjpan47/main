@@ -22,4 +22,14 @@ public class ListCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS, false, false, true);
     }
+
+    @Override
+    public CommandResult executeGeneral(Model model, CommandHistory history)     {
+        return execute(model, history);
+    }
+
+    @Override
+    public CommandResult executeAdmin(Model model, CommandHistory history) {
+        return execute(model, history);
+    }
 }

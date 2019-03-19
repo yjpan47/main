@@ -112,7 +112,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Rank.MESSAGE_CONSTRAINTS);
         }
         final Rank modelRank = new Rank(rank);
-        
+
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }

@@ -2,11 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
@@ -36,7 +32,12 @@ public class PersonTest {
         assertFalse(ALICE.isSamePerson(null));
 
         // different phone and email -> returns false
+<<<<<<< HEAD
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+=======
+        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withCompany(VALID_COMPANY_BOB)
+                .withSection(VALID_SECTION_BOB).withRank(VALID_RANK_BOB).withNric(VALID_NRIC_BOB).build();
+>>>>>>> eca6a088bf076d8a17183130841b2fccb29f1ac7
         assertFalse(ALICE.isSamePerson(editedAlice));
 
         // different name -> returns false
@@ -44,6 +45,7 @@ public class PersonTest {
         assertFalse(ALICE.isSamePerson(editedAlice));
 
         // same name, same phone, different attributes -> returns true
+<<<<<<< HEAD
         editedAlice = new PersonBuilder(ALICE)
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
@@ -55,6 +57,20 @@ public class PersonTest {
 
         // same name, same phone, same email, different attributes -> returns true
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+=======
+        editedAlice = new PersonBuilder(ALICE).withCompany(VALID_COMPANY_BOB)
+                .withSection(VALID_SECTION_BOB).withRank(VALID_RANK_BOB).withNric(VALID_NRIC_BOB)
+                .withTags(VALID_TAG_HUSBAND).build();
+        assertTrue(ALICE.isSamePerson(editedAlice));
+
+        // same name, same company, same section, different attributes -> returns true
+        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withRank(VALID_RANK_BOB)
+                .withNric(VALID_NRIC_BOB).withTags(VALID_TAG_HUSBAND).build();
+        assertTrue(ALICE.isSamePerson(editedAlice));
+
+        // same name, same phone, same company, same section, same rank, different attributes -> returns true
+        editedAlice = new PersonBuilder(ALICE).withRank(VALID_RANK_BOB).withTags(VALID_TAG_HUSBAND).build();
+>>>>>>> eca6a088bf076d8a17183130841b2fccb29f1ac7
         assertTrue(ALICE.isSamePerson(editedAlice));
     }
 
@@ -84,12 +100,29 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
+<<<<<<< HEAD
         // different email -> returns false
         editedAlice = new PersonBuilder(ALICE).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different address -> returns false
         editedAlice = new PersonBuilder(ALICE).build();
+=======
+        // different company -> returns false
+        editedAlice = new PersonBuilder(ALICE).withCompany(VALID_COMPANY_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different section -> returns false
+        editedAlice = new PersonBuilder(ALICE).withSection(VALID_SECTION_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different rank -> returns false
+        editedAlice = new PersonBuilder(ALICE).withRank(VALID_RANK_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different NRIC -> returns false
+        editedAlice = new PersonBuilder(ALICE).withNric(VALID_NRIC_BOB).build();
+>>>>>>> eca6a088bf076d8a17183130841b2fccb29f1ac7
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false

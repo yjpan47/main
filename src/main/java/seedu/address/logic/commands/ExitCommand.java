@@ -17,4 +17,14 @@ public class ExitCommand extends Command {
         return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true, false);
     }
 
+    @Override
+    public CommandResult executeGeneral(Model model, CommandHistory history) {
+        return execute(model, history);
+    }
+
+    @Override
+    public CommandResult executeAdmin(Model model, CommandHistory history) {
+        return execute(model, history);
+    }
+
 }

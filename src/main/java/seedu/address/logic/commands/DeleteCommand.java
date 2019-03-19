@@ -14,7 +14,7 @@ import seedu.address.model.person.Person;
 /**
  * Deletes a person identified using it's displayed index from the address book.
  */
-public class DeleteCommand extends Command {
+public class DeleteCommand extends Command{
 
     public static final String COMMAND_WORD = "delete";
 
@@ -44,6 +44,16 @@ public class DeleteCommand extends Command {
         model.deletePerson(personToDelete);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+    }
+
+    @Override
+    public CommandResult executeGeneral(Model model, CommandHistory history) throws CommandException {
+        throw new CommandException(Messages.MESSAGE_NO_AUTHORITY);
+    }
+
+    @Override
+    public CommandResult executeAdmin(Model model, CommandHistory history) throws CommandException {
+        return execute(model, history);
     }
 
     @Override
