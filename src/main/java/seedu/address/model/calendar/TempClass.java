@@ -13,39 +13,39 @@ import java.util.*;
 
 public class TempClass {
 
-    Nric nric1 = new Nric("S9875493J");
-    Nric nric2 = new Nric("S8798473L");
-    Nric nric3 = new Nric("S8698443K");
+    private Nric nric1 = new Nric("S9875493J");
+    private Nric nric2 = new Nric("S8798473L");
+    private Nric nric3 = new Nric("S8698443K");
 
-    Name name1 = new Name("John1");
-    Name name2 = new Name("John2");
-    Name name3 = new Name("John3");
+    private Name name1 = new Name("John1");
+    private Name name2 = new Name("John2");
+    private Name name3 = new Name("John3");
 
-    Company company1 = new Company("Alpha");
-    Company company2 = new Company("Beta");
-    Company company3 = new Company("Gamma");
+    private Company company1 = new Company("Alpha");
+    private Company company2 = new Company("Beta");
+    private Company company3 = new Company("Gamma");
 
-    Section section1 = new Section("1");
-    Section section2 = new Section("2");
-    Section section3 = new Section("3");
+    private Section section1 = new Section("1");
+    private Section section2 = new Section("2");
+    private Section section3 = new Section("3");
 
-    Rank rank1 = new Rank("REC");
-    Rank rank2 = new Rank("CPL");
-    Rank rank3 = new Rank("MAJ");
+    private Rank rank1 = new Rank("REC");
+    private Rank rank2 = new Rank("CPL");
+    private Rank rank3 = new Rank("MAJ");
 
-    Phone phone1 = new Phone("09403942");
-    Phone phone2 = new Phone("798749374");
-    Phone phone3 = new Phone("473974983");
+    private Phone phone1 = new Phone("09403942");
+    private Phone phone2 = new Phone("798749374");
+    private Phone phone3 = new Phone("473974983");
 
-    Set<Tag> tags = new HashSet<>();
+    private Set<Tag> tags = new HashSet<>();
 
-    Person person1 = new Person(nric1, company1, section1, rank1, name1, phone1, tags);
-    Person person2 = new Person(nric2, company2, section2, rank2, name2, phone2, tags);
-    Person person3 = new Person(nric3, company3, section3, rank3, name3, phone3, tags);
+    private Person person1 = new Person(nric1, company1, section1, rank1, name1, phone1, tags);
+    private Person person2 = new Person(nric2, company2, section2, rank2, name2, phone2, tags);
+    private Person person3 = new Person(nric3, company3, section3, rank3, name3, phone3, tags);
 
     public List<Person> persons = new ArrayList<>();
 
-    public LocalDate date = LocalDate.now();
+    private LocalDate date = LocalDate.now();
 
     public Duty duty;
 
