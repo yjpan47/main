@@ -43,6 +43,10 @@ public class DutyMonth {
         }
     }
 
+    public DutyMonth(int monthIndex, int firstDayWeekIndex) {
+        this(null, monthIndex, firstDayWeekIndex);
+    }
+    
     /**
      * Import all Persons involved in duty scheduling for the month
      */
