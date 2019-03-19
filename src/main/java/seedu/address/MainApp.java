@@ -15,7 +15,6 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.DutyCalendar;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.PersonnelDatabase;
@@ -78,28 +77,23 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyPersonnelDatabase> addressBookOptional;
         ReadOnlyPersonnelDatabase initialData;
-        DutyCalendar dutyCalendar;
         try {
             addressBookOptional = storage.readPersonnelDatabase();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample PersonnelDatabase");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSamplePersonnelDatabase);
-            // dutyCalendar storage to be implemented
-            dutyCalendar = new DutyCalendar();
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be "
                     + "starting with an empty PersonnelDatabase and Calendar");
             initialData = new PersonnelDatabase();
-            dutyCalendar = new DutyCalendar();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be "
                     + "starting with an empty PersonnelDatabase and Calendar");
             initialData = new PersonnelDatabase();
-            dutyCalendar = new DutyCalendar();
         }
 
-        return new ModelManager(initialData, dutyCalendar, userPrefs);
+        return new ModelManager(initialData, userPrefs);
     }
 
     private void initLogging(Config config) {

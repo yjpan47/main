@@ -24,28 +24,29 @@ import seedu.address.model.tag.Tag;
  */
 public class TempClass {
 
-    private Company company1 = new Company("Alpha");
-    private Company company2 = new Company("Beta");
-    private Company company3 = new Company("Gamma");
+    private Nric nric1 = new Nric("S9875493J");
+    private Nric nric2 = new Nric("S8798473L");
+    private Nric nric3 = new Nric("S8698443K");
 
     private Name name1 = new Name("John1");
     private Name name2 = new Name("John2");
     private Name name3 = new Name("John3");
 
-    private Nric nric1 = new Nric("S9875493J");
-    private Nric nric2 = new Nric("S8798473L");
-    private Nric nric3 = new Nric("S8698443K");
-
-    private Phone phone1 = new Phone("09403942");
-    private Phone phone2 = new Phone("798749374");
-    private Phone phone3 = new Phone("473974983");
-    private Rank rank1 = new Rank("REC");
-    private Rank rank2 = new Rank("CPL");
-    private Rank rank3 = new Rank("MAJ");
+    private Company company1 = new Company("Alpha");
+    private Company company2 = new Company("Beta");
+    private Company company3 = new Company("Gamma");
 
     private Section section1 = new Section("1");
     private Section section2 = new Section("2");
     private Section section3 = new Section("3");
+
+    private Phone phone1 = new Phone("09403942");
+    private Phone phone2 = new Phone("798749374");
+    private Phone phone3 = new Phone("473974983");
+  
+    private Rank rank1 = new Rank("REC");
+    private Rank rank2 = new Rank("CPL");
+    private Rank rank3 = new Rank("MAJ");
 
     private Set<Tag> tags = new HashSet<>();
 

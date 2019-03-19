@@ -26,7 +26,7 @@ public class Nric {
     }
 
     /**
-     * Returns true if a given string is a valid nric.
+     * Returns if a given string is a valid nric.
      */
     public static boolean isValidNric(String test) {
         return test.matches(VALIDATION_REGEX);

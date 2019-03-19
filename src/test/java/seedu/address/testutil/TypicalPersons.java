@@ -15,40 +15,40 @@ import static seedu.address.logic.commands.CommandTestUtil.*;
 public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withPhone("94351253").withSection("1SIR").withNric("S1234567A")
-            .withTags("friends").build();
+            .withPhone("94351253").withCompany("Alpha").withSection("1SIR").withRank("CPL")
+            .withNric("S1234567A").withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
-            .withPhone("98765432").withSection("2SIR").withNric("S1234567B")
-            .withTags("owesMoney", "friends").build();
+            .withPhone("98765432").withCompany("Bravo").withSection("2SIR").withRank("3SG")
+            .withNric("S1234567B").withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withSection("3SIR").withNric("S1234567C").build();
+            .withCompany("Echo").withSection("3SIR").withRank("2SG").withNric("S1234567C").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
-            .withSection("4SIR").withNric("S1234567D")
+            .withCompany("Charlie").withSection("4SIR").withRank("3SG").withNric("S1234567D")
             .withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withSection("5SIR").withNric("S1234567E")
+            .withCompany("Charlie").withSection("5SIR").withRank("3WO").withNric("S1234567E")
             .build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withSection("6SIR").withNric("S1234567F")
+            .withCompany("Bravo").withSection("6SIR").withRank("LTA").withNric("S1234567F")
             .build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("+942442")
-            .withSection("7SIR").withNric("S1234567G")
+            .withCompany("Bravo").withSection("7SIR").withRank("2LT").withNric("S1234567G")
             .build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withSection("8SIR").withNric("S1234567H")
+            .withCompany("Alpha").withSection("8SIR").withRank("LCP").withNric("S1234567H")
             .build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withSection("9SIR").withNric("S1234567I")
+            .withCompany("Echo").withSection("9SIR").withRank("CPT").withNric("S1234567I")
             .build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withSection(VALID_SECTION_AMY)
+            .withCompany(VALID_COMPANY_AMY).withSection(VALID_SECTION_AMY).withRank(VALID_RANK_AMY)
             .withNric(VALID_NRIC_AMY).withTags(VALID_TAG_FRIEND).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withSection(VALID_SECTION_BOB)
+            .withCompany(VALID_COMPANY_BOB).withSection(VALID_SECTION_BOB).withRank(VALID_RANK_BOB)
             .withNric(VALID_NRIC_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 

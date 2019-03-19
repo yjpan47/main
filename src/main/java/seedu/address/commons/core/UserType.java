@@ -1,4 +1,5 @@
 package seedu.address.commons.core;
+
 /**
  *  Usertypes that can be used
  *  <li>{@link #GENERAL}</li>
