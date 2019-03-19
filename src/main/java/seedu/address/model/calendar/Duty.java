@@ -16,8 +16,9 @@ public abstract class Duty {
     private int weekIndex;
 
     private List<Person> persons;
-    int numOfVacancies;
-    int pointsAwards;
+
+    private int numOfVacancies;
+    private int pointsAwards;
 
     /**
      * Constructs a duty
@@ -49,6 +50,14 @@ public abstract class Duty {
      */
     boolean isFilled() {
         return this.numOfVacancies == 0;
+    }
+
+    public void setNumOfVacancies(int numOfVacancies) {
+        this.numOfVacancies = numOfVacancies;
+    }
+
+    public void setPointsAwards(int pointsAwards) {
+        this.pointsAwards = pointsAwards;
     }
 
     /**

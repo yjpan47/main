@@ -1,5 +1,8 @@
 package seedu.address.model.calendar;
 
+/**
+ * Duty Type C - Monday to Thursday
+ */
 class DutyTypeC extends Duty {
 
     /**
@@ -7,7 +10,7 @@ class DutyTypeC extends Duty {
      */
     DutyTypeC(int monthIndex, int dayIndex, int weekIndex) {
         super(monthIndex, dayIndex, weekIndex);
-        this.numOfVacancies = 2;
-        this.pointsAwards = 2;
+        this.setNumOfVacancies(2);
+        this.setPointsAwards(2);
     }
 }
