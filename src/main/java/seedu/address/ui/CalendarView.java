@@ -32,7 +32,7 @@ public class CalendarView extends UiPart<Region> {
     private static final String FXML = "CalendarView.fxml";
     //private final Logger logger = LogsCenter.getLogger(CalendarView.class);
     private static final String[] dayArray = {"SUN", "MON ", "TUE", "WED", "THU", "FRI", "SAT"};
-    private static final String[] monthArray = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", 
+    private static final String[] monthArray = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG",
         "SEP", "OCT", "NOV", "DEC"};
     private Label[] dateLabels;
 
