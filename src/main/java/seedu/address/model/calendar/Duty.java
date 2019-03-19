@@ -52,11 +52,11 @@ public abstract class Duty {
         return this.numOfVacancies == 0;
     }
 
-    public void setNumOfVacancies(int numOfVacancies) {
+    void setNumOfVacancies(int numOfVacancies) {
         this.numOfVacancies = numOfVacancies;
     }
 
-    public void setPointsAwards(int pointsAwards) {
+    void setPointsAwards(int pointsAwards) {
         this.pointsAwards = pointsAwards;
     }
 
