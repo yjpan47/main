@@ -169,6 +169,7 @@ public class EditCommandSystemTest extends PersonnelDatabaseSystemTest {
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NRIC_DESC_BOB + COMPANY_DESC_BOB + SECTION_DESC_BOB
                 + RANK_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
+    }
 
     /**
      * Performs the same verification as {@code assertCommandSuccess(String, Index, Person, Index)} except that

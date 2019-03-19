@@ -1,6 +1,6 @@
 package seedu.address.model.calendar;
 
-enum Meridiem {
+public enum Meridiem {
     AM,
     PM
 }

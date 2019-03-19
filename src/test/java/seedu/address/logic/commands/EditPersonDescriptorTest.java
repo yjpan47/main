@@ -34,19 +34,19 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different company -> returns false
-        EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withCompany(VALID_COMPANY_BOB).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withCompany(VALID_COMPANY_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different section -> returns false
-        EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withSection(VALID_SECTION_BOB).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withSection(VALID_SECTION_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different rank -> returns false
-        EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withRank(VALID_RANK_BOB).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withRank(VALID_RANK_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different name -> returns false
-        EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different phone -> returns false

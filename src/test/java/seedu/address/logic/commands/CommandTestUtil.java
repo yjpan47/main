@@ -24,7 +24,7 @@ public class CommandTestUtil {
 
     public static final String VALID_NRIC_AMY = "S1234567A";
     public static final String VALID_NRIC_BOB = "S1234567B";
-    public static final String VALID_COMPANY_AMY = "Alpha"
+    public static final String VALID_COMPANY_AMY = "Alpha";
     public static final String VALID_COMPANY_BOB = "Bravo";
     public static final String VALID_SECTION_AMY = "1";
     public static final String VALID_SECTION_BOB = "2";
