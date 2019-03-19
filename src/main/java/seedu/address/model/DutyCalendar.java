@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import seedu.address.model.calendar.DutyMonth;
+import seedu.address.model.person.UniquePersonList;
 
 
 /**
@@ -11,15 +12,16 @@ import seedu.address.model.calendar.DutyMonth;
  */
 public class DutyCalendar {
 
+    UniquePersonList personList;
     private DutyMonth currentMonth;
     private DutyMonth nextMonth;
 
     /**
      * Default constructor with no data contained within.
      */
-    public DutyCalendar() {
-        this.currentMonth = new DutyMonth(getTodayMonth(), dayOfFirstDayOfMonth(getTodayMonth()));
-        this.nextMonth = new DutyMonth(getTodayMonth() + 1, dayOfFirstDayOfMonth(getTodayMonth() + 1));
+    public DutyCalendar(UniquePersonList personList) {
+        this.currentMonth = new DutyMonth(personList, getTodayMonth(), dayOfFirstDayOfMonth(getTodayMonth()));
+        this.nextMonth = new DutyMonth(personList,getTodayMonth() + 1, dayOfFirstDayOfMonth(getTodayMonth() + 1));
     }
 
     void setDutyCalendar(DutyCalendar dutyCalendar) {
