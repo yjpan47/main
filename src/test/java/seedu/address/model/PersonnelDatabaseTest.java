@@ -130,7 +130,9 @@ public class PersonnelDatabaseTest {
         }
 
         @Override
-        public DutyCalendar getDutyCalendar() { return dutyCalendar; }
+        public DutyCalendar getDutyCalendar() {
+            return dutyCalendar;
+        }
 
         @Override
         public void addListener(InvalidationListener listener) {

@@ -3,7 +3,13 @@ package seedu.address.logic;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.COMPANY_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.SECTION_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.RANK_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+
 import static seedu.address.testutil.TypicalPersons.AMY;
 
 import java.io.IOException;
@@ -21,7 +27,7 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.DutyCalendar;
+//import seedu.address.model.DutyCalendar;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyPersonnelDatabase;
@@ -47,7 +53,8 @@ public class LogicManagerTest {
 
     @Before
     public void setUp() throws Exception {
-        JsonPersonnelDatabaseStorage personnelDatabaseStorage = new JsonPersonnelDatabaseStorage(temporaryFolder.newFile().toPath());
+        JsonPersonnelDatabaseStorage personnelDatabaseStorage =
+                new JsonPersonnelDatabaseStorage(temporaryFolder.newFile().toPath());
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.newFile().toPath());
         StorageManager storage = new StorageManager(personnelDatabaseStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -180,7 +187,8 @@ public class LogicManagerTest {
         }
 
         @Override
-        public void savePersonnelDatabase(ReadOnlyPersonnelDatabase personnelDatabase, Path filePath) throws IOException {
+        public void savePersonnelDatabase(ReadOnlyPersonnelDatabase personnelDatabase,
+                                          Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

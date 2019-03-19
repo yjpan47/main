@@ -18,10 +18,14 @@ import seedu.address.testutil.PersonnelDatabaseBuilder;
 
 public class VersionedPersonnelDatabaseTest {
 
-    private final ReadOnlyPersonnelDatabase personnelDatabaseWithAmy = new PersonnelDatabaseBuilder().withPerson(AMY).build();
-    private final ReadOnlyPersonnelDatabase personnelDatabaseWithBob = new PersonnelDatabaseBuilder().withPerson(BOB).build();
-    private final ReadOnlyPersonnelDatabase personnelDatabaseWithCarl = new PersonnelDatabaseBuilder().withPerson(CARL).build();
-    private final ReadOnlyPersonnelDatabase emptypersonnelDatabase = new PersonnelDatabaseBuilder().build();
+    private final ReadOnlyPersonnelDatabase personnelDatabaseWithAmy =
+            new PersonnelDatabaseBuilder().withPerson(AMY).build();
+    private final ReadOnlyPersonnelDatabase personnelDatabaseWithBob =
+            new PersonnelDatabaseBuilder().withPerson(BOB).build();
+    private final ReadOnlyPersonnelDatabase personnelDatabaseWithCarl =
+            new PersonnelDatabaseBuilder().withPerson(CARL).build();
+    private final ReadOnlyPersonnelDatabase emptypersonnelDatabase =
+            new PersonnelDatabaseBuilder().build();
 
     @Test
     public void commit_singlePersonnelDatabase_noStatesRemovedCurrentStateSaved() {
@@ -47,7 +51,8 @@ public class VersionedPersonnelDatabaseTest {
     }
 
     @Test
-    public void commit_multiplePersonnelDatabasePointerNotAtEndOfStateList_statesAfterPointerRemovedCurrentStateSaved() {
+    public void
+    commit_multiplePersonnelDatabasePointerNotAtEndOfStateList_statesAfterPointerRemovedCurrentStateSaved() {
         VersionedPersonnelDatabase versionedPersonnelDatabase = preparePersonnelDatabaseList(
                 emptypersonnelDatabase, personnelDatabaseWithAmy, personnelDatabaseWithBob);
         shiftCurrentStatePointerLeftwards(versionedPersonnelDatabase, 2);
@@ -209,10 +214,12 @@ public class VersionedPersonnelDatabaseTest {
 
     @Test
     public void equals() {
-        VersionedPersonnelDatabase versionedPersonnelDatabase = preparePersonnelDatabaseList(personnelDatabaseWithAmy, personnelDatabaseWithBob);
+        VersionedPersonnelDatabase versionedPersonnelDatabase =
+                preparePersonnelDatabaseList(personnelDatabaseWithAmy, personnelDatabaseWithBob);
 
         // same values -> returns true
-        VersionedPersonnelDatabase copy = preparePersonnelDatabaseList(personnelDatabaseWithAmy, personnelDatabaseWithBob);
+        VersionedPersonnelDatabase copy =
+                preparePersonnelDatabaseList(personnelDatabaseWithAmy, personnelDatabaseWithBob);
         assertTrue(versionedPersonnelDatabase.equals(copy));
 
         // same object -> returns true
@@ -225,7 +232,8 @@ public class VersionedPersonnelDatabaseTest {
         assertFalse(versionedPersonnelDatabase.equals(1));
 
         // different state list -> returns false
-        VersionedPersonnelDatabase differentPersonnelDatabaseList = preparePersonnelDatabaseList(personnelDatabaseWithBob, personnelDatabaseWithCarl);
+        VersionedPersonnelDatabase differentPersonnelDatabaseList =
+                preparePersonnelDatabaseList(personnelDatabaseWithBob, personnelDatabaseWithCarl);
         assertFalse(versionedPersonnelDatabase.equals(differentPersonnelDatabaseList));
 
         // different current pointer index -> returns false
@@ -237,8 +245,10 @@ public class VersionedPersonnelDatabaseTest {
 
     /**
      * Asserts that {@code versionedPersonnelDatabase} is currently pointing at {@code expectedCurrentState},
-     * states before {@code versionedPersonnelDatabase#currentStatePointer} is equal to {@code expectedStatesBeforePointer},
-     * and states after {@code versionedPersonnelDatabase#currentStatePointer} is equal to {@code expectedStatesAfterPointer}.
+     * states before {@code versionedPersonnelDatabase#currentStatePointer}
+     * is equal to {@code expectedStatesBeforePointer},
+     * and states after {@code versionedPersonnelDatabase#currentStatePointer}
+     * is equal to {@code expectedStatesAfterPointer}.
      */
     private void assertPersonnelDatabaseListStatus(VersionedPersonnelDatabase versionedPersonnelDatabase,
                                              List<ReadOnlyPersonnelDatabase> expectedStatesBeforePointer,
@@ -272,13 +282,16 @@ public class VersionedPersonnelDatabaseTest {
     }
 
     /**
-     * Creates and returns a {@code VersionedPersonnelDatabase} with the {@code personnelDatabaseStates} added into it, and the
+     * Creates and returns a {@code VersionedPersonnelDatabase} with the
+     * {@code personnelDatabaseStates} added into it, and the
      * {@code VersionedPersonnelDatabase#currentStatePointer} at the end of list.
      */
-    private VersionedPersonnelDatabase preparePersonnelDatabaseList(ReadOnlyPersonnelDatabase... personnelDatabaseStates) {
+    private VersionedPersonnelDatabase preparePersonnelDatabaseList(
+            ReadOnlyPersonnelDatabase... personnelDatabaseStates) {
         assertFalse(personnelDatabaseStates.length == 0);
 
-        VersionedPersonnelDatabase versionedPersonnelDatabase = new VersionedPersonnelDatabase(personnelDatabaseStates[0]);
+        VersionedPersonnelDatabase versionedPersonnelDatabase =
+                new VersionedPersonnelDatabase(personnelDatabaseStates[0]);
         for (int i = 1; i < personnelDatabaseStates.length; i++) {
             versionedPersonnelDatabase.resetData(personnelDatabaseStates[i]);
             versionedPersonnelDatabase.commit();

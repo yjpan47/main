@@ -151,7 +151,8 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        PersonnelDatabase personnelDatabase = new PersonnelDatabaseBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        PersonnelDatabase personnelDatabase = new PersonnelDatabaseBuilder()
+                .withPerson(ALICE).withPerson(BENSON).build();
         PersonnelDatabase differentPersonnelDatabase = new PersonnelDatabase();
         UserPrefs userPrefs = new UserPrefs();
 
