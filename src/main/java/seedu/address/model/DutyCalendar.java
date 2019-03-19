@@ -27,6 +27,15 @@ public class DutyCalendar {
         this.nextMonth = dutyCalendar.nextMonth;
     }
 
+    public void rollover() {
+        this.currentMonth = this.nextMonth;
+        // run allocation algorithm
+        int nextMonthIndex = getTodayMonth() + 1;
+        this.nextMonth = new DutyMonth(nextMonthIndex, dayOfFirstDayOfMonth(nextMonthIndex));
+    }
+
+    //=========== Constructor ==================================================================================
+
     private int getTodayMonth() {
         GregorianCalendar calendar = new GregorianCalendar();
         return calendar.get(Calendar.MONTH);

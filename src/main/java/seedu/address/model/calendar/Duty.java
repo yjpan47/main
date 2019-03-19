@@ -14,8 +14,6 @@ public class Duty {
     private Meridiem meridiem;
     private List<Person> dutyMen;
     private int numOfMen;
-    private Person dutySergeant;
-    private Person dutyOfficer;
 
     /**
      * Constructs a duty
@@ -25,17 +23,13 @@ public class Duty {
         this.meridiem = meridiem;
         this.dutyMen = new ArrayList<>();
         this.numOfMen = 3;
-        this.dutySergeant = null;
-        this.dutyOfficer = null;
     }
 
     /**
      * Check whether this duty has been taken by a person
      */
     public boolean isReady() {
-        return dutyMen.size() == this.numOfMen
-                && this.dutySergeant != null
-                && this.dutyOfficer != null;
+        return dutyMen.size() == this.numOfMen;
     }
 
     /*

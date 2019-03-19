@@ -22,6 +22,8 @@ class JsonSerializablePersonnelDatabase {
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    //private final JsonAdaptedDutyMonth currentMonth;
+    //private final JsonAdaptedDutyMonth nextMonth;
 
     /**
      * Constructs a {@code JsonSerializablePersonnelDatabase} with the given persons.

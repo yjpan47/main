@@ -33,7 +33,7 @@ public class ModelManager implements Model {
     private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
 
     /**
-     * Initializes a ModelManager with the given personnelDatabse, dutyCalendar and userPrefs.
+     * Initializes a ModelManager with the given personnelDatabase, dutyCalendar and userPrefs.
      */
     public ModelManager(ReadOnlyPersonnelDatabase personnelDatabase, ReadOnlyUserPrefs userPrefs) {
 
