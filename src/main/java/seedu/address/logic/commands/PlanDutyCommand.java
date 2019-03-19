@@ -4,7 +4,9 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-
+/**
+ * Schedules duties using the list of personnel for the upcoming month
+ */
 public class PlanDutyCommand extends Command {
 
     public static final String COMMAND_WORD = "plan duty";
