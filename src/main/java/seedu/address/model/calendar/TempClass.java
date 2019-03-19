@@ -4,13 +4,12 @@ package seedu.address.model.calendar;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-
 
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Name;
