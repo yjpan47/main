@@ -21,7 +21,8 @@ import seedu.address.model.PersonnelDatabase;
 import seedu.address.model.ReadOnlyPersonnelDatabase;
 
 public class JsonPersonnelDatabaseStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonPersonnelDatabaseStorageTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data",
+            "JsonPersonnelDatabaseStorageTest");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -36,7 +37,8 @@ public class JsonPersonnelDatabaseStorageTest {
     }
 
     private java.util.Optional<ReadOnlyPersonnelDatabase> readPersonnelDatabase(String filePath) throws Exception {
-        return new JsonPersonnelDatabaseStorage(Paths.get(filePath)).readPersonnelDatabase(addToTestDataPathIfNotNull(filePath));
+        return new JsonPersonnelDatabaseStorage(Paths.get(filePath)).
+                readPersonnelDatabase(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -67,7 +69,8 @@ public class JsonPersonnelDatabaseStorageTest {
     }
 
     @Test
-    public void readPersonnelDatabase_invalidAndValidPersonPersonnelDatabase_throwDataConversionException() throws Exception {
+    public void
+        readPersonnelDatabase_invalidAndValidPersonPersonnelDatabase_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
         readPersonnelDatabase("invalidAndValidPersonPersonnelDatabase.json");
     }
@@ -105,7 +108,7 @@ public class JsonPersonnelDatabaseStorageTest {
     }
 
     /**
-     * Saves {@code PersonnelDatabase} at the specified {@code filePath}.
+     * Saves {@code personnelDatabase} at the specified {@code filePath}.
      */
     private void savePersonnelDatabase(ReadOnlyPersonnelDatabase PersonnelDatabase, String filePath) {
         try {

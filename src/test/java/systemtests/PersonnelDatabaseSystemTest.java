@@ -34,8 +34,8 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
-import seedu.address.model.PersonnelDatabase;
 import seedu.address.model.Model;
+import seedu.address.model.PersonnelDatabase;
 import seedu.address.testutil.TypicalPersons;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;
@@ -138,7 +138,8 @@ public abstract class PersonnelDatabaseSystemTest {
      */
     protected void showAllPersons() {
         executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getPersonnelDatabase().getPersonList().size(), getModel().getFilteredPersonList().size());
+        assertEquals(getModel().getPersonnelDatabase().getPersonList().size(),
+                getModel().getFilteredPersonList().size());
     }
 
     /**
@@ -146,7 +147,8 @@ public abstract class PersonnelDatabaseSystemTest {
      */
     protected void showPersonsWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
-        assertTrue(getModel().getFilteredPersonList().size() < getModel().getPersonnelDatabase().getPersonList().size());
+        assertTrue(getModel().getFilteredPersonList().size() <
+                getModel().getPersonnelDatabase().getPersonList().size());
     }
 
     /**
@@ -174,7 +176,8 @@ public abstract class PersonnelDatabaseSystemTest {
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
-        assertEquals(new PersonnelDatabase(expectedModel.getPersonnelDatabase()), testApp.readStoragePersonnelDatabase());
+        assertEquals(new PersonnelDatabase(expectedModel.getPersonnelDatabase()),
+                testApp.readStoragePersonnelDatabase());
         assertListMatching(getPersonListPanel(), expectedModel.getFilteredPersonList());
     }
 
@@ -211,7 +214,8 @@ public abstract class PersonnelDatabaseSystemTest {
         String selectedCardName = getPersonListPanel().getHandleToSelectedCard().getName();
         URL expectedUrl;
         try {
-            expectedUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + selectedCardName.replaceAll(" ", "%20"));
+            expectedUrl = new URL(BrowserPanel.SEARCH_PAGE_URL +
+                    selectedCardName.replaceAll(" ", "%20"));
         } catch (MalformedURLException mue) {
             throw new AssertionError("URL expected to be valid.", mue);
         }
