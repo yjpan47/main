@@ -2,15 +2,26 @@
 
 package seedu.address.model.calendar;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Company;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rank;
+import seedu.address.model.person.Section;
 import seedu.address.model.tag.Tag;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.*;
-
+/**
+ * A temporary class to be deleted before submission
+ */
 public class TempClass {
 
     private Nric nric1 = new Nric("S9875493J");
@@ -29,13 +40,13 @@ public class TempClass {
     private Section section2 = new Section("2");
     private Section section3 = new Section("3");
 
-    private Rank rank1 = new Rank("REC");
-    private Rank rank2 = new Rank("CPL");
-    private Rank rank3 = new Rank("MAJ");
-
     private Phone phone1 = new Phone("09403942");
     private Phone phone2 = new Phone("798749374");
     private Phone phone3 = new Phone("473974983");
+  
+    private Rank rank1 = new Rank("REC");
+    private Rank rank2 = new Rank("CPL");
+    private Rank rank3 = new Rank("MAJ");
 
     private Set<Tag> tags = new HashSet<>();
 
@@ -43,11 +54,11 @@ public class TempClass {
     private Person person2 = new Person(nric2, company2, section2, rank2, name2, phone2, tags);
     private Person person3 = new Person(nric3, company3, section3, rank3, name3, phone3, tags);
 
-    public List<Person> persons = new ArrayList<>();
+    private List<Person> persons = new ArrayList<>();
 
     private LocalDate date = LocalDate.now();
 
-    public Duty duty;
+    private Duty duty;
 
     public TempClass() {
         persons.add(person1);

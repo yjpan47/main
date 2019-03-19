@@ -1,10 +1,10 @@
 package seedu.address.model;
 
-import javafx.collections.ObservableList;
-import seedu.address.model.calendar.DutyMonth;
-
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
+import seedu.address.model.calendar.DutyMonth;
+
 
 /**
  * Represents a Calendar that contains duties for the current and the following months

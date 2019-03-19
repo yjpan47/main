@@ -50,7 +50,7 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         try {
-            if(user == UserType.ADMIN) {
+            if (user == UserType.ADMIN) {
                 AdminCommand command = addressBookParser.parseCommand(commandText);
                 commandResult = command.executeAdmin(model, history);
             } else if (user == UserType.GENERAL) {

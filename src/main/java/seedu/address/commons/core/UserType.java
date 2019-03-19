@@ -1,7 +1,9 @@
 package seedu.address.commons.core;
 
 /**
- * Represents the two types of users.
+ *  Usertypes that can be used
+ *  <li>{@link #GENERAL}</li>
+ *  <li>{@link #ADMIN}</li>
  */
 public enum UserType {
     GENERAL,
