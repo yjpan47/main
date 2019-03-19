@@ -141,7 +141,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath(), logic.getAddressBook());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        //CalendarView calendarView = new CalendarView(logic.getDutyForDates());
+        CalendarView calendarView = new CalendarView(logic.getFilteredPersonList());
         calendarViewPlaceholder.getChildren().add(calendarView.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand, user, logic.getHistory());
