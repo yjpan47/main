@@ -9,8 +9,11 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.*;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.PersonnelDatabase;
 import seedu.address.model.ReadOnlyPersonnelDatabase;
+import seedu.address.model.UserPrefs;
 import seedu.address.storage.JsonPersonnelDatabaseStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.testutil.TestUtil;
@@ -39,7 +42,8 @@ public class TestApp extends MainApp {
 
         // If some initial local data has been provided, write those to the file
         if (initialDataSupplier.get() != null) {
-            JsonPersonnelDatabaseStorage jsonPersonnelDatabaseStorage = new JsonPersonnelDatabaseStorage(saveFileLocation);
+            JsonPersonnelDatabaseStorage jsonPersonnelDatabaseStorage =
+                    new JsonPersonnelDatabaseStorage(saveFileLocation);
             try {
                 jsonPersonnelDatabaseStorage.savePersonnelDatabase(initialDataSupplier.get());
             } catch (IOException ioe) {

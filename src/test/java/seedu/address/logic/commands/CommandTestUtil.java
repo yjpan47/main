@@ -2,7 +2,13 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RANK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SECTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,8 +17,8 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.PersonnelDatabase;
 import seedu.address.model.Model;
+import seedu.address.model.PersonnelDatabase;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -54,8 +60,10 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
     public static final String INVALID_NRIC_DESC = " " + PREFIX_NRIC + "1238675A"; // missing first letter
-    public static final String INVALID_COMPANY_DESC = " " + PREFIX_COMPANY + " alpha"; // whitespace not allowed at the front of company
-    public static final String INVALID_SECTION_DESC = " " + PREFIX_SECTION + " 2"; // whitespace not allowed at the front of section
+    public static final String INVALID_COMPANY_DESC = " " + PREFIX_COMPANY + " alpha";
+    // whitespace not allowed at the front of company
+    public static final String INVALID_SECTION_DESC = " " + PREFIX_SECTION + " 2";
+    // whitespace not allowed at the front of section
     public static final String INVALID_RANK_DESC = " " + PREFIX_RANK + "PTTT"; // only 3 letters allowed in rank
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones

@@ -2,7 +2,13 @@ package seedu.address.model.person;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_RANK_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SECTION_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
@@ -65,6 +71,30 @@ public class PersonTest {
 
         // different name -> returns false
         Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different phone -> returns false
+        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different company -> returns false
+        editedAlice = new PersonBuilder(ALICE).withCompany(VALID_COMPANY_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different section -> returns false
+        editedAlice = new PersonBuilder(ALICE).withSection(VALID_SECTION_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different rank -> returns false
+        editedAlice = new PersonBuilder(ALICE).withRank(VALID_RANK_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different NRIC -> returns false
+        editedAlice = new PersonBuilder(ALICE).withNric(VALID_NRIC_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different tags -> returns false
+        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }

@@ -16,6 +16,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.PlanDutyCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SortCommand;
@@ -87,6 +88,9 @@ public class PersonnelDatabaseParser {
 
         case SortCommand.COMMAND_WORD:
             return new SortCommand();
+
+        case PlanDutyCommand.COMMAND_WORD:
+            return new PlanDutyCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

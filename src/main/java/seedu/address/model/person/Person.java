@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -11,6 +12,7 @@ import java.util.Set;
 
 import seedu.address.model.calendar.Duty;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Represents a Person in the duty planner.
@@ -30,7 +32,9 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     // Duty
-    private List<Duty> duties = new ArrayList<>();
+    private int dutyPoints;
+    private List<Integer> blockedDates;
+    private List<Duty> duties;
 
     /**
      * Every field must be present and not null.
@@ -46,15 +50,27 @@ public class Person {
         this.name = name;
         this.phone = phone;
         this.tags.addAll(tags);
+
+        this.dutyPoints = 0;
+        this.blockedDates = new ArrayList<>();
+        this.duties = new ArrayList<>();
     }
 
-    public Nric getNric() { return nric; }
+    public Nric getNric() {
+        return nric;
+    }
 
-    public Company getCompany() { return company; }
+    public Company getCompany() {
+        return company;
+    }
 
-    public Section getSection() { return section; }
+    public Section getSection() {
+        return section;
+    }
 
-    public Rank getRank() { return rank; }
+    public Rank getRank() {
+        return rank;
+    }
 
     public Name getName() {
         return name;
@@ -62,6 +78,32 @@ public class Person {
 
     public Phone getPhone() {
         return phone;
+    }
+
+    public int getDutyPoints() {
+        return dutyPoints;
+    }
+
+    public List<Integer> getBlockedDates() {
+        return blockedDates;
+    }
+
+    public List<Duty> getDuties() {
+        return duties;
+    }
+
+    /**
+     * Assign a duty to a Person
+     */
+    public void addDuty(Duty duty) {
+        if (this.duties.contains(duty)) {
+            throw new InvalidParameterException(duty + " is already assigned to " + this);
+        } else if (this.blockedDates.contains(duty.getDayIndex())) {
+            throw new InvalidParameterException(duty + " is blocked by " + this);
+        } else {
+            this.duties.add(duty);
+            this.dutyPoints += duty.getPointsAwards();
+        }
     }
 
     /**
@@ -76,13 +118,13 @@ public class Person {
      * Returns true if both persons of the same name have the same NRIC.
      */
     public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+        if (otherPerson.equals(this)) {
             return true;
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName())
-                && otherPerson.getNric().equals(getNric());
+                && otherPerson.getName().equals(this.getName())
+                && otherPerson.getNric().equals(this.getNric());
     }
 
     /**
@@ -114,12 +156,6 @@ public class Person {
         // use this method for custom fields hashing instead of implementing your own
 
         return Objects.hash(nric, company, section, rank, name, phone, tags);
-    }
-
-    // Duty methods
-
-    public List<Duty> getDuties() {
-        return duties;
     }
 
     @Override

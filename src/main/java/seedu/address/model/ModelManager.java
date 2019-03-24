@@ -25,7 +25,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedPersonnelDatabase versionedAddressBook;
+    private final VersionedPersonnelDatabase versionedPersonnelDatabase;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final TempClass tempClass;
@@ -33,18 +33,19 @@ public class ModelManager implements Model {
     private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given personnelDatabse, dutyCalendar and userPrefs.
      */
-    public ModelManager(ReadOnlyPersonnelDatabase addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyPersonnelDatabase personnelDatabase, ReadOnlyUserPrefs userPrefs) {
+
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(personnelDatabase, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with personnel database: " + personnelDatabase + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedPersonnelDatabase(addressBook);
+        versionedPersonnelDatabase = new VersionedPersonnelDatabase(personnelDatabase);
         tempClass = new TempClass();
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        filteredPersons = new FilteredList<>(versionedPersonnelDatabase.getPersonList());
         filteredPersons.addListener(this::ensureSelectedPersonIsValid);
         /*
         Note: just a test method for UI, remove when done
@@ -95,33 +96,33 @@ public class ModelManager implements Model {
 
     @Override
     public void setPersonnelDatabase(ReadOnlyPersonnelDatabase personnelDatabase) {
-        versionedAddressBook.resetData(personnelDatabase);
+        versionedPersonnelDatabase.resetData(personnelDatabase);
     }
 
     @Override
     public ReadOnlyPersonnelDatabase getPersonnelDatabase() {
-        return versionedAddressBook;
+        return versionedPersonnelDatabase;
     }
 
     @Override
     public void sortPersonnelDatabase() {
-        versionedAddressBook.sort();
+        versionedPersonnelDatabase.sort();
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return versionedAddressBook.hasPerson(person);
+        return versionedPersonnelDatabase.hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        versionedAddressBook.removePerson(target);
+        versionedPersonnelDatabase.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
-        versionedAddressBook.addPerson(person);
+        versionedPersonnelDatabase.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -129,7 +130,7 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        versionedAddressBook.setPerson(target, editedPerson);
+        versionedPersonnelDatabase.setPerson(target, editedPerson);
     }
 
 
@@ -144,8 +145,8 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
-    @Override
-    public ObservableList<Person> getDutyForDates() {return dutyForDates; }
+    //@Override
+    //public ObservableList<Person> getDutyForDates() {return dutyForDates; }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
@@ -158,27 +159,27 @@ public class ModelManager implements Model {
 
     @Override
     public boolean canUndoPersonnelDatabase() {
-        return versionedAddressBook.canUndo();
+        return versionedPersonnelDatabase.canUndo();
     }
 
     @Override
     public boolean canRedoPersonnelDatabase() {
-        return versionedAddressBook.canRedo();
+        return versionedPersonnelDatabase.canRedo();
     }
 
     @Override
     public void undoPersonnelDatabase() {
-        versionedAddressBook.undo();
+        versionedPersonnelDatabase.undo();
     }
 
     @Override
     public void redoPersonnelDatabase() {
-        versionedAddressBook.redo();
+        versionedPersonnelDatabase.redo();
     }
 
     @Override
     public void commitPersonnelDatabase() {
-        versionedAddressBook.commit();
+        versionedPersonnelDatabase.commit();
     }
 
     //=========== Selected person ===========================================================================
@@ -244,7 +245,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedAddressBook.equals(other.versionedAddressBook)
+        return versionedPersonnelDatabase.equals(other.versionedPersonnelDatabase)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)
                 && Objects.equals(selectedPerson.get(), other.selectedPerson.get());

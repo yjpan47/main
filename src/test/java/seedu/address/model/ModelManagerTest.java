@@ -22,8 +22,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.testutil.PersonnelDatabaseBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.PersonnelDatabaseBuilder;
 
 public class ModelManagerTest {
     @Rule
@@ -151,7 +151,8 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        PersonnelDatabase personnelDatabase = new PersonnelDatabaseBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        PersonnelDatabase personnelDatabase = new PersonnelDatabaseBuilder()
+                .withPerson(ALICE).withPerson(BENSON).build();
         PersonnelDatabase differentPersonnelDatabase = new PersonnelDatabase();
         UserPrefs userPrefs = new UserPrefs();
 

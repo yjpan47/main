@@ -5,7 +5,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Company;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rank;
+import seedu.address.model.person.Section;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -68,7 +74,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setRank(new Rank(rank));
         return this;
     }
-    
+
     /**
      * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
      */

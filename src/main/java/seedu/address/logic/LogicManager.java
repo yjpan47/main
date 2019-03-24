@@ -50,14 +50,14 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         try {
-            if(user == UserType.ADMIN) {
+            if (user == UserType.ADMIN) {
                 AdminCommand command = personnelDatabaseParser.parseCommand(commandText);
                 commandResult = command.executeAdmin(model, history);
             } else if (user == UserType.GENERAL) {
                 GeneralCommand command = personnelDatabaseParser.parseCommand(commandText);
                 commandResult = command.executeGeneral(model, history);
             } else {
-                throw new CommandException("USER NOT FOUND");
+                throw new CommandException("The person index provided is invalid");
             }
         } finally {
             history.add(commandText);
@@ -85,8 +85,8 @@ public class LogicManager implements Logic {
         return model.getFilteredPersonList();
     }
 
-    @Override
-    public ObservableList<Person> getDutyForDates() {return model.getDutyForDates(); }
+    //@Override
+    //public ObservableList<Person> getDutyForDates() {return model.getDutyForDates(); }
 
     @Override
     public ObservableList<String> getHistory() {

@@ -5,13 +5,13 @@
     "section": "3",
     "rank": "PTE",
     "name": "Valid Person",
-    "phone": "9482424",
+    "phone": "9482424"
   }, {
     "nric": "S9111112A",
     "company": "Charlie",
     "section": "1",
     "rank": "LCP",
     "name": "Person With Invalid Phone Field",
-    "phone": "948asdf2424",
+    "phone": "948asdf2424"
   } ]
 }

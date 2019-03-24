@@ -55,13 +55,21 @@ public class PersonCardHandle extends NodeHandle<Node> {
         return idLabel.getText();
     }
 
-    public String getNric() { return nricLabel.getText(); }
+    public String getNric() {
+        return nricLabel.getText();
+    }
 
-    public String getCompany() { return companyLabel.getText(); }
+    public String getCompany() {
+        return companyLabel.getText();
+    }
 
-    public String getSection() { return sectionLabel.getText(); }
+    public String getSection() {
+        return sectionLabel.getText();
+    }
 
-    public String getRank() { return rankLabel.getText(); }
+    public String getRank() {
+        return rankLabel.getText();
+    }
 
     public String getName() {
         return nameLabel.getText();

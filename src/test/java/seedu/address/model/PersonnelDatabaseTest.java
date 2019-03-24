@@ -117,6 +117,8 @@ public class PersonnelDatabaseTest {
      */
     private static class PersonnelDatabaseStub implements ReadOnlyPersonnelDatabase {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        // To be edited if necessary
+        private final DutyCalendar dutyCalendar = new DutyCalendar();
 
         PersonnelDatabaseStub(Collection<Person> persons) {
             this.persons.setAll(persons);
@@ -125,6 +127,11 @@ public class PersonnelDatabaseTest {
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public DutyCalendar getDutyCalendar() {
+            return dutyCalendar;
         }
 
         @Override

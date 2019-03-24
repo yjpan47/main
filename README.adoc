@@ -1,9 +1,12 @@
 = Scheduler App
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
-https://travis-ci.org/se-edu/addressbook-level4[image:https://travis-ci.org/se-edu/addressbook-level4.svg?branch=master[Build Status]]
-https://ci.appveyor.com/project/damithc/addressbook-level4[image:https://ci.appveyor.com/api/projects/status/3boko2x2vr5cc3w2?svg=true[Build status]]
-https://coveralls.io/github/se-edu/addressbook-level4?branch=master[image:https://coveralls.io/repos/github/se-edu/addressbook-level4/badge.svg?branch=master[Coverage Status]]
+
+https://travis-ci.org/CS2103-AY1819S2-W15-4/main[image:https://travis-ci.org/CS2103-AY1819S2-W15-4/main.svg?branch=master[Build Status]]
+https://ci.appveyor.com/project/cs2103ez/main[image:https://ci.appveyor.com/api/projects/status/i0xblq9iwnmrgdai?svg=true[Build status]]
+https://coveralls.io/github/CS2103-AY1819S2-W15-4/main?branch=master[image:https://coveralls.io/repos/github/CS2103-AY1819S2-W15-4/main/badge.svg?branch=master[Coverage Status]]
+https://www.codacy.com/app/cs2103ez/main?utm_source=github.com&utm_medium=referral&utm_content=CS2103-AY1819S2-W15-4/main&utm_campaign=Badge_Grade[image:https://api.codacy.com/project/badge/Grade/fc0b7775cf7f4fdeaf08776f3d8e364a[Codacy Badge]]
+
 
 
 ifdef::env-github[]
@@ -16,7 +19,7 @@ endif::[]
 
 * This is a desktop Scheduler application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface). It is meant for army personnel to use to schedule and assign guard duties to personnel.
 * Duty can be assigned for the upcoming months and soldiers can see their duties assigned to them as well as perform various different actions.
-* This will save a lot of time for commanders planning duties as this will automatically allocate duties and make the process completely automated
+* This will save a lot of time for commanders planning duties as this will automatically allocate duties and make the process completely automated.
 
 
 == Site Map

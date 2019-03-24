@@ -3,14 +3,13 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Nric;
 import seedu.address.model.person.Company;
-import seedu.address.model.person.Section;
-import seedu.address.model.person.Rank;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-
+import seedu.address.model.person.Rank;
+import seedu.address.model.person.Section;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -19,9 +18,9 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class PersonBuilder {
 
-    public static final String DEFAULT_NRIC = "S1234567A";
+    public static final String DEFAULT_NRIC = "S5234567A";
     public static final String DEFAULT_COMPANY = "Bravo";
-    public static final String DEFAULT_SECTION = "1";
+    public static final String DEFAULT_SECTION = "1SIR";
     public static final String DEFAULT_RANK = "CPL";
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_PHONE = "85355255";
@@ -72,12 +71,16 @@ public class PersonBuilder {
         this.company = new Company(company);
         return this;
     }
-
+    /**
+     * Sets the {@code Section} of the {@code Person} that we are building.
+     */
     public PersonBuilder withSection(String section) {
         this.section = new Section(section);
         return this;
     }
-
+    /**
+     * Sets the {@code Rank} of the {@code Person} that we are building.
+     */
     public PersonBuilder withRank(String rank) {
         this.rank = new Rank(rank);
         return this;

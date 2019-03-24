@@ -7,7 +7,6 @@ import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
-import seedu.address.model.calendar.Duty;
 
 /**
  * The API of the Model component.
@@ -77,7 +76,8 @@ public interface Model {
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the personnel database.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the personnel database.
+     * The person identity of {@code editedPerson} must not be the same as another existing person
+     * in the personnel database.
      */
     void setPerson(Person target, Person editedPerson);
 
@@ -85,7 +85,7 @@ public interface Model {
     ObservableList<Person> getFilteredPersonList();
 
     /** Returns an unmodifiable view of the duty for dates */
-    ObservableList<Person> getDutyForDates();
+    //ObservableList<Person> getDutyForDates();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.

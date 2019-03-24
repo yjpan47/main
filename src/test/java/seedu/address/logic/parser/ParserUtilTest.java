@@ -16,7 +16,12 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Company;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rank;
+import seedu.address.model.person.Section;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.Assert;
 
@@ -156,7 +161,7 @@ public class ParserUtilTest {
         Rank expectedRank = new Rank(VALID_RANK);
         assertEquals(expectedRank, ParserUtil.parseRank(rankWithWhitespace));
     }
-    
+
     @Test
     public void parseName_null_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
