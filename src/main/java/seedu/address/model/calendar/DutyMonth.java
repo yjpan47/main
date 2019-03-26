@@ -41,6 +41,19 @@ public class DutyMonth {
         }
     }
 
+    public DutyMonth(int monthIndex, int firstDayWeekIndex, List<Duty> duties) {
+
+        if (monthIndex >= 1 && monthIndex <= 12 && firstDayWeekIndex >= 0 && firstDayWeekIndex <= 7) {
+            this.monthIndex = monthIndex;
+            this.firstDayWeekIndex = firstDayWeekIndex;
+            this.numOfDays = getNumOfDays();
+            this.duties = new ArrayList<>(duties);
+            this.persons = new ArrayList<>();
+        } else {
+            throw new InputMismatchException("Invalid Month Index or first Day Index");
+        }
+    }
+
     public void addDutyPersons(List<Person> persons) {
         this.persons.addAll(persons);
     }
@@ -84,8 +97,9 @@ public class DutyMonth {
         List<Duty> dutyList = this.arrangeDuties();
         PriorityQueue<Person> personQueue = this.arrangePersons();
         for (Duty duty : dutyList) {
-            if (personQueue.isEmpty()) { continue; }
-
+            if (personQueue.isEmpty()) {
+                continue;
+            }
 
             while (!duty.isFilled()) {
                 boolean matchExist = true;
@@ -105,9 +119,13 @@ public class DutyMonth {
                 personQueue.addAll(tempList);
                 personQueue.add(currPerson);
 
-                if (matchExist) { this.assign(duty, currPerson); }
+                if (matchExist) {
+                    this.assign(duty, currPerson);
+                }
 
-                if (duty.getNumOfVacancies() == originalVacancies) { break; }
+                if (duty.getNumOfVacancies() == originalVacancies) {
+                    break;
+                }
             }
 
         }
@@ -211,5 +229,17 @@ public class DutyMonth {
         } else {
             throw new InputMismatchException("Invalid Month Index.");
         }
+    }
+
+    public int getMonthIndex() {
+        return monthIndex;
+    }
+
+    public int getFirstDayWeekIndex() {
+        return firstDayWeekIndex;
+    }
+
+    public List<Duty> getDuties() {
+        return duties;
     }
 }

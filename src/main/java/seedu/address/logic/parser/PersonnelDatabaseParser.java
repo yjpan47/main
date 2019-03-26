@@ -94,7 +94,7 @@ public class PersonnelDatabaseParser {
             return new PlanDutyCommand();
 
         case ScheduleCommand.COMMAND_WORD:
-                return new ScheduleCommand();
+            return new ScheduleCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
