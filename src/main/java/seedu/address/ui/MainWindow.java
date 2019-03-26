@@ -34,7 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private Stage primaryStage;
     private Logic logic;
     //Clearance of the user
-    private UserType user;
+    public final UserType user;
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
@@ -71,12 +71,13 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private TitledPane contactList;
 
-    public MainWindow(Stage primaryStage, Logic logic) {
+    public MainWindow(Stage primaryStage, Logic logic, UserType user) {
         super(FXML, primaryStage);
 
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.user = user;
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -226,9 +227,5 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
-    }
-
-    public void setUserType(UserType userType) {
-        this.user = userType;
     }
 }

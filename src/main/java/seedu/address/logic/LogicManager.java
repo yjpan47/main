@@ -8,6 +8,7 @@ import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.UserType;
 import seedu.address.logic.commands.AdminCommand;
 import seedu.address.logic.commands.CommandResult;
@@ -57,7 +58,7 @@ public class LogicManager implements Logic {
                 GeneralCommand command = personnelDatabaseParser.parseCommand(commandText);
                 commandResult = command.executeGeneral(model, history);
             } else {
-                throw new CommandException("The person index provided is invalid");
+                throw new CommandException(Messages.MESSAGE_NO_USER);
             }
         } finally {
             history.add(commandText);
