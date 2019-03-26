@@ -24,7 +24,8 @@ public class DutyMonth {
     private List<Duty> duties;
     private List<Person> persons;
 
-    public DutyMonth(UniquePersonList personList, int monthIndex, int firstDayWeekIndex) {
+    public DutyMonth(int monthIndex, int firstDayWeekIndex) {
+
         if (monthIndex >= 1 && monthIndex <= 12 && firstDayWeekIndex >= 0 && firstDayWeekIndex <= 7) {
             this.monthIndex = monthIndex;
             this.firstDayWeekIndex = firstDayWeekIndex;
@@ -35,12 +36,13 @@ public class DutyMonth {
             // Create all duties
             this.generateDuties();
 
-            // Import all Persons
-            importPersons(personList);
-
         } else {
             throw new InputMismatchException("Invalid Month Index or first Day Index");
         }
+    }
+
+    public void addDutyPersons(List<Person> persons) {
+        this.persons.addAll(persons);
     }
 
     /**
@@ -81,19 +83,33 @@ public class DutyMonth {
     public void schedule() {
         List<Duty> dutyList = this.arrangeDuties();
         PriorityQueue<Person> personQueue = this.arrangePersons();
-
         for (Duty duty : dutyList) {
+            if (personQueue.isEmpty()) { continue; }
+
+
             while (!duty.isFilled()) {
+                boolean matchExist = true;
+                int originalVacancies = duty.getNumOfVacancies();
+
                 Person currPerson = personQueue.poll();
                 List<Person> tempList = new ArrayList<>();
+
                 while (!this.isAssignable(duty, currPerson)) {
+                    if (personQueue.isEmpty()) {
+                        matchExist = false;
+                        break;
+                    }
                     tempList.add(currPerson);
                     currPerson = personQueue.poll();
                 }
-                this.assign(duty, currPerson);
                 personQueue.addAll(tempList);
                 personQueue.add(currPerson);
+
+                if (matchExist) { this.assign(duty, currPerson); }
+
+                if (duty.getNumOfVacancies() == originalVacancies) { break; }
             }
+
         }
     }
 
@@ -112,9 +128,6 @@ public class DutyMonth {
      * 3) Whether the person blocked that duty date
      */
     private boolean isAssignable(Duty duty, Person person) {
-        if (person == null) {
-            System.out.println("efwg");
-        }
         if (duty.isFilled()) {
             return false;
         } else if (duty.getPersons().contains(person)) {
