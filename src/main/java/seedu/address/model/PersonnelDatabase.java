@@ -29,7 +29,7 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
      */
     {
         persons = new UniquePersonList();
-        dutyCalendar = new DutyCalendar();
+        dutyCalendar = new DutyCalendar(persons);
     }
 
     public PersonnelDatabase() {}
@@ -148,7 +148,9 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
     }
 
     @Override
-    public DutyCalendar getDutyCalendar() { return this.dutyCalendar; }
+    public DutyCalendar getDutyCalendar() {
+        return this.dutyCalendar;
+    }
 
     @Override
     public boolean equals(Object other) {

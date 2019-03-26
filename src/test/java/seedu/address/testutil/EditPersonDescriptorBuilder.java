@@ -34,21 +34,13 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditPersonDescriptor();
-        descriptor.setName(person.getName());
-        descriptor.setPhone(person.getPhone());
+        descriptor.setNric(person.getNric());
         descriptor.setCompany(person.getCompany());
         descriptor.setSection(person.getSection());
         descriptor.setRank(person.getRank());
-        descriptor.setNric(person.getNric());
+        descriptor.setName(person.getName());
+        descriptor.setPhone(person.getPhone());
         descriptor.setTags(person.getTags());
-    }
-
-    /**
-     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public EditPersonDescriptorBuilder withName(String name) {
-        descriptor.setName(new Name(name));
-        return this;
     }
 
     /**
@@ -60,18 +52,10 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Company} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withPhone(String phone) {
-        descriptor.setPhone(new Phone(phone));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Rank} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public EditPersonDescriptorBuilder withRank(String rank) {
-        descriptor.setRank(new Rank(rank));
+    public EditPersonDescriptorBuilder withCompany(String company) {
+        descriptor.setCompany(new Company(company));
         return this;
     }
 
@@ -84,10 +68,26 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Company} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Rank} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withCompany(String company) {
-        descriptor.setCompany(new Company(company));
+    public EditPersonDescriptorBuilder withRank(String rank) {
+        descriptor.setRank(new Rank(rank));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withName(String name) {
+        descriptor.setName(new Name(name));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withPhone(String phone) {
+        descriptor.setPhone(new Phone(phone));
         return this;
     }
 

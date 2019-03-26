@@ -82,30 +82,30 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getPersonnelDatabaseFilePath() {
+        return userPrefs.getPersonnelDatabaseFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setPersonnelDatabaseFilePath(Path personnelDatabaseFilePath) {
+        requireNonNull(personnelDatabaseFilePath);
+        userPrefs.setPersonnelDatabaseFilePath(personnelDatabaseFilePath);
     }
 
     //=========== PersonnelDatabase ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyPersonnelDatabase addressBook) {
-        versionedPersonnelDatabase.resetData(addressBook);
+    public void setPersonnelDatabase(ReadOnlyPersonnelDatabase personnelDatabase) {
+        versionedPersonnelDatabase.resetData(personnelDatabase);
     }
 
     @Override
-    public ReadOnlyPersonnelDatabase getAddressBook() {
+    public ReadOnlyPersonnelDatabase getPersonnelDatabase() {
         return versionedPersonnelDatabase;
     }
 
     @Override
-    public void sortAddressBook() {
+    public void sortPersonnelDatabase() {
         versionedPersonnelDatabase.sort();
     }
 
@@ -158,27 +158,27 @@ public class ModelManager implements Model {
     //=========== Undo/Redo =================================================================================
 
     @Override
-    public boolean canUndoAddressBook() {
+    public boolean canUndoPersonnelDatabase() {
         return versionedPersonnelDatabase.canUndo();
     }
 
     @Override
-    public boolean canRedoAddressBook() {
+    public boolean canRedoPersonnelDatabase() {
         return versionedPersonnelDatabase.canRedo();
     }
 
     @Override
-    public void undoAddressBook() {
+    public void undoPersonnelDatabase() {
         versionedPersonnelDatabase.undo();
     }
 
     @Override
-    public void redoAddressBook() {
+    public void redoPersonnelDatabase() {
         versionedPersonnelDatabase.redo();
     }
 
     @Override
-    public void commitAddressBook() {
+    public void commitPersonnelDatabase() {
         versionedPersonnelDatabase.commit();
     }
 

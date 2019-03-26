@@ -1,8 +1,10 @@
 {
   "persons": [ {
+    "nric": "S9823456P",
+    "company": "Zulu",
+    "section": "3",
+    "rank": "PTE"
     "name": "Person with invalid name field: Ha!ns Mu@ster",
     "phone": "9482424",
-    "email": "hans@example.com",
-    "address": "4th street"
   } ]
 }

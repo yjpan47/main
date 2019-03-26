@@ -3,39 +3,201 @@ package seedu.address.model.calendar;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.PriorityQueue;
+import java.util.stream.Collectors;
+
+import seedu.address.model.person.Person;
+import seedu.address.model.person.UniquePersonList;
 
 /**
  * Represents a month in DutyCalendar containing duty details of each day
  */
 public class DutyMonth {
 
-    private String month;
     private int monthIndex;
-    private int firstDayIndex;
+    private int firstDayWeekIndex;
     private int numOfDays;
-    private List<DutyDate> dates;
+    private List<Duty> duties;
+    private List<Person> persons;
 
-    public DutyMonth(int monthIndex, int firstDayIndex) {
-        if (monthIndex >= 1 && monthIndex <= 12 && firstDayIndex >= 0 && firstDayIndex <= 7) {
+    public DutyMonth(UniquePersonList personList, int monthIndex, int firstDayWeekIndex) {
+        if (monthIndex >= 1 && monthIndex <= 12 && firstDayWeekIndex >= 0 && firstDayWeekIndex <= 7) {
             this.monthIndex = monthIndex;
-            this.month = this.getMonth();
-            this.firstDayIndex = firstDayIndex;
-            this.numOfDays = getNumOfDays();
-            this.dates = new ArrayList<>();
+            this.firstDayWeekIndex = firstDayWeekIndex;
+            this.numOfDays = getNumOfDaysInMonth();
+            this.duties = new ArrayList<>();
+            this.persons = new ArrayList<>();
+
+            // Create all duties
+            this.generateDuties();
+
+            // Import all Persons
+            importPersons(personList);
+
         } else {
             throw new InputMismatchException("Invalid Month Index or first Day Index");
         }
     }
+
+    public DutyMonth(int monthIndex, int firstDayWeekIndex) {
+        this(null, monthIndex, firstDayWeekIndex);
+    }
     /**
-     * Gets current month
+     * Import all Persons involved in duty scheduling for the month
+     */
+    private void importPersons(UniquePersonList personList) {
+        for (Person person : personList) {
+            this.persons.add(person);
+        }
+    }
+
+
+    /**
+     * Initialize the all duties for the month. Done during construction.
+     */
+    private void generateDuties() {
+        int weekCounter = this.firstDayWeekIndex;
+        for (int day = 1; day <= this.numOfDays; day++) {
+            if (weekCounter >= 1 && weekCounter <= 4) {
+                this.duties.add(new DutyTypeA(this.monthIndex, day, weekCounter));
+            } else if (weekCounter == 5) {
+                this.duties.add(new DutyTypeB(this.monthIndex, day, weekCounter));
+            } else {
+                this.duties.add(new DutyTypeC(this.monthIndex, day, weekCounter));
+            }
+            weekCounter++;
+            if (weekCounter == 7) {
+                weekCounter = 1;
+            }
+        }
+    }
+
+    /**
+     * The scheduler method.
+     * Called to schedule duties for the month.
+     * Attempts to match Duties with Persons.
+     */
+    private void schedule() {
+        List<Duty> dutyList = this.arrangeDuties();
+        PriorityQueue<Person> personQueue = this.arrangePersons();
+
+        for (Duty duty : dutyList) {
+            while (!duty.isFilled()) {
+                Person currPerson = personQueue.poll();
+                List<Person> tempList = new ArrayList<>();
+                while (!this.isAssignable(duty, currPerson)) {
+                    tempList.add(currPerson);
+                    currPerson = personQueue.poll();
+                }
+                this.assign(duty, currPerson);
+                personQueue.addAll(tempList);
+                personQueue.add(currPerson);
+            }
+        }
+    }
+
+    /**
+     * Assign a Duty to a Person
+     */
+    private void assign(Duty duty, Person person) {
+        duty.addPerson(person);
+        person.addDuty(duty);
+    }
+
+
+    /**
+     * Check whether a Duty a assignable to a Person taking into consideration:
+     * 1) Whether the duty is already filled
+     * 2) Whether the duty already assigned to the person / the person already assigned the duty
+     * 3) Whether the person blocked that duty date
+     */
+    private boolean isAssignable(Duty duty, Person person) {
+        if (duty.isFilled()) {
+            return false;
+        } else if (duty.getPersons().contains(person)) {
+            return false;
+        } else if (person.getDuties().contains(duty)) {
+            return false;
+        } else if (person.getBlockedDates().contains(duty.getDayIndex())) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * Returns a list of duties with the following considerations
+     * 1) Type A duties are placed at the  front of the list followed by Type B then Type C
+     * 2) Amongst each of the types, the duties are shuffled
+     */
+    private List<Duty> arrangeDuties() {
+        List<Duty> dutiesTypeA = this.duties.stream()
+                .filter(duty -> duty instanceof DutyTypeA)
+                .collect(Collectors.toList());
+        Collections.shuffle(dutiesTypeA);
+
+        List<Duty> dutiesTypeB = this.duties.stream()
+                .filter(duty -> duty instanceof DutyTypeA)
+                .collect(Collectors.toList());
+        Collections.shuffle(dutiesTypeB);
+
+        List<Duty> dutiesTypeC = this.duties.stream()
+                .filter(duty -> duty instanceof DutyTypeA)
+                .collect(Collectors.toList());
+        Collections.shuffle(dutiesTypeC);
+
+        List<Duty> arrangedList = new ArrayList<>();
+        arrangedList.addAll(dutiesTypeA);
+        arrangedList.addAll(dutiesTypeB);
+        arrangedList.addAll(dutiesTypeC);
+
+        return arrangedList;
+
+    }
+
+    /**
+     * Returns are priority queue that ranks the Persons based on their accumulated duty points
+     */
+    private PriorityQueue<Person> arrangePersons() {
+        PriorityQueue<Person> pq = new PriorityQueue<>(Comparator.comparingInt(Person::getDutyPoints));
+        pq.addAll(this.persons);
+        return pq;
+    }
+
+    public int getMonthIndex() {
+        return monthIndex;
+    }
+
+    public int getFirstDayWeekIndex() {
+        return firstDayWeekIndex;
+    }
+
+    public int getNumOfDays() {
+        return numOfDays;
+    }
+
+    /**
+     * Returns an immutable duty list, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     * @return duties
+     */
+    public List<Duty> getDuties () {
+        return Collections.unmodifiableList(duties);
+    }
+
+    /**
+     * Gets current month in String format
      */
     public String getMonth() {
         String[] months = {"January", "February", "March", "April", "May", "June", "July",
             "August", "September", "October", "November", "December"};
         return months[this.monthIndex - 1];
     }
+
     /**
      * Returns current month
      */
@@ -44,10 +206,11 @@ public class DutyMonth {
         int currentMonth = cal.get(Calendar.MONTH);
         return (this.monthIndex == currentMonth);
     }
+
     /**
      * Gets the number of days in the current month
      */
-    private int getNumOfDays() {
+    private int getNumOfDaysInMonth() {
         if (Arrays.asList(1, 3, 5, 7, 8, 10, 12).contains(this.monthIndex)) {
             return 31;
         } else if (Arrays.asList(4, 6, 9, 11).contains(this.monthIndex)) {
@@ -58,5 +221,4 @@ public class DutyMonth {
             throw new InputMismatchException("Invalid Month Index.");
         }
     }
-
 }
