@@ -40,7 +40,7 @@ public class TypicalPersons {
             .withPhone("95352563").build();
     public static final Person DANIEL = new PersonBuilder().withNric("T0034567L").withCompany("Falcon")
             .withSection("4").withRank("LCP").withName("Daniel Meier")
-            .withPhone("87652533").build();
+            .withPhone("87652533").withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withNric("S9876567I").withCompany("Ninja")
             .withSection("2").withRank("REC").withName("Elle Meyer")
             .withPhone("9482224").build();
