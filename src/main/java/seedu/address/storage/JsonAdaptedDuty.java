@@ -99,7 +99,6 @@ public class JsonAdaptedDuty {
         } else {
             throw new IllegalValueException(String.format(WRONG_TYPE_MESSAGE_FORMAT));
         }
-        
     }
 
 }
