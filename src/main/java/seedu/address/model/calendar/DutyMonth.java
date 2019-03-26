@@ -97,8 +97,9 @@ public class DutyMonth {
         List<Duty> dutyList = this.arrangeDuties();
         PriorityQueue<Person> personQueue = this.arrangePersons();
         for (Duty duty : dutyList) {
-            if (personQueue.isEmpty()) { continue; }
-
+            if (personQueue.isEmpty()) {
+                continue;
+            }
 
             while (!duty.isFilled()) {
                 boolean matchExist = true;
@@ -118,9 +119,13 @@ public class DutyMonth {
                 personQueue.addAll(tempList);
                 personQueue.add(currPerson);
 
-                if (matchExist) { this.assign(duty, currPerson); }
+                if (matchExist) {
+                    this.assign(duty, currPerson);
+                }
 
-                if (duty.getNumOfVacancies() == originalVacancies) { break; }
+                if (duty.getNumOfVacancies() == originalVacancies) {
+                    break;
+                }
             }
 
         }
@@ -198,7 +203,7 @@ public class DutyMonth {
      */
     public String getMonth() {
         String[] months = {"January", "February", "March", "April", "May", "June", "July",
-                "August", "September", "October", "November", "December"};
+            "August", "September", "October", "November", "December"};
         return months[this.monthIndex - 1];
     }
 
