@@ -11,6 +11,7 @@ import java.util.PriorityQueue;
 import java.util.stream.Collectors;
 
 import seedu.address.model.person.Person;
+import seedu.address.model.person.UniquePersonList;
 
 /**
  * Represents a month in DutyCalendar containing duty details of each day
@@ -24,11 +25,13 @@ public class DutyMonth {
     private List<Person> persons;
 
     public DutyMonth(int monthIndex, int firstDayWeekIndex) {
+
         if (monthIndex >= 1 && monthIndex <= 12 && firstDayWeekIndex >= 0 && firstDayWeekIndex <= 7) {
             this.monthIndex = monthIndex;
             this.firstDayWeekIndex = firstDayWeekIndex;
-            this.numOfDays = getNumOfDaysInMonth();
+            this.numOfDays = getNumOfDays();
             this.duties = new ArrayList<>();
+            this.persons = new ArrayList<>();
 
             // Create all duties
             this.generateDuties();
@@ -39,15 +42,31 @@ public class DutyMonth {
     }
 
     public DutyMonth(int monthIndex, int firstDayWeekIndex, List<Duty> duties) {
+
         if (monthIndex >= 1 && monthIndex <= 12 && firstDayWeekIndex >= 0 && firstDayWeekIndex <= 7) {
             this.monthIndex = monthIndex;
             this.firstDayWeekIndex = firstDayWeekIndex;
-            this.numOfDays = getNumOfDaysInMonth();
+            this.numOfDays = getNumOfDays();
             this.duties = new ArrayList<>(duties);
+            this.persons = new ArrayList<>();
         } else {
             throw new InputMismatchException("Invalid Month Index or first Day Index");
         }
     }
+
+    public void addDutyPersons(List<Person> persons) {
+        this.persons.addAll(persons);
+    }
+
+    /**
+     * Import all Persons involved in duty scheduling for the month
+     */
+    private void importPersons(UniquePersonList personList) {
+        for (Person person : personList) {
+            this.persons.add(person);
+        }
+    }
+
 
     /**
      * Initialize the all duties for the month. Done during construction.
@@ -77,19 +96,33 @@ public class DutyMonth {
     public void schedule() {
         List<Duty> dutyList = this.arrangeDuties();
         PriorityQueue<Person> personQueue = this.arrangePersons();
-
         for (Duty duty : dutyList) {
+            if (personQueue.isEmpty()) { continue; }
+
+
             while (!duty.isFilled()) {
+                boolean matchExist = true;
+                int originalVacancies = duty.getNumOfVacancies();
+
                 Person currPerson = personQueue.poll();
                 List<Person> tempList = new ArrayList<>();
+
                 while (!this.isAssignable(duty, currPerson)) {
+                    if (personQueue.isEmpty()) {
+                        matchExist = false;
+                        break;
+                    }
                     tempList.add(currPerson);
                     currPerson = personQueue.poll();
                 }
-                this.assign(duty, currPerson);
                 personQueue.addAll(tempList);
                 personQueue.add(currPerson);
+
+                if (matchExist) { this.assign(duty, currPerson); }
+
+                if (duty.getNumOfVacancies() == originalVacancies) { break; }
             }
+
         }
     }
 
@@ -108,9 +141,6 @@ public class DutyMonth {
      * 3) Whether the person blocked that duty date
      */
     private boolean isAssignable(Duty duty, Person person) {
-        if (person == null) {
-            System.out.println("efwg");
-        }
         if (duty.isFilled()) {
             return false;
         } else if (duty.getPersons().contains(person)) {
@@ -163,37 +193,12 @@ public class DutyMonth {
         return pq;
     }
 
-    public void setPersons(List<Person> persons) {
-        this.persons = persons;
-    }
-
-    public int getMonthIndex() {
-        return monthIndex;
-    }
-
-    public int getFirstDayWeekIndex() {
-        return firstDayWeekIndex;
-    }
-
-    public int getNumOfDays() {
-        return numOfDays;
-    }
-
-    /**
-     * Returns an immutable duty list, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     * @return duties
-     */
-    public List<Duty> getDuties () {
-        return Collections.unmodifiableList(duties);
-    }
-
     /**
      * Gets current month in String format
      */
     public String getMonth() {
         String[] months = {"January", "February", "March", "April", "May", "June", "July",
-            "August", "September", "October", "November", "December"};
+                "August", "September", "October", "November", "December"};
         return months[this.monthIndex - 1];
     }
 
@@ -209,7 +214,7 @@ public class DutyMonth {
     /**
      * Gets the number of days in the current month
      */
-    private int getNumOfDaysInMonth() {
+    private int getNumOfDays() {
         if (Arrays.asList(1, 3, 5, 7, 8, 10, 12).contains(this.monthIndex)) {
             return 31;
         } else if (Arrays.asList(4, 6, 9, 11).contains(this.monthIndex)) {
@@ -219,5 +224,17 @@ public class DutyMonth {
         } else {
             throw new InputMismatchException("Invalid Month Index.");
         }
+    }
+
+    public int getMonthIndex() {
+        return monthIndex;
+    }
+
+    public int getFirstDayWeekIndex() {
+        return firstDayWeekIndex;
+    }
+
+    public List<Duty> getDuties() {
+        return duties;
     }
 }

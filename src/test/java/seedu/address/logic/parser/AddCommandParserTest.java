@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NRIC_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_RANK_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_SECTION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
@@ -39,8 +40,14 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import org.junit.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.model.person.Company;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rank;
+import seedu.address.model.person.Section;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
@@ -140,19 +147,19 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid nric
         assertParseFailure(parser, INVALID_NRIC_DESC + COMPANY_DESC_BOB + SECTION_DESC_BOB + RANK_DESC_BOB
-                + NAME_DESC_BOB + PHONE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+                + NAME_DESC_BOB + PHONE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Nric.MESSAGE_CONSTRAINTS);
 
         // invalid company
         assertParseFailure(parser, NRIC_DESC_BOB + INVALID_COMPANY_DESC + SECTION_DESC_BOB + RANK_DESC_BOB
-                + NAME_DESC_BOB + PHONE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+                + NAME_DESC_BOB + PHONE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Company.MESSAGE_CONSTRAINTS);
 
         // invalid section
-        assertParseFailure(parser, NRIC_DESC_BOB + COMPANY_DESC_BOB + SECTION_DESC_BOB + RANK_DESC_BOB
-                + NAME_DESC_BOB + PHONE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NRIC_DESC_BOB + COMPANY_DESC_BOB + INVALID_SECTION_DESC + RANK_DESC_BOB
+                + NAME_DESC_BOB + PHONE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Section.MESSAGE_CONSTRAINTS);
 
         // invalid rank
         assertParseFailure(parser, NRIC_DESC_BOB + COMPANY_DESC_BOB + SECTION_DESC_BOB + INVALID_RANK_DESC
-                + NAME_DESC_BOB + PHONE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+                + NAME_DESC_BOB + PHONE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Rank.MESSAGE_CONSTRAINTS);
 
         // invalid name
         assertParseFailure(parser, NRIC_DESC_BOB + COMPANY_DESC_BOB + SECTION_DESC_BOB + RANK_DESC_BOB
@@ -160,15 +167,15 @@ public class AddCommandParserTest {
 
         // invalid phone
         assertParseFailure(parser, NRIC_DESC_BOB + COMPANY_DESC_BOB + SECTION_DESC_BOB + RANK_DESC_BOB
-                + NAME_DESC_BOB + INVALID_PHONE_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+                + NAME_DESC_BOB + INVALID_PHONE_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NRIC_DESC_BOB + COMPANY_DESC_BOB + SECTION_DESC_BOB + RANK_DESC_BOB
-                + NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND, Name.MESSAGE_CONSTRAINTS);
+                + NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid inputs, first invalid input reported
         assertParseFailure(parser, INVALID_NRIC_DESC + COMPANY_DESC_BOB + SECTION_DESC_BOB + RANK_DESC_BOB
-                + INVALID_NAME_DESC + PHONE_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
+                + INVALID_NAME_DESC + PHONE_DESC_BOB, Nric.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NRIC_DESC_BOB + COMPANY_DESC_BOB + SECTION_DESC_BOB

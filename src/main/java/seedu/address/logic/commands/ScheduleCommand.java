@@ -31,8 +31,9 @@ public class ScheduleCommand extends Command {
         requireNonNull(model);
         List<Person> persons = model.getFilteredPersonList();
         DutyMonth dutyMonth = model.getDutyCalendar().getCurrentMonth();
-        model.getFilteredPersonList();
+        dutyMonth.addDutyPersons(persons);
         dutyMonth.schedule();
+        System.out.println(model.getFilteredPersonList());
         return new CommandResult(String.format(SCHEDULE_SUCCESS, dutyMonth.getMonth()));
     }
 
