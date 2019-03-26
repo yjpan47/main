@@ -11,7 +11,6 @@ import java.util.PriorityQueue;
 import java.util.stream.Collectors;
 
 import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
 
 /**
  * Represents a month in DutyCalendar containing duty details of each day
@@ -24,34 +23,31 @@ public class DutyMonth {
     private List<Duty> duties;
     private List<Person> persons;
 
-    public DutyMonth(UniquePersonList personList, int monthIndex, int firstDayWeekIndex) {
+    public DutyMonth(int monthIndex, int firstDayWeekIndex) {
         if (monthIndex >= 1 && monthIndex <= 12 && firstDayWeekIndex >= 0 && firstDayWeekIndex <= 7) {
             this.monthIndex = monthIndex;
             this.firstDayWeekIndex = firstDayWeekIndex;
             this.numOfDays = getNumOfDaysInMonth();
             this.duties = new ArrayList<>();
-            this.persons = new ArrayList<>();
 
             // Create all duties
             this.generateDuties();
-
-            // Import all Persons
-            importPersons(personList);
 
         } else {
             throw new InputMismatchException("Invalid Month Index or first Day Index");
         }
     }
 
-    /**
-     * Import all Persons involved in duty scheduling for the month
-     */
-    private void importPersons(UniquePersonList personList) {
-        for (Person person : personList) {
-            this.persons.add(person);
+    public DutyMonth(int monthIndex, int firstDayWeekIndex, List<Duty> duties) {
+        if (monthIndex >= 1 && monthIndex <= 12 && firstDayWeekIndex >= 0 && firstDayWeekIndex <= 7) {
+            this.monthIndex = monthIndex;
+            this.firstDayWeekIndex = firstDayWeekIndex;
+            this.numOfDays = getNumOfDaysInMonth();
+            this.duties = new ArrayList<>(duties);
+        } else {
+            throw new InputMismatchException("Invalid Month Index or first Day Index");
         }
     }
-
 
     /**
      * Initialize the all duties for the month. Done during construction.
@@ -165,6 +161,10 @@ public class DutyMonth {
         PriorityQueue<Person> pq = new PriorityQueue<>(Comparator.comparingInt(Person::getDutyPoints));
         pq.addAll(this.persons);
         return pq;
+    }
+
+    public void setPersons(List<Person> persons) {
+        this.persons = persons;
     }
 
     public int getMonthIndex() {

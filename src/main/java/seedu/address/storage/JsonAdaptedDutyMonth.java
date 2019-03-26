@@ -7,9 +7,11 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javafx.collections.ObservableList;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.calendar.Duty;
 import seedu.address.model.calendar.DutyMonth;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.Person;
 
 /**
  * Jackson-friendly version of {@link DutyMonth}
@@ -53,17 +55,13 @@ public class JsonAdaptedDutyMonth {
     /**
      * Converts this Jackson-friendly adapted dutyMonth object into the model's {@code DutyMonth} object.
      */
-    public JsonAdaptedDuty toModelType(UniquePersonList personList) {
+    public DutyMonth toModelType (ObservableList<Person> personList) throws IllegalValueException {
         final List<Duty> monthDuties = new ArrayList<>();
         for (JsonAdaptedDuty duty : duties) {
-            monthDuties.add(duty.toModelType());
+            monthDuties.add(duty.toModelType(personList));
         }
 
-        final int modelMonthIndex = monthIndex;
-        final int modelFirstDayWeekIndex = firstDayWeekIndex;
-
-        final List<Duty> duties = new ArrayList<>(monthDuties);
-        return new DutyMonth(monthIndex, firstDayWeekIndex);
+        return new DutyMonth(monthIndex, firstDayWeekIndex, monthDuties);
     }
 
 }

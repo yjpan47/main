@@ -27,8 +27,14 @@ public abstract class Duty {
         this.monthIndex = monthIndex;
         this.dayIndex = dayIndex;
         this.weekIndex = weekIndex;
-        this.weekIndex = weekIndex;
         this.persons = new ArrayList<>();
+    }
+
+    public Duty(int monthIndex, int dayIndex, int weekIndex, List<Person> personList) {
+        this.monthIndex = monthIndex;
+        this.dayIndex = dayIndex;
+        this.weekIndex = weekIndex;
+        this.persons = new ArrayList<>(personList);
     }
 
     /**

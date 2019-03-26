@@ -14,14 +14,18 @@ public class DutyCalendar {
 
     private DutyMonth currentMonth;
     private DutyMonth nextMonth;
-    private UniquePersonList personList;
 
     /**
      * Default constructor with no data contained within.
      */
-    public DutyCalendar(UniquePersonList personList) {
-        this.currentMonth = new DutyMonth(personList, getTodayMonth(), dayOfFirstDayOfMonth(getTodayMonth()));
-        this.nextMonth = new DutyMonth(personList, (getTodayMonth() + 1), dayOfFirstDayOfMonth(getTodayMonth() + 1));
+    public DutyCalendar() {
+        this.currentMonth = new DutyMonth(getTodayMonth(), dayOfFirstDayOfMonth(getTodayMonth()));
+        this.nextMonth = new DutyMonth((getTodayMonth() + 1), dayOfFirstDayOfMonth(getTodayMonth() + 1));
+    }
+
+    public DutyCalendar(DutyMonth currentMonth, DutyMonth nextMonth) {
+        this.currentMonth = currentMonth;
+        this.nextMonth = nextMonth;
     }
 
     //=========== Constructor ==================================================================================
@@ -37,10 +41,6 @@ public class DutyCalendar {
         return calendar.get(Calendar.DAY_OF_WEEK);
     }
 
-    public UniquePersonList getPersonList() {
-        return personList;
-    }
-
     public DutyMonth getCurrentMonth() {
         return currentMonth;
     }
@@ -50,7 +50,6 @@ public class DutyCalendar {
     }
 
     public void setDutyCalendar(DutyCalendar dutyCalendar) {
-        this.personList = dutyCalendar.personList;
         this.currentMonth = dutyCalendar.currentMonth;
         this.nextMonth = dutyCalendar.nextMonth;
     }
