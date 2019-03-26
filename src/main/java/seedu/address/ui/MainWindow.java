@@ -31,7 +31,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
     //Clearance of the user
-    public final UserType user;
+    private final UserType user;
 
     private Stage primaryStage;
     private Logic logic;
