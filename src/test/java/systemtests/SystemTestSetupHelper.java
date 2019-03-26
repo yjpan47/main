@@ -24,7 +24,10 @@ public class SystemTestSetupHelper {
     public TestApp setupApplication(Supplier<ReadOnlyPersonnelDatabase> personnelDatabase, Path saveFileLocation) {
         try {
             FxToolkit.registerStage(Stage::new);
-            FxToolkit.setupApplication(() -> testApp = new TestApp(personnelDatabase, saveFileLocation));
+            FxToolkit.setupApplication(() -> {
+                testApp = new TestApp(personnelDatabase, saveFileLocation);
+                return testApp;
+            });
         } catch (TimeoutException te) {
             throw new AssertionError("Application takes too long to set up.", te);
         }

@@ -77,19 +77,33 @@ public class DutyMonth {
     public void schedule() {
         List<Duty> dutyList = this.arrangeDuties();
         PriorityQueue<Person> personQueue = this.arrangePersons();
-
         for (Duty duty : dutyList) {
+            if (personQueue.isEmpty()) { continue; }
+
+
             while (!duty.isFilled()) {
+                boolean matchExist = true;
+                int originalVacancies = duty.getNumOfVacancies();
+
                 Person currPerson = personQueue.poll();
                 List<Person> tempList = new ArrayList<>();
+
                 while (!this.isAssignable(duty, currPerson)) {
+                    if (personQueue.isEmpty()) {
+                        matchExist = false;
+                        break;
+                    }
                     tempList.add(currPerson);
                     currPerson = personQueue.poll();
                 }
-                this.assign(duty, currPerson);
                 personQueue.addAll(tempList);
                 personQueue.add(currPerson);
+
+                if (matchExist) { this.assign(duty, currPerson); }
+
+                if (duty.getNumOfVacancies() == originalVacancies) { break; }
             }
+
         }
     }
 
@@ -108,9 +122,6 @@ public class DutyMonth {
      * 3) Whether the person blocked that duty date
      */
     private boolean isAssignable(Duty duty, Person person) {
-        if (person == null) {
-            System.out.println("efwg");
-        }
         if (duty.isFilled()) {
             return false;
         } else if (duty.getPersons().contains(person)) {
