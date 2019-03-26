@@ -52,7 +52,7 @@ public class VersionedPersonnelDatabaseTest {
 
     @Test
     public void
-    commit_multiplePersonnelDatabasePointerNotAtEndOfStateList_statesAfterPointerRemovedCurrentStateSaved() {
+        commit_multiplePersonnelDatabasePointerNotAtEndOfStateList_statesAfterPointerRemovedCurrentStateSaved() {
         VersionedPersonnelDatabase versionedPersonnelDatabase = preparePersonnelDatabaseList(
                 emptypersonnelDatabase, personnelDatabaseWithAmy, personnelDatabaseWithBob);
         shiftCurrentStatePointerLeftwards(versionedPersonnelDatabase, 2);

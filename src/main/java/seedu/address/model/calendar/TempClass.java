@@ -63,8 +63,6 @@ public class TempClass {
         persons.add(person1);
         persons.add(person2);
         persons.add(person3);
-        duty = new Duty(date, Meridiem.AM);
-        duty.addDutyMen(persons);
     }
 
     public ObservableList<Person> getDutyPersons() {

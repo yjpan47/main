@@ -22,8 +22,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.testutil.PersonnelDatabaseBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.PersonnelDatabaseBuilder;
 
 public class ModelManagerTest {
     @Rule

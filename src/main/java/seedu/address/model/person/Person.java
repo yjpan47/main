@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -11,6 +12,7 @@ import java.util.Set;
 
 import seedu.address.model.calendar.Duty;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Represents a Person in the duty planner.
@@ -29,6 +31,11 @@ public class Person {
     private final Phone phone;
     private final Set<Tag> tags = new HashSet<>();
 
+    // Duty
+    private int dutyPoints;
+    private List<Integer> blockedDates;
+    private List<Duty> duties;
+
     /**
      * Every field must be present and not null.
      */
@@ -43,6 +50,10 @@ public class Person {
         this.name = name;
         this.phone = phone;
         this.tags.addAll(tags);
+
+        this.dutyPoints = 0;
+        this.blockedDates = new ArrayList<>();
+        this.duties = new ArrayList<>();
     }
 
     public Nric getNric() {
@@ -67,6 +78,32 @@ public class Person {
 
     public Phone getPhone() {
         return phone;
+    }
+
+    public int getDutyPoints() {
+        return dutyPoints;
+    }
+
+    public List<Integer> getBlockedDates() {
+        return blockedDates;
+    }
+
+    public List<Duty> getDuties() {
+        return duties;
+    }
+
+    /**
+     * Assign a duty to a Person
+     */
+    public void addDuty(Duty duty) {
+        if (this.duties.contains(duty)) {
+            throw new InvalidParameterException(duty + " is already assigned to " + this);
+        } else if (this.blockedDates.contains(duty.getDayIndex())) {
+            throw new InvalidParameterException(duty + " is blocked by " + this);
+        } else {
+            this.duties.add(duty);
+            this.dutyPoints += duty.getPointsAwards();
+        }
     }
 
     /**
