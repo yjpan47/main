@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -31,7 +30,10 @@ public class ScheduleCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Person> persons = model.getFilteredPersonList();
-        model.getPersonnelDatabase()
+        DutyMonth dutyMonth = model.getDutyCalendar().getCurrentMonth();
+        model.getFilteredPersonList();
+        dutyMonth.schedule();
+        return new CommandResult(String.format(SCHEDULE_SUCCESS, dutyMonth.getMonth()));
     }
 
     @Override
