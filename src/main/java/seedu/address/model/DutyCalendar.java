@@ -24,17 +24,6 @@ public class DutyCalendar {
         this.nextMonth = new DutyMonth(personList, (getTodayMonth() + 1), dayOfFirstDayOfMonth(getTodayMonth() + 1));
     }
 
-    public DutyCalendar() {
-        GregorianCalendar calendar = new GregorianCalendar();
-        this.currentMonth = new DutyMonth(1, 1);
-        this.nextMonth = new DutyMonth(2, 2);
-    }
-
-    void setDutyCalendar(DutyCalendar dutyCalendar) {
-        this.currentMonth = dutyCalendar.currentMonth;
-        this.nextMonth = dutyCalendar.nextMonth;
-    }
-
     private int getTodayMonth() {
         GregorianCalendar calendar = new GregorianCalendar();
         return calendar.get(Calendar.MONTH);
@@ -58,4 +47,9 @@ public class DutyCalendar {
         return nextMonth;
     }
 
+    public void setDutyCalendar(DutyCalendar dutyCalendar) {
+        this.personList = dutyCalendar.personList;
+        this.currentMonth = dutyCalendar.currentMonth;
+        this.nextMonth = dutyCalendar.nextMonth;
+    }
 }

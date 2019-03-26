@@ -43,9 +43,6 @@ public class DutyMonth {
         }
     }
 
-    public DutyMonth(int monthIndex, int firstDayWeekIndex) {
-        this(null, monthIndex, firstDayWeekIndex);
-    }
     /**
      * Import all Persons involved in duty scheduling for the month
      */
@@ -81,7 +78,7 @@ public class DutyMonth {
      * Called to schedule duties for the month.
      * Attempts to match Duties with Persons.
      */
-    private void schedule() {
+    public void schedule() {
         List<Duty> dutyList = this.arrangeDuties();
         PriorityQueue<Person> personQueue = this.arrangePersons();
 
@@ -108,7 +105,6 @@ public class DutyMonth {
         person.addDuty(duty);
     }
 
-
     /**
      * Check whether a Duty a assignable to a Person taking into consideration:
      * 1) Whether the duty is already filled
@@ -116,6 +112,9 @@ public class DutyMonth {
      * 3) Whether the person blocked that duty date
      */
     private boolean isAssignable(Duty duty, Person person) {
+        if (person == null) {
+            System.out.println("efwg");
+        }
         if (duty.isFilled()) {
             return false;
         } else if (duty.getPersons().contains(person)) {
