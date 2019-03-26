@@ -28,7 +28,8 @@ public class LoginBox {
         window.setMinWidth(500);
         window.setMinHeight(250);
 
-        textField1 = new TextField("Your nric");
+        textField1 = new TextField();
+        textField1.setPromptText("Your NRIC");
         textField1.setOnAction(e -> findAccount());
         textField2 = new PasswordField();
         textField2.setPromptText("Your password");
