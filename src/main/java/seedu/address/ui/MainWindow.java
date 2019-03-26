@@ -30,11 +30,11 @@ public class MainWindow extends UiPart<Stage> {
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
+    //Clearance of the user
+    public final UserType user;
 
     private Stage primaryStage;
     private Logic logic;
-    //Clearance of the user
-    public final UserType user;
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;

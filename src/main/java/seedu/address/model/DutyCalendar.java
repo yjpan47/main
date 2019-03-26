@@ -4,7 +4,6 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import seedu.address.model.calendar.DutyMonth;
-import seedu.address.model.person.UniquePersonList;
 
 
 /**

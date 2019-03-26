@@ -59,17 +59,17 @@ public class JsonAdaptedDuty {
         }
 
         switch(source.getPointsAwards()) {
-            case 4:
-                type = "A";
-                break;
-            case 3:
-                type = "B";
-                break;
-            case 2:
-                type = "C";
-                break;
-            default:
-                type = "Error";
+        case 4:
+            type = "A";
+            break;
+        case 3:
+            type = "B";
+            break;
+        case 2:
+            type = "C";
+            break;
+        default:
+            type = "Error";
         }
     }
 
