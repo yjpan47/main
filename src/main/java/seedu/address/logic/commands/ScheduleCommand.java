@@ -33,7 +33,7 @@ public class ScheduleCommand extends Command {
         DutyMonth dutyMonth = model.getDutyCalendar().getCurrentMonth();
         dutyMonth.addDutyPersons(persons);
         dutyMonth.schedule();
-        System.out.println(persons.get(0).getDuties());
+        System.out.println(model.getFilteredPersonList());
         return new CommandResult(String.format(SCHEDULE_SUCCESS, dutyMonth.getMonth()));
     }
 

@@ -4,7 +4,6 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import seedu.address.model.calendar.DutyMonth;
-import seedu.address.model.person.UniquePersonList;
 
 
 /**
@@ -19,9 +18,16 @@ public class DutyCalendar {
      * Default constructor with no data contained within.
      */
     public DutyCalendar() {
-        this.currentMonth = new DutyMonth( getTodayMonth(), dayOfFirstDayOfMonth(getTodayMonth()));
+        this.currentMonth = new DutyMonth(getTodayMonth(), dayOfFirstDayOfMonth(getTodayMonth()));
         this.nextMonth = new DutyMonth((getTodayMonth() + 1), dayOfFirstDayOfMonth(getTodayMonth() + 1));
     }
+
+    public DutyCalendar(DutyMonth currentMonth, DutyMonth nextMonth) {
+        this.currentMonth = currentMonth;
+        this.nextMonth = nextMonth;
+    }
+
+    //=========== Constructor ==================================================================================
 
     private int getTodayMonth() {
         GregorianCalendar calendar = new GregorianCalendar();
