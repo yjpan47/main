@@ -1,13 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_RANK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SECTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -17,18 +11,13 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.UserType;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Company;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Rank;
-import seedu.address.model.person.Section;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -48,7 +37,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_RANK + "RANK] "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG] "
+            + "[" + PREFIX_PASSWORD + "PASSWORD]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_RANK + "CFC";
@@ -118,9 +108,10 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-
+        Password password = editPersonDescriptor.getPassword().orElse(personToEdit.getPassword());
+        //Will allow Admin in the future
         return new Person(updatedNric, updatedCompany, updatedSection, updatedRank, updatedName,
-                updatedPhone, updatedTags);
+                updatedPhone, updatedTags, password, UserType.GENERAL);
     }
 
     @Override
@@ -153,6 +144,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Set<Tag> tags;
+        private Password password;
 
         public EditPersonDescriptor() {}
 
@@ -168,13 +160,14 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setTags(toCopy.tags);
+            setPassword(toCopy.password);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(nric, company, section, rank, name, phone, tags);
+            return CollectionUtil.isAnyNonNull(nric, company, section, rank, name, phone, tags, password);
         }
 
         public void setNric(Nric nric) {
@@ -242,6 +235,14 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setPassword(Password password) {
+            this.password = password;
+        }
+
+        public Optional<Password> getPassword() {
+            return Optional.ofNullable(password);
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -263,7 +264,8 @@ public class EditCommand extends Command {
                     && getRank().equals(e.getRank())
                     && getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getPassword().equals(e.getPassword());
         }
     }
 }
