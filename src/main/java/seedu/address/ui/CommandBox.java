@@ -24,15 +24,17 @@ public class CommandBox extends UiPart<Region> {
     private final List<String> history;
     private ListElementPointer historySnapshot;
     private final UserType user;
+    private final String userName;
 
     @FXML
     private TextField commandTextField;
 
-    public CommandBox(CommandExecutor commandExecutor, UserType user, List<String> history) {
+    public CommandBox(CommandExecutor commandExecutor, UserType user, String userName, List<String> history) {
         super(FXML);
         this.commandExecutor = commandExecutor;
         this.history = history;
         this.user = user;
+        this.userName = userName;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         historySnapshot = new ListElementPointer(history);
@@ -101,7 +103,7 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private void handleCommandEntered() {
         try {
-            commandExecutor.execute(commandTextField.getText(), user);
+            commandExecutor.execute(commandTextField.getText(), user, userName);
             initHistory();
             historySnapshot.next();
             commandTextField.setText("");
@@ -149,9 +151,9 @@ public class CommandBox extends UiPart<Region> {
         /**
          * Executes the command and returns the result.
          *
-         * @see seedu.address.logic.Logic#execute(String, UserType)
+         * @see seedu.address.logic.Logic#execute(String, UserType, String)
          */
-        CommandResult execute(String commandText, UserType user) throws CommandException, ParseException;
+        CommandResult execute(String commandText, UserType user, String userName) throws CommandException, ParseException;
     }
 
 }
