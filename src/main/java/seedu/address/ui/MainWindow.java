@@ -26,15 +26,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * a menu bar and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Stage> {
-
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
-
+    //Clearance of the user
+    private final UserType user;
     private Stage primaryStage;
     private Logic logic;
-    //Clearance of the user
-    public final UserType user;
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
