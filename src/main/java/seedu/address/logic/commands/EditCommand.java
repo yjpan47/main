@@ -1,7 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RANK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SECTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -17,7 +24,14 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Company;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
+import seedu.address.model.person.Password;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rank;
+import seedu.address.model.person.Section;
 import seedu.address.model.tag.Tag;
 
 /**
