@@ -29,12 +29,11 @@ public class ModelManager implements Model {
     private final VersionedPersonnelDatabase versionedPersonnelDatabase;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final TempClass tempClass;
-    private final ObservableList<Person> dutyForDates;
+    private final DutyCalendar dutyCalendar;
     private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
 
     /**
-     * Initializes a ModelManager with the given personnelDatabse, dutyCalendar and userPrefs.
+     * Initializes a ModelManager with the given personnelDatabase, dutyCalendar and userPrefs.
      */
     public ModelManager(ReadOnlyPersonnelDatabase personnelDatabase, ReadOnlyUserPrefs userPrefs) {
 
@@ -44,14 +43,15 @@ public class ModelManager implements Model {
         logger.fine("Initializing with personnel database: " + personnelDatabase + " and user prefs " + userPrefs);
 
         versionedPersonnelDatabase = new VersionedPersonnelDatabase(personnelDatabase);
-        tempClass = new TempClass();
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(versionedPersonnelDatabase.getPersonList());
         filteredPersons.addListener(this::ensureSelectedPersonIsValid);
         /*
         Note: just a test method for UI, remove when done
         */
-        dutyForDates = tempClass.getDutyPersons();
+
+        dutyCalendar = versionedPersonnelDatabase.getDutyCalendar();
+
     }
 
     public ModelManager() {
@@ -134,6 +134,11 @@ public class ModelManager implements Model {
         versionedPersonnelDatabase.setPerson(target, editedPerson);
     }
 
+    //=========== Duty Calendar ================================================================================
+
+    public DutyCalendar getDutyCalendar() {
+        return this.dutyCalendar;
+    }
 
     //=========== Filtered Person List Accessors =============================================================
 

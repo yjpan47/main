@@ -24,7 +24,8 @@ public class DutyMonth {
     private List<Duty> duties;
     private List<Person> persons;
 
-    public DutyMonth(UniquePersonList personList, int monthIndex, int firstDayWeekIndex) {
+    public DutyMonth(int monthIndex, int firstDayWeekIndex) {
+
         if (monthIndex >= 1 && monthIndex <= 12 && firstDayWeekIndex >= 0 && firstDayWeekIndex <= 7) {
             this.monthIndex = monthIndex;
             this.firstDayWeekIndex = firstDayWeekIndex;
@@ -35,17 +36,28 @@ public class DutyMonth {
             // Create all duties
             this.generateDuties();
 
-            // Import all Persons
-            importPersons(personList);
-
         } else {
             throw new InputMismatchException("Invalid Month Index or first Day Index");
         }
     }
 
-    public DutyMonth(int monthIndex, int firstDayWeekIndex) {
-        this(null, monthIndex, firstDayWeekIndex);
+    public DutyMonth(int monthIndex, int firstDayWeekIndex, List<Duty> duties) {
+
+        if (monthIndex >= 1 && monthIndex <= 12 && firstDayWeekIndex >= 0 && firstDayWeekIndex <= 7) {
+            this.monthIndex = monthIndex;
+            this.firstDayWeekIndex = firstDayWeekIndex;
+            this.numOfDays = getNumOfDays();
+            this.duties = new ArrayList<>(duties);
+            this.persons = new ArrayList<>();
+        } else {
+            throw new InputMismatchException("Invalid Month Index or first Day Index");
+        }
     }
+
+    public void addDutyPersons(List<Person> persons) {
+        this.persons.addAll(persons);
+    }
+
     /**
      * Import all Persons involved in duty scheduling for the month
      */
@@ -81,22 +93,41 @@ public class DutyMonth {
      * Called to schedule duties for the month.
      * Attempts to match Duties with Persons.
      */
-    private void schedule() {
+    public void schedule() {
         List<Duty> dutyList = this.arrangeDuties();
         PriorityQueue<Person> personQueue = this.arrangePersons();
-
         for (Duty duty : dutyList) {
+            if (personQueue.isEmpty()) {
+                continue;
+            }
+
             while (!duty.isFilled()) {
+                boolean matchExist = true;
+                int originalVacancies = duty.getNumOfVacancies();
+
                 Person currPerson = personQueue.poll();
                 List<Person> tempList = new ArrayList<>();
+
                 while (!this.isAssignable(duty, currPerson)) {
+                    if (personQueue.isEmpty()) {
+                        matchExist = false;
+                        break;
+                    }
                     tempList.add(currPerson);
                     currPerson = personQueue.poll();
                 }
-                this.assign(duty, currPerson);
                 personQueue.addAll(tempList);
                 personQueue.add(currPerson);
+
+                if (matchExist) {
+                    this.assign(duty, currPerson);
+                }
+
+                if (duty.getNumOfVacancies() == originalVacancies) {
+                    break;
+                }
             }
+
         }
     }
 
@@ -107,7 +138,6 @@ public class DutyMonth {
         duty.addPerson(person);
         person.addDuty(duty);
     }
-
 
     /**
      * Check whether a Duty a assignable to a Person taking into consideration:
@@ -199,5 +229,17 @@ public class DutyMonth {
         } else {
             throw new InputMismatchException("Invalid Month Index.");
         }
+    }
+
+    public int getMonthIndex() {
+        return monthIndex;
+    }
+
+    public int getFirstDayWeekIndex() {
+        return firstDayWeekIndex;
+    }
+
+    public List<Duty> getDuties() {
+        return duties;
     }
 }

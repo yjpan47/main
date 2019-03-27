@@ -1,15 +1,25 @@
 package seedu.address.model.calendar;
 
+import java.util.List;
+
+import seedu.address.model.person.Person;
+
 /**
  * Duty Type A - Saturday or Sunday
  */
-class DutyTypeA extends Duty {
+public class DutyTypeA extends Duty {
 
     /**
      * Constructs a duty of Type A
      */
-    DutyTypeA(int monthIndex, int dayIndex, int weekIndex) {
+    public DutyTypeA(int monthIndex, int dayIndex, int weekIndex) {
         super(monthIndex, dayIndex, weekIndex);
+        this.setNumOfVacancies(3);
+        this.setPointsAwards(4);
+    }
+
+    public DutyTypeA(int monthIndex, int dayIndex, int weekIndex, List<Person> personList) {
+        super(monthIndex, dayIndex, weekIndex, personList);
         this.setNumOfVacancies(3);
         this.setPointsAwards(4);
     }
