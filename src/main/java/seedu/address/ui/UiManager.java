@@ -40,8 +40,8 @@ public class UiManager implements Ui {
 
         try {
             LoginBox loginBox = new LoginBox(this::findAccount);
-            UserType userType = loginBox.display();
-            mainWindow = new MainWindow(primaryStage, logic, userType);
+            NricUserPair nricUserPair = loginBox.display();
+            mainWindow = new MainWindow(primaryStage, logic, nricUserPair.userType, nricUserPair.userName);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 
@@ -59,7 +59,7 @@ public class UiManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            mainWindow = new MainWindow(primaryStage, logic, UserType.ADMIN);
+            mainWindow = new MainWindow(primaryStage, logic, UserType.ADMIN, "ADMIN");
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 

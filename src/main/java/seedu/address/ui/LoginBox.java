@@ -14,6 +14,7 @@ import seedu.address.commons.core.UserType;
  */
 public class LoginBox {
     private UserType userType = null;
+    private String userName = null;
     private TextField userField;
     private TextField passField;
     private Label label;
@@ -27,7 +28,7 @@ public class LoginBox {
     /**
      * Display box parameters.
      */
-    public UserType display() {
+    public NricUserPair display() {
         window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Login");
@@ -51,7 +52,7 @@ public class LoginBox {
         window.setScene(scene);
         window.showAndWait();
 
-        return userType;
+        return new NricUserPair(userType, userName);
 
     }
     /**
@@ -60,6 +61,7 @@ public class LoginBox {
     private void findAccount() {
         if (userField.getText().equals("Admin") && passField.getText().equals("Admin")) {
             userType = UserType.ADMIN;
+            userName = userField.getText();
             window.close();
         }
         UserType foundUser = userFinder.findAccount(userField.getText(), passField.getText());
@@ -67,6 +69,7 @@ public class LoginBox {
             label.setText("User not found!");
         } else {
             userType = foundUser;
+            userName = userField.getText();
             window.close();
         }
     }
