@@ -15,6 +15,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.UserType;
+import seedu.address.model.calendar.TempClass;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -204,6 +206,19 @@ public class ModelManager implements Model {
             throw new PersonNotFoundException();
         }
         selectedPerson.setValue(person);
+    }
+
+    /**
+     * Returns UserType of account given username and password, returns null if no account found.
+     */
+    @Override
+    public UserType findAccount(String userName, String password) {
+        for (Person person: versionedPersonnelDatabase.getPersonList()) {
+            if (userName.equals(person.getNric().value) && password.equals(person.getPassword().value)) {
+                return person.getUserType();
+            }
+        }
+        return null;
     }
 
     /**

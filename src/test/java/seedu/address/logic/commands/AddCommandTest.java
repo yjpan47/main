@@ -17,6 +17,7 @@ import org.junit.rules.ExpectedException;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.UserType;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.DutyCalendar;
@@ -210,6 +211,11 @@ public class AddCommandTest {
 
         @Override
         public void setSelectedPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public UserType findAccount(String userName, String password) {
             throw new AssertionError("This method should not be called.");
         }
     }
