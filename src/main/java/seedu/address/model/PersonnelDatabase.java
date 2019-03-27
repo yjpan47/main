@@ -54,7 +54,7 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
     }
 
     /**
-     * Replaces the contents of the duty calendar with {@code dutyCalendar}.
+     * Replaces the contents of the duty duty with {@code dutyCalendar}.
      * {@code dutyCalendar} must not contain duplicate duties.
      */
     public void setDutyCalendar(DutyCalendar dutyCalendar) {

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.calendar.Duty;
+import seedu.address.model.duty.Duty;
 import seedu.address.model.tag.Tag;
 
 

@@ -1,4 +1,4 @@
-package seedu.address.model.calendar;
+package seedu.address.model.duty;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,6 +56,17 @@ public class DutyMonth {
 
     public void addDutyPersons(List<Person> persons) {
         this.persons.addAll(persons);
+    }
+
+    public String print() {
+        StringBuilder sb = new StringBuilder();
+        for (Duty duty : this.duties) {
+            sb.append(String.format("%1$12s - %2$2s : [", duty.getWeek(), duty.getDayIndex()));
+            for (Person person : duty.getPersons()) {
+                sb.append(String.format("%1$3s %2$20s", person.getRank(), person.getName()));
+            } sb.append("]\n");
+        }
+        return sb.toString();
     }
 
     /**

@@ -1,7 +1,8 @@
-package seedu.address.model.calendar;
+package seedu.address.model.duty;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.person.Person;
@@ -85,6 +86,13 @@ public abstract class Duty {
      */
     public int getWeekIndex() {
         return weekIndex;
+    }
+
+
+    public String getWeek() {
+        List<String> weeks = Arrays.asList("Monday", "Tuesday", "Wednesday",
+                "Thursday", "Friday", "Saturday", "Sunday");
+        return weeks.get(this.getDayIndex() - 1);
     }
 
     /**
