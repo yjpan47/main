@@ -18,7 +18,7 @@ import static seedu.address.logic.commands.CommandTestUtil.SECTION_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SECTION_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SECTION_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -74,7 +74,7 @@ public class AddCommandSystemTest extends PersonnelDatabaseSystemTest {
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: add a person with all fields same as another person in the address book except nric -> added */
-        toAdd = new PersonBuilder(AMY).withNric(VALID_NAME_BOB).build();
+        toAdd = new PersonBuilder(AMY).withNric(VALID_NRIC_BOB).build();
         command = AddCommand.COMMAND_WORD + NRIC_DESC_BOB + COMPANY_DESC_AMY + SECTION_DESC_AMY + RANK_DESC_AMY
                 + NAME_DESC_AMY + PHONE_DESC_AMY + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);

@@ -15,6 +15,7 @@ import guitests.guihandles.HelpWindowHandle;
 import guitests.guihandles.StageHandle;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import seedu.address.commons.core.UserType;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.ModelManager;
 import seedu.address.storage.JsonPersonnelDatabaseStorage;
@@ -40,7 +41,7 @@ public class MainWindowCloseTest extends GuiUnitTest {
         StorageManager storageManager = new StorageManager(jsonPersonnelDatabaseStorage, jsonUserPrefsStorage);
         FxToolkit.setupStage(stage -> {
             this.stage = stage;
-            mainWindow = new MainWindow(stage, new LogicManager(new ModelManager(), storageManager));
+            mainWindow = new MainWindow(stage, new LogicManager(new ModelManager(), storageManager), UserType.ADMIN);
             mainWindowHandle = new EmptyMainWindowHandle(stage);
             mainWindowHandle.focus();
         });

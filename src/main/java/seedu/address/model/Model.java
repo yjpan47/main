@@ -135,4 +135,9 @@ public interface Model {
      * Sets the selected person in the filtered person list.
      */
     void setSelectedPerson(Person person);
+
+    /**
+     * Get the Duty Calendar
+     */
+    public DutyCalendar getDutyCalendar();
 }

@@ -39,11 +39,28 @@ public class UiManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            mainWindow = new MainWindow(primaryStage, logic);
-            mainWindow.show(); //This should be called before creating other UI parts
             LoginBox loginBox = new LoginBox();
             UserType userType = loginBox.display();
-            mainWindow.setUserType(userType);
+            mainWindow = new MainWindow(primaryStage, logic, userType);
+            mainWindow.show(); //This should be called before creating other UI parts
+            mainWindow.fillInnerParts();
+
+        } catch (Throwable e) {
+            logger.severe(StringUtil.getDetails(e));
+            showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
+        }
+    }
+
+    @Override
+    public void testStartAdmin(Stage primaryStage) {
+        logger.info("Starting UI...");
+
+        //Set the application icon.
+        primaryStage.getIcons().add(getImage(ICON_APPLICATION));
+
+        try {
+            mainWindow = new MainWindow(primaryStage, logic, UserType.ADMIN);
+            mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 
         } catch (Throwable e) {

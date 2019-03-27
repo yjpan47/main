@@ -60,10 +60,8 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
     public static final String INVALID_NRIC_DESC = " " + PREFIX_NRIC + "1238675A"; // missing first letter
-    public static final String INVALID_COMPANY_DESC = " " + PREFIX_COMPANY + " alpha";
-    // whitespace not allowed at the front of company
-    public static final String INVALID_SECTION_DESC = " " + PREFIX_SECTION + " 2";
-    // whitespace not allowed at the front of section
+    public static final String INVALID_COMPANY_DESC = " " + PREFIX_COMPANY + " "; //must have non-space character
+    public static final String INVALID_SECTION_DESC = " " + PREFIX_SECTION + " "; // must have non-space character
     public static final String INVALID_RANK_DESC = " " + PREFIX_RANK + "PTTT"; // only 3 letters allowed in rank
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones

@@ -32,7 +32,8 @@ public class PersonCard extends UiPart<Region> {
     private Label company;
     @FXML
     private Label section;
-
+    @FXML
+    private Label rank;
     @FXML
     private Label name;
     @FXML
@@ -48,8 +49,9 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         nric.setText(person.getNric().value);
         company.setText(person.getCompany().value);
-        section.setText("Section " + person.getSection().value);
-        name.setText(person.getRank() + " " + person.getName().fullName);
+        section.setText(person.getSection().value);
+        rank.setText(person.getRank().value);
+        name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
