@@ -41,7 +41,8 @@ public class MainWindowCloseTest extends GuiUnitTest {
         StorageManager storageManager = new StorageManager(jsonPersonnelDatabaseStorage, jsonUserPrefsStorage);
         FxToolkit.setupStage(stage -> {
             this.stage = stage;
-            mainWindow = new MainWindow(stage, new LogicManager(new ModelManager(), storageManager), UserType.ADMIN);
+            mainWindow = new MainWindow(stage, new LogicManager(new ModelManager(), storageManager),
+                    UserType.ADMIN, "ADMIN");
             mainWindowHandle = new EmptyMainWindowHandle(stage);
             mainWindowHandle.focus();
         });
