@@ -42,6 +42,10 @@ public class PersonCard extends UiPart<Region> {
     private Label phone;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label password;
+    @FXML
+    private Label userType;
 
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
@@ -54,6 +58,9 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        //Below 2 are only for testing purposes: will remove them.
+        password.setText("Password :" + person.getPassword().value);
+        userType.setText("Account Type: " + person.getUserType().toString());
     }
 
     @Override

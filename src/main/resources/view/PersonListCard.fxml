@@ -33,6 +33,8 @@
       <Label fx:id="nric" styleClass="cell_small_label" text="\$nric" />
       <Label fx:id="company" styleClass="cell_small_label" text="\$company" />
       <Label fx:id="section" styleClass="cell_small_label" text="\$section" />
+      <Label fx:id="password" styleClass="cell_small_label" text="\$password" />
+      <Label fx:id="userType" styleClass="cell_small_label" text="\$userType" />
     </VBox>
   </GridPane>
 </HBox>
