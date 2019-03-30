@@ -117,11 +117,13 @@ public class DutyMonth {
                     currPerson = personQueue.poll();
                 }
                 personQueue.addAll(tempList);
-                personQueue.add(currPerson);
 
                 if (matchExist) {
                     this.assign(duty, currPerson);
                 }
+
+                // Add current person back into the priority queue only after assignment
+                personQueue.add(currPerson);
 
                 if (duty.getNumOfVacancies() == originalVacancies) {
                     break;
@@ -171,12 +173,12 @@ public class DutyMonth {
         Collections.shuffle(dutiesTypeA);
 
         List<Duty> dutiesTypeB = this.duties.stream()
-                .filter(duty -> duty instanceof DutyTypeA)
+                .filter(duty -> duty instanceof DutyTypeB)
                 .collect(Collectors.toList());
         Collections.shuffle(dutiesTypeB);
 
         List<Duty> dutiesTypeC = this.duties.stream()
-                .filter(duty -> duty instanceof DutyTypeA)
+                .filter(duty -> duty instanceof DutyTypeC)
                 .collect(Collectors.toList());
         Collections.shuffle(dutiesTypeC);
 
