@@ -39,9 +39,9 @@ public class UiManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            LoginBox loginBox = new LoginBox();
-            UserType userType = loginBox.display();
-            mainWindow = new MainWindow(primaryStage, logic, userType);
+            LoginBox loginBox = new LoginBox(this::findAccount);
+            NricUserPair nricUserPair = loginBox.display();
+            mainWindow = new MainWindow(primaryStage, logic, nricUserPair.userType, nricUserPair.userName);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 
@@ -59,7 +59,7 @@ public class UiManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            mainWindow = new MainWindow(primaryStage, logic, UserType.ADMIN);
+            mainWindow = new MainWindow(primaryStage, logic, UserType.ADMIN, "ADMIN");
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 
@@ -102,6 +102,14 @@ public class UiManager implements Ui {
         showAlertDialogAndWait(Alert.AlertType.ERROR, title, e.getMessage(), e.toString());
         Platform.exit();
         System.exit(1);
+    }
+
+    /**
+     * Finds UserType of account given username and password.
+     * Returns null if account not found.
+     */
+    private UserType findAccount(String userName, String password) {
+        return logic.findAccount(userName, password);
     }
 
 }

@@ -14,53 +14,77 @@ import seedu.address.commons.core.UserType;
  */
 public class LoginBox {
     private UserType userType = null;
-    private TextField textField1;
-    private TextField textField2;
+    private String userName = null;
+    private TextField userField;
+    private TextField passField;
     private Label label;
     private Stage window;
+    private final UserFinder userFinder;
+
+    public LoginBox(UserFinder userFinder) {
+        this.userFinder = userFinder;
+    }
+
     /**
      * Display box parameters.
      */
-    public UserType display() {
+    public NricUserPair display() {
         window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Login");
         window.setMinWidth(500);
         window.setMinHeight(250);
 
-        textField1 = new TextField();
-        textField1.setPromptText("Your NRIC");
+        userField = new TextField();
+        userField.setPromptText("Your NRIC");
+        userField.setOnAction(e -> findAccount());
 
-        textField1.setOnAction(e -> findAccount());
-        textField2 = new PasswordField();
-        textField2.setPromptText("Your password");
-        textField2.setOnAction(e -> findAccount());
+        passField = new PasswordField();
+        passField.setPromptText("Your password");
+        passField.setOnAction(e -> findAccount());
 
         label = new Label();
 
         VBox layout = new VBox();
-        layout.getChildren().addAll(textField1, textField2, label);
+        layout.getChildren().addAll(userField, passField, label);
 
         Scene scene = new Scene(layout);
         window.setScene(scene);
         window.showAndWait();
 
-        return userType;
+        return new NricUserPair(userType, userName);
 
     }
     /**
      * Finds the account in the list of accounts and lets the user login.
      */
     private void findAccount() {
-        if (textField1.getText().equals("General") && textField2.getText().equals("General")) {
-            userType = UserType.GENERAL;
-            window.close();
-        } else if (textField1.getText().equals("Admin") && textField2.getText().equals("Admin")) {
+        if (userField.getText().equals("Admin") && passField.getText().equals("Admin")) {
             userType = UserType.ADMIN;
+            userName = userField.getText();
             window.close();
-        } else {
-            label.setText("User not found!");
         }
+        UserType foundUser = userFinder.findAccount(userField.getText(), passField.getText());
+        if (foundUser == null) {
+            label.setText("User not found!");
+        } else {
+            userType = foundUser;
+            userName = userField.getText();
+            window.close();
+        }
+    }
+
+    /**
+     * Represents a function that can find accounts.
+     */
+    @FunctionalInterface
+    public interface UserFinder {
+        /**
+         * Finds the usertype of the account
+         *
+         * @see seedu.address.logic.Logic#findAccount(String, String)
+         */
+        UserType findAccount(String userName, String password);
     }
 
 }
