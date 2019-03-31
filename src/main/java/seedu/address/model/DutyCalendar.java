@@ -29,7 +29,9 @@ public class DutyCalendar {
         this.nextMonth = nextMonth;
     }
 
-    public int getCurrentMonthIndex() { return currentMonthIndex; }
+    public int getCurrentMonthIndex() {
+        return currentMonthIndex;
+    }
 
     public DutyMonth getCurrentMonth() {
         return currentMonth;
@@ -48,6 +50,10 @@ public class DutyCalendar {
         }
     }
 
+    /**
+     * Replace currentMonth with nextMonth and create a new nextMonth class
+     * @param dutyCalendar the dutyCalendar from the storage
+     */
     private void rollover(DutyCalendar dutyCalendar) {
         this.currentMonthIndex = CalendarUtil.getCurrentMonth();
         this.currentMonth = dutyCalendar.getNextMonth();
