@@ -1,4 +1,4 @@
-package seedu.address.model.duty;
+package seedu.address.model.calendar;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public abstract class Duty {
     private int pointsAwards;
 
     /**
-     * Constructs a duty
+     * Constructs a calendar
      */
     public Duty(int monthIndex, int dayIndex, int weekIndex) {
         this.monthIndex = monthIndex;
@@ -39,7 +39,7 @@ public abstract class Duty {
     }
 
     /**
-     * Add a person to be assigned to this duty
+     * Add a person to be assigned to this calendar
      */
     public void addPerson(Person person) {
         if (this.persons.contains(person)) {
@@ -53,7 +53,7 @@ public abstract class Duty {
     }
 
     /**
-     * check whether this duty is already filled
+     * check whether this calendar is already filled
      */
     boolean isFilled() {
         return this.numOfVacancies == 0;
@@ -75,14 +75,14 @@ public abstract class Duty {
     }
 
     /**
-     * Returns the day in the month of the duty
+     * Returns the day in the month of the calendar
      */
     public int getDayIndex() {
         return dayIndex;
     }
 
     /**
-     * Get the index corresponding to which day of the week is this duty
+     * Get the index corresponding to which day of the week is this calendar
      */
     public int getWeekIndex() {
         return weekIndex;
@@ -96,21 +96,21 @@ public abstract class Duty {
     }
 
     /**
-     * Returns the list of Persons assigned to this duty
+     * Returns the list of Persons assigned to this calendar
      */
     public List<Person> getPersons() {
         return persons;
     }
 
     /**
-     * Returns the number of people still needed for this duty
+     * Returns the number of people still needed for this calendar
      */
     public int getNumOfVacancies() {
         return numOfVacancies;
     }
 
     /**
-     * Points awarded to persons for  completing this duty
+     * Points awarded to persons for  completing this calendar
      */
     public int getPointsAwards() {
         return pointsAwards;

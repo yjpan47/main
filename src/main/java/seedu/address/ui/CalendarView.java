@@ -107,7 +107,7 @@ public class CalendarView extends UiPart<Region> {
     }
 
     /**
-     * Fills up duty dates
+     * Fills up calendar dates
      */
     private void initializeDateDisplay() {
         int[] currentDate = getCurrentDayMonthYear();

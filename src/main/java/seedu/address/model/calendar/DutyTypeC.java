@@ -1,4 +1,4 @@
-package seedu.address.model.duty;
+package seedu.address.model.calendar;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import seedu.address.model.person.Person;
 public class DutyTypeC extends Duty {
 
     /**
-     * Constructs a duty of Type C
+     * Constructs a calendar of Type C
      */
     public DutyTypeC(int monthIndex, int dayIndex, int weekIndex) {
         super(monthIndex, dayIndex, weekIndex);

@@ -1,7 +1,7 @@
-package seedu.address.model.duty;
+package seedu.address.model.calendar;
 
 /**
- *  enum AM / PM used for duty allocation
+ *  enum AM / PM used for calendar allocation
  *  <li>{@link #AM}</li>
  *  <li>{@link #PM}</li>
 

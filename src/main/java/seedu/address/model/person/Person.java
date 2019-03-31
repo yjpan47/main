@@ -10,13 +10,13 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.duty.Duty;
+import seedu.address.model.calendar.Duty;
 import seedu.address.commons.core.UserType;
 import seedu.address.model.tag.Tag;
 
 
 /**
- * Represents a Person in the duty planner.
+ * Represents a Person in the calendar planner.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
@@ -130,7 +130,7 @@ public class Person {
     }
 
     /**
-     * Assign a duty to a Person
+     * Assign a calendar to a Person
      */
     public void addDuty(Duty duty) {
         if (this.duties.contains(duty)) {
