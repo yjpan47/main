@@ -155,7 +155,9 @@ public class Person {
      * Returns true if both persons of the same name have the same NRIC.
      */
     public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == null) return false;
+        if (otherPerson == null) {
+            return false;
+        }
         if (otherPerson.equals(this)) {
             return true;
         }
