@@ -24,7 +24,7 @@ public class DutyMonth {
     private List<Person> persons;
 
     public DutyMonth(int monthIndex, int firstDayWeekIndex) {
-        if (monthIndex >= 0 && monthIndex <= 11 && firstDayWeekIndex >= 0 && firstDayWeekIndex <= 7) {
+        if (monthIndex >= 0 && monthIndex <= 11 && firstDayWeekIndex >= 1 && firstDayWeekIndex <= 7) {
             this.monthIndex = monthIndex;
             this.firstDayWeekIndex = firstDayWeekIndex;
             this.numOfDays = CalendarUtil.getNumOfDays(monthIndex);

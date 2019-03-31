@@ -45,10 +45,10 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void contains_personWithSameNameButDifferentNricInList_returnsTrue() {
+    public void contains_personWithSameNameButDifferentNricInList_returnsFalse() {
         uniquePersonList.add(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withNric(VALID_NRIC_BOB).build();
-        assertTrue(uniquePersonList.contains(editedAlice));
+        assertFalse(uniquePersonList.contains(editedAlice));
     }
 
     @Test

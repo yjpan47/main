@@ -31,7 +31,7 @@
     "rank": "LCP",
     "name" : "Daniel Meier",
     "phone" : "87652533",
-    "tagged" : [ ]
+    "tagged" : [ "friends" ]
   }, {
     "nric": "S9876567I",
     "company": "Ninja",
@@ -56,5 +56,369 @@
     "name" : "George Best",
     "phone" : "+942442",
     "tagged" : [ ]
-  } ]
+  } ],
+  "currentMonth" : {
+    "monthIndex" : 2,
+    "firstDayWeekIndex" : 6,
+    "duties" : [ {
+      "monthIndex" : 2,
+      "dayIndex" : 1,
+      "weekIndex" : 6,
+      "type" : "C",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 2,
+      "dayIndex" : 2,
+      "weekIndex" : 1,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 2,
+      "dayIndex" : 3,
+      "weekIndex" : 2,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 2,
+      "dayIndex" : 4,
+      "weekIndex" : 3,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 2,
+      "dayIndex" : 5,
+      "weekIndex" : 4,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 2,
+      "dayIndex" : 6,
+      "weekIndex" : 5,
+      "type" : "B",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 2,
+      "dayIndex" : 7,
+      "weekIndex" : 6,
+      "type" : "C",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 2,
+      "dayIndex" : 8,
+      "weekIndex" : 1,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 2,
+      "dayIndex" : 9,
+      "weekIndex" : 2,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 2,
+      "dayIndex" : 10,
+      "weekIndex" : 3,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 2,
+      "dayIndex" : 11,
+      "weekIndex" : 4,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 2,
+      "dayIndex" : 12,
+      "weekIndex" : 5,
+      "type" : "B",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 2,
+      "dayIndex" : 13,
+      "weekIndex" : 6,
+      "type" : "C",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 2,
+      "dayIndex" : 14,
+      "weekIndex" : 1,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 2,
+      "dayIndex" : 15,
+      "weekIndex" : 2,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 2,
+      "dayIndex" : 16,
+      "weekIndex" : 3,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 2,
+      "dayIndex" : 17,
+      "weekIndex" : 4,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 2,
+      "dayIndex" : 18,
+      "weekIndex" : 5,
+      "type" : "B",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 2,
+      "dayIndex" : 19,
+      "weekIndex" : 6,
+      "type" : "C",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 2,
+      "dayIndex" : 20,
+      "weekIndex" : 1,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 2,
+      "dayIndex" : 21,
+      "weekIndex" : 2,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 2,
+      "dayIndex" : 22,
+      "weekIndex" : 3,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 2,
+      "dayIndex" : 23,
+      "weekIndex" : 4,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 2,
+      "dayIndex" : 24,
+      "weekIndex" : 5,
+      "type" : "B",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 2,
+      "dayIndex" : 25,
+      "weekIndex" : 6,
+      "type" : "C",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 2,
+      "dayIndex" : 26,
+      "weekIndex" : 1,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 2,
+      "dayIndex" : 27,
+      "weekIndex" : 2,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 2,
+      "dayIndex" : 28,
+      "weekIndex" : 3,
+      "type" : "A",
+      "persons" : [ ]
+    } ]
+  },
+  "nextMonth" : {
+    "monthIndex" : 3,
+    "firstDayWeekIndex" : 2,
+    "duties" : [ {
+      "monthIndex" : 3,
+      "dayIndex" : 1,
+      "weekIndex" : 2,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 2,
+      "weekIndex" : 3,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 3,
+      "weekIndex" : 4,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 4,
+      "weekIndex" : 5,
+      "type" : "B",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 5,
+      "weekIndex" : 6,
+      "type" : "C",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 6,
+      "weekIndex" : 1,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 7,
+      "weekIndex" : 2,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 8,
+      "weekIndex" : 3,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 9,
+      "weekIndex" : 4,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 10,
+      "weekIndex" : 5,
+      "type" : "B",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 11,
+      "weekIndex" : 6,
+      "type" : "C",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 12,
+      "weekIndex" : 1,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 13,
+      "weekIndex" : 2,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 14,
+      "weekIndex" : 3,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 15,
+      "weekIndex" : 4,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 16,
+      "weekIndex" : 5,
+      "type" : "B",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 17,
+      "weekIndex" : 6,
+      "type" : "C",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 18,
+      "weekIndex" : 1,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 19,
+      "weekIndex" : 2,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 20,
+      "weekIndex" : 3,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 21,
+      "weekIndex" : 4,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 22,
+      "weekIndex" : 5,
+      "type" : "B",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 23,
+      "weekIndex" : 6,
+      "type" : "C",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 24,
+      "weekIndex" : 1,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 25,
+      "weekIndex" : 2,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 26,
+      "weekIndex" : 3,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 27,
+      "weekIndex" : 4,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 28,
+      "weekIndex" : 5,
+      "type" : "B",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 29,
+      "weekIndex" : 6,
+      "type" : "C",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 30,
+      "weekIndex" : 1,
+      "type" : "A",
+      "persons" : [ ]
+    }, {
+      "monthIndex" : 3,
+      "dayIndex" : 31,
+      "weekIndex" : 2,
+      "type" : "A",
+      "persons" : [ ]
+    } ]
+  }
 }
