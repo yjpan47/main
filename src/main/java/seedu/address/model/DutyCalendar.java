@@ -1,8 +1,5 @@
 package seedu.address.model;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import seedu.address.commons.util.CalendarUtil;
 import seedu.address.model.calendar.DutyMonth;
 
@@ -27,6 +24,7 @@ public class DutyCalendar {
     }
 
     public DutyCalendar(DutyMonth currentMonth, DutyMonth nextMonth) {
+        this.currentMonthIndex = CalendarUtil.getCurrentMonth();
         this.currentMonth = currentMonth;
         this.nextMonth = nextMonth;
     }
