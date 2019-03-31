@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's company in the calendar planner.
+ * Represents a Person's company in the duty planner.
  * Guarantees: immutable; is valid as declared in {@link #isValidCompany(String)}
  */
 public class Company {

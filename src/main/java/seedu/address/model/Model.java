@@ -85,7 +85,7 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the calendar for dates */
+    /** Returns an unmodifiable view of the duty for dates */
     //ObservableList<Person> getDutyForDates();
 
     /**
@@ -143,7 +143,7 @@ public interface Model {
     UserType findAccount(String userName, String password);
 
     /**
-     * Returns the calendar calendar of current personnel database.
+     * Returns the duty duty of current personnel database.
      */
     DutyCalendar getDutyCalendar();
 }

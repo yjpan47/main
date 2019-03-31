@@ -21,7 +21,7 @@ import seedu.address.model.person.Person;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the calendar planner. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the duty planner. "
             + "Parameters: "
             + PREFIX_NRIC + "NRIC "
             + PREFIX_COMPANY + "COMPANY "

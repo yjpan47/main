@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.calendar.Duty;
-import seedu.address.model.calendar.DutyMonth;
+import seedu.address.model.duty.Duty;
+import seedu.address.model.duty.DutyMonth;
 import seedu.address.model.person.Person;
 
 /**
@@ -25,7 +25,7 @@ public class JsonAdaptedDutyMonth {
     private final List<JsonAdaptedDuty> duties = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedDutyMonth} with the given calendar month details.
+     * Constructs a {@code JsonAdaptedDutyMonth} with the given duty month details.
      */
     @JsonCreator
 

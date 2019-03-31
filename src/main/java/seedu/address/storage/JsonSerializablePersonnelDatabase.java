@@ -28,7 +28,7 @@ class JsonSerializablePersonnelDatabase {
     private final JsonAdaptedDutyMonth nextMonth;
 
     /**
-     * Constructs a {@code JsonSerializablePersonnelDatabase} with the given persons and calendar months.
+     * Constructs a {@code JsonSerializablePersonnelDatabase} with the given persons and duty months.
      */
     @JsonCreator
     public JsonSerializablePersonnelDatabase(@JsonProperty("persons") List<JsonAdaptedPerson> persons,

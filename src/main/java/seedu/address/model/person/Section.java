@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's section in the calendar planner.
+ * Represents a Person's section in the duty planner.
  * Guarantees: immutable; is valid as declared in {@link #isValidSection(String)}
  */
 public class Section {

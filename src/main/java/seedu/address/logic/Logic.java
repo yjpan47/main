@@ -35,7 +35,7 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
 
-    /** returns an unmodifiable view of calendar for dates */
+    /** returns an unmodifiable view of duty for dates */
     //ObservableList<Person> getDutyForDates();
 
     /**

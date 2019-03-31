@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's rank in the calendar planner.
+ * Represents a Person's rank in the duty planner.
  * Guarantees: immutable; is valid as declared in {@link #isValidRank(String)}
  */
 public class Rank {

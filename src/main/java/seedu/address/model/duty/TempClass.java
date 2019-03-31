@@ -1,6 +1,6 @@
 /*A temporary class used for intermediate testing. Pls delete before submission.*/
 
-package seedu.address.model.calendar;
+package seedu.address.model.duty;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
