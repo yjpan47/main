@@ -26,13 +26,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * a menu bar and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Stage> {
-
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
     //Clearance of the user
     private final UserType user;
-
+    private final String userName;
     private Stage primaryStage;
     private Logic logic;
 
@@ -71,13 +70,14 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private TitledPane contactList;
 
-    public MainWindow(Stage primaryStage, Logic logic, UserType user) {
+    public MainWindow(Stage primaryStage, Logic logic, UserType user, String userName) {
         super(FXML, primaryStage);
 
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
         this.user = user;
+        this.userName = userName;
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());

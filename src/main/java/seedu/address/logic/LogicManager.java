@@ -118,4 +118,9 @@ public class LogicManager implements Logic {
     public void setSelectedPerson(Person person) {
         model.setSelectedPerson(person);
     }
+
+    @Override
+    public UserType findAccount(String userName, String password) {
+        return model.findAccount(userName, password);
+    }
 }

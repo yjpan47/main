@@ -73,4 +73,9 @@ public interface Logic {
      * @see seedu.address.model.Model#setSelectedPerson(Person)
      */
     void setSelectedPerson(Person person);
+
+    /**
+     * Returns UserType of User if valid username and password, null otherwise.
+     */
+    UserType findAccount(String userName, String password);
 }

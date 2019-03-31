@@ -11,6 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.duty.Duty;
+import seedu.address.commons.core.UserType;
 import seedu.address.model.tag.Tag;
 
 
@@ -36,6 +37,10 @@ public class Person {
     private List<Integer> blockedDates;
     private List<Duty> duties;
 
+    // Account fields
+    private final Password password;
+    private final UserType userType;
+
     /**
      * Every field must be present and not null.
      */
@@ -50,6 +55,30 @@ public class Person {
         this.name = name;
         this.phone = phone;
         this.tags.addAll(tags);
+        this.password = new Password(nric.value);
+        this.userType = UserType.GENERAL;
+
+        this.dutyPoints = 0;
+        this.blockedDates = new ArrayList<>();
+        this.duties = new ArrayList<>();
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+
+    public Person(Nric nric, Company company, Section section, Rank rank, Name name,
+                  Phone phone, Set<Tag> tags, Password password, UserType userType) {
+        requireAllNonNull(nric, company, section, rank, name, phone, tags, password, userType);
+        this.nric = nric;
+        this.company = company;
+        this.section = section;
+        this.rank = rank;
+        this.name = name;
+        this.phone = phone;
+        this.tags.addAll(tags);
+        this.password = password;
+        this.userType = userType;
 
         this.dutyPoints = 0;
         this.blockedDates = new ArrayList<>();
@@ -78,6 +107,14 @@ public class Person {
 
     public Phone getPhone() {
         return phone;
+    }
+
+    public Password getPassword() {
+        return password;
+    }
+
+    public UserType getUserType() {
+        return userType;
     }
 
     public int getDutyPoints() {
@@ -148,14 +185,16 @@ public class Person {
                 && otherPerson.getRank().equals(getRank())
                 && otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getPassword().equals(getPassword())
+                && otherPerson.getUserType().equals(getUserType());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
 
-        return Objects.hash(nric, company, section, rank, name, phone, tags);
+        return Objects.hash(nric, company, section, rank, name, phone, tags, password, userType);
     }
 
     @Override
