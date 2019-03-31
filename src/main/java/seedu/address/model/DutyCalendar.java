@@ -1,8 +1,5 @@
 package seedu.address.model;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import seedu.address.commons.util.CalendarUtil;
 import seedu.address.model.calendar.DutyMonth;
 
@@ -27,11 +24,14 @@ public class DutyCalendar {
     }
 
     public DutyCalendar(DutyMonth currentMonth, DutyMonth nextMonth) {
+        this.currentMonthIndex = CalendarUtil.getCurrentMonth();
         this.currentMonth = currentMonth;
         this.nextMonth = nextMonth;
     }
 
-    public int getCurrentMonthIndex() { return currentMonthIndex; }
+    public int getCurrentMonthIndex() {
+        return currentMonthIndex;
+    }
 
     public DutyMonth getCurrentMonth() {
         return currentMonth;
@@ -50,6 +50,10 @@ public class DutyCalendar {
         }
     }
 
+    /**
+     * Replace currentMonth with nextMonth and create a new nextMonth class
+     * @param dutyCalendar the dutyCalendar from the storage
+     */
     private void rollover(DutyCalendar dutyCalendar) {
         this.currentMonthIndex = CalendarUtil.getCurrentMonth();
         this.currentMonth = dutyCalendar.getNextMonth();
