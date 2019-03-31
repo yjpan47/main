@@ -67,7 +67,6 @@ public class DutyMonth {
         }
     }
 
-
     /**
      * Initialize the all duties for the month. Done during construction.
      */
