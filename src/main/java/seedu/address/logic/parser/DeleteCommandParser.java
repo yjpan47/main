@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_NO_AUTHORITY_PARSE;
 
 import seedu.address.commons.core.UserType;
 import seedu.address.commons.core.index.Index;
@@ -18,6 +19,14 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args, UserType userType, String userName) throws ParseException {
+        if (userType == UserType.ADMIN) {
+            return adminParse(args);
+        } else {
+            throw new ParseException(MESSAGE_NO_AUTHORITY_PARSE);
+        }
+    }
+
+    public DeleteCommand adminParse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
             return new DeleteCommand(index);
