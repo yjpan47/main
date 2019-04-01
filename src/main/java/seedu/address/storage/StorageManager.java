@@ -7,9 +7,7 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.ReadOnlyPersonnelDatabase;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.*;
 
 /**
  * Manages storage of PersonnelDatabase data in local storage.
@@ -19,12 +17,15 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private PersonnelDatabaseStorage personnelDatabaseStorage;
     private UserPrefsStorage userPrefsStorage;
+    private RequestManagerStorage requestManagerStorage;
 
 
-    public StorageManager(PersonnelDatabaseStorage personnelDatabaseStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(PersonnelDatabaseStorage personnelDatabaseStorage, UserPrefsStorage userPrefsStorage,
+                          RequestManagerStorage requestManagerStorage) {
         super();
         this.personnelDatabaseStorage = personnelDatabaseStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.requestManagerStorage = requestManagerStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -44,7 +45,23 @@ public class StorageManager implements Storage {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
+    // ================ UserPrefs methods ==============================
+    
+    @Override
+    public Path getRequestManagerFilePath() {
+        return requestManagerStorage.getRequestManagerFilePath();
+    }
 
+    @Override
+    public Optional<RequestManager> readRequestManager() throws DataConversionException, IOException {
+        return requestManagerStorage.readRequestManager();
+    }
+
+    @Override
+    public void saveRequestManager(ReadOnlyRequestManager requestManager) throws IOException {
+        requestManagerStorage.saveRequestManager(requestManager);
+    }
+    
     // ================ PersonnelDatabase methods ==============================
 
     @Override

@@ -33,6 +33,7 @@ public class LogicManager implements Logic {
     private final CommandHistory history;
     private final PersonnelDatabaseParser personnelDatabaseParser;
     private boolean addressBookModified;
+    private boolean requestManagerModified;
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
@@ -42,6 +43,7 @@ public class LogicManager implements Logic {
 
         // Set addressBookModified to true whenever the models' address book is modified.
         model.getPersonnelDatabase().addListener(observable -> addressBookModified = true);
+        model.getRequestManager().addListener(observable -> requestManagerModified = true);
     }
 
     @Override
@@ -122,5 +124,10 @@ public class LogicManager implements Logic {
     @Override
     public UserType findAccount(String userName, String password) {
         return model.findAccount(userName, password);
+    }
+
+    @Override
+    public void setUserDetailsInModel(UserType userType, String userName) {
+        model.setUserDetails(userType, userName);
     }
 }

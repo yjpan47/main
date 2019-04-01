@@ -107,4 +107,11 @@ public abstract class Duty {
     public int getPointsAwards() {
         return pointsAwards;
     }
+
+    /**
+     * Checks if person with nric is assigned a duty on this day.
+     */
+    public boolean isPersonAssigned(String nric) {
+        return persons.stream().filter(person -> person.getNric().toString().equals(nric)).count() == 1;
+    }
 }

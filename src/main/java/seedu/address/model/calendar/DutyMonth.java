@@ -24,6 +24,7 @@ public class DutyMonth {
     private List<Duty> duties;
     private List<Person> persons;
 
+
     public DutyMonth(int monthIndex, int firstDayWeekIndex) {
 
         if (monthIndex >= 1 && monthIndex <= 12 && firstDayWeekIndex >= 0 && firstDayWeekIndex <= 7) {
@@ -75,11 +76,11 @@ public class DutyMonth {
         int weekCounter = this.firstDayWeekIndex;
         for (int day = 1; day <= this.numOfDays; day++) {
             if (weekCounter >= 1 && weekCounter <= 4) {
-                this.duties.add(new DutyTypeA(this.monthIndex, day, weekCounter));
+                this.duties.add(new DutyTypeC(this.monthIndex, day, weekCounter));
             } else if (weekCounter == 5) {
                 this.duties.add(new DutyTypeB(this.monthIndex, day, weekCounter));
             } else {
-                this.duties.add(new DutyTypeC(this.monthIndex, day, weekCounter));
+                this.duties.add(new DutyTypeA(this.monthIndex, day, weekCounter));
             }
             weekCounter++;
             if (weekCounter == 7) {
@@ -243,5 +244,9 @@ public class DutyMonth {
 
     public List<Duty> getDuties() {
         return duties;
+    }
+
+    public boolean isAssignedToDuty(String nric, int day) {
+        persons.get(day - 1);
     }
 }

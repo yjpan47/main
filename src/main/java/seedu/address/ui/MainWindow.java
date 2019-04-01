@@ -20,6 +20,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.storage.Storage;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -34,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private final String userName;
     private Stage primaryStage;
     private Logic logic;
+    private Storage storage;
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
@@ -228,4 +230,5 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
 }

@@ -78,4 +78,9 @@ public interface Logic {
      * Returns UserType of User if valid username and password, null otherwise.
      */
     UserType findAccount(String userName, String password);
+
+    /**
+     * Sets UserType and UserName in Model.
+     */
+    void setUserDetailsInModel(UserType userType, String userName);
 }

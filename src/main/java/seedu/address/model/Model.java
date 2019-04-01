@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.function.Predicate;
 
 import javafx.beans.property.ReadOnlyProperty;
@@ -57,6 +58,9 @@ public interface Model {
     /** Sorts the PersonnelDatabase by name */
     void sortPersonnelDatabase();
 
+    /** Returns the RequestManager */
+    ReadOnlyRequestManager getRequestManager();
+    
     /**
      * Returns true if a person with the same identity as {@code person} exists in the personnel database.
      */
@@ -145,4 +149,24 @@ public interface Model {
      * Get the Duty Calendar
      */
     public DutyCalendar getDutyCalendar();
+
+    /**
+     * Set user details.
+     */
+    public void setUserDetails(UserType userType, String userName);
+
+    /**
+     * Get username
+     */
+    public String getUserName();
+
+    /**
+     * Get user type
+     */
+    public UserType getUserType();
+
+    /**
+     * Add a swap request to the model
+     */
+    public void addSwapRequest(String nric, LocalDate allocatedDate, LocalDate requestedDate);
 }
