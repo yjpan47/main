@@ -1,8 +1,6 @@
 package seedu.address.model.calendar;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.InputMismatchException;
@@ -10,6 +8,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.util.CalendarUtil;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -25,28 +24,25 @@ public class DutyMonth {
     private List<Person> persons;
 
     public DutyMonth(int monthIndex, int firstDayWeekIndex) {
-
-        if (monthIndex >= 1 && monthIndex <= 12 && firstDayWeekIndex >= 0 && firstDayWeekIndex <= 7) {
+        if (monthIndex >= 0 && monthIndex <= 11 && firstDayWeekIndex >= 0 && firstDayWeekIndex <= 7) {
             this.monthIndex = monthIndex;
             this.firstDayWeekIndex = firstDayWeekIndex;
-            this.numOfDays = getNumOfDays();
+            this.numOfDays = CalendarUtil.getNumOfDays(monthIndex);
             this.duties = new ArrayList<>();
             this.persons = new ArrayList<>();
 
             // Create all duties
             this.generateDuties();
-
         } else {
             throw new InputMismatchException("Invalid Month Index or first Day Index");
         }
     }
 
     public DutyMonth(int monthIndex, int firstDayWeekIndex, List<Duty> duties) {
-
-        if (monthIndex >= 1 && monthIndex <= 12 && firstDayWeekIndex >= 0 && firstDayWeekIndex <= 7) {
+        if (monthIndex >= 0 && monthIndex <= 11 && firstDayWeekIndex >= 0 && firstDayWeekIndex <= 7) {
             this.monthIndex = monthIndex;
             this.firstDayWeekIndex = firstDayWeekIndex;
-            this.numOfDays = getNumOfDays();
+            this.numOfDays = CalendarUtil.getNumOfDays(monthIndex);
             this.duties = new ArrayList<>(duties);
             this.persons = new ArrayList<>();
         } else {
@@ -66,7 +62,6 @@ public class DutyMonth {
             this.persons.add(person);
         }
     }
-
 
     /**
      * Initialize the all duties for the month. Done during construction.
@@ -196,39 +191,6 @@ public class DutyMonth {
         PriorityQueue<Person> pq = new PriorityQueue<>(Comparator.comparingInt(Person::getDutyPoints));
         pq.addAll(this.persons);
         return pq;
-    }
-
-    /**
-     * Gets current month in String format
-     */
-    public String getMonth() {
-        String[] months = {"January", "February", "March", "April", "May", "June", "July",
-            "August", "September", "October", "November", "December"};
-        return months[this.monthIndex - 1];
-    }
-
-    /**
-     * Returns current month
-     */
-    public boolean isCurrentMonth() {
-        Calendar cal = Calendar.getInstance();
-        int currentMonth = cal.get(Calendar.MONTH);
-        return (this.monthIndex == currentMonth);
-    }
-
-    /**
-     * Gets the number of days in the current month
-     */
-    private int getNumOfDays() {
-        if (Arrays.asList(1, 3, 5, 7, 8, 10, 12).contains(this.monthIndex)) {
-            return 31;
-        } else if (Arrays.asList(4, 6, 9, 11).contains(this.monthIndex)) {
-            return 30;
-        } else if (this.monthIndex == 2) {
-            return 28;
-        } else {
-            throw new InputMismatchException("Invalid Month Index.");
-        }
     }
 
     public int getMonthIndex() {

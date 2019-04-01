@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.util.CalendarUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -33,8 +34,10 @@ public class ScheduleCommand extends Command {
         DutyMonth dutyMonth = model.getDutyCalendar().getCurrentMonth();
         dutyMonth.addDutyPersons(persons);
         dutyMonth.schedule();
-        System.out.println(model.getFilteredPersonList());
-        return new CommandResult(String.format(SCHEDULE_SUCCESS, dutyMonth.getMonth()));
+        //System.out.println(model.getFilteredPersonList());
+        //System.out.println("Current Month " + dutyMonth.getMonthIndex());
+        return new CommandResult(String.format(SCHEDULE_SUCCESS, CalendarUtil
+                .getMonthString(dutyMonth.getMonthIndex())));
     }
 
     @Override
