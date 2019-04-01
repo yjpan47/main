@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.BlockDateCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -120,7 +121,10 @@ public class PersonnelDatabaseParserTest {
         assertTrue(parser.parseCommand(ScheduleCommand.COMMAND_WORD) instanceof ScheduleCommand);
         assertTrue(parser.parseCommand("schedule July") instanceof UndoCommand);
     }
-
+    @Test
+    public void parseCommand_blockDate() throws Exception {
+        assertTrue(parser.parseCommand(BlockDateCommand.COMMAND_WORD) instanceof BlockDateCommand);
+    }
     @Test
     public void parseCommand_redoCommandWord_returnsRedoCommand() throws Exception {
 
