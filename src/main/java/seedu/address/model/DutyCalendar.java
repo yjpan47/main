@@ -10,6 +10,7 @@ import seedu.address.model.calendar.DutyMonth;
 public class DutyCalendar {
 
     private int currentMonthIndex;
+    private int currentYearIndex;
     private DutyMonth currentMonth;
     private DutyMonth nextMonth;
 
@@ -18,6 +19,7 @@ public class DutyCalendar {
      */
     public DutyCalendar() {
         this.currentMonthIndex = CalendarUtil.getCurrentMonth();
+        this.currentYearIndex = CalendarUtil.getCurrentYear();
         this.currentMonth = new DutyMonth(currentMonthIndex, CalendarUtil.dayOfFirstDayOfMonth(currentMonthIndex));
         this.nextMonth = new DutyMonth(currentMonthIndex + 1,
                 CalendarUtil.dayOfFirstDayOfMonth(currentMonthIndex + 1));
@@ -25,12 +27,17 @@ public class DutyCalendar {
 
     public DutyCalendar(DutyMonth currentMonth, DutyMonth nextMonth) {
         this.currentMonthIndex = CalendarUtil.getCurrentMonth();
+        this.currentYearIndex = CalendarUtil.getCurrentYear();
         this.currentMonth = currentMonth;
         this.nextMonth = nextMonth;
     }
 
     public int getCurrentMonthIndex() {
         return currentMonthIndex;
+    }
+
+    public int getCurrentYearIndex() {
+        return currentYearIndex;
     }
 
     public DutyMonth getCurrentMonth() {
