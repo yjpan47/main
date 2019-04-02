@@ -21,7 +21,10 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
 
     private final UniquePersonList persons;
     private final DutyCalendar dutyCalendar;
+
     private final List<Request> requests;
+
+    private Person currentUser;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
     /*
@@ -122,6 +125,7 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
         indicateModified();
     }
 
+
     /**
      * Adds a swap request to the request manager by fields.
      */
@@ -136,6 +140,11 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
     public void addRequest(Request request) {
         requests.add(request);
         indicateModified();
+
+
+    public Person getCurrentUser() {
+        return currentUser;
+
     }
 
     @Override

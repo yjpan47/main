@@ -154,6 +154,7 @@ public interface Model {
      */
     DutyCalendar getDutyCalendar();
 
+
     /**
      * Set user details.
      */
@@ -173,4 +174,4 @@ public interface Model {
      * Add a swap request to the model
      */
     void addSwapRequest(String nric, LocalDate allocatedDate, LocalDate requestedDate);
-}
+

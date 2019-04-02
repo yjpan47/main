@@ -9,10 +9,10 @@ import seedu.address.model.person.Person;
 
 public class DutyStorage {
 
-    static HashMap<Person, Integer> dutyPoints = new HashMap<>();
-    static HashMap<Person, List<Duty>> dutyRecords = new HashMap<>();
+    public static HashMap<Person, Integer> dutyPoints = new HashMap<>();
+    public static HashMap<Person, List<Duty>> dutyRecords = new HashMap<>();
 
-    static void update(List<Duty> duties) {
+    public static void update(List<Duty> duties) {
         for (Duty duty : duties) {
             for (Person person : duty.getPersons()) {
                 dutyPoints.putIfAbsent(person, 0);
@@ -24,7 +24,7 @@ public class DutyStorage {
         }
     }
 
-    static Comparator<Person> comparebyPoints() {
+    public static Comparator<Person> comparebyPoints() {
         return (p1, p2) -> {
             if (!dutyPoints.containsKey(p1) && !dutyPoints.containsKey(p2)) {
                 return 0;

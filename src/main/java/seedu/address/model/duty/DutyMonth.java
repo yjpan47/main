@@ -32,6 +32,15 @@ public class DutyMonth {
         }
     }
 
+    public DutyMonth(int year, int monthIndex, int firstDayOfWeekIndex,
+                     List<Duty> duties, HashMap<Person, List<Integer>> blockedDays) {
+        this.year = year;
+        this.monthIndex = monthIndex;
+        this.firstDayOfWeekIndex = firstDayOfWeekIndex;
+        this.scheduledDuties = new ArrayList<>(duties);
+        this.blockedDays = new HashMap<>(blockedDays);
+    }
+
     public void addBlockedDay(Person person, int day) {
         if (DateUtil.isValidDate(this.year, this.monthIndex, day)) {
             this.blockedDays.putIfAbsent(person, new ArrayList<>());
@@ -81,19 +90,24 @@ public class DutyMonth {
                     person = personQueue.poll();
                 }
                 personQueue.addAll(tempList);
-                personQueue.add(person);
+
 
                 if (hasAssignable) {
                     duty.addPerson(person);
                     points.replace(person, points.get(person) + duty.getPoints());
+                    personQueue.add(person);
 
                 } else {
+                    personQueue.add(person);
                     break;
                 }
+
             }
         }
         this.scheduledDuties = dutyList;
         this.scheduledDuties.sort(Comparator.comparingInt(Duty::getDayIndex));
+
+        System.out.println(this.scheduledDuties);
     }
 
     private boolean isAssignable(Person person, Duty duty) {
@@ -139,6 +153,10 @@ public class DutyMonth {
 
     public List<Duty> getScheduledDuties() {
         return this.scheduledDuties;
+    }
+
+    public HashMap<Person, List<Integer>> getBlockedDates() {
+        return this.blockedDays;
     }
 
     public void printScheduledDuties() {
