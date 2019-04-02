@@ -30,6 +30,8 @@ import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
 
+    private static final String CALLED_ERROR = "This method should not be called.";
+
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
     @Rule
@@ -96,127 +98,132 @@ public class AddCommandTest {
     private class ModelStub implements Model {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(CALLED_ERROR);
         }
 
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(CALLED_ERROR);
         }
 
         @Override
         public GuiSettings getGuiSettings() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(CALLED_ERROR);
         }
 
         @Override
         public void setGuiSettings(GuiSettings guiSettings) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(CALLED_ERROR);
         }
 
         @Override
         public Path getPersonnelDatabaseFilePath() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(CALLED_ERROR);
         }
 
         @Override
         public void setPersonnelDatabaseFilePath(Path personnelDatabaseFilePath) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(CALLED_ERROR);
         }
 
         @Override
         public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(CALLED_ERROR);
         }
 
         @Override
         public void setPersonnelDatabase(ReadOnlyPersonnelDatabase newData) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(CALLED_ERROR);
         }
 
         @Override
         public ReadOnlyPersonnelDatabase getPersonnelDatabase() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(CALLED_ERROR);
         }
 
         @Override
         public DutyCalendar getDutyCalendar() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(CALLED_ERROR);
         }
 
         @Override
         public void sortPersonnelDatabase() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(CALLED_ERROR);
         }
 
         @Override
         public boolean hasPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(CALLED_ERROR);
         }
 
         @Override
         public void deletePerson(Person target) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(CALLED_ERROR);
         }
 
         @Override
         public void setPerson(Person target, Person editedPerson) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(CALLED_ERROR);
         }
 
         @Override
         public ObservableList<Person> getFilteredPersonList() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(CALLED_ERROR);
         }
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(CALLED_ERROR);
         }
 
         @Override
         public boolean canUndoPersonnelDatabase() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(CALLED_ERROR);
         }
 
         @Override
         public boolean canRedoPersonnelDatabase() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(CALLED_ERROR);
         }
 
         @Override
         public void undoPersonnelDatabase() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(CALLED_ERROR);
         }
 
         @Override
         public void redoPersonnelDatabase() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(CALLED_ERROR);
         }
 
         @Override
         public void commitPersonnelDatabase() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(CALLED_ERROR);
         }
 
         @Override
         public ReadOnlyProperty<Person> selectedPersonProperty() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(CALLED_ERROR);
         }
 
         @Override
         public Person getSelectedPerson() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(CALLED_ERROR);
         }
 
         @Override
         public void setSelectedPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(CALLED_ERROR);
         }
 
         @Override
         public UserType findAccount(String userName, String password) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(CALLED_ERROR);
+        }
+
+        @Override
+        public Person findPerson(String userName) {
+            throw new AssertionError(CALLED_ERROR);
         }
     }
 
