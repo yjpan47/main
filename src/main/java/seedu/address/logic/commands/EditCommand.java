@@ -1,14 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_RANK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SECTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -52,10 +45,12 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_TAG + "TAG] "
-            + "[" + PREFIX_PASSWORD + "PASSWORD]...\n"
+            + "[" + PREFIX_PASSWORD + "PASSWORD] "
+            + "[" + PREFIX_USERTYPE + "USERTYPE] ...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_RANK + "CFC";
+            + PREFIX_RANK + "CFC "
+            + PREFIX_USERTYPE + "A";;
 
     public static final String MESSAGE_USAGE_GENERAL = COMMAND_WORD + ": Edits the details of yourself. "
             + "Existing values will be overwritten by the input values.\n"
@@ -66,7 +61,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_TAG + "TAG] "
-            + "[" + PREFIX_PASSWORD + "PASSWORD]...\n"
+            + "[" + PREFIX_PASSWORD + "PASSWORD] ...\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_PHONE + "91234567 " + PREFIX_RANK + "CFC";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";

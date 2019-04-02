@@ -180,9 +180,9 @@ public class ParserUtil {
     public static UserType parseUserType (String userType) throws ParseException {
         requireNonNull(userType);
         String trimmedUserType = userType.trim();
-        if (trimmedUserType.equals("A") ) {
+        if (trimmedUserType.matches("[A\\s].*") ) {
             return UserType.ADMIN;
-        } else if (trimmedUserType.equals("G")) {
+        } else if (trimmedUserType.matches("[G\\s].*")) {
             return UserType.GENERAL;
         } else {
             throw new ParseException(UserType.MESSAGE_CONSTRAINTS);
