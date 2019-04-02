@@ -75,7 +75,7 @@ public class EditCommand extends Command {
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
-    public final String userName;
+    private final String userName;
 
     /**
      * @param index of the person in the filtered person list to edit
