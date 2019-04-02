@@ -40,6 +40,8 @@ public class ScheduleCommand extends Command {
         dutyMonth.schedule(persons);
         dutyMonth.printScheduledDuties();
 
+        model.commitPersonnelDatabase();
+
         return new CommandResult(String.format(SCHEDULE_SUCCESS, CalendarUtil
                 .getMonthString(dutyMonth.getMonthIndex())));
     }
