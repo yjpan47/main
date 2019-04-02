@@ -30,14 +30,15 @@ public class CommandBoxTest extends GuiUnitTest {
     public void setUp() {
         CommandBox commandBox = new CommandBox(new CommandBox.CommandExecutor() {
             @Override
-            public CommandResult execute(String commandText, UserType user) throws CommandException, ParseException {
+            public CommandResult execute(String commandText, UserType user, String userName)
+                    throws CommandException, ParseException {
                 history.add(commandText);
                 if (commandText.equals(COMMAND_THAT_SUCCEEDS)) {
                     return new CommandResult("Command successful");
                 }
                 throw new CommandException("Command failed");
             }
-        }, null, history);
+        }, UserType.ADMIN, "Admin", history);
         commandBoxHandle = new CommandBoxHandle(getChildNode(commandBox.getRoot(),
                 CommandBoxHandle.COMMAND_INPUT_FIELD_ID));
         uiPartRule.setUiPart(commandBox);
