@@ -29,14 +29,16 @@ public class BlockDateCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        Person person = model.findPerson(userName);
-        DutyMonth nextMonth = model.getDutyCalendar().getNextMonth();
-        if (blockedDates.size() > 15) {
-            throw new CommandException(MESSAGE_TOO_MANY_BLOCKED_DATES);
-        }
-        for (Integer blockedDay : blockedDates) {
-            nextMonth.addBlockedDay(person, blockedDay);
-        }
+
+//        Person person = model.findPerson(userName);
+//        DutyMonth nextMonth = model.getDutyCalendar().getNextMonth();
+//        if (blockedDates.size() > 15) {
+//            throw new CommandException(MESSAGE_TOO_MANY_BLOCKED_DATES);
+//        }
+//        for (Integer blockedDay : blockedDates) {
+//            nextMonth.addBlockedDay(person, blockedDay);
+//       }
+//
         return new CommandResult(String.format(MESSAGE_BLOCK_DATES_SUCCESS));
     }
 

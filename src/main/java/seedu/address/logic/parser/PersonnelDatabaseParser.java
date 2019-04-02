@@ -96,7 +96,7 @@ public class PersonnelDatabaseParser {
             return new ScheduleCommand();
 
         case BlockDateCommand.COMMAND_WORD:
-            return new BlockDateCommandParser().parse(arguments);
+            return new BlockDateCommandParser().parse(arguments, userType, userName);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

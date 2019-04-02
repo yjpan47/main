@@ -23,9 +23,10 @@ public class BlockDateCommandParser implements Parser<BlockDateCommand>{
         List<Integer> blockedDates = new ArrayList<>();
 
         for (int i = 0; i < args.length(); i++) {
-            blockedDates.add(Integer.parseInt(Character.toString(args.charAt(i))));
+            if (!(args.charAt(i)==' ')) {
+                blockedDates.add(Integer.parseInt(Character.toString(args.charAt(i))));
+            }
         }
-
 
         return new BlockDateCommand(blockedDates,userName);
     }
