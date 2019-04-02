@@ -18,6 +18,7 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
 
     private final UniquePersonList persons;
     private final DutyCalendar dutyCalendar;
+    private Person currentUser;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
     /*
@@ -115,6 +116,11 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
     public void removePerson(Person key) {
         persons.remove(key);
         indicateModified();
+    }
+
+
+    public Person getCurrentUser() {
+        return currentUser;
     }
 
     @Override
