@@ -8,4 +8,6 @@ package seedu.address.commons.core;
 public enum UserType {
     GENERAL,
     ADMIN;
+
+    public static final String MESSAGE_CONSTRAINTS = "UserType character must be 'A' or 'G' only.";
 }
