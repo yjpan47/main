@@ -16,14 +16,16 @@ public class BlockDateCommand extends Command {
             + "Example: " + COMMAND_WORD + "2 4 5 6 9 10";
 
     private final List<Integer> blockedDates;
+    private final String userName;
 
-    public BlockDateCommand(List<Integer> blockedDates) {
+    public BlockDateCommand(List<Integer> blockedDates, String userName) {
         this.blockedDates = blockedDates;
+        this.userName = userName;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        Person person = model.getCurrentUser();
+        Person person = model.findPerson(userName);
     }
 
     @Override

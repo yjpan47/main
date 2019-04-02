@@ -152,8 +152,5 @@ public interface Model {
      */
     DutyCalendar getDutyCalendar();
 
-    /**
-     * Returns the current User of the program
-     */
-    Person getCurrentUser();
+
 }

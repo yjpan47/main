@@ -118,10 +118,6 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
         indicateModified();
     }
 
-    public void setCurrentUser(Person key) {
-        currentUser=key;
-        indicateModified();
-    }
 
     public Person getCurrentUser() {
         return currentUser;

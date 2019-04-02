@@ -7,12 +7,13 @@ import java.util.Collections;
 import java.util.List;
 
 
+import seedu.address.commons.core.UserType;
 import seedu.address.logic.commands.BlockDateCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 public class BlockDateCommandParser implements Parser<BlockDateCommand>{
 
-    public BlockDateCommand parse(String args) throws ParseException {
+    public BlockDateCommand parse(String args, UserType userType, String userName) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
@@ -26,6 +27,6 @@ public class BlockDateCommandParser implements Parser<BlockDateCommand>{
         }
 
 
-        return new BlockDateCommand(blockedDates);
+        return new BlockDateCommand(blockedDates,userName);
     }
 }
