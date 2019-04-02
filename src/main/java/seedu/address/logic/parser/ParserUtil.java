@@ -27,7 +27,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_CONSTRAINTS_DATE =
-            "Dates should be valid Gregorian dates of the format [ddmmyy]."
+            "Dates should be valid Gregorian dates of the format [ddmmyy].";
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_DATE = "Date is not a valid [ddmmyy] string.";
     public static final String VALIDATION_REGEX_DATE = "\\d{6}";
@@ -54,7 +54,7 @@ public class ParserUtil {
     public static LocalDate parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        if (!trimmedDate.matches(VALIDATION_REGEX_DATE))) {
+        if (!trimmedDate.matches(VALIDATION_REGEX_DATE)) {
             throw new ParseException(MESSAGE_CONSTRAINTS_DATE);
         }
 

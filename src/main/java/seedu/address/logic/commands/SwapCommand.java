@@ -7,6 +7,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.*;
@@ -24,7 +25,7 @@ public class SwapCommand extends Command {
             + PREFIX_REQUESTED_DATE + "DATE (ddmmyy) "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ALLOCATED_DATE + "010119 "
-            + PREFIX_REQUESTED_DATE + "050119 "
+            + PREFIX_REQUESTED_DATE + "050119 ";
 
     public static final String MESSAGE_SUCCESS = "Request submitted";
     public static final String MESSAGE_INVALID_YEAR = "Invalid year input.";
@@ -33,6 +34,7 @@ public class SwapCommand extends Command {
 
     private final LocalDate allocatedDate;
     private final LocalDate requestedDate;
+    private Optional<String> userName;
 
     /**
      * Creates a SwapCommand to swap the specified {@code Person}
@@ -42,18 +44,18 @@ public class SwapCommand extends Command {
         requireNonNull(requestedDate);
         this.allocatedDate = allocatedDate;
         this.requestedDate = requestedDate;
+        this.userName = Optional.empty();
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         String currentUser = model.getUserName();
-        UserType currentUserType = model.getUserType();
+        userName = Optional.of(currentUser);
         int currentMonthIndex = model.getDutyCalendar().getCurrentMonth().getMonthIndex();
         int nextMonthIndex = model.getDutyCalendar().getNextMonth().getMonthIndex();
         int currentYear = model.getDutyCalendar().getCurrentYear();
         int allocatedDateDay = allocatedDate.getDayOfMonth();
-        int requestedDateDay = requestedDate.getDayOfMonth();
         int allocatedDateMonth = allocatedDate.getMonthValue();
         int requestedDateMonth = requestedDate.getMonthValue();
         int allocatedDateYear = allocatedDate.getYear();
@@ -84,25 +86,27 @@ public class SwapCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_DAY);
         }
 
-
+        model.addSwapRequest(currentUser, allocatedDate, requestedDate);
         model.commitPersonnelDatabase();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 
     @Override
     public CommandResult executeGeneral(Model model, CommandHistory history) throws CommandException {
-        throw new CommandException(Messages.MESSAGE_NO_AUTHORITY);
+        return execute(model, history);
     }
 
     @Override
     public CommandResult executeAdmin(Model model, CommandHistory history) throws CommandException {
-        return execute(model, history);
+        throw new CommandException(Messages.MESSAGE_NO_AUTHORITY);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof SwapCommand // instanceof handles nulls
-                && toAdd.equals(((SwapCommand) other).toAdd));
+                || other instanceof SwapCommand // instanceof handles nulls
+                && userName.equals(((SwapCommand) other).userName)
+                && allocatedDate.equals(((SwapCommand) other).allocatedDate)
+                && requestedDate.equals(((SwapCommand) other).requestedDate);
     }
 }

@@ -12,4 +12,16 @@ public class Request {
         this.allocatedDate = allocatedDate;
         this.requestedDate = requestedDate;
     }
+
+    public String getNric() {
+        return nric;
+    }
+
+    public LocalDate getAllocatedDate() {
+        return allocatedDate;
+    }
+
+    public LocalDate getRequestedDate() {
+        return requestedDate;
+    }
 }
