@@ -118,7 +118,6 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(this.getName())
                 && otherPerson.getNric().equals(this.getNric());
     }
 
