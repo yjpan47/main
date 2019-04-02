@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.function.Predicate;
 
 import javafx.beans.property.ReadOnlyProperty;
@@ -154,4 +155,23 @@ public interface Model {
     DutyCalendar getDutyCalendar();
 
 
-}
+    /**
+     * Set user details.
+     */
+    void setUserDetails(UserType userType, String userName);
+
+    /**
+     * Get username
+     */
+    String getUserName();
+
+    /**
+     * Get user type
+     */
+    UserType getUserType();
+
+    /**
+     * Add a swap request to the model
+     */
+    void addSwapRequest(String nric, LocalDate allocatedDate, LocalDate requestedDate);
+

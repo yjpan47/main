@@ -168,4 +168,14 @@ public class DutyMonth {
             System.out.println("]");
         }
     }
+
+    public boolean isAssignedToDuty(String nric, int day) {
+        List<Person> personsOnDuty = scheduledDuties.get(day - 1).getPersons();
+        for (Person person : personsOnDuty) {
+            if (person.getNric().toString().equals(nric)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

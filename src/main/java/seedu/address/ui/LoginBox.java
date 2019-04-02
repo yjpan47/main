@@ -63,14 +63,15 @@ public class LoginBox {
             userType = UserType.ADMIN;
             userName = userField.getText();
             window.close();
-        }
-        UserType foundUser = userFinder.findAccount(userField.getText(), passField.getText());
-        if (foundUser == null) {
-            label.setText("User not found!");
         } else {
-            userType = foundUser;
-            userName = userField.getText();
-            window.close();
+            UserType foundUser = userFinder.findAccount(userField.getText(), passField.getText());
+            if (foundUser == null) {
+                label.setText("User not found!");
+            } else {
+                userType = foundUser;
+                userName = userField.getText();
+                window.close();
+            }
         }
     }
 

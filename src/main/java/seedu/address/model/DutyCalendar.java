@@ -1,4 +1,8 @@
 package seedu.address.model;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import seedu.address.commons.util.CalendarUtil;
 import seedu.address.model.duty.DutyMonth;
 import seedu.address.model.duty.DutySettings;
@@ -9,11 +13,17 @@ import seedu.address.model.duty.DutyStorage;
  */
 public class DutyCalendar {
 
+
+    private static final int NUMBER_OF_MONTHS_IN_YEAR = 12;
+
     private int currentYear;
     private int currentMonthIndex;
 
     private DutyMonth currentMonth;
     private DutyMonth nextMonth;
+
+    private int currentYear;
+    private int currentMonthIndex;
 
     /**
      * Default constructor with no data contained within.
@@ -45,6 +55,10 @@ public class DutyCalendar {
 
     public DutyMonth getNextMonth() {
         return nextMonth;
+    }
+
+    public int getCurrentYear() {
+        return currentYear;
     }
 
     public void setDutyCalendar(DutyCalendar dutyCalendar) {
