@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.GregorianCalendar;
 import java.util.stream.Collectors;
 
 import seedu.address.model.person.Person;
@@ -27,7 +28,7 @@ public class DutyMonth {
 
     public DutyMonth(int monthIndex, int firstDayWeekIndex) {
 
-        if (monthIndex >= 1 && monthIndex <= 12 && firstDayWeekIndex >= 0 && firstDayWeekIndex <= 7) {
+        if (monthIndex >= 1 && monthIndex <= 12 && firstDayWeekIndex >= 1 && firstDayWeekIndex <= 7) {
             this.monthIndex = monthIndex;
             this.firstDayWeekIndex = firstDayWeekIndex;
             this.numOfDays = getNumOfDays();
@@ -44,7 +45,7 @@ public class DutyMonth {
 
     public DutyMonth(int monthIndex, int firstDayWeekIndex, List<Duty> duties) {
 
-        if (monthIndex >= 1 && monthIndex <= 12 && firstDayWeekIndex >= 0 && firstDayWeekIndex <= 7) {
+        if (monthIndex >= 1 && monthIndex <= 12 && firstDayWeekIndex >= 1 && firstDayWeekIndex <= 7) {
             this.monthIndex = monthIndex;
             this.firstDayWeekIndex = firstDayWeekIndex;
             this.numOfDays = getNumOfDays();
@@ -75,15 +76,15 @@ public class DutyMonth {
     private void generateDuties() {
         int weekCounter = this.firstDayWeekIndex;
         for (int day = 1; day <= this.numOfDays; day++) {
-            if (weekCounter >= 1 && weekCounter <= 4) {
+            if (weekCounter >= 2 && weekCounter <= 5) {
                 this.duties.add(new DutyTypeC(this.monthIndex, day, weekCounter));
-            } else if (weekCounter == 5) {
+            } else if (weekCounter == 6) {
                 this.duties.add(new DutyTypeB(this.monthIndex, day, weekCounter));
             } else {
                 this.duties.add(new DutyTypeA(this.monthIndex, day, weekCounter));
             }
             weekCounter++;
-            if (weekCounter == 7) {
+            if (weekCounter == 8) {
                 weekCounter = 1;
             }
         }
@@ -214,9 +215,8 @@ public class DutyMonth {
      * Returns current month
      */
     public boolean isCurrentMonth() {
-        Calendar cal = Calendar.getInstance();
-        int currentMonth = cal.get(Calendar.MONTH);
-        return (this.monthIndex == currentMonth);
+        GregorianCalendar cal = new GregorianCalendar();
+        return (this.monthIndex == cal.get(Calendar.MONTH) + 1);
     }
 
     /**
@@ -247,6 +247,12 @@ public class DutyMonth {
     }
 
     public boolean isAssignedToDuty(String nric, int day) {
-        persons.get(day - 1);
+        List<Person> personsOnDuty = duties.get(day - 1).getPersons();
+        for (Person person : personsOnDuty) {
+            if (person.getNric().toString().equals(nric)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

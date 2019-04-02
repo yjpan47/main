@@ -42,15 +42,17 @@ public class DutyCalendar {
 
     private int getTodayMonth() {
         GregorianCalendar calendar = new GregorianCalendar();
-        return calendar.get(Calendar.MONTH);
+        // January is 0 when gotten from calendar.
+        return calendar.get(Calendar.MONTH) + 1;
     }
 
     private int dayOfFirstDayOfMonth(int month) {
         GregorianCalendar calendar = new GregorianCalendar();
+        // Sunday is 1, Monday is 2, Saturday is 7.
         if (month == 13) {
-            calendar.set(calendar.get(Calendar.YEAR) + 1, month - 12, 1);
+            calendar.set(calendar.get(Calendar.YEAR) + 1, month - 13, 1);
         } else {
-            calendar.set(calendar.get(Calendar.YEAR), month, 1);
+            calendar.set(calendar.get(Calendar.YEAR), month - 1, 1);
         }
         return calendar.get(Calendar.DAY_OF_WEEK);
     }
