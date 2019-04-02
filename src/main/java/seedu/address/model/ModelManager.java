@@ -205,10 +205,15 @@ public class ModelManager implements Model {
     public UserType findAccount(String userName, String password) {
         for (Person person: versionedPersonnelDatabase.getPersonList()) {
             if (userName.equals(person.getNric().value) && password.equals(person.getPassword().value)) {
+                versionedPersonnelDatabase.setCurrentUser(person);
                 return person.getUserType();
             }
         }
         return null;
+    }
+
+    public Person getCurrentUser() {
+        return versionedPersonnelDatabase.getCurrentUser();
     }
 
     /**

@@ -146,4 +146,9 @@ public interface Model {
      * Returns the duty calendar of current personnel database.
      */
     DutyCalendar getDutyCalendar();
+
+    /**
+     * Returns the current User of the program
+     */
+    Person getCurrentUser();
 }
