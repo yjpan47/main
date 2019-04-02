@@ -5,8 +5,12 @@ import java.util.HashMap;
 public class DutySettings {
 
     private static int[] dutyPointsInWeek = new int[7];
+
     static int[] dutyCapacityInWeek = new int[7];
+
+
     static HashMap<Integer, HashMap<Integer, Integer>> dutyPointsException = new HashMap<>();
+
     static HashMap<Integer, HashMap<Integer, Integer>> dutyCapacityException = new HashMap<>();
 
     public static void setDefault() {

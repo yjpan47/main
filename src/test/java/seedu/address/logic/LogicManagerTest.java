@@ -22,6 +22,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
+import seedu.address.commons.core.UserType;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.HistoryCommand;
@@ -152,7 +153,7 @@ public class LogicManagerTest {
                                            String expectedMessage, Model expectedModel) {
 
         try {
-            CommandResult result = logic.execute(inputCommand, ADMIN);
+            CommandResult result = logic.execute(inputCommand, UserType.ADMIN, "Admin");
             assertEquals(expectedException, null);
             assertEquals(expectedMessage, result.getFeedbackToUser());
         } catch (CommandException | ParseException e) {
@@ -169,7 +170,7 @@ public class LogicManagerTest {
      */
     private void assertHistoryCorrect(String... expectedCommands) {
         try {
-            CommandResult result = logic.execute(HistoryCommand.COMMAND_WORD, ADMIN);
+            CommandResult result = logic.execute(HistoryCommand.COMMAND_WORD, UserType.ADMIN, "Admin");
             String expectedMessage = String.format(
                     HistoryCommand.MESSAGE_SUCCESS, String.join("\n", expectedCommands));
             assertEquals(expectedMessage, result.getFeedbackToUser());
