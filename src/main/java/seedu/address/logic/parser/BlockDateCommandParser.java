@@ -1,10 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DATE;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 
 import seedu.address.commons.core.UserType;
@@ -19,14 +18,17 @@ public class BlockDateCommandParser implements Parser<BlockDateCommand>{
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, BlockDateCommand.MESSAGE_USAGE));
         }
+        String[] dates = trimmedArgs.split(" ");
+        List<Integer> blockedDatesDuplicates = new ArrayList<>();
 
-        List<Integer> blockedDates = new ArrayList<>();
-
-        for (int i = 0; i < args.length(); i++) {
-            if (!(args.charAt(i)==' ')) {
-                blockedDates.add(Integer.parseInt(Character.toString(args.charAt(i))));
+        for (String date : dates){
+            Integer dateAdded = Integer.parseInt(date);
+            if(dateAdded>31){
+                throw new ParseException(MESSAGE_INVALID_DATE);
             }
         }
+        Set<Integer> set = new HashSet<>(blockedDatesDuplicates);
+        List<Integer> blockedDates = new ArrayList<>(set);
 
         return new BlockDateCommand(blockedDates,userName);
     }
