@@ -212,6 +212,19 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Returns Person of account given username, returns null if no person found.
+     */
+    @Override
+    public Person findPerson(String userName) {
+        for (Person person: versionedPersonnelDatabase.getPersonList()) {
+            if (userName.equals(person.getNric().value)) {
+                return person;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Ensures {@code selectedPerson} is a valid person in {@code filteredPersons}.
      */
     private void ensureSelectedPersonIsValid(ListChangeListener.Change<? extends Person> change) {

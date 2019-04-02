@@ -6,8 +6,8 @@ import java.util.GregorianCalendar;
 import java.util.InputMismatchException;
 import java.util.TimeZone;
 
-import seedu.address.model.calendar.Duty;
-import seedu.address.model.calendar.DutyMonth;
+import seedu.address.model.duty.Duty;
+import seedu.address.model.duty.DutyMonth;
 
 /**
  * A container for Calendar specific utility functions.
@@ -75,8 +75,8 @@ public class CalendarUtil {
     public static Duty[][] getDutyMatrix(DutyMonth dutyMonth) {
         Duty[][] matrix = new Duty[5][7];
         int weekIndex = 0;
-        int dayIndex = dutyMonth.getFirstDayWeekIndex() - 1;
-        for (Duty duty : dutyMonth.getDuties()) {
+        int dayIndex = dutyMonth.getFirstDayOfWeekIndex() - 1;
+        for (Duty duty : dutyMonth.getScheduledDuties()) {
             matrix[weekIndex][dayIndex] = duty;
             dayIndex++;
             if (dayIndex >= 6) {

@@ -9,7 +9,10 @@ import seedu.address.commons.util.CalendarUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.calendar.DutyMonth;
+import seedu.address.model.duty.Duty;
+import seedu.address.model.duty.DutyMonth;
+import seedu.address.model.duty.DutySettings;
+import seedu.address.model.duty.DutyStorage;
 import seedu.address.model.person.Person;
 
 /**
@@ -21,7 +24,7 @@ public class ScheduleCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Schedules the duties for the upcoming month."
-            + "taking into account the block out dates of each guard duty personnel and their extras. "
+            + "taking into account the duty points of each person and their blocked out dates. "
             + "It will sort by available dates and distribute duties accordingly. \n";
 
     public static final String SCHEDULE_SUCCESS = "Month of %1$s successfully scheduled!";
@@ -32,10 +35,12 @@ public class ScheduleCommand extends Command {
         requireNonNull(model);
         List<Person> persons = model.getFilteredPersonList();
         DutyMonth dutyMonth = model.getDutyCalendar().getCurrentMonth();
-        dutyMonth.addDutyPersons(persons);
-        dutyMonth.schedule();
-        //System.out.println(model.getFilteredPersonList());
-        //System.out.println("Current Month " + dutyMonth.getMonthIndex());
+
+        DutySettings.setDefault();
+        dutyMonth.schedule(persons);
+
+        dutyMonth.printScheduledDuties();
+
         return new CommandResult(String.format(SCHEDULE_SUCCESS, CalendarUtil
                 .getMonthString(dutyMonth.getMonthIndex())));
     }

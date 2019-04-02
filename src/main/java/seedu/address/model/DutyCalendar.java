@@ -1,16 +1,15 @@
 package seedu.address.model;
-
 import seedu.address.commons.util.CalendarUtil;
-import seedu.address.model.calendar.DutyMonth;
-
+import seedu.address.model.duty.DutyMonth;
 
 /**
  * Represents a Calendar that contains duties for the current and the following months
  */
 public class DutyCalendar {
 
+    private int currentYear;
     private int currentMonthIndex;
-    private int currentYearIndex;
+
     private DutyMonth currentMonth;
     private DutyMonth nextMonth;
 
@@ -18,26 +17,23 @@ public class DutyCalendar {
      * Default constructor with no data contained within.
      */
     public DutyCalendar() {
+        this.currentYear = CalendarUtil.getCurrentYear();
         this.currentMonthIndex = CalendarUtil.getCurrentMonth();
-        this.currentYearIndex = CalendarUtil.getCurrentYear();
-        this.currentMonth = new DutyMonth(currentMonthIndex, CalendarUtil.dayOfFirstDayOfMonth(currentMonthIndex));
-        this.nextMonth = new DutyMonth(currentMonthIndex + 1,
-                CalendarUtil.dayOfFirstDayOfMonth(currentMonthIndex + 1));
+        this.currentMonth = new DutyMonth(this.currentYear, this.currentMonthIndex,
+                CalendarUtil.dayOfFirstDayOfMonth(this.currentMonthIndex));
+        this.nextMonth = new DutyMonth((this.currentMonthIndex == 12)
+                ? this.currentYear + 1 : this.currentYear,
+                this.currentMonthIndex + 1,
+                CalendarUtil.dayOfFirstDayOfMonth(this.currentMonthIndex + 1));
     }
 
     public DutyCalendar(DutyMonth currentMonth, DutyMonth nextMonth) {
-        this.currentMonthIndex = CalendarUtil.getCurrentMonth();
-        this.currentYearIndex = CalendarUtil.getCurrentYear();
         this.currentMonth = currentMonth;
         this.nextMonth = nextMonth;
     }
 
     public int getCurrentMonthIndex() {
-        return currentMonthIndex;
-    }
-
-    public int getCurrentYearIndex() {
-        return currentYearIndex;
+        return this.currentMonthIndex;
     }
 
     public DutyMonth getCurrentMonth() {
@@ -53,7 +49,7 @@ public class DutyCalendar {
             this.currentMonth = dutyCalendar.getCurrentMonth();
             this.nextMonth = dutyCalendar.getNextMonth();
         } else {
-            rollover(dutyCalendar);
+            this.rollover(dutyCalendar);
         }
     }
 
@@ -62,10 +58,10 @@ public class DutyCalendar {
      * @param dutyCalendar the dutyCalendar from the storage
      */
     private void rollover(DutyCalendar dutyCalendar) {
+        this.currentYear = CalendarUtil.getCurrentYear();
         this.currentMonthIndex = CalendarUtil.getCurrentMonth();
         this.currentMonth = dutyCalendar.getNextMonth();
-        this.nextMonth = new DutyMonth(currentMonthIndex + 1,
-                CalendarUtil.dayOfFirstDayOfMonth(currentMonthIndex + 1));
+        this.nextMonth = new DutyMonth(this.currentYear, this.currentMonthIndex + 1,
+                CalendarUtil.dayOfFirstDayOfMonth(this.currentMonthIndex + 1));
     }
-
 }
