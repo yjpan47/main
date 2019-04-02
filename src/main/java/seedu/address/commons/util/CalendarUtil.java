@@ -17,11 +17,12 @@ public class CalendarUtil {
         return calendar.get(Calendar.MONTH);
     }
 
-    public static int getNextMonth() {
+    public static int getCurrentYear() {
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.setTimeZone(TimeZone.getTimeZone("GMT+8"));
-        return calendar.get(Calendar.MONTH) + 1;
+        return calendar.get(Calendar.YEAR);
     }
+
 
     /**
      * Gets current month in String format
