@@ -24,20 +24,20 @@ class JsonSerializablePersonnelDatabase {
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
-//    private final JsonAdaptedDutyMonth currentMonth;
-//    private final JsonAdaptedDutyMonth nextMonth;
+    private final JsonAdaptedDutyMonth currentMonth;
+    private final JsonAdaptedDutyMonth nextMonth;
 
     /**
      * Constructs a {@code JsonSerializablePersonnelDatabase} with the given persons and duty months.
      */
-//    @JsonCreator
-//    public JsonSerializablePersonnelDatabase(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-//                                             @JsonProperty("currentMonth") JsonAdaptedDutyMonth currentMonth,
-//                                             @JsonProperty("nextMonth") JsonAdaptedDutyMonth nextMonth) {
-//        this.persons.addAll(persons);
-//        this.currentMonth = currentMonth;
-//        this.nextMonth = nextMonth;
-//    }
+    @JsonCreator
+    public JsonSerializablePersonnelDatabase(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
+                                             @JsonProperty("currentMonth") JsonAdaptedDutyMonth currentMonth,
+                                             @JsonProperty("nextMonth") JsonAdaptedDutyMonth nextMonth) {
+        this.persons.addAll(persons);
+        this.currentMonth = currentMonth;
+        this.nextMonth = nextMonth;
+    }
 
     /**
      * Converts a given {@code ReadOnlyPersonnelDatabase} into this class for Jackson use.
@@ -46,8 +46,8 @@ class JsonSerializablePersonnelDatabase {
      */
     public JsonSerializablePersonnelDatabase(ReadOnlyPersonnelDatabase source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
-//        this.currentMonth = new JsonAdaptedDutyMonth(source.getDutyCalendar().getCurrentMonth());
-//        this.nextMonth = new JsonAdaptedDutyMonth(source.getDutyCalendar().getNextMonth());
+        this.currentMonth = new JsonAdaptedDutyMonth(source.getDutyCalendar().getCurrentMonth());
+        this.nextMonth = new JsonAdaptedDutyMonth(source.getDutyCalendar().getNextMonth());
     }
 
     /**
@@ -65,8 +65,8 @@ class JsonSerializablePersonnelDatabase {
             personnelDatabase.addPerson(person);
         }
         ObservableList<Person> personList = personnelDatabase.getPersonList();
-//        personnelDatabase.setDutyCalendar(new DutyCalendar(currentMonth.toModelType(personList),
-//                nextMonth.toModelType(personList)));
+        personnelDatabase.setDutyCalendar(new DutyCalendar(currentMonth.toModelType(personList),
+                nextMonth.toModelType(personList)));
 
         return personnelDatabase;
     }
