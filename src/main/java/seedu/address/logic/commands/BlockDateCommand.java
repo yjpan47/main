@@ -5,6 +5,7 @@ import java.util.List;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.duty.DutyMonth;
 import seedu.address.model.person.Person;
 
 public class BlockDateCommand extends Command {
@@ -14,6 +15,9 @@ public class BlockDateCommand extends Command {
             + "month for the current person using.\n"
             + "Parameters: Dates in numbers for the next month\n"
             + "Example: " + COMMAND_WORD + "2 4 5 6 9 10";
+    public static final String MESSAGE_BLOCK_DATES_SUCCESS = "Dates for next month have been successfully blocked!";
+    public static final String MESSAGE_TOO_MANY_BLOCKED_DATES = "Too many dates to block, number of blocked days "
+            + "should be less than 15";
 
     private final List<Integer> blockedDates;
     private final String userName;
@@ -26,6 +30,14 @@ public class BlockDateCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         Person person = model.findPerson(userName);
+        DutyMonth nextMonth = model.getDutyCalendar().getNextMonth();
+        if (blockedDates.size()>15){
+            throw new CommandException(MESSAGE_TOO_MANY_BLOCKED_DATES);
+        }
+        for (Integer blockedDay : blockedDates){
+            nextMonth.addBlockedDay(person,blockedDay);
+        }
+        return new CommandResult(String.format(MESSAGE_BLOCK_DATES_SUCCESS);
     }
 
     @Override
