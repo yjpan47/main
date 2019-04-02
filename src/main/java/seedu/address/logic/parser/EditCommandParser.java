@@ -46,14 +46,12 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
+     * Parses the given {@code String} of arguments in the context of the EditCommand (General)
      * and returns an EditCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditCommand generalParse(String args, String userName) throws ParseException {
         ArgumentMultimap argMultimap = initMultimapGeneral(args);
-        Index index;
-
         if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_GENERAL));
         }
@@ -86,7 +84,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
+     * Parses the given {@code String} of arguments in the context of the EditCommand (Admin)
      * and returns an EditCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
@@ -149,7 +147,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
-    private ArgumentMultimap initMultimapGeneral(String args){
+    /**
+     * Parses the given {@code String} of arguments in the context of the EditCommand (General)
+     * and returns an ArgumentMultimap object.
+     */
+    private ArgumentMultimap initMultimapGeneral(String args) {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_COMPANY, PREFIX_SECTION, PREFIX_RANK,
@@ -157,12 +159,16 @@ public class EditCommandParser implements Parser<EditCommand> {
         return argMultimap;
     }
 
-    private ArgumentMultimap initMultimapAdmin(String args){
+    /**
+     * Parses the given {@code String} of arguments in the context of the EditCommand (Admin)
+     * and returns an ArgumentMultimap object.
+     */
+    private ArgumentMultimap initMultimapAdmin(String args) {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_COMPANY, PREFIX_SECTION, PREFIX_RANK,
                         PREFIX_NAME, PREFIX_PHONE, PREFIX_TAG, PREFIX_PASSWORD, PREFIX_USERTYPE);
-        return  argMultimap;
+        return argMultimap;
     }
 
 }
