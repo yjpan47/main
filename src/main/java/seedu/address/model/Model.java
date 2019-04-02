@@ -57,9 +57,6 @@ public interface Model {
 
     /** Sorts the PersonnelDatabase by name */
     void sortPersonnelDatabase();
-
-    /** Returns the RequestManager */
-    ReadOnlyRequestManager getRequestManager();
     
     /**
      * Returns true if a person with the same identity as {@code person} exists in the personnel database.

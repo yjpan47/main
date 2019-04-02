@@ -31,7 +31,6 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final DutyCalendar dutyCalendar;
-    private final RequestManager requestManager;
     private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
     private Optional<UserType> userType;
     private Optional<String> userName;
@@ -57,7 +56,6 @@ public class ModelManager implements Model {
         */
 
         dutyCalendar = versionedPersonnelDatabase.getDutyCalendar();
-        requestManager = new RequestManager();
     }
 
     public ModelManager() {
@@ -164,11 +162,11 @@ public class ModelManager implements Model {
         return userName.get();
     }
 
-    //=========== User Details ===============================================================================
+    //=========== Swap Requests ===============================================================================
 
     @Override
     public void addSwapRequest(String nric, LocalDate allocatedDate, LocalDate requestedDate) {
-        requestManager.addRequest(nric, allocatedDate, requestedDate);
+        versionedPersonnelDatabase.addRequest(nric, allocatedDate, requestedDate);
     }
 
     //=========== Filtered Person List Accessors =============================================================

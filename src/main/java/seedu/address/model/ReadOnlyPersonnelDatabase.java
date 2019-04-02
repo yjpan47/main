@@ -3,6 +3,9 @@ package seedu.address.model;
 import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
+import seedu.address.model.request.Request;
+
+import java.util.List;
 
 /**
  * Unmodifiable view of a personnel database
@@ -21,4 +24,8 @@ public interface ReadOnlyPersonnelDatabase extends Observable {
      */
     DutyCalendar getDutyCalendar();
 
+    /**
+     * Returns a list of requests.
+     */
+    List<Request> getRequestList();
 }
