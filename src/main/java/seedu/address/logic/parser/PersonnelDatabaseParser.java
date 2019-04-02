@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.UserType;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.BlockDateCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -22,6 +23,7 @@ import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.UndoCommand;
+
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -92,6 +94,9 @@ public class PersonnelDatabaseParser {
 
         case ScheduleCommand.COMMAND_WORD:
             return new ScheduleCommand();
+
+        case BlockDateCommand.COMMAND_WORD:
+            return new BlockDateCommandParser().parse(arguments, userType, userName);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
