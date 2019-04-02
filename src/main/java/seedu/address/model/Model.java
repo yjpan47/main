@@ -57,7 +57,7 @@ public interface Model {
 
     /** Sorts the PersonnelDatabase by name */
     void sortPersonnelDatabase();
-    
+
     /**
      * Returns true if a person with the same identity as {@code person} exists in the personnel database.
      */
@@ -142,28 +142,35 @@ public interface Model {
      * Returns UserType of account if found, null otherwise.
      */
     UserType findAccount(String userName, String password);
+
     /**
-     * Get the Duty Calendar
+
+     * Returns Person of account if found, null otherwise.
      */
-    public DutyCalendar getDutyCalendar();
+    Person findPerson(String userName);
+
+    /**
+     * Returns the duty calendar of current personnel database.
+     */
+    DutyCalendar getDutyCalendar();
 
     /**
      * Set user details.
      */
-    public void setUserDetails(UserType userType, String userName);
+    void setUserDetails(UserType userType, String userName);
 
     /**
      * Get username
      */
-    public String getUserName();
+    String getUserName();
 
     /**
      * Get user type
      */
-    public UserType getUserType();
+    UserType getUserType();
 
     /**
      * Add a swap request to the model
      */
-    public void addSwapRequest(String nric, LocalDate allocatedDate, LocalDate requestedDate);
+    void addSwapRequest(String nric, LocalDate allocatedDate, LocalDate requestedDate);
 }

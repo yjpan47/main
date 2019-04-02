@@ -3,8 +3,8 @@ package seedu.address.model;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import seedu.address.model.calendar.DutyMonth;
-
+import seedu.address.commons.util.CalendarUtil;
+import seedu.address.model.duty.DutyMonth;
 
 /**
  * Represents a Calendar that contains duties for the current and the following months
@@ -15,46 +15,31 @@ public class DutyCalendar {
 
     private DutyMonth currentMonth;
     private DutyMonth nextMonth;
+
     private int currentYear;
+    private int currentMonthIndex;
 
     /**
      * Default constructor with no data contained within.
      */
     public DutyCalendar() {
-        this.currentMonth = new DutyMonth(getTodayMonth(), dayOfFirstDayOfMonth(getTodayMonth()));
-        this.nextMonth = new DutyMonth((getTodayMonth() + 1) % NUMBER_OF_MONTHS_IN_YEAR,
-                dayOfFirstDayOfMonth(getTodayMonth() + 1));
-        this.currentYear = getTodayYear();
+        this.currentYear = CalendarUtil.getCurrentYear();
+        this.currentMonthIndex = CalendarUtil.getCurrentMonth();
+        this.currentMonth = new DutyMonth(this.currentYear, this.currentMonthIndex,
+                CalendarUtil.dayOfFirstDayOfMonth(this.currentMonthIndex));
+        this.currentMonth = new DutyMonth((this.currentMonthIndex == 12)
+                ? this.currentYear + 1 : this.currentYear,
+                this.currentMonthIndex + 1,
+                CalendarUtil.dayOfFirstDayOfMonth(this.currentMonthIndex + 1));
     }
 
     public DutyCalendar(DutyMonth currentMonth, DutyMonth nextMonth) {
         this.currentMonth = currentMonth;
         this.nextMonth = nextMonth;
-        this.currentYear = getTodayYear();
     }
 
-    //=========== Constructor ==================================================================================
-
-    private int getTodayYear() {
-        GregorianCalendar calendar = new GregorianCalendar();
-        return calendar.get(Calendar.YEAR);
-    }
-
-    private int getTodayMonth() {
-        GregorianCalendar calendar = new GregorianCalendar();
-        // January is 0 when gotten from calendar.
-        return calendar.get(Calendar.MONTH) + 1;
-    }
-
-    private int dayOfFirstDayOfMonth(int month) {
-        GregorianCalendar calendar = new GregorianCalendar();
-        // Sunday is 1, Monday is 2, Saturday is 7.
-        if (month == 13) {
-            calendar.set(calendar.get(Calendar.YEAR) + 1, month - 13, 1);
-        } else {
-            calendar.set(calendar.get(Calendar.YEAR), month - 1, 1);
-        }
-        return calendar.get(Calendar.DAY_OF_WEEK);
+    public int getCurrentMonthIndex() {
+        return this.currentMonthIndex;
     }
 
     public DutyMonth getCurrentMonth() {
@@ -70,7 +55,23 @@ public class DutyCalendar {
     }
 
     public void setDutyCalendar(DutyCalendar dutyCalendar) {
-        this.currentMonth = dutyCalendar.currentMonth;
-        this.nextMonth = dutyCalendar.nextMonth;
+        if (dutyCalendar.getCurrentMonthIndex() == CalendarUtil.getCurrentMonth()) {
+            this.currentMonth = dutyCalendar.getCurrentMonth();
+            this.nextMonth = dutyCalendar.getNextMonth();
+        } else {
+            this.rollover(dutyCalendar);
+        }
+    }
+
+    /**
+     * Replace currentMonth with nextMonth and create a new nextMonth class
+     * @param dutyCalendar the dutyCalendar from the storage
+     */
+    private void rollover(DutyCalendar dutyCalendar) {
+        this.currentYear = CalendarUtil.getCurrentYear();
+        this.currentMonthIndex = CalendarUtil.getCurrentMonth();
+        this.currentMonth = dutyCalendar.getNextMonth();
+        this.nextMonth = new DutyMonth(this.currentYear, this.currentMonthIndex + 1,
+                CalendarUtil.dayOfFirstDayOfMonth(this.currentMonthIndex + 1));
     }
 }

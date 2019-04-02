@@ -147,7 +147,7 @@ public class MainWindow extends UiPart<Stage> {
         CalendarView calendarView = new CalendarView(logic.getFilteredPersonList());
         calendarViewPlaceholder.getChildren().add(calendarView.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand, user, logic.getHistory());
+        CommandBox commandBox = new CommandBox(this::executeCommand, user, userName, logic.getHistory());
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -203,11 +203,12 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Executes the command and returns the result.
      *
-     * @see seedu.address.logic.Logic#execute(String, UserType)
+     * @see seedu.address.logic.Logic#execute(String, UserType, String)
      */
-    private CommandResult executeCommand(String commandText, UserType user) throws CommandException, ParseException {
+    private CommandResult executeCommand(String commandText, UserType user, String userName)
+            throws CommandException, ParseException {
         try {
-            CommandResult commandResult = logic.execute(commandText, user);
+            CommandResult commandResult = logic.execute(commandText, user, userName);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 

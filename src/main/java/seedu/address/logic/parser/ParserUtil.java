@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.UserType;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -161,7 +162,7 @@ public class ParserUtil {
      * Parses a {@code String password} into a {@code Password}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code phone} is invalid.
+     * @throws ParseException if the given {@code password} is invalid.
      */
     public static Password parsePassword(String password) throws ParseException {
         requireNonNull(password);
@@ -197,5 +198,23 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String userType} into a {@code UserType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code userType} is invalid.
+     */
+    public static UserType parseUserType (String userType) throws ParseException {
+        requireNonNull(userType);
+        String trimmedUserType = userType.trim();
+        if (trimmedUserType.matches("[A\\s].*")) {
+            return UserType.ADMIN;
+        } else if (trimmedUserType.matches("[G\\s].*")) {
+            return UserType.GENERAL;
+        } else {
+            throw new ParseException(UserType.MESSAGE_CONSTRAINTS);
+        }
     }
 }

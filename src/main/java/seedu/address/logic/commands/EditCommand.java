@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RANK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SECTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERTYPE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -41,7 +42,7 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
+    public static final String MESSAGE_USAGE_ADMIN = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -52,10 +53,24 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_TAG + "TAG] "
-            + "[" + PREFIX_PASSWORD + "PASSWORD]...\n"
+            + "[" + PREFIX_PASSWORD + "PASSWORD] "
+            + "[" + PREFIX_USERTYPE + "USERTYPE] ...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_RANK + "CFC";
+            + PREFIX_RANK + "CFC "
+            + PREFIX_USERTYPE + "A";;
+
+    public static final String MESSAGE_USAGE_GENERAL = COMMAND_WORD + ": Edits the details of yourself. "
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: "
+            + "[" + PREFIX_COMPANY + "COMPANY] "
+            + "[" + PREFIX_SECTION + "SECTION] "
+            + "[" + PREFIX_RANK + "RANK] "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_TAG + "TAG] "
+            + "[" + PREFIX_PASSWORD + "PASSWORD] ...\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_PHONE + "91234567 " + PREFIX_RANK + "CFC";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -63,17 +78,34 @@ public class EditCommand extends Command {
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
+    private final String userName;
 
     /**
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
+     * @param userName of person used to enter the command
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor, String userName) {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
+        requireNonNull(userName);
 
         this.index = index;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.userName = userName;
+    }
+
+    /**
+     * @param editPersonDescriptor details to edit the person with
+     * @param userName of person used to enter the command
+     */
+    public EditCommand(EditPersonDescriptor editPersonDescriptor, String userName) {
+        requireNonNull(editPersonDescriptor);
+        requireNonNull(userName);
+
+        this.index = null;
+        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.userName = userName;
     }
 
     @Override
@@ -100,7 +132,21 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult executeGeneral(Model model, CommandHistory history) throws CommandException {
-        throw new CommandException(Messages.MESSAGE_NO_AUTHORITY);
+        requireNonNull(model);
+        Person personToEdit = model.findPerson(userName);
+        if (personToEdit == null) {
+            throw new CommandException(Messages.MESSAGE_USER_NOT_FOUND);
+        }
+        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+
+        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        model.setPerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.commitPersonnelDatabase();
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 
     @Override
@@ -123,9 +169,9 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Password password = editPersonDescriptor.getPassword().orElse(personToEdit.getPassword());
-        //Will allow Admin in the future
+        UserType userType = editPersonDescriptor.getUserType().orElse(personToEdit.getUserType());
         return new Person(updatedNric, updatedCompany, updatedSection, updatedRank, updatedName,
-                updatedPhone, updatedTags, password, UserType.GENERAL);
+                updatedPhone, updatedTags, password, userType);
     }
 
     @Override
@@ -159,6 +205,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Set<Tag> tags;
         private Password password;
+        private UserType userType;
 
         public EditPersonDescriptor() {}
 
@@ -175,13 +222,14 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setTags(toCopy.tags);
             setPassword(toCopy.password);
+            setUserType(toCopy.userType);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(nric, company, section, rank, name, phone, tags, password);
+            return CollectionUtil.isAnyNonNull(nric, company, section, rank, name, phone, tags, password, userType);
         }
 
         public void setNric(Nric nric) {
@@ -257,6 +305,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(password);
         }
 
+        public void setUserType(UserType userType) {
+            this.userType = userType;
+        }
+
+        public Optional<UserType> getUserType() {
+            return Optional.ofNullable(userType);
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -279,7 +335,8 @@ public class EditCommand extends Command {
                     && getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getTags().equals(e.getTags())
-                    && getPassword().equals(e.getPassword());
+                    && getPassword().equals(e.getPassword())
+                    && getUserType().equals(e.getUserType());
         }
     }
 }

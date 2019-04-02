@@ -45,17 +45,18 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public CommandResult execute(String commandText, UserType user) throws CommandException, ParseException {
+    public CommandResult execute(String commandText, UserType user, String userName)
+            throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         personnelDatabaseModified = false;
 
         CommandResult commandResult;
         try {
             if (user == UserType.ADMIN) {
-                AdminCommand command = personnelDatabaseParser.parseCommand(commandText);
+                AdminCommand command = personnelDatabaseParser.parseCommand(commandText, user, userName);
                 commandResult = command.executeAdmin(model, history);
             } else if (user == UserType.GENERAL) {
-                GeneralCommand command = personnelDatabaseParser.parseCommand(commandText);
+                GeneralCommand command = personnelDatabaseParser.parseCommand(commandText, user, userName);
                 commandResult = command.executeGeneral(model, history);
             } else {
                 throw new CommandException(Messages.MESSAGE_NO_USER);
