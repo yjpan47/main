@@ -141,8 +141,15 @@ public interface Model {
      * Returns UserType of account if found, null otherwise.
      */
     UserType findAccount(String userName, String password);
+
     /**
-     * Get the Duty Calendar
+
+     * Returns Person of account if found, null otherwise.
      */
-    public DutyCalendar getDutyCalendar();
+    Person findPerson(String userName);
+
+    /**
+     * Returns the duty calendar of current personnel database.
+     */
+    DutyCalendar getDutyCalendar();
 }

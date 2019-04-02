@@ -8,10 +8,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.calendar.Duty;
-import seedu.address.model.calendar.DutyTypeA;
-import seedu.address.model.calendar.DutyTypeB;
-import seedu.address.model.calendar.DutyTypeC;
+import seedu.address.model.duty.Duty;
+import seedu.address.model.duty.DutyTypeA;
+import seedu.address.model.duty.DutyTypeB;
+import seedu.address.model.duty.DutyTypeC;
 import seedu.address.model.person.Person;
 
 /**

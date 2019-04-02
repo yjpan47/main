@@ -28,7 +28,6 @@ public class ModelManager implements Model {
     private final VersionedPersonnelDatabase versionedPersonnelDatabase;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final DutyCalendar dutyCalendar;
     private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
 
     /**
@@ -45,12 +44,6 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(versionedPersonnelDatabase.getPersonList());
         filteredPersons.addListener(this::ensureSelectedPersonIsValid);
-        /*
-        Note: just a test method for UI, remove when done
-        */
-
-        dutyCalendar = versionedPersonnelDatabase.getDutyCalendar();
-
     }
 
     public ModelManager() {
@@ -104,6 +97,10 @@ public class ModelManager implements Model {
         return versionedPersonnelDatabase;
     }
 
+    public DutyCalendar getDutyCalendar() {
+        return versionedPersonnelDatabase.getDutyCalendar();
+    }
+
     @Override
     public void sortPersonnelDatabase() {
         versionedPersonnelDatabase.sort();
@@ -131,12 +128,6 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         versionedPersonnelDatabase.setPerson(target, editedPerson);
-    }
-
-    //=========== Duty Calendar ================================================================================
-
-    public DutyCalendar getDutyCalendar() {
-        return this.dutyCalendar;
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -215,6 +206,19 @@ public class ModelManager implements Model {
         for (Person person: versionedPersonnelDatabase.getPersonList()) {
             if (userName.equals(person.getNric().value) && password.equals(person.getPassword().value)) {
                 return person.getUserType();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns Person of account given username, returns null if no person found.
+     */
+    @Override
+    public Person findPerson(String userName) {
+        for (Person person: versionedPersonnelDatabase.getPersonList()) {
+            if (userName.equals(person.getNric().value)) {
+                return person;
             }
         }
         return null;
