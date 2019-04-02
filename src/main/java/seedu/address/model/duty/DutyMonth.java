@@ -81,19 +81,24 @@ public class DutyMonth {
                     person = personQueue.poll();
                 }
                 personQueue.addAll(tempList);
-                personQueue.add(person);
+
 
                 if (hasAssignable) {
                     duty.addPerson(person);
                     points.replace(person, points.get(person) + duty.getPoints());
+                    personQueue.add(person);
 
                 } else {
+                    personQueue.add(person);
                     break;
                 }
+
             }
         }
         this.scheduledDuties = dutyList;
         this.scheduledDuties.sort(Comparator.comparingInt(Duty::getDayIndex));
+
+        System.out.println(this.scheduledDuties);
     }
 
     private boolean isAssignable(Person person, Duty duty) {

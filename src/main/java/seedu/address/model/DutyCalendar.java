@@ -15,21 +15,19 @@ public class DutyCalendar {
     private DutyMonth currentMonth;
     private DutyMonth nextMonth;
 
-    private DutySettings dutySettings;
-    private DutyStorage dutyStorage;
-
     /**
      * Default constructor with no data contained within.
      */
     public DutyCalendar() {
         this.currentYear = CalendarUtil.getCurrentYear();
         this.currentMonthIndex = CalendarUtil.getCurrentMonth();
+
         this.currentMonth = new DutyMonth(this.currentYear, this.currentMonthIndex,
-                CalendarUtil.dayOfFirstDayOfMonth(this.currentMonthIndex));
-        this.currentMonth = new DutyMonth((this.currentMonthIndex == 12)
-                ? this.currentYear + 1 : this.currentYear,
-                this.currentMonthIndex + 1,
-                CalendarUtil.dayOfFirstDayOfMonth(this.currentMonthIndex + 1));
+                CalendarUtil.dayOfFirstDayOfMonth(this.currentYear, this.currentMonthIndex));
+
+        int yearOfNextMonth = currentMonthIndex == 11 ? currentYear + 1 : currentYear;
+        this.nextMonth = new DutyMonth(yearOfNextMonth, this.currentMonthIndex + 1 ,
+                CalendarUtil.dayOfFirstDayOfMonth(yearOfNextMonth, this.currentMonthIndex + 1));
     }
 
     public DutyCalendar(DutyMonth currentMonth, DutyMonth nextMonth) {
@@ -49,14 +47,6 @@ public class DutyCalendar {
         return nextMonth;
     }
 
-    public DutySettings getDutySettings() {
-        return dutySettings;
-    }
-
-    public DutyStorage getDutyStorage() {
-        return dutyStorage;
-    }
-
     public void setDutyCalendar(DutyCalendar dutyCalendar) {
         if (dutyCalendar.getCurrentMonthIndex() == CalendarUtil.getCurrentMonth()) {
             this.currentMonth = dutyCalendar.getCurrentMonth();
@@ -74,8 +64,9 @@ public class DutyCalendar {
         this.currentYear = CalendarUtil.getCurrentYear();
         this.currentMonthIndex = CalendarUtil.getCurrentMonth();
         this.currentMonth = dutyCalendar.getNextMonth();
-        this.nextMonth = new DutyMonth(this.currentYear, this.currentMonthIndex + 1,
-                CalendarUtil.dayOfFirstDayOfMonth(this.currentMonthIndex + 1));
+        int yearOfNextMonth = currentMonthIndex == 11 ? currentYear + 1 : currentYear;
+        this.nextMonth = new DutyMonth(yearOfNextMonth, this.currentMonthIndex + 1 ,
+                CalendarUtil.dayOfFirstDayOfMonth(yearOfNextMonth, this.currentMonthIndex + 1));
     }
 
 }
