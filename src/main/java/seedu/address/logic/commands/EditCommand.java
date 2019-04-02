@@ -166,9 +166,9 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Password password = editPersonDescriptor.getPassword().orElse(personToEdit.getPassword());
-        //Will allow Admin in the future
+        UserType userType = editPersonDescriptor.getUserType().orElse(personToEdit.getUserType());
         return new Person(updatedNric, updatedCompany, updatedSection, updatedRank, updatedName,
-                updatedPhone, updatedTags, password, UserType.GENERAL);
+                updatedPhone, updatedTags, password, userType);
     }
 
     @Override
@@ -202,6 +202,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Set<Tag> tags;
         private Password password;
+        private UserType userType;
 
         public EditPersonDescriptor() {}
 
@@ -218,13 +219,14 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setTags(toCopy.tags);
             setPassword(toCopy.password);
+            setUserType(toCopy.userType);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(nric, company, section, rank, name, phone, tags, password);
+            return CollectionUtil.isAnyNonNull(nric, company, section, rank, name, phone, tags, password, userType);
         }
 
         public void setNric(Nric nric) {
@@ -300,6 +302,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(password);
         }
 
+        public void setUserType(UserType userType) {
+            this.userType = userType;
+        }
+
+        public Optional<UserType> getUserType() {
+            return Optional.ofNullable(userType);
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -322,7 +332,8 @@ public class EditCommand extends Command {
                     && getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getTags().equals(e.getTags())
-                    && getPassword().equals(e.getPassword());
+                    && getPassword().equals(e.getPassword())
+                    && getUserType().equals(e.getUserType());
         }
     }
 }
