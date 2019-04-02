@@ -51,11 +51,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditCommand generalParse(String args, String userName) throws ParseException {
-        requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_COMPANY, PREFIX_SECTION, PREFIX_RANK,
-                        PREFIX_NAME, PREFIX_PHONE, PREFIX_TAG, PREFIX_PASSWORD);
-
+        ArgumentMultimap argMultimap = initMultimapGeneral(args);
         Index index;
 
         if (!argMultimap.getPreamble().isEmpty()) {
@@ -95,11 +91,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditCommand adminParse(String args, String userName) throws ParseException {
-        requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_COMPANY, PREFIX_SECTION, PREFIX_RANK,
-                        PREFIX_NAME, PREFIX_PHONE, PREFIX_TAG, PREFIX_PASSWORD, PREFIX_USERTYPE);
-
+        ArgumentMultimap argMultimap = initMultimapAdmin(args);
         Index index;
 
         try {
@@ -155,6 +147,22 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
+    }
+
+    private ArgumentMultimap initMultimapGeneral(String args){
+        requireNonNull(args);
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_COMPANY, PREFIX_SECTION, PREFIX_RANK,
+                        PREFIX_NAME, PREFIX_PHONE, PREFIX_TAG, PREFIX_PASSWORD);
+        return argMultimap;
+    }
+
+    private ArgumentMultimap initMultimapAdmin(String args){
+        requireNonNull(args);
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_COMPANY, PREFIX_SECTION, PREFIX_RANK,
+                        PREFIX_NAME, PREFIX_PHONE, PREFIX_TAG, PREFIX_PASSWORD, PREFIX_USERTYPE);
+        return  argMultimap;
     }
 
 }
