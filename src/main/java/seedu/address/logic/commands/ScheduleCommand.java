@@ -9,6 +9,7 @@ import seedu.address.commons.util.CalendarUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.duty.Duty;
 import seedu.address.model.duty.DutyMonth;
 import seedu.address.model.duty.DutySettings;
 import seedu.address.model.duty.DutyStorage;
@@ -26,7 +27,7 @@ public class ScheduleCommand extends Command {
             + "taking into account the duty points of each person and their blocked out dates. "
             + "It will sort by available dates and distribute duties accordingly. \n";
 
-    public static final String SCHEDULE_SUCCESS = "%1$s\n\nMonth of %2$s successfully scheduled!";
+    public static final String SCHEDULE_SUCCESS = "Month of %1$s successfully scheduled!";
 
 
     @Override
@@ -34,11 +35,12 @@ public class ScheduleCommand extends Command {
         requireNonNull(model);
         List<Person> persons = model.getFilteredPersonList();
         DutyMonth dutyMonth = model.getDutyCalendar().getCurrentMonth();
+
+        DutySettings.setDefault();
         dutyMonth.schedule(persons);
 
+        dutyMonth.printScheduledDuties();
 
-
-        dutyMonth.schedule();
         return new CommandResult(String.format(SCHEDULE_SUCCESS, CalendarUtil
                 .getMonthString(dutyMonth.getMonthIndex())));
     }

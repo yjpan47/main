@@ -9,7 +9,7 @@ import seedu.address.model.duty.DutyStorage;
  */
 public class DutyCalendar {
 
-    private int  currentYear;
+    private int currentYear;
     private int currentMonthIndex;
 
     private DutyMonth currentMonth;
@@ -26,7 +26,7 @@ public class DutyCalendar {
         this.currentMonthIndex = CalendarUtil.getCurrentMonth();
         this.currentMonth = new DutyMonth(this.currentYear, this.currentMonthIndex,
                 CalendarUtil.dayOfFirstDayOfMonth(this.currentMonthIndex));
-        this.currentMonth = new DutyMonth((this.currentMonthIndex == 12)
+        this.nextMonth = new DutyMonth((this.currentMonthIndex == 12)
                 ? this.currentYear + 1 : this.currentYear,
                 this.currentMonthIndex + 1,
                 CalendarUtil.dayOfFirstDayOfMonth(this.currentMonthIndex + 1));
@@ -77,5 +77,4 @@ public class DutyCalendar {
         this.nextMonth = new DutyMonth(this.currentYear, this.currentMonthIndex + 1,
                 CalendarUtil.dayOfFirstDayOfMonth(this.currentMonthIndex + 1));
     }
-
 }
