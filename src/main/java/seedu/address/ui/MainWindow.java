@@ -35,7 +35,6 @@ public class MainWindow extends UiPart<Stage> {
     private final String userName;
     private Stage primaryStage;
     private Logic logic;
-    private Storage storage;
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
@@ -131,7 +130,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(logic.selectedPersonProperty());
+        browserPanel = new BrowserPanel(logic.getPersonnelDatabase().getRequestList());
+        // Originally logic.selectedPersonProperty()
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.selectedPersonProperty(),
@@ -141,7 +141,7 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath(), logic.getAddressBook());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getPersonnelDatabaseFilePath(), logic.getPersonnelDatabase());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CalendarView calendarView = new CalendarView(logic.getFilteredPersonList());
