@@ -16,8 +16,8 @@ public interface ReadOnlyPersonnelDatabase extends Observable {
     ObservableList<Person> getPersonList();
 
     /**
-     * Returns an unmodifiable view of the duty calendar.
-     * This calendar will not contain any duplicate duties.
+     * Returns an unmodifiable view of the duty duty.
+     * This duty will not contain any duplicate duties.
      */
     DutyCalendar getDutyCalendar();
 
