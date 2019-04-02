@@ -38,8 +38,6 @@ public class ScheduleCommand extends Command {
 
         DutySettings.setDefault();
         dutyMonth.schedule(persons);
-        DutyStorage.update(dutyMonth.getScheduledDuties());
-
         dutyMonth.printScheduledDuties();
 
         return new CommandResult(String.format(SCHEDULE_SUCCESS, CalendarUtil

@@ -18,12 +18,12 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class PersonBuilder {
 
-    public static final String DEFAULT_NRIC = "S5234567A";
-    public static final String DEFAULT_COMPANY = "Bravo";
-    public static final String DEFAULT_SECTION = "1SIR";
-    public static final String DEFAULT_RANK = "CPL";
+    public static final String DEFAULT_NRIC = "S9673582K";
+    public static final String DEFAULT_COMPANY = "Leopardo";
+    public static final String DEFAULT_SECTION = "1";
+    public static final String DEFAULT_RANK = "CFC";
     public static final String DEFAULT_NAME = "Alice Pauline";
-    public static final String DEFAULT_PHONE = "85355255";
+    public static final String DEFAULT_PHONE = "81234567";
 
     private Nric nric;
     private Company company;

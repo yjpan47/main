@@ -50,6 +50,33 @@ public class Duty {
         }
     }
 
+    /**
+     * Constructor for reconstruction of Duty object from json storage
+     * @param year this year
+     * @param monthIndex this monthIndex
+     * @param dayIndex this dayIndex
+     * @param dayOfWeekIndex this dayOfWeekIndex
+     * @param capacity this capacity
+     * @param vacancies this vacancies
+     * @param points this points
+     * @param personList this personList
+     */
+    public Duty(int year, int monthIndex, int dayIndex, int dayOfWeekIndex, int capacity,
+                int vacancies, int points, List<Person> personList) {
+        if (DateUtil.isValidDate(year, monthIndex, dayIndex) && DateUtil.isValidDayOfWeek(dayOfWeekIndex)) {
+            this.year = year;
+            this.monthIndex = monthIndex;
+            this.dayIndex = dayIndex;
+            this.dayOfWeekIndex = dayOfWeekIndex;
+            this.capacity = capacity;
+            this.vacancies = vacancies;
+            this.points = points;
+            this.persons = new ArrayList<>(personList);
+        } else {
+            throw new InvalidParameterException("Invalid Date");
+        }
+    }
+
     public void addPerson(Person person) {
         if (this.persons.contains(person)) {
             throw new InvalidParameterException(person + " is already assigned " + this);
@@ -64,6 +91,10 @@ public class Duty {
         return this.persons.size() == this.capacity;
     }
 
+    public int getYear() {
+        return this.year;
+    }
+
     public int getMonthIndex() {
         return this.monthIndex;
     }
@@ -76,7 +107,7 @@ public class Duty {
         return this.dayIndex;
     }
 
-    public int getWeekIndex() {
+    public int getDayOfWeekIndex() {
         return this.dayOfWeekIndex;
     }
 

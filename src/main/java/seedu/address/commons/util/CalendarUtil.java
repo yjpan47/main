@@ -6,6 +6,9 @@ import java.util.GregorianCalendar;
 import java.util.InputMismatchException;
 import java.util.TimeZone;
 
+import seedu.address.model.duty.Duty;
+import seedu.address.model.duty.DutyMonth;
+
 /**
  * A container for Calendar specific utility functions.
  */
@@ -22,7 +25,6 @@ public class CalendarUtil {
         calendar.setTimeZone(TimeZone.getTimeZone("GMT+8"));
         return calendar.get(Calendar.YEAR);
     }
-
 
     /**
      * Gets current month in String format
