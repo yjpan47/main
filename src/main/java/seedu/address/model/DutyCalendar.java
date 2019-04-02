@@ -1,6 +1,8 @@
 package seedu.address.model;
 import seedu.address.commons.util.CalendarUtil;
 import seedu.address.model.duty.DutyMonth;
+import seedu.address.model.duty.DutySettings;
+import seedu.address.model.duty.DutyStorage;
 
 /**
  * Represents a Calendar that contains duties for the current and the following months
@@ -12,6 +14,9 @@ public class DutyCalendar {
 
     private DutyMonth currentMonth;
     private DutyMonth nextMonth;
+
+    private DutySettings dutySettings;
+    private DutyStorage dutyStorage;
 
     /**
      * Default constructor with no data contained within.
@@ -44,6 +49,14 @@ public class DutyCalendar {
         return nextMonth;
     }
 
+    public DutySettings getDutySettings() {
+        return dutySettings;
+    }
+
+    public DutyStorage getDutyStorage() {
+        return dutyStorage;
+    }
+
     public void setDutyCalendar(DutyCalendar dutyCalendar) {
         if (dutyCalendar.getCurrentMonthIndex() == CalendarUtil.getCurrentMonth()) {
             this.currentMonth = dutyCalendar.getCurrentMonth();
@@ -64,4 +77,5 @@ public class DutyCalendar {
         this.nextMonth = new DutyMonth(this.currentYear, this.currentMonthIndex + 1,
                 CalendarUtil.dayOfFirstDayOfMonth(this.currentMonthIndex + 1));
     }
+
 }
