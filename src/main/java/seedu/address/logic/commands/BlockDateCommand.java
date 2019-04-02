@@ -31,13 +31,13 @@ public class BlockDateCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         Person person = model.findPerson(userName);
         DutyMonth nextMonth = model.getDutyCalendar().getNextMonth();
-        if (blockedDates.size()>15){
+        if (blockedDates.size() > 15) {
             throw new CommandException(MESSAGE_TOO_MANY_BLOCKED_DATES);
         }
-        for (Integer blockedDay : blockedDates){
-            nextMonth.addBlockedDay(person,blockedDay);
+        for (Integer blockedDay : blockedDates) {
+            nextMonth.addBlockedDay(person, blockedDay);
         }
-        return new CommandResult(String.format(MESSAGE_BLOCK_DATES_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_BLOCK_DATES_SUCCESS));
     }
 
     @Override
@@ -48,7 +48,8 @@ public class BlockDateCommand extends Command {
     @Override
     public CommandResult executeAdmin(Model model, CommandHistory history) throws CommandException {
         return execute(model, history);
-}
+    }
+
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
@@ -65,3 +66,4 @@ public class BlockDateCommand extends Command {
         BlockDateCommand e = (BlockDateCommand) other;
         return blockedDates.equals(e.blockedDates);
     }
+}
