@@ -41,7 +41,7 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
+    public static final String MESSAGE_USAGE_ADMIN = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -57,23 +57,52 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_RANK + "CFC";
 
+    public static final String MESSAGE_USAGE_GENERAL = COMMAND_WORD + ": Edits the details of yourself. "
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: "
+            + "[" + PREFIX_COMPANY + "COMPANY] "
+            + "[" + PREFIX_SECTION + "SECTION] "
+            + "[" + PREFIX_RANK + "RANK] "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_TAG + "TAG] "
+            + "[" + PREFIX_PASSWORD + "PASSWORD]...\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_PHONE + "91234567 " + PREFIX_RANK + "CFC";
+
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the personnel database.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
+    public final String userName;
 
     /**
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
+     * @param userName of person used to enter the command
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor, String userName) {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
+        requireNonNull(userName);
 
         this.index = index;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.userName = userName;
+    }
+
+    /**
+     * @param editPersonDescriptor details to edit the person with
+     * @param userName of person used to enter the command
+     */
+    public EditCommand(EditPersonDescriptor editPersonDescriptor, String userName) {
+        requireNonNull(editPersonDescriptor);
+        requireNonNull(userName);
+
+        this.index = null;
+        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.userName = userName;
     }
 
     @Override
@@ -100,7 +129,21 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult executeGeneral(Model model, CommandHistory history) throws CommandException {
-        throw new CommandException(Messages.MESSAGE_NO_AUTHORITY);
+        requireNonNull(model);
+        Person personToEdit = model.findPerson(userName);
+        if (personToEdit == null) {
+            throw new CommandException(Messages.MESSAGE_USER_NOT_FOUND);
+        }
+        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+
+        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        model.setPerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.commitPersonnelDatabase();
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 
     @Override
