@@ -1,4 +1,4 @@
-package seedu.address.model.calendar;
+package seedu.address.model.duty;
 
 /**
  *  enum AM / PM used for duty allocation

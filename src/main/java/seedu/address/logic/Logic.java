@@ -23,7 +23,7 @@ public interface Logic {
      * @throws CommandException If an error occurs during command execution.
      * @throws ParseException If an error occurs during parsing.
      */
-    CommandResult execute(String commandText, UserType user) throws CommandException, ParseException;
+    CommandResult execute(String commandText, UserType user, String userName) throws CommandException, ParseException;
 
     /**
      * Returns the PersonnelDatabase.

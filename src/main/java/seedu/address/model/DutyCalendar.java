@@ -1,8 +1,6 @@
 package seedu.address.model;
-
 import seedu.address.commons.util.CalendarUtil;
-import seedu.address.model.calendar.DutyMonth;
-
+import seedu.address.model.duty.DutyMonth;
 
 /**
  * Represents a Calendar that contains duties for the current and the following months
