@@ -9,10 +9,12 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import seedu.address.commons.core.UserType;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
+import seedu.address.model.person.Password;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Rank;
@@ -31,8 +33,10 @@ class JsonAdaptedPerson {
     private final String section;
     private final String rank;
     private final String name;
+    private final String password;
     private final String phone;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final UserType userType;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -42,7 +46,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("nric") String nric, @JsonProperty("company") String company,
                              @JsonProperty("section") String section, @JsonProperty("rank") String rank,
                              @JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                             @JsonProperty("password") String password, @JsonProperty("userType") UserType userType) {
         this.nric = nric;
         this.company = company;
         this.section = section;
@@ -52,6 +57,8 @@ class JsonAdaptedPerson {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        this.password = password;
+        this.userType = userType;
     }
 
     /**
@@ -64,7 +71,8 @@ class JsonAdaptedPerson {
         rank = source.getRank().value;
         name = source.getName().fullName;
         phone = source.getPhone().value;
-
+        password = source.getPassword().value;
+        userType = source.getUserType();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -129,9 +137,24 @@ class JsonAdaptedPerson {
         }
         final Phone modelPhone = new Phone(phone);
 
+        if (password == null) {
+            throw new IllegalValueException(String.format(
+                    MISSING_FIELD_MESSAGE_FORMAT, Password.class.getSimpleName()));
+        }
+        if (!Password.isValidPassword(password)) {
+            throw new IllegalValueException(Password.MESSAGE_CONSTRAINTS);
+        }
+        final Password modelPassword = new Password(password);
+
+        if (userType == null) {
+            throw new IllegalValueException(String.format(
+                    MISSING_FIELD_MESSAGE_FORMAT, UserType.class.getSimpleName()));
+        }
+
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelNric, modelCompany, modelSection, modelRank, modelName, modelPhone, modelTags);
+        return new Person(modelNric, modelCompany, modelSection, modelRank, modelName, modelPhone, modelTags,
+                modelPassword, userType);
     }
 
 }
