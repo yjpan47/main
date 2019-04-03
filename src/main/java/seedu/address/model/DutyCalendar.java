@@ -24,9 +24,6 @@ public class DutyCalendar {
 
     private DutyStorage dutyStorage;
 
-    private int currentYear;
-    private int currentMonthIndex;
-
     /**
      * Default constructor with no data contained within.
      */
@@ -64,9 +61,12 @@ public class DutyCalendar {
 
     public DutyStorage getDutyStorage() {
         return dutyStorage;
+    }
 
     public int getCurrentYear() {
         return currentYear;
+    }
+
 
     public void setDutyCalendar(DutyCalendar dutyCalendar) {
         if (dutyCalendar.getCurrentMonthIndex() == CalendarUtil.getCurrentMonth()) {

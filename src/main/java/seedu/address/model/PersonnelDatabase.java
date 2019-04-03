@@ -140,7 +140,7 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
     public void addRequest(Request request) {
         requests.add(request);
         indicateModified();
-
+    }
 
     public Person getCurrentUser() {
         return currentUser;

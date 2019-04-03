@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import seedu.address.commons.core.UserType;
 import seedu.address.logic.commands.SwapCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -19,7 +20,7 @@ public class SwapCommandParser implements Parser<SwapCommand> {
      * and returns an SwapCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public SwapCommand parse(String args) throws ParseException {
+    public SwapCommand parse(String args, UserType userType, String userName) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ALLOCATED_DATE, PREFIX_REQUESTED_DATE);
 

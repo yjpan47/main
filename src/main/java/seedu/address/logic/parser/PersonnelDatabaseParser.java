@@ -105,7 +105,7 @@ public class PersonnelDatabaseParser {
 
 
         case SwapCommand.COMMAND_WORD:
-            return new SwapCommandParser().parse(arguments);
+            return new SwapCommandParser().parse(arguments, userType, userName);
 
         case BlockDateCommand.COMMAND_WORD:
             return new BlockDateCommandParser().parse(arguments, userType, userName);
