@@ -5,35 +5,45 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
+import org.assertj.core.util.Lists;
+
 import seedu.address.model.person.Person;
 
 public class DutyStorage {
 
-    static HashMap<Person, Integer> dutyPoints = new HashMap<>();
-    static HashMap<Person, List<Duty>> dutyRecords = new HashMap<>();
+    public HashMap<Person, Integer> dutyPoints = new HashMap<>();
+    public HashMap<Person, List<Duty>> dutyRecords = new HashMap<>();
 
-    static void update(List<Duty> duties) {
+    public void update(List<Duty> duties) {
         for (Duty duty : duties) {
             for (Person person : duty.getPersons()) {
-                dutyPoints.putIfAbsent(person, 0);
-                dutyPoints.replace(person, dutyPoints.get(person) + duty.getPoints());
+                this.dutyPoints.putIfAbsent(person, 0);
+                this.dutyPoints.replace(person, this.dutyPoints.get(person) + duty.getPoints());
 
-                dutyRecords.putIfAbsent(person, new ArrayList<>());
-                dutyRecords.get(person).add(duty);
+                this.dutyRecords.putIfAbsent(person, new ArrayList<>());
+                this.dutyRecords.get(person).add(duty);
             }
         }
     }
 
-    static Comparator<Person> comparebyPoints() {
+    public int getPoints(Person person) {
+        return dutyPoints.getOrDefault(person, 0);
+    }
+
+    public List<Duty> getDuties(Person person) {
+        return dutyRecords.getOrDefault(person, Lists.emptyList());
+    }
+
+    public Comparator<Person> comparebyPoints() {
         return (p1, p2) -> {
-            if (!dutyPoints.containsKey(p1) && !dutyPoints.containsKey(p2)) {
+            if (!this.dutyPoints.containsKey(p1) && !this.dutyPoints.containsKey(p2)) {
                 return 0;
-            } else if (!dutyPoints.containsKey(p1)) {
+            } else if (!this.dutyPoints.containsKey(p1)) {
                 return 1;
-            } else if (!dutyPoints.containsKey(p2)) {
+            } else if (!this.dutyPoints.containsKey(p2)) {
                 return -1;
             } else {
-                return dutyPoints.get(p1) - dutyPoints.get(p2);
+                return this.dutyPoints.get(p1) - this.dutyPoints.get(p2);
             }
         };
     }

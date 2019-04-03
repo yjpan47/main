@@ -26,6 +26,8 @@ public class JsonSerializablePersonnelDatabaseTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
+
+
     public void toModelType_typicalPersonsFile_success() throws Exception {
         JsonSerializablePersonnelDatabase dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
                 JsonSerializablePersonnelDatabase.class).get();

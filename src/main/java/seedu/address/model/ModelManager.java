@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -16,6 +18,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UserType;
+import seedu.address.model.duty.DutySettings;
+import seedu.address.model.duty.DutyStorage;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -29,6 +33,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
+    private Optional<UserType> userType;
+    private Optional<String> userName;
 
     /**
      * Initializes a ModelManager with the given personnelDatabase, dutyCalendar and userPrefs.
@@ -44,6 +50,13 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(versionedPersonnelDatabase.getPersonList());
         filteredPersons.addListener(this::ensureSelectedPersonIsValid);
+        userType = Optional.empty();
+        userName = Optional.empty();
+        /*
+        Note: just a test method for UI, remove when done
+        */
+
+        dutyCalendar = versionedPersonnelDatabase.getDutyCalendar();
     }
 
     public ModelManager() {
@@ -75,6 +88,17 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public DutySettings getDutySettings() {
+        return userPrefs.getDutySettings();
+    }
+
+    @Override
+    public void setDutySettings(DutySettings dutySettings) {
+        requireNonNull(dutySettings);
+        userPrefs.setDutySettings(dutySettings);
+    }
+
+    @Override
     public Path getPersonnelDatabaseFilePath() {
         return userPrefs.getPersonnelDatabaseFilePath();
     }
@@ -97,8 +121,14 @@ public class ModelManager implements Model {
         return versionedPersonnelDatabase;
     }
 
+    @Override
     public DutyCalendar getDutyCalendar() {
         return versionedPersonnelDatabase.getDutyCalendar();
+    }
+
+    @Override
+    public DutyStorage getDutyStorage() {
+        return versionedPersonnelDatabase.getDutyCalendar().getDutyStorage();
     }
 
     @Override
@@ -128,6 +158,31 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         versionedPersonnelDatabase.setPerson(target, editedPerson);
+    }
+
+    //=========== User Details ================================================================================
+
+    @Override
+    public void setUserDetails(UserType userType, String userName) {
+        this.userType = Optional.of(userType);
+        this.userName = Optional.of(userName);
+    }
+
+    @Override
+    public UserType getUserType() {
+        return userType.get();
+    }
+
+    @Override
+    public String getUserName() {
+        return userName.get();
+    }
+
+    //=========== Swap Requests ===============================================================================
+
+    @Override
+    public void addSwapRequest(String nric, LocalDate allocatedDate, LocalDate requestedDate) {
+        versionedPersonnelDatabase.addRequest(nric, allocatedDate, requestedDate);
     }
 
     //=========== Filtered Person List Accessors =============================================================

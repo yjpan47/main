@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,7 +27,11 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
+    public static final String MESSAGE_CONSTRAINTS_DATE =
+            "Dates should be valid Gregorian dates of the format [ddmmyy].";
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_DATE = "Date is not a valid [ddmmyy] string.";
+    public static final String VALIDATION_REGEX_DATE = "\\d{6}";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -37,6 +44,28 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code LocalDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static LocalDate parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!trimmedDate.matches(VALIDATION_REGEX_DATE)) {
+            throw new ParseException(MESSAGE_CONSTRAINTS_DATE);
+        }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyy");
+        try {
+            LocalDate parsedDate = LocalDate.parse(date, formatter);
+            return parsedDate;
+        } catch (DateTimeParseException dtpe) {
+            throw new ParseException(MESSAGE_CONSTRAINTS_DATE);
+        }
     }
 
     /**
@@ -188,4 +217,5 @@ public class ParserUtil {
             throw new ParseException(UserType.MESSAGE_CONSTRAINTS);
         }
     }
+
 }

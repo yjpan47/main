@@ -1,7 +1,10 @@
 package seedu.address.model;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import seedu.address.commons.util.CalendarUtil;
 import seedu.address.model.duty.DutyMonth;
-import seedu.address.model.duty.DutySettings;
 import seedu.address.model.duty.DutyStorage;
 
 /**
@@ -9,14 +12,20 @@ import seedu.address.model.duty.DutyStorage;
  */
 public class DutyCalendar {
 
-    private int  currentYear;
+
+    private static final int NUMBER_OF_MONTHS_IN_YEAR = 12;
+
+    private int currentYear;
     private int currentMonthIndex;
 
     private DutyMonth currentMonth;
     private DutyMonth nextMonth;
 
-    private DutySettings dutySettings;
+
     private DutyStorage dutyStorage;
+
+    private int currentYear;
+    private int currentMonthIndex;
 
     /**
      * Default constructor with no data contained within.
@@ -24,12 +33,15 @@ public class DutyCalendar {
     public DutyCalendar() {
         this.currentYear = CalendarUtil.getCurrentYear();
         this.currentMonthIndex = CalendarUtil.getCurrentMonth();
+
         this.currentMonth = new DutyMonth(this.currentYear, this.currentMonthIndex,
-                CalendarUtil.dayOfFirstDayOfMonth(this.currentMonthIndex));
-        this.currentMonth = new DutyMonth((this.currentMonthIndex == 12)
-                ? this.currentYear + 1 : this.currentYear,
-                this.currentMonthIndex + 1,
-                CalendarUtil.dayOfFirstDayOfMonth(this.currentMonthIndex + 1));
+                CalendarUtil.dayOfFirstDayOfMonth(this.currentYear, this.currentMonthIndex));
+
+        int yearOfNextMonth = currentMonthIndex == 11 ? currentYear + 1 : currentYear;
+        this.nextMonth = new DutyMonth(yearOfNextMonth, this.currentMonthIndex + 1 ,
+                CalendarUtil.dayOfFirstDayOfMonth(yearOfNextMonth, this.currentMonthIndex + 1));
+
+        this.dutyStorage = new DutyStorage();
     }
 
     public DutyCalendar(DutyMonth currentMonth, DutyMonth nextMonth) {
@@ -49,13 +61,12 @@ public class DutyCalendar {
         return nextMonth;
     }
 
-    public DutySettings getDutySettings() {
-        return dutySettings;
-    }
 
     public DutyStorage getDutyStorage() {
         return dutyStorage;
-    }
+
+    public int getCurrentYear() {
+        return currentYear;
 
     public void setDutyCalendar(DutyCalendar dutyCalendar) {
         if (dutyCalendar.getCurrentMonthIndex() == CalendarUtil.getCurrentMonth()) {
@@ -74,8 +85,8 @@ public class DutyCalendar {
         this.currentYear = CalendarUtil.getCurrentYear();
         this.currentMonthIndex = CalendarUtil.getCurrentMonth();
         this.currentMonth = dutyCalendar.getNextMonth();
-        this.nextMonth = new DutyMonth(this.currentYear, this.currentMonthIndex + 1,
-                CalendarUtil.dayOfFirstDayOfMonth(this.currentMonthIndex + 1));
+        int yearOfNextMonth = currentMonthIndex == 11 ? currentYear + 1 : currentYear;
+        this.nextMonth = new DutyMonth(yearOfNextMonth, this.currentMonthIndex + 1 ,
+                CalendarUtil.dayOfFirstDayOfMonth(yearOfNextMonth, this.currentMonthIndex + 1));
     }
-
 }

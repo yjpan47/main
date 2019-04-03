@@ -2,6 +2,8 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.beans.InvalidationListener;
@@ -9,6 +11,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.InvalidationListenerManager;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.request.Request;
 
 /**
  * Wraps all data at the personnel database level
@@ -18,6 +21,10 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
 
     private final UniquePersonList persons;
     private final DutyCalendar dutyCalendar;
+
+    private final List<Request> requests;
+
+    private Person currentUser;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
     /*
@@ -30,6 +37,7 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
     {
         persons = new UniquePersonList();
         dutyCalendar = new DutyCalendar();
+        requests = new ArrayList<>();
     }
 
     public PersonnelDatabase() {}
@@ -117,6 +125,28 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
         indicateModified();
     }
 
+
+    /**
+     * Adds a swap request to the request manager by fields.
+     */
+    public void addRequest(String nric, LocalDate allocatedDate, LocalDate requestedDate) {
+        requests.add(new Request(nric, allocatedDate, requestedDate));
+        indicateModified();
+    }
+
+    /**
+     * Adds a swap request to the request manager.
+     */
+    public void addRequest(Request request) {
+        requests.add(request);
+        indicateModified();
+
+
+    public Person getCurrentUser() {
+        return currentUser;
+
+    }
+
     @Override
     public void addListener(InvalidationListener listener) {
         invalidationListenerManager.addListener(listener);
@@ -150,6 +180,11 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
     @Override
     public DutyCalendar getDutyCalendar() {
         return this.dutyCalendar;
+    }
+
+    @Override
+    public List<Request> getRequestList() {
+        return this.requests;
     }
 
     @Override

@@ -10,6 +10,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyPersonnelDatabase;
+import seedu.address.model.duty.DutySettings;
 import seedu.address.model.person.Person;
 
 /**
@@ -30,7 +31,7 @@ public interface Logic {
      *
      * @see seedu.address.model.Model#getPersonnelDatabase()
      */
-    ReadOnlyPersonnelDatabase getAddressBook();
+    ReadOnlyPersonnelDatabase getPersonnelDatabase();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
@@ -47,7 +48,7 @@ public interface Logic {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getPersonnelDatabaseFilePath();
 
     /**
      * Returns the user prefs' GUI settings.
@@ -58,6 +59,16 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Returns the user prefs' GUI settings.
+     */
+    DutySettings getDutySettings();
+
+    /**
+     * Set the user prefs' GUI settings.
+     */
+    void setDutySettings(DutySettings dutySettings);
 
     /**
      * Selected person in the filtered person list.
@@ -78,4 +89,9 @@ public interface Logic {
      * Returns UserType of User if valid username and password, null otherwise.
      */
     UserType findAccount(String userName, String password);
+
+    /**
+     * Sets UserType and UserName in Model.
+     */
+    void setUserDetailsInModel(UserType userType, String userName);
 }
