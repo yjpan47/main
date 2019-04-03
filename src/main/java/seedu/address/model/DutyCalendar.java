@@ -22,9 +22,6 @@ public class DutyCalendar {
     private DutyMonth currentMonth;
     private DutyMonth nextMonth;
 
-    private int currentYear;
-    private int currentMonthIndex;
-
     /**
      * Default constructor with no data contained within.
      */

@@ -14,7 +14,9 @@ import seedu.address.model.person.Person;
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /**
@@ -52,16 +54,26 @@ public interface Model {
      */
     void setPersonnelDatabase(ReadOnlyPersonnelDatabase personnelDatabase);
 
-    /** Returns the PersonnelDatabase */
+    /**
+     * Returns the PersonnelDatabase
+     */
     ReadOnlyPersonnelDatabase getPersonnelDatabase();
 
-    /** Sorts the PersonnelDatabase by name */
+    /**
+     * Sorts the PersonnelDatabase by name
+     */
     void sortPersonnelDatabase();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the personnel database.
      */
     boolean hasPerson(Person person);
+
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the personnel database,
+     * using the NRIC value
+     */
+    boolean hasPerson(String nric);
 
     /**
      * Deletes the given person.
@@ -83,7 +95,9 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /**
+     * Returns an unmodifiable view of the filtered person list
+     */
     ObservableList<Person> getFilteredPersonList();
 
     /** Returns an unmodifiable view of the duty for dates */
@@ -91,6 +105,7 @@ public interface Model {
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
 
@@ -144,7 +159,6 @@ public interface Model {
     UserType findAccount(String userName, String password);
 
     /**
-
      * Returns Person of account if found, null otherwise.
      */
     Person findPerson(String userName);
@@ -174,4 +188,4 @@ public interface Model {
      * Add a swap request to the model
      */
     void addSwapRequest(String nric, LocalDate allocatedDate, LocalDate requestedDate);
-
+}
