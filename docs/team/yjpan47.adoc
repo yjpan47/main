@@ -63,15 +63,23 @@ https://github.com/yjpan47/main/blob/master/docs/UserGuide.adoc
 https://github.com/yjpan47/main/blob/master/docs/DeveloperGuide.adoc
 
 
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::https://github.com/yjpan47/main/blob/master/docs/UserGuide.adoc
+
 == Contributions to the Developer Guide
 
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::docs/DeveloperGuide.adoc[tag=undoredo]
-
-include::../DeveloperGuide.adoc[tag=dataencryption]
+include::https://github.com/yjpan47/main/blob/master/docs/DeveloperGuide.adoc
+Section 3.5
 
 
 == PROJECT: PowerPointLabs
