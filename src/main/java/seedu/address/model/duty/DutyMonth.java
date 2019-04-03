@@ -5,14 +5,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.Set;
 
 import seedu.address.model.person.Person;
 import seedu.address.commons.util.DateUtil;
 
 public class DutyMonth {
 
+    private boolean confirmed = false;
     private List<Duty> scheduledDuties;
 
     private int year;
@@ -21,6 +24,18 @@ public class DutyMonth {
     private HashMap<Person, List<Integer>> blockedDays;
 
     public DutyMonth(int year, int monthIndex, int firstDayOfWeekIndex) {
+        if (DateUtil.isValidYear(year) && DateUtil.isValidMonth(monthIndex)
+                && DateUtil.isValidDayOfWeek(firstDayOfWeekIndex)) {
+            this.year = year;
+            this.monthIndex = monthIndex;
+            this.firstDayOfWeekIndex = firstDayOfWeekIndex;
+            this.blockedDays = new HashMap<>();
+        } else {
+            throw new InvalidParameterException("Invalid Date");
+        }
+    }
+
+    public DutyMonth(int year, int monthIndex, int firstDayOfWeekIndex, DutySettings dutySettings) {
         if (DateUtil.isValidYear(year) && DateUtil.isValidMonth(monthIndex)
                 && DateUtil.isValidDayOfWeek(firstDayOfWeekIndex)) {
             this.year = year;
@@ -52,16 +67,16 @@ public class DutyMonth {
         }
     }
 
-    public void schedule(List<Person> persons) {
+    public void schedule(List<Person> persons, DutySettings dutySettings, DutyStorage dutyStorage) {
 
         // Temporary Storage for points earned
         HashMap<Person, Integer> points = new HashMap<>();
         for (Person person : persons) {
-            points.put(person, DutyStorage.dutyPoints.getOrDefault(person, 0));
+            points.put(person, dutyStorage.dutyPoints.getOrDefault(person, 0));
         }
 
         // List of Duties
-        List<Duty> dutyList = generateAllDuties();
+        List<Duty> dutyList = generateAllDuties(dutySettings);
 
         // Priority Queue of Persons
         PriorityQueue<Person> personQueue = new PriorityQueue<>(Comparator.comparingInt(points::get));
@@ -106,8 +121,6 @@ public class DutyMonth {
         }
         this.scheduledDuties = dutyList;
         this.scheduledDuties.sort(Comparator.comparingInt(Duty::getDayIndex));
-
-        System.out.println(this.scheduledDuties);
     }
 
     private boolean isAssignable(Person person, Duty duty) {
@@ -119,12 +132,12 @@ public class DutyMonth {
                 || !this.blockedDays.get(person).contains(duty.getDayIndex());
     }
 
-    private List<Duty> generateAllDuties() {
+    private List<Duty> generateAllDuties(DutySettings dutySettings) {
         List<Duty> duties = new ArrayList<>();
         int dayOfWeek = this.getFirstDayOfWeekIndex();
         for (int day = 1; day <= this.getNumOfDays(); day++) {
-            int capacity = DutySettings.getCapacity(this.monthIndex, day, dayOfWeek);
-            int points = DutySettings.getPoints(this.monthIndex, day, dayOfWeek);
+            int capacity = dutySettings.getCapacity(this.monthIndex, day, dayOfWeek);
+            int points = dutySettings.getPoints(this.monthIndex, day, dayOfWeek);
             Duty duty = new Duty(this.year, this.monthIndex, day, dayOfWeek, capacity, points);
             duties.add(duty);
             dayOfWeek = (dayOfWeek == 7) ? 1 : dayOfWeek + 1;
@@ -159,14 +172,55 @@ public class DutyMonth {
         return this.blockedDays;
     }
 
-    public void printScheduledDuties() {
+    public String printDuties() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(String.format("---- Duty Roster for %1$s %2$s  ---- \n",
+                DateUtil.getMonth(this.monthIndex), this.year));
+
         for (Duty duty : this.getScheduledDuties()) {
-            System.out.print(String.format("%s (%s) : [", duty.getDayIndex(), duty.getPoints()));
+            sb.append(String.format("%-3d %-10s (%d/%d) : [",
+                    duty.getDayIndex(), DateUtil.getDayOfWeek(duty.getDayOfWeekIndex()),
+                    duty.getPersons().size(), duty.getCapacity()));
+
             for (Person person : duty.getPersons()) {
-                System.out.print(String.format("%s (%s), ", person, DutyStorage.dutyPoints.get(person)));
+                sb.append(String.format("%s %s , ", person.getRank(), person.getName()));
             }
-            System.out.println("]");
+
+            sb.append(" ]\n");
         }
+        return sb.toString();
+    }
+
+    public String printPoints(DutyStorage dutyStorage) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("--- Points Awarded ----\n");
+
+        Set<Person> PersonsThisMonth = new HashSet<>();
+        for (Duty duty : this.scheduledDuties) {
+            PersonsThisMonth.addAll(duty.getPersons());
+        }
+
+        for (Person person : PersonsThisMonth) {
+            int pointsInThePast = dutyStorage.getPoints(person);
+            int pointsThisMonth = this.getScheduledDuties().stream()
+                    .filter(duty -> duty.getPersons().contains(person))
+                    .mapToInt(Duty::getPoints)
+                    .sum();
+            sb.append(String.format("%3s %-20s %3d       + %-2d\n",
+                    person.getRank(), person.getName(),
+                    pointsInThePast,
+                    pointsThisMonth));
+        }
+        return sb.toString();
+    }
+
+    public boolean isConfirmed() {
+        return confirmed;
+    }
+
+    public void confirm() {
+        confirmed = true;
     }
 
     public boolean isAssignedToDuty(String nric, int day) {

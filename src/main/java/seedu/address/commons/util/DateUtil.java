@@ -1,5 +1,7 @@
 package seedu.address.commons.util;
 
+import java.security.InvalidParameterException;
+
 public class DateUtil {
 
     public static int MAX_VALID_YR = 9999;
@@ -48,6 +50,17 @@ public class DateUtil {
 
     public static String getDayOfWeek(int d) {
         return daysOfWeek[d - 1];
+    }
+
+
+    public static int getDayOfWeekIndex(String s) {
+        for (int i = 0; i < daysOfWeek.length; i++) {
+            String day = daysOfWeek[i];
+            if (day.equalsIgnoreCase(s) || day.substring(0, 2).equalsIgnoreCase(s.substring(0, 2))) {
+                return i + 1;
+            }
+        }
+        throw new InvalidParameterException("Day of Week does not exist!");
     }
 
     public static int getNumOfDaysInMonth(int y, int m) {

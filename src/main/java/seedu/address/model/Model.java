@@ -8,6 +8,8 @@ import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.UserType;
+import seedu.address.model.duty.DutySettings;
+import seedu.address.model.duty.DutyStorage;
 import seedu.address.model.person.Person;
 
 /**
@@ -38,6 +40,16 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
+     * Returns the user prefs' Duty settings.
+     */
+    DutySettings getDutySettings();
+
+    /**
+     * Sets the user prefs' Duty settings.
+     */
+    void setDutySettings(DutySettings dutySettings);
+
+    /**
      * Returns the user prefs' personnel database file path.
      */
     Path getPersonnelDatabaseFilePath();
@@ -54,6 +66,9 @@ public interface Model {
 
     /** Returns the PersonnelDatabase */
     ReadOnlyPersonnelDatabase getPersonnelDatabase();
+
+    /** Returns Duty Storage */
+    DutyStorage getDutyStorage();
 
     /** Sorts the PersonnelDatabase by name */
     void sortPersonnelDatabase();
