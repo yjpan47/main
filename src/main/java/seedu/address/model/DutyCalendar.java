@@ -5,7 +5,6 @@ import java.util.GregorianCalendar;
 
 import seedu.address.commons.util.CalendarUtil;
 import seedu.address.model.duty.DutyMonth;
-import seedu.address.model.duty.DutySettings;
 import seedu.address.model.duty.DutyStorage;
 
 /**
@@ -22,6 +21,8 @@ public class DutyCalendar {
     private DutyMonth currentMonth;
     private DutyMonth nextMonth;
 
+    private DutyStorage dutyStorage;
+
     /**
      * Default constructor with no data contained within.
      */
@@ -35,6 +36,8 @@ public class DutyCalendar {
         int yearOfNextMonth = currentMonthIndex == 11 ? currentYear + 1 : currentYear;
         this.nextMonth = new DutyMonth(yearOfNextMonth, this.currentMonthIndex + 1 ,
                 CalendarUtil.dayOfFirstDayOfMonth(yearOfNextMonth, this.currentMonthIndex + 1));
+
+        this.dutyStorage = new DutyStorage();
     }
 
     public DutyCalendar(DutyMonth currentMonth, DutyMonth nextMonth) {
@@ -54,9 +57,15 @@ public class DutyCalendar {
         return nextMonth;
     }
 
+
+    public DutyStorage getDutyStorage() {
+        return dutyStorage;
+    }
+
     public int getCurrentYear() {
         return currentYear;
     }
+
 
     public void setDutyCalendar(DutyCalendar dutyCalendar) {
         if (dutyCalendar.getCurrentMonthIndex() == CalendarUtil.getCurrentMonth()) {

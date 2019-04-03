@@ -18,6 +18,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UserType;
+import seedu.address.model.duty.DutySettings;
+import seedu.address.model.duty.DutyStorage;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -28,6 +30,7 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final VersionedPersonnelDatabase versionedPersonnelDatabase;
+    private final DutyCalendar dutyCalendar;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
@@ -81,6 +84,17 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public DutySettings getDutySettings() {
+        return userPrefs.getDutySettings();
+    }
+
+    @Override
+    public void setDutySettings(DutySettings dutySettings) {
+        requireNonNull(dutySettings);
+        userPrefs.setDutySettings(dutySettings);
+    }
+
+    @Override
     public Path getPersonnelDatabaseFilePath() {
         return userPrefs.getPersonnelDatabaseFilePath();
     }
@@ -103,8 +117,14 @@ public class ModelManager implements Model {
         return versionedPersonnelDatabase;
     }
 
+    @Override
     public DutyCalendar getDutyCalendar() {
         return versionedPersonnelDatabase.getDutyCalendar();
+    }
+
+    @Override
+    public DutyStorage getDutyStorage() {
+        return versionedPersonnelDatabase.getDutyCalendar().getDutyStorage();
     }
 
     @Override
