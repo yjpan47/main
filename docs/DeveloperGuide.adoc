@@ -372,18 +372,11 @@ Each `Duty` class should contain the details such as the day index, list of `Per
 ** Each duty is worth a certain number of points and a person gains that amount of points by doing that duty. The points allocated to each duty is retrieved from DutySettings.
 ** Before the scheduling command is called, each person has the opportunity to indicate the days in which they are unavailable to do duty.
 
-* The 
-
-* Preparation of data
-1. The list of persons will be sorted according to their points in ascending order.
-2. The list of duties will be sorted in the order Weekend >> Friday >> Weekday.
-3. Person with lower duty points will be assigned to weekend duties
-
-* Assignment
-1. Starting from the top of the duties list, the first person from the persons list who is available (didn't block out the date) for that day will be assigned
-the duty. This ensures that lower score persons are given priority for weekend duties.
-2. The algorithm ensure that the duty score of the persons will be normalized as much as possible at the end of each month.
-
+* Appoach
+** A priority queue of all people based on their accumulated points with the lowest at the head of the queue.
+** A list of duties will be generated and sorted by their points allocated in descending order.
+** Starting from the top of the list of duties, the priority queue will be continuously polled to look for the instances of compatible duty-person pairing. For a duty-person pair to be compatible, it requries the duty to not contain the person and the person to not block the day of the duty. Once a duty is completedly filled, it moves on to the next duty in the list. The person will be added back into the priority queue with an adjusted duty point, thus most likely pushed to the back of the queue, allowing others to be assigned duties.
+** Ideally, people with lower accumulated points will be assigned to duties with higher points allocated. This allows the scheduler to automatically balance the points of each person by the end of the month. 
 
 ==== Design Considerations
 ===== Aspect: need for DutyDate classes
