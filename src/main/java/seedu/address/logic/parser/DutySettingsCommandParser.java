@@ -11,7 +11,7 @@ import seedu.address.model.duty.DutySettings;
 
 public class DutySettingsCommandParser implements Parser<DutySettingsCommand> {
 
-    private static final Prefix PREFIX_DAY_OF_WEEK = new Prefix("w/");
+    private static final Prefix PREFIX_DAY_OF_WEEK = new Prefix("d/");
     private static final Prefix PREFIX_POINTS = new Prefix("p/");
     private static final Prefix PREFIX_CAPACITY = new Prefix("m/");
 
@@ -29,7 +29,7 @@ public class DutySettingsCommandParser implements Parser<DutySettingsCommand> {
             int dayOfWeek = DateUtil.getDayOfWeekIndex(argMultimap.getValue(PREFIX_DAY_OF_WEEK).get());
             int capacity = Integer.parseInt(argMultimap.getValue(PREFIX_CAPACITY).get());
             int points = Integer.parseInt(argMultimap.getValue(PREFIX_POINTS).get());
-            return new DutySettingsCommand(dayOfWeek,capacity, points);
+            return new DutySettingsCommand(dayOfWeek, capacity, points);
         } catch (NumberFormatException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DutySettingsCommand.MESSAGE_USAGE));
         }

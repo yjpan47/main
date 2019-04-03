@@ -3,7 +3,9 @@ package seedu.address.model.duty;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.assertj.core.util.Lists;
 
@@ -28,6 +30,18 @@ public class DutyStorage {
 
     public int getPoints(Person person) {
         return dutyPoints.getOrDefault(person, 0);
+    }
+
+    public String printPoints() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("--- Points Accumulated ----\n");
+        for (Person person : this.dutyPoints.keySet()) {
+            int points = this.dutyPoints.get(person);
+            sb.append(String.format("%3s %-20s %3d\n",
+                    person.getRank(), person.getName(),
+                    points));
+        }
+        return sb.toString();
     }
 
     public List<Duty> getDuties(Person person) {

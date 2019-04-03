@@ -47,7 +47,7 @@ public class ScheduleCommand extends Command {
                     DateUtil.getMonth(dutyMonth.getMonthIndex()),
                     dutyMonth.getYear(),
                     dutyMonth.printDuties(),
-                    dutyMonth.printPoints(dutyStorage)));
+                    dutyStorage.printPoints()));
         }
 
         dutyMonth.schedule(persons, dutySettings, dutyStorage);

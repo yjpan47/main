@@ -46,7 +46,7 @@ public class ConfirmScheduleCommand extends Command {
                 DateUtil.getMonth(dutyMonth.getMonthIndex()),
                 dutyMonth.getYear(),
                 dutyMonth.printDuties(),
-                dutyMonth.printPoints(dutyStorage)));
+                dutyStorage.printPoints()));
     }
 
     @Override
