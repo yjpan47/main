@@ -352,15 +352,25 @@ Certain properties of the application can be controlled (e.g user prefs file loc
 
 The class that contains all the information about duties is `DutyCalendar` which has been included as an attribute within `PersonnelDatabase`. `DutyCalendar` contains two `DutyMonth` objects, named `currentMonth` and `nextMonth` respectively. It implements the following operations:
 
-* `DutyCalendar#rollover()` `planned for v1.3` -- replaces `currentMonth` with `nextMonth`, run duty allocation algorithm on `nextMonth` automatically to allocate duties based on the current state of the month such as blocked dates of each personnel. New empty `nextMonth` object will be instantiated.
-* `DutyCalendar#clearMonth(DutyMonth)` `planned for v1.3` -- clear all duties fields or blocked dates in the `DutyMonth` object
-* `DutyCalendar#reallocate()` `planned for v1.3` -- rerun the algorithm to randomly reassign the duties again
+* `DutyCalendar#rollover()` -- replaces `currentMonth` with `nextMonth`, run duty allocation algorithm on `nextMonth` automatically to allocate duties based on the current state of the month such as blocked dates of each personnel. New empty `nextMonth` object will be instantiated.
 
-These operations are to be exposed in the `Model` interface as `Model#rolloverDutyCalendar()`, `Model#clearMonthDutyCalendar(DutyMonth)` and `Model#reallocate()` respectively *for v1.3*.
+These operation are to be exposed in the `Model` interface as `Model#rolloverDutyCalendar()` *for v1.3*.
 
 Each `DutyMonth` class will contain the same number of `Duty` objects as the number of days in the month. For example, if it is January, it should contain exactly 31 `Duty` classes, and any less or more will raise an Exception.
+'DutyMonth' class contains the following operations:
+
+* `DutyMonth#addBlockedDay()` -- method for block dates command to use. Enables a particular Person to block a particular day
+* `DutyMonth#schedule()` -- schedules duties. Details explained below.
+* `DutyMonth#generateAllDuties()` -- based on the settings, this method generates duties for the particular month with customised capacity and number of points awarded
 
 Each `Duty` class should contain the details such as the day index, list of `Person`s in duty that day and a list of `Person`s who have blocked that particular date. More details are to be confirm *by v1.3*.
+`Duty` class contains the following operation:
+
+* `Duty#getPersonsString()` -- method for the view command. Returns the string of all the personnels allocated to that particular duty, minus the NRIC of the person passed as the parameter
+
+`DutySettings` class enables the users to customise the number of points and capacity for each day of Duty
+
+`DutyStorage` class stores the accumulated points of each Person
 
 *Algorithm*
 
