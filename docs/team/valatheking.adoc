@@ -22,7 +22,7 @@ Duty Planner is a desktop application used to organise and plan duties for army 
 
 * *Minor enhancement*: Added a command to view blocked Dates
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=valatheking&sort=displayName&since=2019-02-10&until=2019-04-03&timeframe=day&reverse=false&repoSort=true[Code]]
 
 * *Other contributions*:
 
