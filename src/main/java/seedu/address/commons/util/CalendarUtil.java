@@ -1,13 +1,8 @@
 package seedu.address.commons.util;
 
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.InputMismatchException;
 import java.util.TimeZone;
-
-import seedu.address.model.duty.Duty;
-import seedu.address.model.duty.DutyMonth;
 
 /**
  * A container for Calendar specific utility functions.
