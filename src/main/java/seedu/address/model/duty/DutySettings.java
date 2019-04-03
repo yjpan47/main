@@ -1,7 +1,6 @@
 package seedu.address.model.duty;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.HashMap;
 
 import seedu.address.commons.util.DateUtil;
