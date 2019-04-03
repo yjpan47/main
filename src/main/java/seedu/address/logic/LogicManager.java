@@ -33,7 +33,7 @@ public class LogicManager implements Logic {
     private final Storage storage;
     private final CommandHistory history;
     private final PersonnelDatabaseParser personnelDatabaseParser;
-    private boolean addressBookModified;
+    private boolean personnelDatabaseModified;
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
@@ -41,15 +41,15 @@ public class LogicManager implements Logic {
         history = new CommandHistory();
         personnelDatabaseParser = new PersonnelDatabaseParser();
 
-        // Set addressBookModified to true whenever the models' address book is modified.
-        model.getPersonnelDatabase().addListener(observable -> addressBookModified = true);
+        // Set personnelDatabaseModified to true whenever the models' personnel database is modified.
+        model.getPersonnelDatabase().addListener(observable -> personnelDatabaseModified = true);
     }
 
     @Override
     public CommandResult execute(String commandText, UserType user, String userName)
             throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-        addressBookModified = false;
+        personnelDatabaseModified = false;
 
         CommandResult commandResult;
         try {
@@ -66,8 +66,8 @@ public class LogicManager implements Logic {
             history.add(commandText);
         }
 
-        if (addressBookModified) {
-            logger.info("Address book modified, saving to file.");
+        if (personnelDatabaseModified) {
+            logger.info("Personnel database modified, saving to file.");
             try {
                 storage.savePersonnelDatabase(model.getPersonnelDatabase());
                 storage.saveUserPrefs(model.getUserPrefs());
@@ -80,7 +80,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyPersonnelDatabase getAddressBook() {
+    public ReadOnlyPersonnelDatabase getPersonnelDatabase() {
         return model.getPersonnelDatabase();
     }
 
@@ -98,7 +98,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
+    public Path getPersonnelDatabaseFilePath() {
         return model.getPersonnelDatabaseFilePath();
     }
 
@@ -135,5 +135,10 @@ public class LogicManager implements Logic {
     @Override
     public UserType findAccount(String userName, String password) {
         return model.findAccount(userName, password);
+    }
+
+    @Override
+    public void setUserDetailsInModel(UserType userType, String userName) {
+        model.setUserDetails(userType, userName);
     }
 }

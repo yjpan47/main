@@ -5,9 +5,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.ReadOnlyPersonnelDatabase;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.*;
 
 /**
  * API of the Storage component
@@ -28,5 +26,4 @@ public interface Storage extends PersonnelDatabaseStorage, UserPrefsStorage {
 
     @Override
     void savePersonnelDatabase(ReadOnlyPersonnelDatabase personnelDatabase) throws IOException;
-
 }

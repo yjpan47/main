@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -31,6 +33,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
+    private Optional<UserType> userType;
+    private Optional<String> userName;
 
     /**
      * Initializes a ModelManager with the given personnelDatabase, dutyCalendar and userPrefs.
@@ -46,6 +50,13 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(versionedPersonnelDatabase.getPersonList());
         filteredPersons.addListener(this::ensureSelectedPersonIsValid);
+        userType = Optional.empty();
+        userName = Optional.empty();
+        /*
+        Note: just a test method for UI, remove when done
+        */
+
+        dutyCalendar = versionedPersonnelDatabase.getDutyCalendar();
     }
 
     public ModelManager() {
@@ -147,6 +158,31 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         versionedPersonnelDatabase.setPerson(target, editedPerson);
+    }
+
+    //=========== User Details ================================================================================
+
+    @Override
+    public void setUserDetails(UserType userType, String userName) {
+        this.userType = Optional.of(userType);
+        this.userName = Optional.of(userName);
+    }
+
+    @Override
+    public UserType getUserType() {
+        return userType.get();
+    }
+
+    @Override
+    public String getUserName() {
+        return userName.get();
+    }
+
+    //=========== Swap Requests ===============================================================================
+
+    @Override
+    public void addSwapRequest(String nric, LocalDate allocatedDate, LocalDate requestedDate) {
+        versionedPersonnelDatabase.addRequest(nric, allocatedDate, requestedDate);
     }
 
     //=========== Filtered Person List Accessors =============================================================

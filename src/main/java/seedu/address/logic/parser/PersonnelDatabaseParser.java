@@ -24,6 +24,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.SwapCommand;
 import seedu.address.logic.commands.UndoCommand;
 
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -98,16 +99,22 @@ public class PersonnelDatabaseParser {
         case ScheduleCommand.COMMAND_WORD:
             return new ScheduleCommand();
 
+
         case ConfirmScheduleCommand.COMMAND_WORD:
             return new ConfirmScheduleCommand();
+
+
+        case SwapCommand.COMMAND_WORD:
+            return new SwapCommandParser().parse(arguments);
 
         case BlockDateCommand.COMMAND_WORD:
             return new BlockDateCommandParser().parse(arguments, userType, userName);
 
+
         case DutySettingsCommand.COMMAND_WORD:
                 return new DutySettingsCommandParser().parse(arguments, userType, userName);
-
-        default:
+            
+          default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
