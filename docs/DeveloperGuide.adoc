@@ -337,7 +337,7 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: `config.json`).
 
-=== Duty Calendar and allocation algorithm
+=== Duty Package 
 
 ==== Current Implementation
 
@@ -361,14 +361,18 @@ Each `Duty` class should contain the details such as the day index, list of `Per
 
 * `Duty#getPersonsString()` -- method for the view command. Returns the string of all the personnels allocated to that particular duty, minus the NRIC of the person passed as the parameter
 
-`DutySettings` class enables the users to customise the number of points and capacity for each day of Duty
+`DutySettings` class enables the users to customise the number of points and manpower requied for each duty day 
 
-`DutyStorage` class stores the accumulated points of each Person
+`DutyStorage` class stores the accumulated points of each person. 
 
-*Algorithm*
+*Scheduling Algorithm*
 
-* Each Person is assigned a duty score that is initialized at a fixed value. Each Person can earn duty points by covering
-duties. Weekday duties are worth 2 points; Friday duties are worth 3 points; Weekend duties are worth 4 points.
+* To ensure a system where duties are allocated fairly to the people:
+** We make use of the point system in which each individual can earn points by doing duties. The points awarded to servicemen are cumulative, thus the points awarded are carried over to the next month. Points of each person is stored in DutyStorage.
+** Each duty is worth a certain number of points and a person gains that amount of points by doing that duty. The points allocated to each duty is retrieved from DutySettings.
+** Before the scheduling command is called, each person has the opportunity to indicate the days in which they are unavailable to do duty.
+
+* The 
 
 * Preparation of data
 1. The list of persons will be sorted according to their points in ascending order.
