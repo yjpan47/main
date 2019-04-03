@@ -38,8 +38,8 @@ The Duty Planner is modified and upgraded from SE-EDU Address Book 4.
 ** What it does: A class that contains static methods to assist in validation of date parameters and other date related functions. 
 ** Justification: Contains commonly used functionalities that aids the developers and prevent duplicate code. 
 
-* *Code contributed*: +
-https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/duty/Duty.java + https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/duty/DutyMonth.java +
+* *Code contributed*: 
+https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/duty/Duty.java  https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/duty/DutyMonth.java 
 
 * *Other contributions*:
 
