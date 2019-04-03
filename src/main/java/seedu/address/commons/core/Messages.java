@@ -20,4 +20,6 @@ public class Messages {
     public static final String MESSAGE_NO_USER = "No user found!";
     public static final String MESSAGE_USER_NOT_FOUND = "Your username is not found!";
 
+    public static final String MESSAGE_MASTERADMIN_ERROR = "Master admin cannot have duties!";
+
 }

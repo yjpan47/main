@@ -15,7 +15,7 @@ public class Duty {
     //  Year
     private int year;
 
-    //  Represent month (i.e. 1, 2, 3, ... , 31)
+    //  Represent month (i.e. 1, 2, 3, ... , 12)
     private int monthIndex;
 
     //  Represent the day of the month (1, 2, 3 ... 31)
@@ -117,6 +117,21 @@ public class Duty {
 
     public List<Person> getPersons() {
         return this.persons;
+    }
+
+    /**
+     * Returns the string of all the persons in the duty minus the current person.
+     * @param nric
+     * @return
+     */
+    public String getPersonsString(String nric) {
+        String personString = "";
+        for (Person person : this.persons) {
+            if (!person.getNric().toString().equals(nric)) {
+                personString = personString + " " + person.getName().toString();
+            }
+        }
+        return personString;
     }
 
     public int getCapacity() {

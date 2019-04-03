@@ -53,11 +53,6 @@ public class ModelManager implements Model {
         filteredPersons.addListener(this::ensureSelectedPersonIsValid);
         userType = Optional.empty();
         userName = Optional.empty();
-        /*
-        Note: just a test method for UI, remove when done
-        */
-
-        dutyCalendar = versionedPersonnelDatabase.getDutyCalendar();
     }
 
     public ModelManager() {
@@ -141,6 +136,11 @@ public class ModelManager implements Model {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return versionedPersonnelDatabase.hasPerson(person);
+    }
+
+    @Override
+    public boolean hasPerson(String nric) {
+        return versionedPersonnelDatabase.hasPerson(nric);
     }
 
     @Override

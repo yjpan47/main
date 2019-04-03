@@ -26,6 +26,7 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.SwapCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.ViewCommand;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.duty.DutySettings;
@@ -60,56 +61,56 @@ public class PersonnelDatabaseParser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments, userType, userName);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments, userType, userName);
-
-        case SelectCommand.COMMAND_WORD:
-            return new SelectCommandParser().parse(arguments, userType, userName);
-
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments, userType, userName);
+        case BlockDateCommand.COMMAND_WORD:
+            return new BlockDateCommandParser().parse(arguments, userType, userName);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments, userType, userName);
+        case DeleteCommand.COMMAND_WORD:
+            return new DeleteCommandParser().parse(arguments, userType, userName);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
-
-        case HistoryCommand.COMMAND_WORD:
-            return new HistoryCommand();
+        case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments, userType, userName);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
+        case FindCommand.COMMAND_WORD:
+            return new FindCommandParser().parse(arguments, userType, userName);
+
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();
+        case HistoryCommand.COMMAND_WORD:
+            return new HistoryCommand();
+
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 
-        case SortCommand.COMMAND_WORD:
-            return new SortCommand();
-
         case ScheduleCommand.COMMAND_WORD:
             return new ScheduleCommand();
 
+        case SelectCommand.COMMAND_WORD:
+            return new SelectCommandParser().parse(arguments, userType, userName);
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommand();
 
         case ConfirmScheduleCommand.COMMAND_WORD:
             return new ConfirmScheduleCommand();
 
-
         case SwapCommand.COMMAND_WORD:
             return new SwapCommandParser().parse(arguments, userType, userName);
+            
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
 
-        case BlockDateCommand.COMMAND_WORD:
-            return new BlockDateCommandParser().parse(arguments, userType, userName);
-
+        case ViewCommand.COMMAND_WORD:
+            return new ViewCommandParser().parse(arguments, userType, userName);
 
         case DutySettingsCommand.COMMAND_WORD:
                 return new DutySettingsCommandParser().parse(arguments, userType, userName);

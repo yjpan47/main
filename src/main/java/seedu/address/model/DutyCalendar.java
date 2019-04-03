@@ -21,7 +21,6 @@ public class DutyCalendar {
     private DutyMonth currentMonth;
     private DutyMonth nextMonth;
 
-
     private DutyStorage dutyStorage;
 
     /**
