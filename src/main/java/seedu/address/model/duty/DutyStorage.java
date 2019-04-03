@@ -5,8 +5,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
-import com.google.common.collect.Lists;
-
 import seedu.address.model.person.Person;
 
 public class DutyStorage {
@@ -30,11 +28,17 @@ public class DutyStorage {
         return dutyPoints.getOrDefault(person, 0);
     }
 
-    /*
-    public List<Duty> getDuties(Person person) {
-        return dutyRecords.getOrDefault(person, Lists.emptyList());
+    public String printPoints() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("--- Points Accumulated ----\n");
+        for (Person person : this.dutyPoints.keySet()) {
+            int points = this.dutyPoints.get(person);
+            sb.append(String.format("%3s %-20s %3d\n",
+                    person.getRank(), person.getName(),
+                    points));
+        }
+        return sb.toString();
     }
-    */
 
     public Comparator<Person> comparebyPoints() {
         return (p1, p2) -> {
