@@ -3,11 +3,7 @@ package seedu.address.model.duty;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
-import org.assertj.core.util.Lists;
 
 import seedu.address.model.person.Person;
 
@@ -45,7 +41,7 @@ public class DutyStorage {
     }
 
     public List<Duty> getDuties(Person person) {
-        return dutyRecords.getOrDefault(person, Lists.emptyList());
+        return dutyRecords.getOrDefault(person, new ArrayList<>());
     }
 
     public Comparator<Person> comparebyPoints() {
