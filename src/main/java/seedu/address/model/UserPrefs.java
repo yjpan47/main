@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.duty.DutySettings;
 
 /**
  * Represents User's preferences.
@@ -14,6 +15,7 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
+    private DutySettings dutySettings = new DutySettings();
     private Path personnelDatabaseFilePath = Paths.get("data" , "personneldatabase.json");
 
     /**
@@ -35,6 +37,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
+        setDutySettings(newUserPrefs.getDutySettings());
         setPersonnelDatabaseFilePath(newUserPrefs.getPersonnelDatabaseFilePath());
     }
 
@@ -45,6 +48,15 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
         this.guiSettings = guiSettings;
+    }
+
+    public DutySettings getDutySettings() {
+        return dutySettings;
+    }
+
+    public void setDutySettings(DutySettings dutySettings) {
+        requireNonNull(dutySettings);
+        this.dutySettings = dutySettings;
     }
 
     public Path getPersonnelDatabaseFilePath() {
@@ -68,12 +80,13 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return guiSettings.equals(o.guiSettings)
-                && personnelDatabaseFilePath.equals(o.personnelDatabaseFilePath);
+                && personnelDatabaseFilePath.equals(o.personnelDatabaseFilePath)
+                && dutySettings.equals(o.dutySettings);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, personnelDatabaseFilePath);
+        return Objects.hash(guiSettings, personnelDatabaseFilePath, dutySettings);
     }
 
     @Override
@@ -81,6 +94,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
         sb.append("\nLocal data file location : " + personnelDatabaseFilePath);
+        sb.append("\nDuty : " + dutySettings);
         return sb.toString();
     }
 
