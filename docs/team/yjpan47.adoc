@@ -23,6 +23,7 @@ The Duty Planner is modified and upgraded from SE-EDU Address Book 4.
 *** DutyStorage : Accumulates and stores the duty points earned by all the persons. 
 ** Justification: The duty package provides the backend support for all duty-related features and commands. 
 ** Highlights: The package contain functions assessed by many commands (i.e. BlockDateCommmand, ViewCommand, ScheduleCommand, DutySettingCommand). 
+** Credits: {Fellow teammate Yoon Ki Hyun for working together on the DutyMonth and Duty}
 
 * *Major enhancement*: Schedule and confirm command
 ** What it does: The schedule command that invokes the schedule algorithm to generate a viable duty allocation for the upcoming month. The confirm command finalizes the schedule and updates the existing duty points of each person. 
@@ -39,30 +40,34 @@ The Duty Planner is modified and upgraded from SE-EDU Address Book 4.
 ** Justification: Contains commonly used functionalities that aids the developers and prevent duplicate code. 
 
 * *Code contributed*: 
-https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/duty/Duty.java  https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/duty/DutyMonth.java 
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/duty/Duty.java  
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/duty/DutyMonth.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/duty/DutySettings.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/duty/DutyStorage.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/DutyCalendar.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/commons/util/DateUtil.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/commands/ScheduleCommand.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/commands/ConfirmScheduleCommand.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/commands/DutySettingsCommand.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/parser/DutySettingsCommandParser.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/UserPrefs.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/PersonnelDatabase.java
 
 * *Other contributions*:
 
 ** Project management:
+
 *** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+
 ** Enhancements to existing features:
 *** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
 *** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
-** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
-** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
 
-_{you can add/remove categories in the list above}_
+** Documentation:
+*** Major updates to the User Guide: https://github.com/yjpan47/main/blob/master/docs/UserGuide.adoc
+*** Updated developer guide to include explanation of the schedule algorithm: https://github.com/yjpan47/main/blob/master/docs/DeveloperGuide.adoc
 
 == Contributions to the User Guide
-
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
