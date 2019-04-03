@@ -26,7 +26,7 @@ Duty Planner is a desktop application used to organise and plan duties for army 
 * *Other contributions*: 
 
 ** Project management:
-*** Managed releases `v1.0` - `v1.3rc` (4 releases) on GitHub
+*** Managed releases `v1.0` - `v1.1rc` (2 releases) on GitHub
 *** Set up the group Github account and the main repository
 *** Set up Travis testing within our own repository
 ** Enhancements to existing features:
