@@ -62,3 +62,18 @@ https://github.com/yjpan47/main/blob/master/docs/UserGuide.adoc
 ** Updated developer guide to include explanation of the schedule algorithm: +
 https://github.com/yjpan47/main/blob/master/docs/DeveloperGuide.adoc
 
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::https://github.com/yjpan47/main/blob/master/docs/DeveloperGuide.adoc[tag=undoredo]
+
+include::../DeveloperGuide.adoc[tag=dataencryption]
+
+
+== PROJECT: PowerPointLabs
+
+---
