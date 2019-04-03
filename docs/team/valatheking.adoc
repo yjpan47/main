@@ -1,4 +1,4 @@
-= John Doe - Project Portfolio
+= Valavan Rajar - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
@@ -9,17 +9,18 @@
 
 == Overview
 
-AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Duty Planner is a desktop application used to organise and plan duties for army personnel with various functions for commanders as well as duty personnel. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10kLoC
+
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+* *Major enhancement*: Added Block Date Command
+** What it does: Allows the user to block dates of duty for the upcoming month allowing them not to be scheduled for duties on those particular days
+** Justification: This features allows personnel to have some flexibility on the days the do duties and to ensure that they can attend other events or not do duties when they are busy 
+** Highlights: This enhancement affected the scheduling algorithm and the algorithm and Duty system had to be modified to allow personnel to block Dates
+** Credits: Thanks to my other group members for helping to figure out the block date command
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+* *Minor enhancement*: Added a command to view blocked Dates
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
