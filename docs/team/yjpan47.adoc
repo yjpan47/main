@@ -1,4 +1,4 @@
-= John Doe - Project Portfolio
+= Pan Yongjing - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
@@ -9,64 +9,56 @@
 
 == Overview
 
-AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+MINDEF Duty Planner is a desktop application used to help military units in the Singapore Armed Forces organise and plan monthly duties for their servicemen. It has various features and functions for administator (i.e. commander) as well as the duty personnel (i.e. servicemen). The user interacts with the application using a Command Line Interface (CLI) with a Graphic User Interface (GUI) created with JavaFX. It is written in Java, and has about 10kLoC.
+
+The Duty Planner is modified and upgraded from SE-EDU Address Book 4. 
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+* *Major enhancement*: Creation of the duty package module
+** What it does: A duty package with classes (i.e. Duty, DutyMonth, DutySettings, DutyStorage) in charge of setting up the duties of a month and assigning them to person, as well as contain vital functions needed for the duty features to be implemented.
+*** Duty : A duty class that characterizes the attributes of a duty including the exact date, points awarded, manpower needed and a list of person eventually being assigned to that duty.  
+*** DutyMonth : Represents a month in the calendar and is the main driver class behind the scheduling of duties. It initializes all duties and assigns them to person. Stores vital information such as the list of duties and the blocked dates of each person. 
+*** DutySettings : Classfied as a UserPref which contains information about the manpower needs and points assigned to duties from each day of the week. Enable modification to the the mnapower needs and points assigned to each duty based on the day of the week.
+*** DutyStorage : Accumulates and stores the duty points earned by all the persons. 
+** Justification: The duty package provides the backend support for all duty-related features and commands. 
+** Highlights: The package contain functions assessed by many commands (i.e. BlockDateCommmand, ViewCommand, ScheduleCommand, DutySettingCommand). 
+** Credits: {Fellow teammate Yoon Ki Hyun for working together on the DutyMonth and Duty}
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+* *Major enhancement*: Schedule and confirm command
+** What it does: The schedule command that invokes the schedule algorithm to generate a viable duty allocation for the upcoming month. The confirm command finalizes the schedule and updates the existing duty points of each person. 
+** Justification: Enable duties to be scheduled to persons.
+** Highlight: Need to ensure that the command references the correct dutyMonth and duty points of each person do not get updated until confirm command is called. 
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Major enhancement*: Settings command
+** What it does: Enable the administrator to adjust the desired manpower for duties based on the day of the week. Eanble the administrator to adjust the points to be awarded for doing duties based on the daty of the week. 
+** Justification: Allows the user to have flexibility to change the duty allocation system.
+** Highlight: Need to ensure that the scheduling algorithm is compatible with adjustable duty points and duty capacities. 
 
-* *Other contributions*:
+* *Minor enhancement*: DateUtil common
+** What it does: A class that contains static methods to assist in validation of date parameters and other date related functions. 
+** Justification: Contains commonly used functionalities that aids the developers and prevent duplicate code. 
 
-** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
-** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
-** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
+* *Code contributed*: 
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/duty/Duty.java  
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/duty/DutyMonth.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/duty/DutySettings.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/duty/DutyStorage.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/DutyCalendar.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/commons/util/DateUtil.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/commands/ScheduleCommand.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/commands/ConfirmScheduleCommand.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/commands/DutySettingsCommand.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/parser/DutySettingsCommandParser.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/UserPrefs.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/PersonnelDatabase.java
 
-_{you can add/remove categories in the list above}_
+* Project management:
+** Managed releases `v1.1`
 
-== Contributions to the User Guide
+* Documentation:
+** Major updates to the User Guide: +
+https://github.com/yjpan47/main/blob/master/docs/UserGuide.adoc
+** Updated developer guide to include explanation of the schedule algorithm: +
+https://github.com/yjpan47/main/blob/master/docs/DeveloperGuide.adoc
 
-
-|===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
-|===
-
-include::../UserGuide.adoc[tag=undoredo]
-
-include::../UserGuide.adoc[tag=dataencryption]
-
-== Contributions to the Developer Guide
-
-|===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
-|===
-
-include::../DeveloperGuide.adoc[tag=undoredo]
-
-include::../DeveloperGuide.adoc[tag=dataencryption]
-
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_

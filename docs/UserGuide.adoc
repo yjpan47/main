@@ -163,14 +163,17 @@ Format: `edit [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONE] [t/TAG] [pw/PA
 
 === Admin Features
 
+// tag::adddelete[]
 ==== Add a user : `add`
 Add a user to the system with the corresponding NRIC, password, company, section, rank, name and contact number. +
 By default, the user will be a General type account, and the password will be the NRIC. +
 Format: `add nr/NRIC c/COMPANY s/SECTION r/RANK n/NAME p/PHONE [t/TAG]`
 
+
 ==== Delete a user : `delete`
 Delete a user based on the index in the list+
 Format: `delete INDEX`
+// end::adddelete[]
 
 ==== Edit a user’s details : `edit`
 Edits an existing user’s details based on the index number in the list. Can edit one or more fields. +

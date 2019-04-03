@@ -9,39 +9,27 @@
 
 == Overview
 
-AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Duty Planner is a desktop address book application used foradding MINDEF personnel, and assigning and handling duties for the personnel involed. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10kLoC.
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+* *Major enhancement*: added *accounts for different users, and other user functionalities*.
+** What it does: Different personnel stored in the Duty Planner can log in. Accounts have 2 types: General and Admin, which can act differently for some commands. Some commands target the specific user.
+** Justification: This feature allows for commands that target the specific user (like swap duty, or edit own details). It also allows for commands like delete to be allowed for admins but not general users.
+** Highlights: The enhancement affects the Person model, and existing and future commands that may be added in the future.  Many design alternatives were considered, and the implementation was difficult since it affects current commands, models and test cases.
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
-
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Minor enhancement*: edited the edit command to allow user to edit his own information (except NRIC and account type).
+* *Code contributed*: [https://github.com/exactlyprecise/main/tree/master/src/main/java/seedu/address/logic/commands, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/storage/JsonAdaptedPerson.java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/logic/Logic.java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/logic/LogicManager.java, https://github.com/exactlyprecise/main/tree/master/src/main/java/seedu/address/logic/parser, https://github.com/exactlyprecise/main/tree/master/src/main/java/seedu/address/model/person/Person,java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/model/person/Password.java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/model/Model.java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/model/ModelManager.java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/ui/UiManager.java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/ui/CalendarView.java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/ui/LoginBox.java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/ui/MainWindow.java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/ui/NricUserPair.java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/ui/PersonCard.java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/ui/Ui.java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/ui/UiManager.java]
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
 ** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
-** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Helped other members to write CalendarView.fxml and CalendarView.java
+*** Helped in creating JAR file for team for version 1.3
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
 
-_{you can add/remove categories in the list above}_
+
 
 == Contributions to the User Guide
 
@@ -50,9 +38,7 @@ _{you can add/remove categories in the list above}_
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
-
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=adddelete]
 
 == Contributions to the Developer Guide
 
@@ -60,9 +46,7 @@ include::../UserGuide.adoc[tag=dataencryption]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
-
-include::../DeveloperGuide.adoc[tag=dataencryption]
+include::../DeveloperGuide.adoc[tag=login]
 
 
 == PROJECT: PowerPointLabs
