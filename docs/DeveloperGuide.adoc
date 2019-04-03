@@ -388,7 +388,7 @@ the duty. This ensures that lower score persons are given priority for weekend d
 ** Pros: Easy indexing and reference for UI and other purposes
 ** Cons: `DutyDate` class does not have other roles, can be redundant
 
-
+// tag::login[]
 === Logging in and account authority feature
 ==== Current Implementation
 There are currently 2 User Types found in commons.core.index: UserType.ADMIN and UserType.General. Each NRIC account will be assigned to one of these user types that correspond to different authorities.
@@ -406,6 +406,7 @@ to ensure the user does not have access to the wrong authority level.
 * **Alternative 2:** Logging in is like a command that is handled by logic, after which Main Window is initialized with the UserType and NRIC.
 ** Pros: Logic operations now handled by Logic class, UserType and NRIC can be final attribute to make sure no one gets the wrong account/ permission for each window.
 ** Cons: Command from logging in should be different from 'command' class to prevent undos or redos from happening.
+// end::login[]
 
 == Documentation
 
