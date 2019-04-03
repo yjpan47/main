@@ -53,43 +53,10 @@ The Duty Planner is modified and upgraded from SE-EDU Address Book 4.
 ** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/UserPrefs.java
 ** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/PersonnelDatabase.java
 
-* *Other contributions*:
-
 ** Project management:
-
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-
-** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Managed releases `v1.1`
 
 ** Documentation:
 *** Major updates to the User Guide: https://github.com/yjpan47/main/blob/master/docs/UserGuide.adoc
 *** Updated developer guide to include explanation of the schedule algorithm: https://github.com/yjpan47/main/blob/master/docs/DeveloperGuide.adoc
 
-== Contributions to the User Guide
-
-|===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
-|===
-
-include::../UserGuide.adoc[tag=undoredo]
-
-include::../UserGuide.adoc[tag=dataencryption]
-
-== Contributions to the Developer Guide
-
-|===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
-|===
-
-include::../DeveloperGuide.adoc[tag=undoredo]
-
-include::../DeveloperGuide.adoc[tag=dataencryption]
-
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
