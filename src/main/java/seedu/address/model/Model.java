@@ -87,6 +87,12 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a person with the same identity as {@code person} exists in the personnel database,
+     * using the NRIC value
+     */
+    boolean hasPerson(String nric);
+
+    /**
      * Deletes the given person.
      * The person must exist in the personnel database.
      */
@@ -200,4 +206,3 @@ public interface Model {
      */
     void addSwapRequest(String nric, LocalDate allocatedDate, LocalDate requestedDate);
 }
-

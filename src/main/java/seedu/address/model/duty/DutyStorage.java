@@ -40,10 +40,6 @@ public class DutyStorage {
         return sb.toString();
     }
 
-    public List<Duty> getDuties(Person person) {
-        return dutyRecords.getOrDefault(person, new ArrayList<>());
-    }
-
     public Comparator<Person> comparebyPoints() {
         return (p1, p2) -> {
             if (!this.dutyPoints.containsKey(p1) && !this.dutyPoints.containsKey(p2)) {

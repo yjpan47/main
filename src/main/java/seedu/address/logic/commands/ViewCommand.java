@@ -1,0 +1,77 @@
+package seedu.address.logic.commands;
+
+import static java.util.Objects.requireNonNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.duty.Duty;
+import seedu.address.model.duty.DutyMonth;
+import seedu.address.model.person.Person;
+
+public class ViewCommand extends Command {
+
+    public static final String COMMAND_WORD = "view";
+
+    public static final String MESSAGE_SUCCESS = "Viewing %1$s's duties!\n";
+    public static final String MESSAGE_NOSUCHPERSON = "This person does not exist in the personnel database";
+
+    private final String userName;
+
+    public ViewCommand(String userName) {
+        this.userName = userName;
+    }
+
+    @Override
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+        requireNonNull(model);
+        String MESSAGE_DUTY = MESSAGE_SUCCESS;
+
+        if (!model.hasPerson(userName)) {
+            throw new CommandException(MESSAGE_NOSUCHPERSON);
+        }
+
+        DutyMonth currentMonth = model.getDutyCalendar().getCurrentMonth();
+        DutyMonth nextMonth = model.getDutyCalendar().getNextMonth();
+        List<Duty> duties = new ArrayList<>();
+        duties.addAll(currentMonth.getScheduledDuties());
+        duties.addAll(nextMonth.getScheduledDuties());
+        int dutyCounter = 0;
+
+        if (!duties.isEmpty()) {
+            for (Duty duty : duties) {
+                for (Person person : duty.getPersons()) {
+                    if (person.getNric().toString().equals(userName)) {
+                        dutyCounter++;
+                        MESSAGE_DUTY = MESSAGE_DUTY + "Duty " + dutyCounter + ": Month: " + duty.getMonthString() + ", Day: " +
+                                duty.getDayIndex() + " with" + duty.getPersonsString(userName) + " \n";
+                    }
+                }
+            }
+        } else {
+            MESSAGE_DUTY = "%1$s has no duties!";
+        }
+
+        return new CommandResult(String.format(MESSAGE_DUTY, userName));
+    }
+
+    @Override
+    public CommandResult executeAdmin(Model model, CommandHistory history) throws CommandException {
+        return execute(model, history);
+    }
+
+    @Override
+    public CommandResult executeGeneral(Model model, CommandHistory history) throws CommandException {
+        return execute(model, history);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ViewCommand // instanceof handles nulls
+                && userName.equals(((ViewCommand) other).userName));
+    }
+}

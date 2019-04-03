@@ -16,7 +16,7 @@ import seedu.address.commons.util.DateUtil;
 public class DutyMonth {
 
     private boolean confirmed = false;
-    private List<Duty> scheduledDuties;
+    private List<Duty> scheduledDuties = new ArrayList<>();
 
     private int year;
     private int monthIndex;
@@ -40,7 +40,7 @@ public class DutyMonth {
         this.year = year;
         this.monthIndex = monthIndex;
         this.firstDayOfWeekIndex = firstDayOfWeekIndex;
-        this.scheduledDuties = new ArrayList<>(duties);
+        this.scheduledDuties.addAll(duties);
         this.blockedDays = new HashMap<>(blockedDays);
     }
 
@@ -70,10 +70,8 @@ public class DutyMonth {
         PriorityQueue<Person> personQueue = new PriorityQueue<>(Comparator.comparingInt(points::get));
         personQueue.addAll(persons);
 
-
-
         if (personQueue.isEmpty()) {
-            this.scheduledDuties = dutyList;
+            this.scheduledDuties.addAll(dutyList);
             this.scheduledDuties.sort(Comparator.comparingInt(Duty::getDayIndex));
         }
 
@@ -107,7 +105,7 @@ public class DutyMonth {
 
             }
         }
-        this.scheduledDuties = dutyList;
+        this.scheduledDuties.addAll(dutyList);
         this.scheduledDuties.sort(Comparator.comparingInt(Duty::getDayIndex));
     }
 

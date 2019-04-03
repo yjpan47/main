@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersonnelDatabase;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -23,6 +24,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.request.Request;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonnelDatabaseTest {
@@ -119,6 +121,7 @@ public class PersonnelDatabaseTest {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         // To be edited if necessary
         private final DutyCalendar dutyCalendar = new DutyCalendar();
+        private final List<Request> requests = new ArrayList<>();
 
         PersonnelDatabaseStub(Collection<Person> persons) {
             this.persons.setAll(persons);
@@ -127,6 +130,11 @@ public class PersonnelDatabaseTest {
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public List<Request> getRequestList() {
+            return requests;
         }
 
         @Override
