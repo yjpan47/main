@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
-import org.assertj.core.util.Lists;
+import com.google.common.collect.Lists;
 
 import seedu.address.model.person.Person;
 
@@ -30,9 +30,11 @@ public class DutyStorage {
         return dutyPoints.getOrDefault(person, 0);
     }
 
+    /*
     public List<Duty> getDuties(Person person) {
         return dutyRecords.getOrDefault(person, Lists.emptyList());
     }
+    */
 
     public Comparator<Person> comparebyPoints() {
         return (p1, p2) -> {
