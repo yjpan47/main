@@ -35,6 +35,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
+.  Some commands can only be accessed by Admin type accounts and some by General type accounts.
 
 [[Features]]
 == User Features
@@ -42,8 +43,10 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 === Log in
 Logs user into account +
 NRIC and passwords are case-sensitive. +
+Can only be done in the login box at the start of the program. +
 Enter in NRIC and password into the top and bottom text areas respectively, press enter. +
-Contact an administrator if you have trouble logging in.
+Contact an administrator if you have trouble logging in. +
+If you need to change your account, exit the program, then log back into a different account.
 
 ====
 *Command Format*
@@ -52,25 +55,14 @@ Contact an administrator if you have trouble logging in.
 * Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* An Admin and a User may have different formats for the same command
 ====
 
-=== Viewing help : `help`
+=== Viewing help : `help` `Admin` `General`
 
 Lists out a list of commands & instructions +
 Format: `help`
 
-
-=== Log out : `logout` `Not implemented yet`
-Logs the user out of the account +
-Format : `logout`
-
-=== Change password : `chpass` `Not implemented yet`
-Changes password of the user to a new one. The system will prompt the user to reconfirm the new password. +
-Format: `chpass pw/CURRENT_PASSWORD pw/NEW_PASSWORD
-
-Example:
-
-* `chpass pw/cs2103noteasy pw/cs2103veryhard`
 
 === View duties assigned to user : `view` `Not implemented yet`
 The user can see their details about their own duties assigned to them and their upcoming duties ranked by recency. +
@@ -84,7 +76,7 @@ Example:
 
 * `view Cassell`
 
-=== View roster : `roster` `Not implemented yet`
+=== View roster : `roster` `Not implemented yet` `Admin` `General`
 The user can see the full duty rosters for particular months. +
 Format: `roster MONTH`
 
@@ -92,7 +84,7 @@ Example:
 
 * `roster February`
 
-=== Block dates : `block`
+=== Block dates : `block` `Admin` `General`
 The user can block dates and set which dates they are unavailable to duties for upcoming months. A user can block up to 15 days per month. +
 Format: `block MONTH DAY DAY DAY ...`
 
