@@ -1,4 +1,4 @@
-= Valavan Rajar - Project Portfolio
+= Valavan Rajarajan - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
