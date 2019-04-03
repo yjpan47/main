@@ -12,7 +12,7 @@ We are from CS2103 Team W15-4 based in the http://www.comp.nus.edu.sg[School of 
 
 === Valavan Rajarajan
 image::valatheking.png[width="150", align="left"]
-{empty}[https://github.com/Valatheking[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/Valatheking[github]] [<<valatheking#, portfolio>>]
 
 Role: Team Lead +
 Responsibilites: Authentication features
@@ -21,7 +21,7 @@ Responsibilites: Authentication features
 
 === Pan Yongjing
 image::yjpan47.png[width="150", align="left"]
-{empty}[https://github.com/yjpan47[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/yjpan47[github]] [<<yjpan47#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Duty Assignment Algorithm
@@ -30,7 +30,7 @@ Responsibilities: Duty Assignment Algorithm
 
 === Cho Ming En
 image::mechome.png[width="150", align="left"]
-{empty}[https://github.com/mechome[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/mechome[github]] [<<mechome#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Graphic User Interface
@@ -39,7 +39,7 @@ Responsibilities: Graphic User Interface
 
 === Ng Wei Le
 image::exactlyprecise.png[width="150", align="left"]
-{empty}[https://github.com/exactlyprecise[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/exactlyprecise[github]] [<<exactlyprecise#, portfolio>>]
 
 Role: Developer +
 Responsibilities: User Commands
@@ -48,7 +48,7 @@ Responsibilities: User Commands
 
 === Yoon KI Hyun
 image::dreampursuer95.png[width="150", align="left"]
-{empty}[https://github.com/dreampursuer95[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/dreampursuer95[github]] [<<dreampursuer#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Admin Commands
