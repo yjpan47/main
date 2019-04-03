@@ -23,10 +23,12 @@ Duty Planner is a desktop application used to organise and plan duties for army 
 
 * *Code contributed*: [https://github.com/dreampursuer95/main/tree/master/src/main/java/seedu/address/logic/commands, https://github.com/dreampursuer95/main/blob/master/src/main/java/seedu/address/storage/JsonAdaptedDuty.java, https://github.com/dreampursuer95/main/blob/master/src/main/java/seedu/address/storage/JsonAdaptedDutyMonth.java, https://github.com/dreampursuer95/main/blob/master/src/main/java/seedu/address/storage/JsonAdaptedHashMapUnit.java, https://github.com/dreampursuer95/main/blob/master/src/main/java/seedu/address/storage/JsonSerializablePersonnelDatabase.java, https://github.com/dreampursuer95/main/blob/master/src/main/java/seedu/address/model/DutyCalendar.java, https://github.com/dreampursuer95/main/blob/master/src/main/java/seedu/address/model/PersonnelDatabase.java, https://github.com/dreampursuer95/main/blob/master/src/main/java/seedu/address/model/duty/Duty.java, https://github.com/dreampursuer95/main/blob/master/src/main/java/seedu/address/model/duty/DutyMonth.java, https://github.com/dreampursuer95/main/blob/master/src/main/java/seedu/address/commons/util/CalendarUtil.java, https://github.com/dreampursuer95/main/blob/master/src/main/java/seedu/address/logic/parser/ViewCommandParser.java, https://github.com/dreampursuer95/main/blob/master/src/main/java/seedu/address/logic/commands/ViewCommand.java] [https://github.com/dreampursuer95/main/blob/master/src/test/java/seedu/address/commons/util/CalendarUtilTest.java] 
 
-* *Other contributions*: fixing of test cases to fit our current use, setting up of the group Github account and the main repository, setting up Travis testing within our own repository, contribution of ideas for Duty Planner
+* *Other contributions*: 
 
 ** Project management:
 *** Managed releases `v1.0` - `v1.3rc` (4 releases) on GitHub
+*** Set up the group Github account and the main repository
+*** Set up Travis testing within our own repository
 ** Enhancements to existing features:
 *** Updated test cases to cater to the new attributes introduced to the Person class (Pull requests https://github.com/CS2103-AY1819S2-W15-4/main/pull/62, https://github.com/CS2103-AY1819S2-W15-4/main/pull/63, https://github.com/CS2103-AY1819S2-W15-4/main/pull/66)
 *** CalenderUtil class added to the commons folder to aid in date related operations (Pull request https://github.com/CS2103-AY1819S2-W15-4/main/pull/100)
