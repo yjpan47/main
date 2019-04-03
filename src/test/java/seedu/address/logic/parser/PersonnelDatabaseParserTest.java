@@ -26,9 +26,11 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -137,11 +139,12 @@ public class PersonnelDatabaseParserTest {
     }
     @Test
     public void parseCommand_blockDate() throws Exception {
-        assertTrue(parser.parseCommand(BlockDateCommand.COMMAND_WORD) instanceof BlockDateCommand);
+        assertTrue(parser.parseCommand(BlockDateCommand.COMMAND_WORD, UserType.ADMIN, "Admin") instanceof BlockDateCommand);
     }
     @Test
     public void parseCommand_redoCommandWord_returnsRedoCommand() throws Exception {
-
+        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD, UserType.ADMIN, "Admin") instanceof RedoCommand);
+        assertTrue(parser.parseCommand("redo 1", UserType.ADMIN, "Admin") instanceof RedoCommand);
     }
 
     @Test
@@ -149,6 +152,11 @@ public class PersonnelDatabaseParserTest {
         assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD, UserType.ADMIN, "Admin")
                 instanceof UndoCommand);
         assertTrue(parser.parseCommand("undo 3", UserType.ADMIN, "Admin") instanceof UndoCommand);
+    }
+
+    @Test
+    public void parseCommand_view() throws Exception {
+        assertTrue(parser.parseCommand("view", UserType.ADMIN, "Admin") instanceof ViewCommand);
     }
 
     @Test

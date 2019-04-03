@@ -95,6 +95,20 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
     }
 
     /**
+     * Returns true if a person with the same identity as {@code person} exists in the personnel database,
+     * using the NRIC value
+     */
+    public boolean hasPerson(String nric) {
+        boolean found = false;
+        for (Person person : persons) {
+            if (person.getNric().toString().equals(nric)) {
+                found = true;
+            }
+        }
+        return found;
+    }
+
+    /**
      * Adds a person to the personnel database.
      * The person must not already exist in the personnel database.
      */
@@ -140,7 +154,7 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
     public void addRequest(Request request) {
         requests.add(request);
         indicateModified();
-
+    }
 
     public Person getCurrentUser() {
         return currentUser;

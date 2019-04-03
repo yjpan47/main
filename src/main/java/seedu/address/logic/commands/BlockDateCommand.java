@@ -38,6 +38,9 @@ public class BlockDateCommand extends Command {
         for (Integer blockedDay : blockedDates) {
             nextMonth.addBlockedDay(person, blockedDay);
         }
+
+        model.commitPersonnelDatabase();
+
         return new CommandResult(String.format(MESSAGE_BLOCK_DATES_SUCCESS));
     }
 
