@@ -2,6 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -25,26 +28,34 @@ public class ViewCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        String DUTY_LIST = MESSAGE_SUCCESS;
+        String MESSAGE_DUTY = MESSAGE_SUCCESS;
 
         if (!model.hasPerson(userName)) {
             throw new CommandException(MESSAGE_NOSUCHPERSON);
         }
 
         DutyMonth currentMonth = model.getDutyCalendar().getCurrentMonth();
+        DutyMonth nextMonth = model.getDutyCalendar().getNextMonth();
+        List<Duty> duties = new ArrayList<>();
+        duties.addAll(currentMonth.getScheduledDuties());
+        duties.addAll(nextMonth.getScheduledDuties());
         int dutyCounter = 0;
 
-        for (Duty duty : currentMonth.getScheduledDuties()) {
-            for (Person person : duty.getPersons()) {
-                if (person.getNric().toString().equals(userName)) {
-                    dutyCounter++;
-                    DUTY_LIST = DUTY_LIST + "Duty " + dutyCounter + ": Month: " + duty.getMonthString() + ", Day: " +
-                            duty.getDayIndex() + " with" + duty.getPersonsString(userName) + " \n";
+        if (!duties.isEmpty()) {
+            for (Duty duty : duties) {
+                for (Person person : duty.getPersons()) {
+                    if (person.getNric().toString().equals(userName)) {
+                        dutyCounter++;
+                        MESSAGE_DUTY = MESSAGE_DUTY + "Duty " + dutyCounter + ": Month: " + duty.getMonthString() + ", Day: " +
+                                duty.getDayIndex() + " with" + duty.getPersonsString(userName) + " \n";
+                    }
                 }
             }
+        } else {
+            MESSAGE_DUTY = "%1$s has no duties!";
         }
 
-        return new CommandResult(String.format(DUTY_LIST, userName));
+        return new CommandResult(String.format(MESSAGE_DUTY, userName));
     }
 
     @Override
