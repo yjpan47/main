@@ -43,6 +43,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 === Log in
 Logs user into account +
 NRIC and passwords are case-sensitive. +
+By default, if your password has not been changed by you or an Admin, the password is your NRIC. +
 Can only be done in the login box at the start of the program. +
 Enter in NRIC and password into the top and bottom text areas respectively, press enter. +
 Contact an administrator if you have trouble logging in. +
@@ -58,17 +59,24 @@ If you need to change your account, exit the program, then log back into a diffe
 * An Admin and a User may have different formats for the same command
 ====
 
-=== Viewing help : `help` `Admin` `General`
+=== Features for all users
+
+==== Viewing help : `help`
 
 Lists out a list of commands & instructions +
 Format: `help`
 
 
-=== View duties assigned to user : `view` `Not implemented yet`
+==== List all the users: `list`
+Lists out all users in the system with their details. +
+Brings up view of the person list.+
+Format: `list`
+
+==== View duties assigned to user : `view` `Not implemented yet`
 The user can see their details about their own duties assigned to them and their upcoming duties ranked by recency. +
 Format: `view`
 
-=== View duties assigned to other users : `view` `Not implemented yet`
+==== View duties assigned to other users : `view` `Not implemented yet`
 The user can see their details about their own duties assigned to other users. +
 Format: `view NAME`
 
@@ -76,7 +84,7 @@ Example:
 
 * `view Cassell`
 
-=== View roster : `roster` `Not implemented yet` `Admin` `General`
+==== View roster : `roster` `Not implemented yet`
 The user can see the full duty rosters for particular months. +
 Format: `roster MONTH`
 
@@ -84,7 +92,7 @@ Example:
 
 * `roster February`
 
-=== Block dates : `block` `Admin` `General`
+==== Block dates : `block`
 The user can block dates and set which dates they are unavailable to duties for upcoming months. A user can block up to 15 days per month. +
 Format: `block MONTH DAY DAY DAY ...`
 
@@ -92,7 +100,7 @@ Example:
 
 * `block March 3 6 15 21 30`
 
-=== View blocked dates : `block`
+==== View blocked dates : `block`
 The user can view the dates they have blocked for a particular month. +
 Format: `block MONTH`
 
@@ -100,11 +108,11 @@ Example:
 
 * `block March`
 
-=== Find who is assigned duty today : `who`
+==== Find who is assigned duty today : `who`
 The user can find out which person is assigned duty today. +
 Format: `who`
 
-=== Find who is assigned duty on a given day : `who`
+==== Find who is assigned duty on a given day : `who`
 The user can find out which person is assigned duty on a given day. +
 Format: `who DATE`
 
@@ -112,7 +120,7 @@ Example:
 
 * `who 14022019`
 
-=== Make a swap request with another user : `swap`
+==== Make a swap request with another user : `swap`
 The user can request for a duty swap with another user. This will be subject to the agreement of the other user and approval of the admin (i.e. commander). +
 The other user and admin will be notified upon login and they will be prompted to accept or decline the request. +
 Format: `swap d/CURRENTDUTYDATE d/DESIREDDUTYDATE [t/MESSAGE]
@@ -121,11 +129,11 @@ Example:
 
 * `swap d/14022019 d/21022019 t/Please help a bro out!`
 
-=== Finding another person: `find`
+==== Finding another person: `find`
 The user can find people whose names contain any of the given keywords. Information of the person’s rank. company, section and contact number can be seen. +
 Format: `find KEYWORD [MORE KEYWORDS]`
 
-=== Filter people: `filter`
+==== Filter people: `filter`
 The user can list out the people who are within the filtered rank, date, or company. The list can be sorted in ascending or descending order. +
 Format: `filter [A or D] [s/STARTDATE] [e/ENDDATE] [r/RANK] [c/COMPANY] [s/SQUAD]`
 
@@ -143,41 +151,42 @@ Lists down all personnel, without any filtering, sorted in ascending order by de
 * `filter D s/11022019 e/11032019 r/PTE` +
 Lists down all personnel with rank Private and available dates between 11-Feb-2019 and 11-March-2019, in descending alphabetical order.
 
-=== Exit : `exit`
+==== Exit : `exit`
 Exits the program. User will be logged out automatically. +
 Format: `exit`
 
-== Admin Features
+=== General Features
 
-=== Viewing help for admin : `helpadmin`
-Lists out a list of commands & instructions for admin. +
-Format: `helpadmin`
+==== Edit user details : `edit`
+Edits user details. Can edit one or more fields, but not the NRIC or the account type. +
+Format: `edit [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONE] [t/TAG] [pw/PASSWORD]`
 
-=== Add a user : `add`
+=== Admin Features
+
+==== Add a user : `add`
 Add a user to the system with the corresponding NRIC, password, company, section, rank, name and contact number. +
-Format: `add nr/NRIC pw/PASSWORD c/COMPANY s/SECTION r/RANK n/NAME p/CONTACTNUMBER`
+By default, the user will be a General type account, and the password will be the NRIC. +
+Format: `add nr/NRIC c/COMPANY s/SECTION r/RANK n/NAME p/PHONE [t/TAG]`
 
-=== Delete a user : `delete`
-Delete a user from the system with the corresponding NRIC. The admin will be prompted with a confirmation message. +
-Format: `delete nr/NRIC`
+==== Delete a user : `delete`
+Delete a user based on the index in the list+
+Format: `delete INDEX`
 
-=== Edit a user’s details : `edit`
-Edits an existing user’s details based on the index number in the list. Can edit one or more fields.
-Format: `edit INDEX [nr/NRIC] [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONENUMBER]`
+==== Edit a user’s details : `edit`
+Edits an existing user’s details based on the index number in the list. Can edit one or more fields. +
+For account type field, A corresponds to an Admin account, G corresponds to a general account.
+Format: `edit INDEX [nr/NRIC] [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONE] [t/TAG] [pw/PASSWORD] [u/A or G]`
 
-=== Import personal details from a file : `import`
+==== Import personal details from a file : `import`
 Imports personal details of users from a TXT file. +
 Format: `import [FILE_NAME.txt]`
 
-=== List all the users: `list`
-Lists out all users in the system with their details. +
-Format: `list`
 
-=== Scheduling duties : `schedule`
+==== Scheduling duties : `schedule`
 This command schedules the duties for the upcoming month. It takes into account the block out dates of each guard duty personnel and their extras. It will sort by available dates and distribute duties accordingly. After the algorithm computes a plausible schedule, the schedule will be displayed and admin will be prompted to either confirm the schedule or rerun the scheduler algorithm. +
 Format: `schedule MONTH`
 
-=== Extra duty : `extra`
+==== Extra duty : `extra`
 Automatically allocates extra duties for a selected personnel in the upcoming month. +
 Format: `extra nr/NRIC d/NUMBEROFDAYS`
 
@@ -216,19 +225,15 @@ the command line. This is very cumbersome for the admin so we added an 'import' 
 == Command Summary
 General User +
 * *Viewing help* : `help` +
-* *Log in* : `login nr/NRIC  pw/PASSWORD` +
-* *Log out* : `logout` +
 * *View* : `view KEYWORD [MORE KEYWORDS]` +
 * *Blocking dates* : `block d/date d/date d/date …` +
 * *Finding a person* : `find KEYWORD [MORE KEYWORDS]` +
 * *Filter* : `filter [A or D] [s/STARTDATE] [e/ENDDATE] [r/RANK] [c/COMPANY] [s/SQUAD]` +
-* *Change password* : `chpass pw/CURRENT_PASSWORD pw/NEW_PASSWORD` +
+* *Edit* : `edit [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONE] [t/TAG] [pw/PASSWORD]` +
 * *Exit* : `exit` +
 Admin +
-* *Command help for admin* : `helpAdmin` +
-* *Add a user* : `addUser nr/NRIC pw/PASSWORD c/COMPANY s/SECTION r/RANK n/NAME p/PHONENUMBER` +
-* *Delete a user* : `deleteUser nr/NRIC` +
-* *Edit a user* : `editUser [nr/NRIC] [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONENUMBER]` +
+* *Add a user* : `addUser nr/NRIC c/COMPANY s/SECTION r/RANK n/NAME p/PHONE [t/TAG] +
+* *Edit a user* : `edit INDEX [nr/NRIC] [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONE] [t/TAG] [pw/PASSWORD] [u/A or G]` +
 * *Import personal details from a file* : `import [FILE_NAME.txt]` +
 * *List all the users* : `listUser` +
 * *Scheduling duties* : `schedule m/MONTH` +
