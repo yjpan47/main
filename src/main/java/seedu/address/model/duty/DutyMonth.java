@@ -35,18 +35,6 @@ public class DutyMonth {
         }
     }
 
-    public DutyMonth(int year, int monthIndex, int firstDayOfWeekIndex, DutySettings dutySettings) {
-        if (DateUtil.isValidYear(year) && DateUtil.isValidMonth(monthIndex)
-                && DateUtil.isValidDayOfWeek(firstDayOfWeekIndex)) {
-            this.year = year;
-            this.monthIndex = monthIndex;
-            this.firstDayOfWeekIndex = firstDayOfWeekIndex;
-            this.blockedDays = new HashMap<>();
-        } else {
-            throw new InvalidParameterException("Invalid Date");
-        }
-    }
-
     public DutyMonth(int year, int monthIndex, int firstDayOfWeekIndex,
                      List<Duty> duties, HashMap<Person, List<Integer>> blockedDays) {
         this.year = year;
