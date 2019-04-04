@@ -46,8 +46,8 @@ public class ViewCommand extends Command {
                 for (Person person : duty.getPersons()) {
                     if (person.getNric().toString().equals(userName)) {
                         dutyCounter++;
-                        MESSAGE_DUTY = MESSAGE_DUTY + "Duty " + dutyCounter + ": Month: " + duty.getMonthString() + ", Day: " +
-                                duty.getDayIndex() + " with" + duty.getPersonsString(userName) + " \n";
+                        MESSAGE_DUTY = MESSAGE_DUTY + "Duty " + dutyCounter + ": Month: " + duty.getMonthString()
+                                + ", Day: " + duty.getDayIndex() + " with" + duty.getPersonsString(userName) + " \n";
                     }
                 }
             }

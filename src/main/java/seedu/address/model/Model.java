@@ -8,6 +8,7 @@ import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.UserType;
+import seedu.address.model.duty.DutyMonth;
 import seedu.address.model.duty.DutySettings;
 import seedu.address.model.duty.DutyStorage;
 import seedu.address.model.person.Person;
@@ -205,4 +206,14 @@ public interface Model {
      * Add a swap request to the model
      */
     void addSwapRequest(String nric, LocalDate allocatedDate, LocalDate requestedDate);
+
+    /**
+     * Returns DutyMonth for next month
+     */
+    DutyMonth getNextDutyMonth();
+
+    /**
+     * Returns DutyMonth for current month
+     */
+    DutyMonth getCurrentDutyMonth();
 }

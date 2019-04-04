@@ -45,9 +45,9 @@ public class CalendarView extends UiPart<Region> {
     public CalendarView(DutyMonth dutyMonth) {
         super(FXML);
         this.dutyMonth = dutyMonth;
-        initdateLabels();
         gridPaneBottom.prefHeightProperty().bind(vBoxCalendar.heightProperty().subtract(20));
         scrollPane.setFitToWidth(true);
+        initdateLabels();
         try {
             fillDutyCalendar();
         } catch (IndexOutOfBoundsException e) {
@@ -70,7 +70,7 @@ public class CalendarView extends UiPart<Region> {
         }
         int monthIndex = dutyMonth.getMonthIndex();
         int year = dutyMonth.getYear();
-        monthLabel.setText(monthArray[monthIndex - 1]);
+        monthLabel.setText(monthArray[monthIndex]);
         yearLabel.setText(Integer.toString(year));
     }
 

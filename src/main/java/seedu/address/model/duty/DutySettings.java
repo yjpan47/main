@@ -1,15 +1,14 @@
 package seedu.address.model.duty;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.HashMap;
 
 import seedu.address.commons.util.DateUtil;
 
 public class DutySettings implements Serializable {
 
-    private static final int[] DEFAULT_DUTY_POINTS_IN_WEEK = {4, 2 , 2 , 2 , 2 , 3 ,4};
-    private static final int[] DEFAULT_DUTY_CAPACITY_IN_WEEK = {3, 2 , 2 , 2 , 2 , 2 ,3};
+    private static final int[] DEFAULT_DUTY_POINTS_IN_WEEK = {4, 2 , 2 , 2 , 2 , 3 , 4};
+    private static final int[] DEFAULT_DUTY_CAPACITY_IN_WEEK = {3, 2 , 2 , 2 , 2 , 2 , 3};
 
     private int[] dutyPointsInWeek;
     private int[] dutyCapacityInWeek;
