@@ -40,14 +40,24 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 [[Features]]
 == User Features
 
+// tag::login[]
 === Log in
+****
+* For Practical Exam: You may use an administrator account with Username: Admin, and Password: Admin
+* For Practical Exam: In personnel list, the password of the users will be listed for your convenience.
+****
 Logs user into account +
 NRIC and passwords are case-sensitive. +
-By default, if your password has not been changed by you or an Admin, the password is your NRIC. +
-Can only be done in the login box at the start of the program. +
 Enter in NRIC and password into the top and bottom text areas respectively, press enter. +
-Contact an administrator if you have trouble logging in. +
-If you need to change your account, exit the program, then log back into a different account.
+****
+* Can only be done in the login box at the start of the program.
+* By default, if your password has not been changed by you or an Admin, the password is your NRIC.
+* Contact an administrator if you have trouble logging in.
+* If you need to change your account, exit the program, then log back into a different account.
+* There are 2 types of accounts: General type accounts, and Admin (or Administrator) type accounts.
+* Admin accounts have access to more commands, or more functionalities for some kind of commands.
+****
+// end::login[]
 
 ====
 *Command Format*
@@ -68,8 +78,7 @@ Format: `help`
 
 
 ==== List all the users: `list`
-Lists out all users in the system with their details. +
-Brings up view of the person list.+
+Lists out all users with their details. +
 Format: `list`
 
 ==== View duties assigned to user : `view` `Not implemented yet`
@@ -129,27 +138,83 @@ Example:
 
 * `swap d/14022019 d/21022019 t/Please help a bro out!`
 
-==== Finding another person: `find`
-The user can find people whose names contain any of the given keywords. Information of the person’s rank. company, section and contact number can be seen. +
-Format: `find KEYWORD [MORE KEYWORDS]`
+==== Locating persons by name: `find`
 
-==== Filter people: `filter`
-The user can list out the people who are within the filtered rank, date, or company. The list can be sorted in ascending or descending order. +
-Format: `filter [A or D] [s/STARTDATE] [e/ENDDATE] [r/RANK] [c/COMPANY] [s/SQUAD]`
+Finds persons whose names contain any of the given keywords. +
+Format: `find KEYWORD [MORE_KEYWORDS]`
 
+****
+* The search is case insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+****
+
+Examples:
+
+* `find John` +
+Returns `john` and `John Doe`
+* `find Betsy Tim John` +
+Returns any person having names `Betsy`, `Tim`, or `John`
+
+==== Listing entered commands : `history`
+
+Lists all the commands that you have entered in reverse chronological order. +
+Format: `history`
+
+[NOTE]
 ====
-* Default ordering is alphabetical order, ascending
-* A or D specifies if ordering is ascending or descending
-* Dates to be entered in ddmmyyyy format.
+Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
+====
+
+==== Undoing previous command : `undo`
+
+Restores the address book to the state before the previous _undoable_ command was executed. +
+Format: `undo`
+
+[NOTE]
+====
+Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
 ====
 
 Examples:
 
-* `filter` +
-Lists down all personnel, without any filtering, sorted in ascending order by default
+* `delete 1` +
+`list` +
+`undo` (reverses the `delete 1` command) +
 
-* `filter D s/11022019 e/11032019 r/PTE` +
-Lists down all personnel with rank Private and available dates between 11-Feb-2019 and 11-March-2019, in descending alphabetical order.
+* `select 1` +
+`list` +
+`undo` +
+The `undo` command fails as there are no undoable commands executed previously.
+
+* `delete 1` +
+`clear` +
+`undo` (reverses the `clear` command) +
+`undo` (reverses the `delete 1` command) +
+
+==== Redoing the previously undone command : `redo`
+
+Reverses the most recent `undo` command. +
+Format: `redo`
+
+Examples:
+
+* `delete 1` +
+`undo` (reverses the `delete 1` command) +
+`redo` (reapplies the `delete 1` command) +
+
+* `delete 1` +
+`redo` +
+The `redo` command fails as there are no `undo` commands executed previously.
+
+* `delete 1` +
+`clear` +
+`undo` (reverses the `clear` command) +
+`undo` (reverses the `delete 1` command) +
+`redo` (reapplies the `delete 1` command) +
+`redo` (reapplies the `clear` command) +
 
 ==== Exit : `exit`
 Exits the program. User will be logged out automatically. +
@@ -157,36 +222,87 @@ Format: `exit`
 
 === General Features
 
-==== Edit user details : `edit`
-Edits user details. Can edit one or more fields, but not the NRIC or the account type. +
-Format: `edit [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONE] [t/TAG] [pw/PASSWORD]`
+// tag::editGeneral[]
+==== Edit own details : `edit`
+Edits user's own details. Can edit one or more fields. +
+Format: `edit INDEX [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONE] [t/TAG] [pw/PASSWORD]`
+
+****
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person's tags by typing `t/` without specifying any tags after it.
+****
+
+Examples:
+
+* `edit p/84523546 r/CPL +
+Edits the phone number and rank of the user to be `84523546` and `CPL` respectively.
+* `edit 1 c/Hotel Crower t/ pw/pass` +
+Edits the company of the user to be `Hotel`, clears all existing tags, and changes passworrd to 'pass'.
+// end::editGeneral[]
 
 === Admin Features
 
-// tag::adddelete[]
-==== Add a user : `add`
+// tag::add[]
+==== Adding a user : `add`
 Add a user to the system with the corresponding NRIC, password, company, section, rank, name and contact number. +
-By default, the user will be a General type account, and the password will be the NRIC. +
 Format: `add nr/NRIC c/COMPANY s/SECTION r/RANK n/NAME p/PHONE [t/TAG]`
 
+****
+* By default, the user will be a General type account, and the password will be the NRIC.
+* Password and account type can be changed using the `edit` command.
+****
 
-==== Delete a user : `delete`
-Delete a user based on the index in the list+
+// end::add[]
+==== Deleting a person : `delete`
+
+Deletes the specified person from the duty planner. +
 Format: `delete INDEX`
-// end::adddelete[]
 
-==== Edit a user’s details : `edit`
-Edits an existing user’s details based on the index number in the list. Can edit one or more fields. +
-For account type field, A corresponds to an Admin account, G corresponds to a general account.
+****
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `list` +
+`delete 2` +
+Deletes the 2nd person in the duty planner personnel list.
+* `find Betsy` +
+`delete 1` +
+Deletes the 1st person in the results of the `find` command.
+
+==== Clearing all entries : `clear`
+
+Clears all entries from the address book. +
+Format: `clear`
+
+// tag::editAdmin[]
+==== Edit any user’s details : `edit`
+Edits an existing user’s details in the personnel list.
 Format: `edit INDEX [nr/NRIC] [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONE] [t/TAG] [pw/PASSWORD] [u/A or G]`
 
-==== Import personal details from a file : `import`
-Imports personal details of users from a TXT file. +
-Format: `import [FILE_NAME.txt]`
+****
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person's tags by typing `t/` without specifying any tags after it.
+* For account type field specified by `u/`, A corresponds to an Admin account, G corresponds to a general account.
+****
 
+Examples:
 
+* `edit 2 p/84523546 r/CPL u/A` +
+Edits the phone number and rank of the 2nd person to be `84523546` and `CPL` respectively, and grants the person's account administrator privileges.
+* `edit 1 c/Hotel Crower t/ pw/pass` +
+Edits the company of the 1st person to be `Hotel`, clears all existing tags, and changes passworrd to 'pass'.
+// end::editAdmin[]
 
-=== Scheduling duties : `schedule`
+==== Scheduling duties : `schedule`
 This command invokes the scheduling algorithm for the upcoming month. It generates a viable duty schedule roster where each duty slot for the upcoming month will be filled by the people currently in the database. ++
 
 .In order to ensure fair scheduling system,
@@ -203,12 +319,12 @@ Calling the schedule command merely generates a viable shedule, but does not fin
 
 Format: `schedule`
 
-=== Confirm a Schedule : `confirm`
+==== Confirm a Schedule : `confirm`
 Confirm and finalize the last generated duty schedule (from the schedule command) for the upcoming month. +
 Subsequent attempts to call schedule command will not result in any new duty allocation produced. +
 Format: `confirm`
 
-=== Saving the data
+==== Saving the data
 
 Duty roster data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
@@ -216,7 +332,7 @@ There is no need to save manually.
 == FAQ
 
 *Q*: What if I want to swap my duty with another person? +
-*A*: Contact the administrator with the request.
+*A*: Use "swap" command to request a swap. If you receive no updates about it, contact your administrator.
 
 *Q*: What is the main feature of this app? +
 *A*: The main feature is the automated scheduling algorithm, which significantly minimizes the amount of work that +
@@ -224,17 +340,14 @@ the admin has to do.
 
 *Q*: What is my username and password? +
 *A*: Your username is by default your NRIC, used so prevalently in the SAF. +
-Your password will be set by the admin when they create your account but you can change the password later on +
-using the chpass command.
+Your password is also your NRIC by default, unless you or your administrator changed it. you can use the 'edit' command to edit your password later on. +
+
+*Q*: What if I forgot my password? +
+*A*: Contact your administrator for help.
 
 *Q*: What should I do if I need help with the app? +
 *A*: You can enter 'help' in the command line, or press Help > Help, or simply press F1. +
 This will open up the User Guide in a new window.
-
-*Q*: What's the difference between 'add' and 'import'? +
-*A*: 'Add' is only able to add one user at a time and requires all the details of the user on +
-the command line. This is very cumbersome for the admin so we added an 'import' command that reads a +
-.txt file containing multiple user details, with the same parameters format as the 'add' command.
 
 == Command Summary
 General User +
