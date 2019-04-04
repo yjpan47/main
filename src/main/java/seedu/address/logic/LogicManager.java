@@ -145,11 +145,11 @@ public class LogicManager implements Logic {
 
     @Override
     public DutyMonth getCurrentDutyMonth() {
-        return model.getDutyCalendar().getCurrentMonth();
+        return model.getCurrentDutyMonth();
     }
 
     @Override
     public DutyMonth getNextDutyMonth() {
-        return model.getDutyCalendar().getNextMonth();
+        return model.getNextDutyMonth();
     }
 }
