@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
 
-import seedu.address.model.person.Person;
 import seedu.address.commons.util.DateUtil;
+import seedu.address.model.person.Person;
 
 public class DutyMonth {
 
@@ -76,7 +76,7 @@ public class DutyMonth {
         }
 
         for (Duty duty : dutyList) {
-            while (! duty.isFilled()) {
+            while (!duty.isFilled()) {
                 boolean hasAssignable = true;
 
                 Person person = personQueue.poll();
@@ -114,8 +114,10 @@ public class DutyMonth {
             return false;
         } else if ((duty.getPersons().contains(person))) {
             return false;
-        } else return !this.blockedDays.containsKey(person)
-                || !this.blockedDays.get(person).contains(duty.getDayIndex());
+        } else {
+            return !this.blockedDays.containsKey(person)
+                    || !this.blockedDays.get(person).contains(duty.getDayIndex());
+        }
     }
 
     private List<Duty> generateAllDuties(DutySettings dutySettings) {

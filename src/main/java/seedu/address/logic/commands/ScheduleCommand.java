@@ -26,11 +26,12 @@ public class ScheduleCommand extends Command {
             + "taking into account the duty points of each person and their blocked out dates. "
             + "It will sort by available dates and distribute duties accordingly. \n";
 
-    public static final String SCHEDULE_SUCCESS = "\n\n%1$s\n\n%2$s\n\n" +
-            "This schedule has yet been confirmed!\n" +
-            "Type <confirm schedule> to confirm this schedule or <schedule> to reassign!";
+    public static final String SCHEDULE_SUCCESS = "\n\n%1$s\n\n%2$s\n\n"
+            + "This schedule has yet been confirmed!\n"
+            + "Type <confirm schedule> to confirm this schedule or <schedule> to reassign!";
 
-    public static final String SCHEDULE_ALREADY_CONFIRMED = "Schedule for %s %s already confirmed! See below for details\n\n%s\n\n%s\n\n";
+    public static final String SCHEDULE_ALREADY_CONFIRMED = "Schedule for %s %s already confirmed! "
+            + "See below for details\n\n%s\n\n%s\n\n";
 
 
     @Override
