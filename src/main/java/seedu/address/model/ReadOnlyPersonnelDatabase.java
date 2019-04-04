@@ -1,9 +1,10 @@
 package seedu.address.model;
 
-import javafx.beans.Observable;
-import javafx.collections.ObservableList;
+
 import java.util.List;
 
+import javafx.beans.Observable;
+import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.request.Request;
 
