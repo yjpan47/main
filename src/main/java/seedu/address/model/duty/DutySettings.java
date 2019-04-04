@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 import seedu.address.commons.util.DateUtil;
-
+/**
+ * Duty Settings class to hold all the duty settings
+ */
 public class DutySettings implements Serializable {
 
     private static final int[] DEFAULT_DUTY_POINTS_IN_WEEK = {4, 2 , 2 , 2 , 2 , 3 , 4};
@@ -61,7 +63,9 @@ public class DutySettings implements Serializable {
             return this.dutyCapacityInWeek[dayOfWeek - 1];
         }
     }
-
+    /**
+     * Prints the duty settings for each day of the week
+     */
     public String printDayOfWeek() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 7; i++) {

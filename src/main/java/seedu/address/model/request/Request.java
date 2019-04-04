@@ -1,7 +1,9 @@
 package seedu.address.model.request;
 
 import java.time.LocalDate;
-
+/**
+ * Request class to get requested info such as duty dates and nric
+ */
 public class Request {
     private String nric;
     private LocalDate allocatedDate;

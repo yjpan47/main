@@ -5,13 +5,17 @@ package seedu.address.commons.core;
  */
 class DateValidity {
 
-    static int MAX_VALID_YR = 9999;
-    static int MIN_VALID_YR = 2000;
+    private static int MAX_VALID_YR = 9999;
+    private static int MIN_VALID_YR = 2000;
 
     static boolean isLeap(int year) {
         return (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0));
     }
 
+
+    /**
+     * Helps to verify if the Date is valid
+     */
     static boolean isValidDate(int year, int month, int day) {
         if (year > MAX_VALID_YR || year < MIN_VALID_YR) {
             return false;

@@ -11,7 +11,9 @@ import seedu.address.model.Model;
 import seedu.address.model.duty.Duty;
 import seedu.address.model.duty.DutyMonth;
 import seedu.address.model.person.Person;
-
+/**
+ * Allows user to view their duties for the current month
+ */
 public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
@@ -28,7 +30,7 @@ public class ViewCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        String MESSAGE_DUTY = MESSAGE_SUCCESS;
+        String messageDuty = MESSAGE_SUCCESS;
 
         if (!model.hasPerson(userName)) {
             throw new CommandException(MESSAGE_NOSUCHPERSON);
@@ -46,16 +48,16 @@ public class ViewCommand extends Command {
                 for (Person person : duty.getPersons()) {
                     if (person.getNric().toString().equals(userName)) {
                         dutyCounter++;
-                        MESSAGE_DUTY = MESSAGE_DUTY + "Duty " + dutyCounter + ": Month: " + duty.getMonthString()
+                        messageDuty = messageDuty + "Duty " + dutyCounter + ": Month: " + duty.getMonthString()
                                 + ", Day: " + duty.getDayIndex() + " with" + duty.getPersonsString(userName) + " \n";
                     }
                 }
             }
         } else {
-            MESSAGE_DUTY = "%1$s has no duties!";
+            messageDuty = "%1$s has no duties!";
         }
 
-        return new CommandResult(String.format(MESSAGE_DUTY, userName));
+        return new CommandResult(String.format(messageDuty, userName));
     }
 
     @Override

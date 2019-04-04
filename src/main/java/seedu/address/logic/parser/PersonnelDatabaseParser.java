@@ -104,7 +104,7 @@ public class PersonnelDatabaseParser {
 
         case SwapCommand.COMMAND_WORD:
             return new SwapCommandParser().parse(arguments, userType, userName);
-            
+
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
 
@@ -112,9 +112,9 @@ public class PersonnelDatabaseParser {
             return new ViewCommandParser().parse(arguments, userType, userName);
 
         case DutySettingsCommand.COMMAND_WORD:
-                return new DutySettingsCommandParser().parse(arguments, userType, userName);
-            
-          default:
+            return new DutySettingsCommandParser().parse(arguments, userType, userName);
+
+        default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }

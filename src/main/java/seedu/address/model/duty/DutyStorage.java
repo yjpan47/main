@@ -6,12 +6,16 @@ import java.util.HashMap;
 import java.util.List;
 
 import seedu.address.model.person.Person;
-
+/**
+ * DutyStorage class to see the points of each person and update Duties
+ */
 public class DutyStorage {
 
-    public HashMap<Person, Integer> dutyPoints = new HashMap<>();
-    public HashMap<Person, List<Duty>> dutyRecords = new HashMap<>();
-
+    private HashMap<Person, Integer> dutyPoints = new HashMap<>();
+    private HashMap<Person, List<Duty>> dutyRecords = new HashMap<>();
+    /**
+     * Updates points for each duty done by person
+     */
     public void update(List<Duty> duties) {
         for (Duty duty : duties) {
             for (Person person : duty.getPersons()) {
@@ -28,6 +32,14 @@ public class DutyStorage {
         return dutyPoints.getOrDefault(person, 0);
     }
 
+    public HashMap<Person, Integer> getDutyPoints() {
+        return dutyPoints;
+    }
+
+    /**
+     * Prints the points accumulated by each person
+     */
+
     public String printPoints() {
         StringBuilder sb = new StringBuilder();
         sb.append("--- Points Accumulated ----\n");
@@ -39,7 +51,9 @@ public class DutyStorage {
         }
         return sb.toString();
     }
-
+    /**
+     * Comparator method to compare person by points
+     */
     public Comparator<Person> comparebyPoints() {
         return (p1, p2) -> {
             if (!this.dutyPoints.containsKey(p1) && !this.dutyPoints.containsKey(p2)) {
