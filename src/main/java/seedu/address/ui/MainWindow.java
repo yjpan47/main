@@ -144,7 +144,7 @@ public class MainWindow extends UiPart<Stage> {
                 logic.getPersonnelDatabase());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CalendarView calendarView = new CalendarView(logic.getFilteredPersonList());
+        CalendarView calendarView = new CalendarView(logic.getCurrentDutyMonth());
         calendarViewPlaceholder.getChildren().add(calendarView.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand, user, userName, logic.getHistory());
@@ -223,7 +223,10 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isList()) {
                 handleList();
             }
-
+            //CalendarView calendarView = new CalendarView(logic.getCurrentDutyMonth());
+            CalendarView calendarView = new CalendarView(logic.getNextDutyMonth());
+            calendarViewPlaceholder.getChildren().clear();
+            calendarViewPlaceholder.getChildren().add(calendarView.getRoot());
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
