@@ -6,13 +6,19 @@ import seedu.address.commons.core.UserType;
 import seedu.address.commons.util.DateUtil;
 import seedu.address.logic.commands.DutySettingsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
+/**
+ * Parses input arguments and creates a new DutySettingsCommand object
+ */
 public class DutySettingsCommandParser implements Parser<DutySettingsCommand> {
 
     private static final Prefix PREFIX_DAY_OF_WEEK = new Prefix("d/");
     private static final Prefix PREFIX_POINTS = new Prefix("p/");
     private static final Prefix PREFIX_CAPACITY = new Prefix("m/");
-
+    /**
+     * Parses the given {@code String} of arguments in the context of the DutySettingsCommand
+     * and returns an DutySettingsCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     @Override
     public DutySettingsCommand parse(String args, UserType userType, String userName) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,

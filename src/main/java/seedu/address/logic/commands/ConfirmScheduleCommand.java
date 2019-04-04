@@ -9,7 +9,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.duty.DutyMonth;
 import seedu.address.model.duty.DutyStorage;
-
+/**
+ * Set the schedule generated into stone by confirming it
+ */
 public class ConfirmScheduleCommand extends Command {
 
     public static final String COMMAND_WORD = "confirmschedule";

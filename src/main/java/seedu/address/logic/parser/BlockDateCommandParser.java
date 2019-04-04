@@ -11,9 +11,15 @@ import java.util.Set;
 import seedu.address.commons.core.UserType;
 import seedu.address.logic.commands.BlockDateCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
-public class BlockDateCommandParser implements Parser<BlockDateCommand>{
-
+/**
+ * Parses input arguments and creates a new BlockDateCommand object
+ */
+public class BlockDateCommandParser implements Parser<BlockDateCommand> {
+    /**
+     * Parses the given {@code String} of arguments in the context of the BlockDateCommand
+     * and returns an BlockDateCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public BlockDateCommand parse(String args, UserType userType, String userName) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
