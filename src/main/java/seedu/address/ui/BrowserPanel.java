@@ -55,7 +55,7 @@ public class BrowserPanel extends UiPart<Region> {
         // Load person page when selected person changes.
         //selectedPerson.addListener((observable, oldValue, newValue) -> {
         //if (newValue == null) {
-            //loadDefaultPage();
+        //    loadDefaultPage();
         //        return;
         //    }
         //loadPersonPage(newValue);

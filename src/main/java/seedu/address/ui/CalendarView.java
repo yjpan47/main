@@ -1,15 +1,9 @@
 package seedu.address.ui;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
@@ -24,13 +18,13 @@ import seedu.address.model.person.Person;
  * The Calendar. Allows user to see dates with duties.
  */
 public class CalendarView extends UiPart<Region> {
-    private final DutyMonth dutyMonth;
     private static final String FXML = "CalendarView.fxml";
-    //private final Logger logger = LogsCenter.getLogger(CalendarView.class);
     private static final String[] dayArray = {"SUN", "MON ", "TUE", "WED", "THU", "FRI", "SAT"};
-    private static final String[] monthArray = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG",
-        "SEP", "OCT", "NOV", "DEC"};
+    private static final String[] monthArray =
+        {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
     private Label[] dateLabels;
+    private final DutyMonth dutyMonth;
+    //private final Logger logger = LogsCenter.getLogger(CalendarView.class);
 
     @FXML
     private Label monthLabel;
@@ -76,7 +70,7 @@ public class CalendarView extends UiPart<Region> {
         }
         int monthIndex = dutyMonth.getMonthIndex();
         int year = dutyMonth.getYear();
-        monthLabel.setText(monthArray[monthIndex]);
+        monthLabel.setText(monthArray[monthIndex - 1]);
         yearLabel.setText(Integer.toString(year));
     }
 
