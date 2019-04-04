@@ -277,7 +277,7 @@ Deletes the 1st person in the results of the `find` command.
 
 ==== Clearing all entries : `clear`
 
-Clears all entries from the address book. +
+Clears all entries from the duty planner. +
 Format: `clear`
 
 // tag::editAdmin[]
@@ -324,7 +324,7 @@ Confirm and finalize the last generated duty schedule (from the schedule command
 Subsequent attempts to call schedule command will not result in any new duty allocation produced. +
 Format: `confirm`
 
-==== Saving the data
+=== Saving the data
 
 Duty roster data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
@@ -350,17 +350,26 @@ Your password is also your NRIC by default, unless you or your administrator cha
 This will open up the User Guide in a new window.
 
 == Command Summary
-General User +
+
+=== All Users
+
 * *Viewing help* : `help` +
-* *View* : `view KEYWORD [MORE KEYWORDS]` +
 * *Blocking dates* : `block d/date d/date d/date …` +
-* *Finding a person* : `find KEYWORD [MORE KEYWORDS]` +
-* *Filter* : `filter [A or D] [s/STARTDATE] [e/ENDDATE] [r/RANK] [c/COMPANY] [s/SQUAD]` +
-* *Edit* : `edit [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONE] [t/TAG] [pw/PASSWORD]` +
+* *Make swap request* : `swap` +
+* *List all the users* : `list` +
+* *Locate person by name* : `find` +
+* *List entered commands* : `history` +
+* *Undo command* : `undo` +
+* *Redo command* : `redo` +
 * *Exit* : `exit` +
-Admin +
-* *Add a user* : `addUser nr/NRIC c/COMPANY s/SECTION r/RANK n/NAME p/PHONE [t/TAG] +
-* *Edit a user* : `edit INDEX [nr/NRIC] [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONE] [t/TAG] [pw/PASSWORD] [u/A or G]` +
-* *Import personal details from a file* : `import [FILE_NAME.txt]` +
-* *List all the users* : `listUser` +
-* *Scheduling duties* : `schedule m/MONTH` +
+
+=== General accounts
+* *Edit own info* : `edit [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONE] [t/TAG] [pw/PASSWORD]` +
+
+=== Admin accounts
+* *Add a user* : `add nr/NRIC c/COMPANY s/SECTION r/RANK n/NAME p/PHONE [t/TAG]` +
+* *Edit any user* : `edit INDEX [nr/NRIC] [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONE] [t/TAG] [pw/PASSWORD] [u/A or G]` +
+* *Delete a user* : `delete INDEX` +
+* *Scheduling duties* : `schedule` +
+* *Confirm schedule* : `confirm` +
+* *Clear entries* : `clear` +
