@@ -20,7 +20,6 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.storage.Storage;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -141,7 +140,8 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getPersonnelDatabaseFilePath(), logic.getPersonnelDatabase());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getPersonnelDatabaseFilePath(),
+                logic.getPersonnelDatabase());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CalendarView calendarView = new CalendarView(logic.getFilteredPersonList());
