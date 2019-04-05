@@ -1,8 +1,5 @@
 package seedu.address.model;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import seedu.address.commons.util.CalendarUtil;
 import seedu.address.model.duty.DutyMonth;
 import seedu.address.model.duty.DutyStorage;
@@ -41,8 +38,11 @@ public class DutyCalendar {
     }
 
     public DutyCalendar(DutyMonth currentMonth, DutyMonth nextMonth) {
+        this.currentYear = CalendarUtil.getCurrentYear();
+        this.currentMonthIndex = CalendarUtil.getCurrentMonth();
         this.currentMonth = currentMonth;
         this.nextMonth = nextMonth;
+        this.dutyStorage = new DutyStorage();
     }
 
     public int getCurrentMonthIndex() {
@@ -68,7 +68,7 @@ public class DutyCalendar {
 
 
     public void setDutyCalendar(DutyCalendar dutyCalendar) {
-        if (dutyCalendar.getCurrentMonthIndex() == CalendarUtil.getCurrentMonth()) {
+        if (dutyCalendar.getCurrentMonth().getMonthIndex() == CalendarUtil.getCurrentMonth()) {
             this.currentMonth = dutyCalendar.getCurrentMonth();
             this.nextMonth = dutyCalendar.getNextMonth();
         } else {
@@ -81,8 +81,6 @@ public class DutyCalendar {
      * @param dutyCalendar the dutyCalendar from the storage
      */
     private void rollover(DutyCalendar dutyCalendar) {
-        this.currentYear = CalendarUtil.getCurrentYear();
-        this.currentMonthIndex = CalendarUtil.getCurrentMonth();
         this.currentMonth = dutyCalendar.getNextMonth();
         int yearOfNextMonth = currentMonthIndex == 11 ? currentYear + 1 : currentYear;
         this.nextMonth = new DutyMonth(yearOfNextMonth, this.currentMonthIndex + 1 ,

@@ -7,7 +7,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.duty.DutyMonth;
 import seedu.address.model.person.Person;
-
+/**
+ * A command to block dates for the next month of duties.
+ */
 public class BlockDateCommand extends Command {
 
     public static final String COMMAND_WORD = "bd";

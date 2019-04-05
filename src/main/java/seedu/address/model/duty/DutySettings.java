@@ -1,15 +1,16 @@
 package seedu.address.model.duty;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.HashMap;
 
 import seedu.address.commons.util.DateUtil;
-
+/**
+ * Duty Settings class to hold all the duty settings
+ */
 public class DutySettings implements Serializable {
 
-    private static final int[] DEFAULT_DUTY_POINTS_IN_WEEK = {4, 2 , 2 , 2 , 2 , 3 ,4};
-    private static final int[] DEFAULT_DUTY_CAPACITY_IN_WEEK = {3, 2 , 2 , 2 , 2 , 2 ,3};
+    private static final int[] DEFAULT_DUTY_POINTS_IN_WEEK = {4, 2 , 2 , 2 , 2 , 3 , 4};
+    private static final int[] DEFAULT_DUTY_CAPACITY_IN_WEEK = {3, 2 , 2 , 2 , 2 , 2 , 3};
 
     private int[] dutyPointsInWeek;
     private int[] dutyCapacityInWeek;
@@ -62,12 +63,14 @@ public class DutySettings implements Serializable {
             return this.dutyCapacityInWeek[dayOfWeek - 1];
         }
     }
-
+    /**
+     * Prints the duty settings for each day of the week
+     */
     public String printDayOfWeek() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 7; i++) {
             sb.append(String.format("%15s : [Manpower Needed = %2d] [Points Awarded = %2d]\n" ,
-                    DateUtil.getDayOfWeek(i + 1), this.dutyPointsInWeek[i], this.dutyCapacityInWeek[i]));
+                    DateUtil.getDayOfWeek(i + 1), this.dutyCapacityInWeek[i], this.dutyPointsInWeek[i]));
         }
         return sb.toString();
     }

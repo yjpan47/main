@@ -10,6 +10,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyPersonnelDatabase;
+import seedu.address.model.duty.DutyMonth;
 import seedu.address.model.duty.DutySettings;
 import seedu.address.model.person.Person;
 
@@ -94,4 +95,14 @@ public interface Logic {
      * Sets UserType and UserName in Model.
      */
     void setUserDetailsInModel(UserType userType, String userName);
+
+    /**
+     * Returns dutyMonth for current month
+     */
+    DutyMonth getCurrentDutyMonth();
+
+    /**
+     * Returns DutyMonth for next month
+     */
+    DutyMonth getNextDutyMonth();
 }

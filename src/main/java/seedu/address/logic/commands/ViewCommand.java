@@ -2,13 +2,18 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.duty.Duty;
 import seedu.address.model.duty.DutyMonth;
 import seedu.address.model.person.Person;
-
+/**
+ * Allows user to view their duties for the current month
+ */
 public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
@@ -25,26 +30,39 @@ public class ViewCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        String DUTY_LIST = MESSAGE_SUCCESS;
+        String messageDuty = MESSAGE_SUCCESS;
 
         if (!model.hasPerson(userName)) {
             throw new CommandException(MESSAGE_NOSUCHPERSON);
         }
 
+        List<Duty> duties = new ArrayList<>();
+
         DutyMonth currentMonth = model.getDutyCalendar().getCurrentMonth();
+        if (currentMonth.isConfirmed()) {
+            duties.addAll(currentMonth.getScheduledDuties());
+        }
+        DutyMonth nextMonth = model.getDutyCalendar().getNextMonth();
+        if (nextMonth.isConfirmed()) {
+            duties.addAll(nextMonth.getScheduledDuties());
+        }
         int dutyCounter = 0;
 
-        for (Duty duty : currentMonth.getScheduledDuties()) {
-            for (Person person : duty.getPersons()) {
-                if (person.getNric().toString().equals(userName)) {
-                    dutyCounter++;
-                    DUTY_LIST = DUTY_LIST + "Duty " + dutyCounter + ": Month: " + duty.getMonthString() + ", Day: " +
-                            duty.getDayIndex() + " with" + duty.getPersonsString(userName) + " \n";
+        if (!duties.isEmpty()) {
+            for (Duty duty : duties) {
+                for (Person person : duty.getPersons()) {
+                    if (person.getNric().toString().equals(userName)) {
+                        dutyCounter++;
+                        messageDuty = messageDuty + "Duty " + dutyCounter + ": Month: " + duty.getMonthString()
+                                + ", Day: " + duty.getDayIndex() + " with" + duty.getPersonsString(userName) + " \n";
+                    }
                 }
             }
+        } else {
+            messageDuty = "%1$s has no duties!";
         }
 
-        return new CommandResult(String.format(DUTY_LIST, userName));
+        return new CommandResult(String.format(messageDuty, userName));
     }
 
     @Override

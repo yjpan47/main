@@ -1,0 +1,65 @@
+= Ng Wei Le - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: MINDEF Duty Planner
+
+---
+
+== Overview
+
+Duty Planner is a desktop address book application used foradding MINDEF personnel, and assigning and handling duties for the personnel involed. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10kLoC.
+
+== Summary of contributions
+
+* *Major enhancement*: added *accounts for different users, and other user functionalities*.
+** What it does: Different personnel stored in the Duty Planner can log in. Accounts have 2 types: General and Admin, which can act differently for some commands. Some commands target the specific user.
+** Justification: This feature allows for commands that target the specific user (like swap duty, or edit own details). It also allows for commands like delete to be allowed for admins but not general users.
+** Highlights: The enhancement affects the Person model, and existing and future commands that may be added in the future.  Many design alternatives were considered, and the implementation was difficult since it affects current commands, models and test cases.
+
+* *Minor enhancement*: edited the edit command to allow user to edit his own information (except NRIC and account type).
+* *Code contributed*: [https://github.com/exactlyprecise/main/tree/master/src/main/java/seedu/address/logic/commands, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/storage/JsonAdaptedPerson.java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/logic/Logic.java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/logic/LogicManager.java, https://github.com/exactlyprecise/main/tree/master/src/main/java/seedu/address/logic/parser, https://github.com/exactlyprecise/main/tree/master/src/main/java/seedu/address/model/person/Person,java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/model/person/Password.java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/model/Model.java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/model/ModelManager.java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/ui/UiManager.java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/ui/CalendarView.java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/ui/LoginBox.java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/ui/MainWindow.java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/ui/NricUserPair.java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/ui/PersonCard.java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/ui/Ui.java, https://github.com/exactlyprecise/main/blob/master/src/main/java/seedu/address/ui/UiManager.java]
+
+* *Other contributions*:
+
+
+** Project management:
+*** Helped in creating JAR file for team for version 1.3
+** Enhancements to existing features:
+*** Helped other members to write CalendarView.fxml and CalendarView.java
+** Community:
+*** Helped group 15-3 in their UI component:
+https://github.com/CS2103-AY1819S2-W15-3/main/blob/master/src/main/resources/view/AnalyticsChart.fxml
+
+
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=login]
+
+include::../UserGuide.adoc[tag=add]
+
+include::../UserGuide.adoc[tag=editGeneral]
+
+include::../UserGuide.adoc[tag=editAdmin]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=login]
+
+
+== PROJECT: PowerPointLabs
+
+---
+
+_{Optionally, you may include other projects in your portfolio.}_

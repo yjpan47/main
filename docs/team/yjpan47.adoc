@@ -1,0 +1,119 @@
+= Pan Yongjing - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: AddressBook - Level 4
+
+---
+
+== Overview
+
+MINDEF Duty Planner is a desktop application used to help military units in the Singapore Armed Forces organise and plan monthly duties for their servicemen. It has various features and functions for administator (i.e. commander) as well as the duty personnel (i.e. servicemen). The user interacts with the application using a Command Line Interface (CLI) with a Graphic User Interface (GUI) created with JavaFX. It is written in Java, and has about 10kLoC.
+
+The Duty Planner is modified and upgraded from SE-EDU Address Book 4. 
+
+== Summary of contributions
+
+* *Major enhancement*: Creation of the duty package module
+** What it does: A duty package with classes (i.e. Duty, DutyMonth, DutySettings, DutyStorage) in charge of setting up the duties of a month and assigning them to person, as well as contain vital functions needed for the duty features to be implemented.
+*** Duty : A duty class that characterizes the attributes of a duty including the exact date, points awarded, manpower needed and a list of person eventually being assigned to that duty.  
+*** DutyMonth : Represents a month in the calendar and is the main driver class behind the scheduling of duties. It initializes all duties and assigns them to person. Stores vital information such as the list of duties and the blocked dates of each person. 
+*** DutySettings : Classfied as a UserPref which contains information about the manpower needs and points assigned to duties from each day of the week. Enable modification to the the mnapower needs and points assigned to each duty based on the day of the week.
+*** DutyStorage : Accumulates and stores the duty points earned by all the persons. 
+** Justification: The duty package provides the backend support for all duty-related features and commands. 
+** Highlights: The package contain functions assessed by many commands (i.e. BlockDateCommmand, ViewCommand, ScheduleCommand, DutySettingCommand). 
+** Credits: {Fellow teammate Yoon Ki Hyun for working together on the DutyMonth and Duty}
+
+* *Major enhancement*: Schedule and confirm command
+** What it does: The schedule command that invokes the schedule algorithm to generate a viable duty allocation for the upcoming month. The confirm command finalizes the schedule and updates the existing duty points of each person. 
+** Justification: Enable duties to be scheduled to persons.
+** Highlight: Need to ensure that the command references the correct dutyMonth and duty points of each person do not get updated until confirm command is called. 
+
+* *Major enhancement*: Settings command
+** What it does: Enable the administrator to adjust the desired manpower for duties based on the day of the week. Eanble the administrator to adjust the points to be awarded for doing duties based on the daty of the week. 
+** Justification: Allows the user to have flexibility to change the duty allocation system.
+** Highlight: Need to ensure that the scheduling algorithm is compatible with adjustable duty points and duty capacities. 
+
+* *Minor enhancement*: DateUtil common
+** What it does: A class that contains static methods to assist in validation of date parameters and other date related functions. 
+** Justification: Contains commonly used functionalities that aids the developers and prevent duplicate code. 
+
+* *Code contributed*: 
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/duty/Duty.java  
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/duty/DutyMonth.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/duty/DutySettings.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/duty/DutyStorage.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/DutyCalendar.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/commons/util/DateUtil.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/commands/ScheduleCommand.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/commands/ConfirmScheduleCommand.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/commands/DutySettingsCommand.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/parser/DutySettingsCommandParser.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/UserPrefs.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/PersonnelDatabase.java
+
+* Project management:
+** Managed releases `v1.1`
+
+* Documentation:
+** Major updates to the User Guide: +
+https://github.com/yjpan47/main/blob/master/docs/UserGuide.adoc
+** Updated developer guide to include explanation of the schedule algorithm: +
+https://github.com/yjpan47/main/blob/master/docs/DeveloperGuide.adoc
+
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+=== Scheduling duties : `schedule`
+This command invokes the scheduling algorithm for the upcoming month. It generates a viable duty schedule roster where each duty slot for the upcoming month will be filled by the people currently in the database. ++
+
+.In order to ensure fair scheduling system,
+. We introduce a point system to each individual such that a servivemen can earn points by doing duties. The points awarded to servicemen are cumulative, thus the points awarded are carried over to the next month. +
+. Each duty is worth a certain number of points and a person gains that amount of points by doing that duty. For example, if all Sunday duties are worth 4 points, a servicemen who is assigned a Sunday duty will by awarded 4 points. +
+. Before the scheduling command is called, each person has the opportunity to indicate the days in which they are unavailable to do duty. (See 3.9 block command)  +
+
+
+The algorithm is optimized such that persons with low points will be allocated to duties with high points. It automatically attempts to balance out the points of each person by the end of the month. +
+
+The duty schedule generated by the schedule command is not deterministic, calling schedule command multiple times generates different duty allocation. +
+
+Calling the schedule command merely generates a viable shedule, but does not finalize the schedule (i.e. points awarded to each person is yet to be added). Schedule generated is also not deterministic, calling schedule command multiple times generates different duty allocation. Thus, the admin can call schedule command continuously until a satisfactory schedule is produced. To finalize the schedule, use the confirm command. (See 4.8 confirm schedule) +
+
+Format: `schedule`
+
+=== Confirm a Schedule : `confirm`
+Confirm and finalize the last generated duty schedule (from the schedule command) for the upcoming month. +
+Subsequent attempts to call schedule command will not result in any new duty allocation produced. +
+Format: `confirm`
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+*Algorithm*
+
+* Each Person is assigned a duty score that is initialized at a fixed value. Each Person can earn duty points by covering
+duties. Weekday duties are worth 2 points; Friday duties are worth 3 points; Weekend duties are worth 4 points.
+
+* Preparation of data
+1. The list of persons will be sorted according to their points in ascending order.
+2. The list of duties will be sorted in the order Weekend >> Friday >> Weekday.
+3. Person with lower duty points will be assigned to weekend duties
+
+* Assignment
+1. Starting from the top of the duties list, the first person from the persons list who is available (didn't block out the date) for that day will be assigned
+the duty. This ensures that lower score persons are given priority for weekend duties.
+2. The algorithm ensure that the duty score of the persons will be normalized as much as possible at the end of each month.
+
+
+== PROJECT: PowerPointLabs
+
+---

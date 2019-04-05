@@ -5,7 +5,9 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.duty.DutySettings;
-
+/**
+ * Allows admin to modify settings of the duties to allow different points and number of personnel for duties
+ */
 public class DutySettingsCommand extends Command {
 
     public static final String COMMAND_WORD = "settings";

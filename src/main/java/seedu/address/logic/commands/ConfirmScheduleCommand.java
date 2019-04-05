@@ -3,23 +3,25 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.util.CalendarUtil;
 import seedu.address.commons.util.DateUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.duty.DutyMonth;
 import seedu.address.model.duty.DutyStorage;
-
+/**
+ * Set the schedule generated into stone by confirming it
+ */
 public class ConfirmScheduleCommand extends Command {
 
-    public static final String COMMAND_WORD = "confirmschedule";
+    public static final String COMMAND_WORD = "confirm";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + "Confirms previously generated schedule\n";
 
     public static final String SCHEDULE_SUCCESS = "Schedule for %s %s confirmed! See below for details\n\n%s\n\n%s\n\n";
-    public static final String SCHEDULE_ALREADY_CONFIRMED = "Schedule for %s %s already confirmed! See below for details\n\n%s\n\n%s\n\n";
+    public static final String SCHEDULE_ALREADY_CONFIRMED = "Schedule for %s %s already confirmed! "
+            + "See below for details\n\n%s\n\n%s\n\n";
     public static final String NO_SCHEDULE_YET = "No schedules found! Tye <schedule> to make a schedule!";
 
     @Override
@@ -46,7 +48,7 @@ public class ConfirmScheduleCommand extends Command {
                 DateUtil.getMonth(dutyMonth.getMonthIndex()),
                 dutyMonth.getYear(),
                 dutyMonth.printDuties(),
-                dutyMonth.printPoints(dutyStorage)));
+                dutyStorage.printPoints()));
     }
 
     @Override

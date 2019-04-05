@@ -18,6 +18,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UserType;
+import seedu.address.model.duty.DutyMonth;
 import seedu.address.model.duty.DutySettings;
 import seedu.address.model.duty.DutyStorage;
 import seedu.address.model.person.Person;
@@ -30,7 +31,6 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final VersionedPersonnelDatabase versionedPersonnelDatabase;
-    private final DutyCalendar dutyCalendar;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
@@ -161,6 +161,16 @@ public class ModelManager implements Model {
         versionedPersonnelDatabase.setPerson(target, editedPerson);
     }
 
+    @Override
+    public DutyMonth getCurrentDutyMonth() {
+        return getDutyCalendar().getCurrentMonth();
+    }
+
+    @Override
+    public DutyMonth getNextDutyMonth() {
+        return getDutyCalendar().getNextMonth();
+    }
+
     //=========== User Details ================================================================================
 
     @Override
@@ -196,9 +206,6 @@ public class ModelManager implements Model {
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
     }
-
-    //@Override
-    //public ObservableList<Person> getDutyForDates() {return dutyForDates; }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {

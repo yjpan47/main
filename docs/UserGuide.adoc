@@ -18,7 +18,7 @@ By: `CS2103 W15-4`      Since: `Feb 2019`      Licence: `MIT`
 
 == Introduction
 
-DutyPlanner is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). It is a software designed to automate the process of assigning guard duties for soldiers in the Singapore Armed Forces, so that the commanders no longer have to manually assign the dates.
+MINDEF Duty Planner is a platform to assist military units in the SAF in the assignment of daily duties amonst the servicemen. The application is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). The software is designed to automate the process of fairly assigning duties to available servicemen for an entire month. It also enables servicemen to conveniently indicate the days they are unavailable for duty. It seeks to fairly distribute duties by taking into account the varying importance of each duty (e.g. Sunday duties are worth more than weekday duties). 
 
 == Quick Start
 
@@ -35,15 +35,29 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
+.  Some commands can only be accessed by Admin type accounts and some by General type accounts.
 
 [[Features]]
 == User Features
 
+// tag::login[]
 === Log in
+****
+* For Practical Exam: You may use an administrator account with Username: Admin, and Password: Admin
+* For Practical Exam: In personnel list, the password of the users will be listed for your convenience.
+****
 Logs user into account +
 NRIC and passwords are case-sensitive. +
 Enter in NRIC and password into the top and bottom text areas respectively, press enter. +
-Contact an administrator if you have trouble logging in.
+****
+* Can only be done in the login box at the start of the program.
+* By default, if your password has not been changed by you or an Admin, the password is your NRIC.
+* Contact an administrator if you have trouble logging in.
+* If you need to change your account, exit the program, then log back into a different account.
+* There are 2 types of accounts: General type accounts, and Admin (or Administrator) type accounts.
+* Admin accounts have access to more commands, or more functionalities for some kind of commands.
+****
+// end::login[]
 
 ====
 *Command Format*
@@ -52,31 +66,26 @@ Contact an administrator if you have trouble logging in.
 * Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* An Admin and a User may have different formats for the same command
 ====
 
-=== Viewing help : `help`
+=== Features for all users
+
+==== Viewing help : `help`
 
 Lists out a list of commands & instructions +
 Format: `help`
 
 
-=== Log out : `logout` `Not implemented yet`
-Logs the user out of the account +
-Format : `logout`
+==== List all the users: `list`
+Lists out all users with their details. +
+Format: `list`
 
-=== Change password : `chpass` `Not implemented yet`
-Changes password of the user to a new one. The system will prompt the user to reconfirm the new password. +
-Format: `chpass pw/CURRENT_PASSWORD pw/NEW_PASSWORD
-
-Example:
-
-* `chpass pw/cs2103noteasy pw/cs2103veryhard`
-
-=== View duties assigned to user : `view` `Not implemented yet`
+==== View duties assigned to user : `view` `Not implemented yet`
 The user can see their details about their own duties assigned to them and their upcoming duties ranked by recency. +
 Format: `view`
 
-=== View duties assigned to other users : `view` `Not implemented yet`
+==== View duties assigned to other users : `view` `Not implemented yet`
 The user can see their details about their own duties assigned to other users. +
 Format: `view NAME`
 
@@ -84,7 +93,7 @@ Example:
 
 * `view Cassell`
 
-=== View roster : `roster` `Not implemented yet`
+==== View roster : `roster` `Not implemented yet`
 The user can see the full duty rosters for particular months. +
 Format: `roster MONTH`
 
@@ -92,7 +101,7 @@ Example:
 
 * `roster February`
 
-=== Block dates : `block`
+==== Block dates : `block`
 The user can block dates and set which dates they are unavailable to duties for upcoming months. A user can block up to 15 days per month. +
 Format: `block MONTH DAY DAY DAY ...`
 
@@ -100,7 +109,7 @@ Example:
 
 * `block March 3 6 15 21 30`
 
-=== View blocked dates : `block`
+==== View blocked dates : `block`
 The user can view the dates they have blocked for a particular month. +
 Format: `block MONTH`
 
@@ -108,11 +117,11 @@ Example:
 
 * `block March`
 
-=== Find who is assigned duty today : `who`
+==== Find who is assigned duty today : `who`
 The user can find out which person is assigned duty today. +
 Format: `who`
 
-=== Find who is assigned duty on a given day : `who`
+==== Find who is assigned duty on a given day : `who`
 The user can find out which person is assigned duty on a given day. +
 Format: `who DATE`
 
@@ -120,7 +129,7 @@ Example:
 
 * `who 14022019`
 
-=== Make a swap request with another user : `swap`
+==== Make a swap request with another user : `swap`
 The user can request for a duty swap with another user. This will be subject to the agreement of the other user and approval of the admin (i.e. commander). +
 The other user and admin will be notified upon login and they will be prompted to accept or decline the request. +
 Format: `swap d/CURRENTDUTYDATE d/DESIREDDUTYDATE [t/MESSAGE]
@@ -129,69 +138,191 @@ Example:
 
 * `swap d/14022019 d/21022019 t/Please help a bro out!`
 
-=== Finding another person: `find`
-The user can find people whose names contain any of the given keywords. Information of the person’s rank. company, section and contact number can be seen. +
-Format: `find KEYWORD [MORE KEYWORDS]`
+==== Locating persons by name: `find`
 
-=== Filter people: `filter`
-The user can list out the people who are within the filtered rank, date, or company. The list can be sorted in ascending or descending order. +
-Format: `filter [A or D] [s/STARTDATE] [e/ENDDATE] [r/RANK] [c/COMPANY] [s/SQUAD]`
+Finds persons whose names contain any of the given keywords. +
+Format: `find KEYWORD [MORE_KEYWORDS]`
 
+****
+* The search is case insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+****
+
+Examples:
+
+* `find John` +
+Returns `john` and `John Doe`
+* `find Betsy Tim John` +
+Returns any person having names `Betsy`, `Tim`, or `John`
+
+==== Listing entered commands : `history`
+
+Lists all the commands that you have entered in reverse chronological order. +
+Format: `history`
+
+[NOTE]
 ====
-* Default ordering is alphabetical order, ascending
-* A or D specifies if ordering is ascending or descending
-* Dates to be entered in ddmmyyyy format.
+Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
+====
+
+==== Undoing previous command : `undo`
+
+Restores the address book to the state before the previous _undoable_ command was executed. +
+Format: `undo`
+
+[NOTE]
+====
+Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
 ====
 
 Examples:
 
-* `filter` +
-Lists down all personnel, without any filtering, sorted in ascending order by default
+* `delete 1` +
+`list` +
+`undo` (reverses the `delete 1` command) +
 
-* `filter D s/11022019 e/11032019 r/PTE` +
-Lists down all personnel with rank Private and available dates between 11-Feb-2019 and 11-March-2019, in descending alphabetical order.
+* `select 1` +
+`list` +
+`undo` +
+The `undo` command fails as there are no undoable commands executed previously.
 
-=== Exit : `exit`
+* `delete 1` +
+`clear` +
+`undo` (reverses the `clear` command) +
+`undo` (reverses the `delete 1` command) +
+
+==== Redoing the previously undone command : `redo`
+
+Reverses the most recent `undo` command. +
+Format: `redo`
+
+Examples:
+
+* `delete 1` +
+`undo` (reverses the `delete 1` command) +
+`redo` (reapplies the `delete 1` command) +
+
+* `delete 1` +
+`redo` +
+The `redo` command fails as there are no `undo` commands executed previously.
+
+* `delete 1` +
+`clear` +
+`undo` (reverses the `clear` command) +
+`undo` (reverses the `delete 1` command) +
+`redo` (reapplies the `delete 1` command) +
+`redo` (reapplies the `clear` command) +
+
+==== Exit : `exit`
 Exits the program. User will be logged out automatically. +
 Format: `exit`
 
-== Admin Features
+=== General Features
 
-=== Viewing help for admin : `helpadmin`
-Lists out a list of commands & instructions for admin. +
-Format: `helpadmin`
+// tag::editGeneral[]
+==== Edit own details : `edit`
+Edits user's own details. Can edit one or more fields. +
+Format: `edit INDEX [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONE] [t/TAG] [pw/PASSWORD]`
 
-=== Add a user : `add`
+****
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person's tags by typing `t/` without specifying any tags after it.
+****
+
+Examples:
+
+* `edit p/84523546 r/CPL +
+Edits the phone number and rank of the user to be `84523546` and `CPL` respectively.
+* `edit 1 c/Hotel Crower t/ pw/pass` +
+Edits the company of the user to be `Hotel`, clears all existing tags, and changes passworrd to 'pass'.
+// end::editGeneral[]
+
+=== Admin Features
+
+// tag::add[]
+==== Adding a user : `add`
 Add a user to the system with the corresponding NRIC, password, company, section, rank, name and contact number. +
-Format: `add nr/NRIC pw/PASSWORD c/COMPANY s/SECTION r/RANK n/NAME p/CONTACTNUMBER`
+Format: `add nr/NRIC c/COMPANY s/SECTION r/RANK n/NAME p/PHONE [t/TAG]`
 
-=== Delete a user : `delete`
-Delete a user from the system with the corresponding NRIC. The admin will be prompted with a confirmation message. +
-Format: `delete nr/NRIC`
+****
+* By default, the user will be a General type account, and the password will be the NRIC.
+* Password and account type can be changed using the `edit` command.
+****
 
-=== Edit a user’s details : `edit`
-Edits an existing user’s details based on the index number in the list. Can edit one or more fields.
-Format: `edit INDEX [nr/NRIC] [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONENUMBER]`
+// end::add[]
+==== Deleting a person : `delete`
 
-=== Import personal details from a file : `import`
-Imports personal details of users from a TXT file. +
-Format: `import [FILE_NAME.txt]`
+Deletes the specified person from the duty planner. +
+Format: `delete INDEX`
 
-=== List all the users: `list`
-Lists out all users in the system with their details. +
-Format: `list`
+****
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
 
-=== Scheduling duties : `schedule`
-This command schedules the duties for the upcoming month. It takes into account the block out dates of each guard duty personnel and their extras. It will sort by available dates and distribute duties accordingly. After the algorithm computes a plausible schedule, the schedule will be displayed and admin will be prompted to either confirm the schedule or rerun the scheduler algorithm. +
-Format: `schedule MONTH`
+Examples:
 
-=== Extra duty : `extra`
-Automatically allocates extra duties for a selected personnel in the upcoming month. +
-Format: `extra nr/NRIC d/NUMBEROFDAYS`
+* `list` +
+`delete 2` +
+Deletes the 2nd person in the duty planner personnel list.
+* `find Betsy` +
+`delete 1` +
+Deletes the 1st person in the results of the `find` command.
 
-Example:
+==== Clearing all entries : `clear`
 
-*`extra n/S9876543A d/7`
+Clears all entries from the duty planner. +
+Format: `clear`
+
+// tag::editAdmin[]
+==== Edit any user’s details : `edit`
+Edits an existing user’s details in the personnel list.
+Format: `edit INDEX [nr/NRIC] [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONE] [t/TAG] [pw/PASSWORD] [u/A or G]`
+
+****
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person's tags by typing `t/` without specifying any tags after it.
+* For account type field specified by `u/`, A corresponds to an Admin account, G corresponds to a general account.
+****
+
+Examples:
+
+* `edit 2 p/84523546 r/CPL u/A` +
+Edits the phone number and rank of the 2nd person to be `84523546` and `CPL` respectively, and grants the person's account administrator privileges.
+* `edit 1 c/Hotel Crower t/ pw/pass` +
+Edits the company of the 1st person to be `Hotel`, clears all existing tags, and changes passworrd to 'pass'.
+// end::editAdmin[]
+
+==== Scheduling duties : `schedule`
+This command invokes the scheduling algorithm for the upcoming month. It generates a viable duty schedule roster where each duty slot for the upcoming month will be filled by the people currently in the database. ++
+
+.In order to ensure fair scheduling system,
+. We introduce a point system to each individual such that a servivemen can earn points by doing duties. The points awarded to servicemen are cumulative, thus the points awarded are carried over to the next month. +
+. Each duty is worth a certain number of points and a person gains that amount of points by doing that duty. For example, if all Sunday duties are worth 4 points, a servicemen who is assigned a Sunday duty will by awarded 4 points. +
+. Before the scheduling command is called, each person has the opportunity to indicate the days in which they are unavailable to do duty. (See 3.9 block command)  +
+
+
+The algorithm is optimized such that persons with low points will be allocated to duties with high points. It automatically attempts to balance out the points of each person by the end of the month. +
+
+The duty schedule generated by the schedule command is not deterministic, calling schedule command multiple times generates different duty allocation. +
+
+Calling the schedule command merely generates a viable shedule, but does not finalize the schedule (i.e. points awarded to each person is yet to be added). Schedule generated is also not deterministic, calling schedule command multiple times generates different duty allocation. Thus, the admin can call schedule command continuously until a satisfactory schedule is produced. To finalize the schedule, use the confirm command. (See 4.8 confirm schedule) +
+
+Format: `schedule`
+
+==== Confirm a Schedule : `confirm`
+Confirm and finalize the last generated duty schedule (from the schedule command) for the upcoming month. +
+Subsequent attempts to call schedule command will not result in any new duty allocation produced. +
+Format: `confirm`
 
 === Saving the data
 
@@ -201,7 +332,7 @@ There is no need to save manually.
 == FAQ
 
 *Q*: What if I want to swap my duty with another person? +
-*A*: Contact the administrator with the request.
+*A*: Use "swap" command to request a swap. If you receive no updates about it, contact your administrator.
 
 *Q*: What is the main feature of this app? +
 *A*: The main feature is the automated scheduling algorithm, which significantly minimizes the amount of work that +
@@ -209,34 +340,36 @@ the admin has to do.
 
 *Q*: What is my username and password? +
 *A*: Your username is by default your NRIC, used so prevalently in the SAF. +
-Your password will be set by the admin when they create your account but you can change the password later on +
-using the chpass command.
+Your password is also your NRIC by default, unless you or your administrator changed it. you can use the 'edit' command to edit your password later on. +
+
+*Q*: What if I forgot my password? +
+*A*: Contact your administrator for help.
 
 *Q*: What should I do if I need help with the app? +
 *A*: You can enter 'help' in the command line, or press Help > Help, or simply press F1. +
 This will open up the User Guide in a new window.
 
-*Q*: What's the difference between 'add' and 'import'? +
-*A*: 'Add' is only able to add one user at a time and requires all the details of the user on +
-the command line. This is very cumbersome for the admin so we added an 'import' command that reads a +
-.txt file containing multiple user details, with the same parameters format as the 'add' command.
-
 == Command Summary
-General User +
+
+=== All Users
+
 * *Viewing help* : `help` +
-* *Log in* : `login nr/NRIC  pw/PASSWORD` +
-* *Log out* : `logout` +
-* *View* : `view KEYWORD [MORE KEYWORDS]` +
 * *Blocking dates* : `block d/date d/date d/date …` +
-* *Finding a person* : `find KEYWORD [MORE KEYWORDS]` +
-* *Filter* : `filter [A or D] [s/STARTDATE] [e/ENDDATE] [r/RANK] [c/COMPANY] [s/SQUAD]` +
-* *Change password* : `chpass pw/CURRENT_PASSWORD pw/NEW_PASSWORD` +
+* *Make swap request* : `swap` +
+* *List all the users* : `list` +
+* *Locate person by name* : `find` +
+* *List entered commands* : `history` +
+* *Undo command* : `undo` +
+* *Redo command* : `redo` +
 * *Exit* : `exit` +
-Admin +
-* *Command help for admin* : `helpAdmin` +
-* *Add a user* : `addUser nr/NRIC pw/PASSWORD c/COMPANY s/SECTION r/RANK n/NAME p/PHONENUMBER` +
-* *Delete a user* : `deleteUser nr/NRIC` +
-* *Edit a user* : `editUser [nr/NRIC] [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONENUMBER]` +
-* *Import personal details from a file* : `import [FILE_NAME.txt]` +
-* *List all the users* : `listUser` +
-* *Scheduling duties* : `schedule m/MONTH` +
+
+=== General accounts
+* *Edit own info* : `edit [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONE] [t/TAG] [pw/PASSWORD]` +
+
+=== Admin accounts
+* *Add a user* : `add nr/NRIC c/COMPANY s/SECTION r/RANK n/NAME p/PHONE [t/TAG]` +
+* *Edit any user* : `edit INDEX [nr/NRIC] [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONE] [t/TAG] [pw/PASSWORD] [u/A or G]` +
+* *Delete a user* : `delete INDEX` +
+* *Scheduling duties* : `schedule` +
+* *Confirm schedule* : `confirm` +
+* *Clear entries* : `clear` +
