@@ -14,7 +14,7 @@ import seedu.address.model.duty.DutyStorage;
  */
 public class ConfirmScheduleCommand extends Command {
 
-    public static final String COMMAND_WORD = "confirmschedule";
+    public static final String COMMAND_WORD = "confirm";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + "Confirms previously generated schedule\n";

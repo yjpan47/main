@@ -36,11 +36,16 @@ public class ViewCommand extends Command {
             throw new CommandException(MESSAGE_NOSUCHPERSON);
         }
 
-        DutyMonth currentMonth = model.getDutyCalendar().getCurrentMonth();
-        DutyMonth nextMonth = model.getDutyCalendar().getNextMonth();
         List<Duty> duties = new ArrayList<>();
-        duties.addAll(currentMonth.getScheduledDuties());
-        duties.addAll(nextMonth.getScheduledDuties());
+
+        DutyMonth currentMonth = model.getDutyCalendar().getCurrentMonth();
+        if (currentMonth.isConfirmed()) {
+            duties.addAll(currentMonth.getScheduledDuties());
+        }
+        DutyMonth nextMonth = model.getDutyCalendar().getNextMonth();
+        if (nextMonth.isConfirmed()) {
+            duties.addAll(nextMonth.getScheduledDuties());
+        }
         int dutyCounter = 0;
 
         if (!duties.isEmpty()) {
