@@ -75,14 +75,14 @@ public class CalendarView extends UiPart<Region> {
     }
 
     /**
-     * Fills up duty calendar
+     * Fills up duty calendar.
      */
     private void fillDutyCalendar() {
         int firstIndex = dutyMonth.getFirstDayOfWeekIndex();
         int numberDays = dutyMonth.getNumOfDays();
         for (int i = 1; i <= numberDays; i++) {
-            int row = 1 + (firstIndex + i - 1) / 7;
-            int column = (firstIndex + i - 1) % 7;
+            int row = 1 + (firstIndex + i - 2) / 7;
+            int column = (firstIndex + i - 2) % 7;
             Duty duty = dutyMonth.getScheduledDuties().get(i - 1);
             ObservableList<Person> obsListDuty = FXCollections.observableArrayList(duty.getPersons());
             ListView tempDuty = new ListView(obsListDuty);
