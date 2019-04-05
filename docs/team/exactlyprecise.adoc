@@ -1,9 +1,9 @@
-= John Doe - Project Portfolio
+= Ng Wei Le - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: AddressBook - Level 4
+== PROJECT: MINDEF Duty Planner
 
 ---
 
@@ -23,11 +23,14 @@ Duty Planner is a desktop address book application used foradding MINDEF personn
 
 * *Other contributions*:
 
+
 ** Project management:
+*** Helped in creating JAR file for team for version 1.3
 ** Enhancements to existing features:
 *** Helped other members to write CalendarView.fxml and CalendarView.java
-*** Helped in creating JAR file for team for version 1.3
 ** Community:
+*** Helped group 15-3 in their UI component:
+https://github.com/CS2103-AY1819S2-W15-3/main/blob/master/src/main/resources/view/AnalyticsChart.fxml
 
 
 
@@ -38,7 +41,13 @@ Duty Planner is a desktop address book application used foradding MINDEF personn
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=adddelete]
+include::../UserGuide.adoc[tag=login]
+
+include::../UserGuide.adoc[tag=add]
+
+include::../UserGuide.adoc[tag=editGeneral]
+
+include::../UserGuide.adoc[tag=editAdmin]
 
 == Contributions to the Developer Guide
 

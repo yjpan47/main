@@ -1,8 +1,5 @@
 package seedu.address.model;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import seedu.address.commons.util.CalendarUtil;
 import seedu.address.model.duty.DutyMonth;
 import seedu.address.model.duty.DutyStorage;

@@ -55,7 +55,7 @@ public class JsonAdaptedDutyMonth {
         monthIndex = source.getMonthIndex();
         firstDayWeekIndex = source.getFirstDayOfWeekIndex();
 
-        if (source.getScheduledDuties() != null){
+        if (source.getScheduledDuties() != null) {
             duties.addAll(source.getScheduledDuties().stream()
                     .map(JsonAdaptedDuty::new)
                     .collect(Collectors.toList()));

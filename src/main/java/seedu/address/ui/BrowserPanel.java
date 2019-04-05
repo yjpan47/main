@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 //import javafx.application.Platform;
-import javafx.beans.value.ObservableValue;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -18,7 +18,6 @@ import javafx.scene.layout.Region;
 //import javafx.scene.web.WebView;
 //import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
 import seedu.address.model.request.Request;
 
 /**
@@ -55,11 +54,11 @@ public class BrowserPanel extends UiPart<Region> {
 
         // Load person page when selected person changes.
         //selectedPerson.addListener((observable, oldValue, newValue) -> {
-        //    if (newValue == null) {
-                //loadDefaultPage();
+        //if (newValue == null) {
+        //    loadDefaultPage();
         //        return;
         //    }
-            //loadPersonPage(newValue);
+        //loadPersonPage(newValue);
         //});
 
         //loadDefaultPage();

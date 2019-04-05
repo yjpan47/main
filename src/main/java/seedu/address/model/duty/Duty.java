@@ -8,7 +8,7 @@ import seedu.address.commons.util.DateUtil;
 import seedu.address.model.person.Person;
 
 /**
- * Duty class
+ * Duty class has indexes for current month day and duty class methods
  */
 public class Duty {
 
@@ -76,7 +76,9 @@ public class Duty {
             throw new InvalidParameterException("Invalid Date");
         }
     }
-
+    /**
+     * Adds the input person into the duty
+     */
     public void addPerson(Person person) {
         if (this.persons.contains(person)) {
             throw new InvalidParameterException(person + " is already assigned " + this);
