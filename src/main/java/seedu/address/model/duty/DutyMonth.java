@@ -18,7 +18,7 @@ import seedu.address.model.person.Person;
 public class DutyMonth {
 
     private boolean confirmed = false;
-    private List<Duty> scheduledDuties = new ArrayList<>();
+    private List<Duty> scheduledDuties;
 
     private int year;
     private int monthIndex;
@@ -32,6 +32,7 @@ public class DutyMonth {
             this.monthIndex = monthIndex;
             this.firstDayOfWeekIndex = firstDayOfWeekIndex;
             this.blockedDays = new HashMap<>();
+            this.scheduledDuties = new ArrayList<>();
         } else {
             throw new InvalidParameterException("Invalid Date");
         }
@@ -42,7 +43,8 @@ public class DutyMonth {
         this.year = year;
         this.monthIndex = monthIndex;
         this.firstDayOfWeekIndex = firstDayOfWeekIndex;
-        this.scheduledDuties.addAll(duties);
+
+        this.scheduledDuties = duties;
         this.blockedDays = new HashMap<>(blockedDays);
     }
     /**
@@ -111,6 +113,7 @@ public class DutyMonth {
 
             }
         }
+        this.scheduledDuties.clear();
         this.scheduledDuties.addAll(dutyList);
         this.scheduledDuties.sort(Comparator.comparingInt(Duty::getDayIndex));
     }
@@ -173,6 +176,7 @@ public class DutyMonth {
      * Prints the scheduled duties for the DutyMonth
      */
     public String printDuties() {
+
         StringBuilder sb = new StringBuilder();
 
         sb.append(String.format("---- Duty Roster for %1$s %2$s  ---- \n",
