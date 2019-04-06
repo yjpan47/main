@@ -34,24 +34,22 @@ public class SwapCommand extends Command {
 
     private final LocalDate allocatedDate;
     private final LocalDate requestedDate;
-    private Optional<String> userName;
+    private final String userName;
 
     /**
      * Creates a SwapCommand to swap the specified {@code Person}
      */
-    public SwapCommand(LocalDate allocatedDate, LocalDate requestedDate) {
+    public SwapCommand(LocalDate allocatedDate, LocalDate requestedDate, String userName) {
         requireNonNull(allocatedDate);
         requireNonNull(requestedDate);
         this.allocatedDate = allocatedDate;
         this.requestedDate = requestedDate;
-        this.userName = Optional.empty();
+        this.userName = userName;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        String currentUser = model.getUserName();
-        userName = Optional.of(currentUser);
         int currentMonthIndex = model.getDutyCalendar().getCurrentMonth().getMonthIndex();
         int nextMonthIndex = model.getDutyCalendar().getNextMonth().getMonthIndex();
         int currentYear = model.getDutyCalendar().getCurrentYear();
@@ -80,13 +78,13 @@ public class SwapCommand extends Command {
         }
 
         if (currentMonthIndex == allocatedDateMonth
-                && !model.getDutyCalendar().getCurrentMonth().isAssignedToDuty(currentUser, allocatedDateDay)
+                && !model.getDutyCalendar().getCurrentMonth().isAssignedToDuty(userName, allocatedDateDay)
                 || nextMonthIndex == allocatedDateMonth
-                && !model.getDutyCalendar().getNextMonth().isAssignedToDuty(currentUser, allocatedDateDay)) {
+                && !model.getDutyCalendar().getNextMonth().isAssignedToDuty(userName, allocatedDateDay)) {
             throw new CommandException(MESSAGE_INVALID_DAY);
         }
 
-        model.addSwapRequest(currentUser, allocatedDate, requestedDate);
+        model.addSwapRequest(userName, allocatedDate, requestedDate);
         model.commitPersonnelDatabase();
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }

@@ -34,8 +34,6 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
-    private Optional<UserType> userType;
-    private Optional<String> userName;
 
     /**
      * Initializes a ModelManager with the given personnelDatabase, dutyCalendar and userPrefs.
@@ -51,8 +49,6 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(versionedPersonnelDatabase.getPersonList());
         filteredPersons.addListener(this::ensureSelectedPersonIsValid);
-        userType = Optional.empty();
-        userName = Optional.empty();
     }
 
     public ModelManager() {
@@ -169,24 +165,6 @@ public class ModelManager implements Model {
     @Override
     public DutyMonth getNextDutyMonth() {
         return getDutyCalendar().getNextMonth();
-    }
-
-    //=========== User Details ================================================================================
-
-    @Override
-    public void setUserDetails(UserType userType, String userName) {
-        this.userType = Optional.of(userType);
-        this.userName = Optional.of(userName);
-    }
-
-    @Override
-    public UserType getUserType() {
-        return userType.get();
-    }
-
-    @Override
-    public String getUserName() {
-        return userName.get();
     }
 
     //=========== Swap Requests ===============================================================================
