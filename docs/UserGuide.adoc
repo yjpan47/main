@@ -45,6 +45,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ****
 * For Practical Exam: You may use an administrator account with Username: Admin, and Password: Admin
 * For Practical Exam: In personnel list, the password of the users will be listed for your convenience.
+* If you close the login window, you are still able to view the personnel list and the calendar duty list. However, you will not be able to use any commands.
 ****
 Logs user into account +
 NRIC and passwords are case-sensitive. +
