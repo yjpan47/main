@@ -51,6 +51,7 @@ public class ScheduleCommand extends Command {
                     dutyStorage.printPoints()));
         }
 
+
         dutyMonth.schedule(persons, dutySettings, dutyStorage);
 
         return new CommandResult(String.format(SCHEDULE_SUCCESS,
