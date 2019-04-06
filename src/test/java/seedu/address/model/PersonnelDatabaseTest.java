@@ -67,7 +67,7 @@ public class PersonnelDatabaseTest {
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        personnelDatabase.hasPerson(null);
+        personnelDatabase.hasPerson((Person) null);
     }
 
     @Test
