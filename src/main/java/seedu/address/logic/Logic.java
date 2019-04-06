@@ -92,11 +92,6 @@ public interface Logic {
     UserType findAccount(String userName, String password);
 
     /**
-     * Sets UserType and UserName in Model.
-     */
-    void setUserDetailsInModel(UserType userType, String userName);
-
-    /**
      * Returns dutyMonth for current month
      */
     DutyMonth getCurrentDutyMonth();

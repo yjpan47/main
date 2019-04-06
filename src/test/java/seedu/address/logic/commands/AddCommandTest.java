@@ -6,6 +6,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -25,6 +26,9 @@ import seedu.address.model.Model;
 import seedu.address.model.PersonnelDatabase;
 import seedu.address.model.ReadOnlyPersonnelDatabase;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.duty.DutyMonth;
+import seedu.address.model.duty.DutySettings;
+import seedu.address.model.duty.DutyStorage;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -157,6 +161,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasPerson(String nric) {
+            throw new AssertionError(CALLED_ERROR);
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError(CALLED_ERROR);
         }
@@ -223,6 +232,36 @@ public class AddCommandTest {
 
         @Override
         public Person findPerson(String userName) {
+            throw new AssertionError(CALLED_ERROR);
+        }
+
+        @Override
+        public DutyMonth getCurrentDutyMonth() {
+            throw new AssertionError(CALLED_ERROR);
+        }
+
+        @Override
+        public DutyMonth getNextDutyMonth() {
+            throw new AssertionError(CALLED_ERROR);
+        }
+
+        @Override
+        public DutyStorage getDutyStorage() {
+            throw  new AssertionError(CALLED_ERROR);
+        }
+
+        @Override
+        public void addSwapRequest(String nric, LocalDate allocatedDate, LocalDate requestedDate) {
+            throw new AssertionError(CALLED_ERROR);
+        }
+
+        @Override
+        public void setDutySettings(DutySettings dutySettings) {
+            throw new AssertionError(CALLED_ERROR);
+        }
+
+        @Override
+        public DutySettings getDutySettings() {
             throw new AssertionError(CALLED_ERROR);
         }
     }
