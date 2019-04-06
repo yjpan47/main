@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLOCATED_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REQUESTED_DATE;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
