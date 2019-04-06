@@ -83,10 +83,14 @@ public class CalendarView extends UiPart<Region> {
         for (int i = 1; i <= numberDays; i++) {
             int row = 1 + (firstIndex + i - 2) / 7;
             int column = (firstIndex + i - 2) % 7;
+            Label label = new Label(Integer.toString(i));
             Duty duty = dutyMonth.getScheduledDuties().get(i - 1);
             ObservableList<Person> obsListDuty = FXCollections.observableArrayList(duty.getPersons());
             ListView tempDuty = new ListView(obsListDuty);
-            gridPaneBottom.add(tempDuty, column, row);
+            VBox vBox = new VBox();
+            vBox.getChildren().addAll(label, tempDuty);
+            gridPaneBottom.add(vBox, column, row);
+            tempDuty.setStyle("-fx-control-inner-background: blue;");
         }
     }
 }
