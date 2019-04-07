@@ -63,11 +63,20 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
     }
 
     /**
-     * Replaces the contents of the duty duty with {@code dutyCalendar}.
+     * Replaces the contents of the duty calendar with {@code dutyCalendar}.
      * {@code dutyCalendar} must not contain duplicate duties.
      */
     public void setDutyCalendar(DutyCalendar dutyCalendar) {
         this.dutyCalendar.setDutyCalendar(dutyCalendar);
+        indicateModified();
+    }
+
+    /**
+     * Replaces the contents of the request list with {@code requestList}.
+     */
+    public void setRequests(List<Request> requestList) {
+        this.requests.clear();
+        this.requests.addAll(requestList);
         indicateModified();
     }
 
@@ -88,6 +97,7 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
 
         setPersons(newData.getPersonList());
         setDutyCalendar(newData.getDutyCalendar());
+        setRequests(newData.getRequestList());
     }
 
     // Sort the persons in the personnel database by name
@@ -168,7 +178,6 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
         requests.add(request);
         indicateModified();
     }
-
 
     @Override
     public void addListener(InvalidationListener listener) {
