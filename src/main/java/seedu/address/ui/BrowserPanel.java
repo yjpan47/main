@@ -42,7 +42,7 @@ public class BrowserPanel extends UiPart<Region> {
     // Originally ObservableValue<Person> selectedPerson as argument
     public BrowserPanel(List<Request> requests) {
         super(FXML);
-        List<String> listOfStrings = requests.stream().map(req -> req.getNric() + " requests a swap of their duty from "
+        List<String> listOfStrings = requests.stream().map(req -> req.getRequesterNric() + " requests a swap of their duty from "
                 + req.getAllocatedDate().toString() + " to " + req.getRequestedDate().toString() + ".")
                 .collect(Collectors.toList());
         ObservableList<String> observableStrings = FXCollections.observableArrayList(listOfStrings);
