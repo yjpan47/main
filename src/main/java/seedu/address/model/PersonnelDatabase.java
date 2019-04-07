@@ -9,6 +9,8 @@ import java.util.List;
 import javafx.beans.InvalidationListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.InvalidationListenerManager;
+import seedu.address.model.duty.DutySettings;
+import seedu.address.model.duty.DutyStorage;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.request.Request;
@@ -24,7 +26,6 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
 
     private final List<Request> requests;
 
-    private Person currentUser;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
     /*
@@ -67,6 +68,16 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
      */
     public void setDutyCalendar(DutyCalendar dutyCalendar) {
         this.dutyCalendar.setDutyCalendar(dutyCalendar);
+        indicateModified();
+    }
+
+    /**
+     * Schedules duty for next month in {@code dutyCalendar}.
+     */
+    public void scheduleDutyForNextMonth(List<Person> persons,
+                                         DutySettings dutySettings, DutyStorage dutyStorage) {
+        this.dutyCalendar.scheduleDutyForNextMonth(persons,dutySettings, dutyStorage);
+        indicateModified();
     }
 
     /**
@@ -81,7 +92,9 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
 
     // Sort the persons in the personnel database by name
     public void sort() {
+
         this.persons.sort();
+        indicateModified();
     }
 
     //// person-level operations
@@ -141,7 +154,7 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
 
 
     /**
-     * Adds a swap request to the request manager by fields.
+     * Adds a swap request to the request list by fields.
      */
     public void addRequest(String nric, LocalDate allocatedDate, LocalDate requestedDate) {
         requests.add(new Request(nric, allocatedDate, requestedDate));
@@ -149,17 +162,13 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
     }
 
     /**
-     * Adds a swap request to the request manager.
+     * Adds a swap request to the request list.
      */
     public void addRequest(Request request) {
         requests.add(request);
         indicateModified();
     }
 
-    public Person getCurrentUser() {
-        return currentUser;
-
-    }
 
     @Override
     public void addListener(InvalidationListener listener) {

@@ -37,10 +37,7 @@ public class ScheduleCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Person> persons = model.getFilteredPersonList();
         DutyMonth dutyMonth = model.getDutyCalendar().getNextMonth();
-
-        DutySettings dutySettings = model.getDutySettings();
         DutyStorage dutyStorage = model.getDutyStorage();
 
         if (dutyMonth.isConfirmed()) {
@@ -52,7 +49,7 @@ public class ScheduleCommand extends Command {
         }
 
 
-        dutyMonth.schedule(persons, dutySettings, dutyStorage);
+        model.scheduleDutyForNextMonth();
 
         return new CommandResult(String.format(SCHEDULE_SUCCESS,
                 dutyMonth.printDuties(),

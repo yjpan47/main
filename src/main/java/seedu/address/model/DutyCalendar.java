@@ -2,7 +2,11 @@ package seedu.address.model;
 
 import seedu.address.commons.util.CalendarUtil;
 import seedu.address.model.duty.DutyMonth;
+import seedu.address.model.duty.DutySettings;
 import seedu.address.model.duty.DutyStorage;
+import seedu.address.model.person.Person;
+
+import java.util.List;
 
 /**
  * Represents a Calendar that contains duties for the current and the following months
@@ -74,6 +78,11 @@ public class DutyCalendar {
         } else {
             this.rollover(dutyCalendar);
         }
+    }
+
+    public void scheduleDutyForNextMonth(List<Person> persons,
+                                         DutySettings dutySettings, DutyStorage dutyStorage) {
+        nextMonth.schedule(persons, dutySettings, dutyStorage);
     }
 
     /**

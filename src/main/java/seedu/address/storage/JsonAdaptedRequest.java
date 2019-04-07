@@ -1,7 +1,6 @@
 package seedu.address.storage;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -27,11 +26,11 @@ class JsonAdaptedRequest {
     @JsonCreator
 
     public JsonAdaptedRequest(@JsonProperty("requesterNric") String requesterNric, @JsonProperty("allocatedDate") String allocatedDate,
-                              @JsonProperty("requestedDate") String requestedDate, Optional<String> accepterNric) {
+                              @JsonProperty("requestedDate") String requestedDate, @JsonProperty String accepterNric) {
         this.requesterNric = requesterNric;
         this.requestedDate = requestedDate;
         this.allocatedDate = allocatedDate;
-        this.accepterNric = accepterNric.get();
+        this.accepterNric = accepterNric;
     }
 
     /**
@@ -51,9 +50,8 @@ class JsonAdaptedRequest {
      */
     public Request toModelType() throws IllegalValueException {
         if (requesterNric == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "NRIC"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "requester NRIC"));
         }
-        final String modelNric = requesterNric;
 
         if (allocatedDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "allocated date"));
@@ -67,7 +65,11 @@ class JsonAdaptedRequest {
 
         final LocalDate modelRequestedDate = LocalDate.parse(requestedDate);
 
-        return new Request(modelNric, modelRequestedDate, modelAllocatedDate);
+        if (accepterNric == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "accepter NRIC"));
+        }
+
+        return new Request(requesterNric, modelRequestedDate, modelAllocatedDate, accepterNric);
     }
 
 }
