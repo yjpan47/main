@@ -39,6 +39,10 @@ public class Request {
         return requestedDate;
     }
 
+    public boolean isAccepterValid() {
+        return !getAccepterNric().equals(EMPTY_ACCEPTER_FIELD);
+    }
+
     public String getAccepterNric() {
         return accepterNric;
     }

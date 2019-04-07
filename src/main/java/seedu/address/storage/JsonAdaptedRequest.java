@@ -69,7 +69,7 @@ class JsonAdaptedRequest {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "accepter NRIC"));
         }
 
-        return new Request(requesterNric, modelRequestedDate, modelAllocatedDate, accepterNric);
+        return new Request(requesterNric, modelAllocatedDate, modelRequestedDate, accepterNric);
     }
 
 }
