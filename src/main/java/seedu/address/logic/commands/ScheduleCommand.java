@@ -28,7 +28,7 @@ public class ScheduleCommand extends Command {
 
     public static final String SCHEDULE_SUCCESS = "\n\n%1$s\n\n%2$s\n\n"
             + "This schedule has yet been confirmed!\n"
-            + "Type <confirm schedule> to confirm this schedule or <schedule> to reassign!";
+            + "Type <confirm> to confirm this schedule or <schedule> to reassign!";
 
     public static final String SCHEDULE_ALREADY_CONFIRMED = "Schedule for %s %s already confirmed! "
             + "See below for details\n\n%s\n\n%s\n\n";
@@ -50,6 +50,7 @@ public class ScheduleCommand extends Command {
                     dutyMonth.printDuties(),
                     dutyStorage.printPoints()));
         }
+
 
         dutyMonth.schedule(persons, dutySettings, dutyStorage);
 

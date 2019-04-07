@@ -186,22 +186,6 @@ public interface Model {
      */
     DutyCalendar getDutyCalendar();
 
-
-    /**
-     * Set user details.
-     */
-    void setUserDetails(UserType userType, String userName);
-
-    /**
-     * Get username
-     */
-    String getUserName();
-
-    /**
-     * Get user type
-     */
-    UserType getUserType();
-
     /**
      * Add a swap request to the model
      */

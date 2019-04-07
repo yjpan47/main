@@ -41,7 +41,6 @@ public class UiManager implements Ui {
         try {
             LoginBox loginBox = new LoginBox(this::findAccount);
             NricUserPair nricUserPair = loginBox.display();
-            setUserDetailsInModel(nricUserPair);
             mainWindow = new MainWindow(primaryStage, logic, nricUserPair.userType, nricUserPair.userName);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
@@ -61,7 +60,6 @@ public class UiManager implements Ui {
 
         try {
             NricUserPair nricUserPair = new NricUserPair(UserType.ADMIN, "ADMIN");
-            setUserDetailsInModel(nricUserPair);
             mainWindow = new MainWindow(primaryStage, logic, nricUserPair.userType, nricUserPair.userName);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
@@ -115,9 +113,4 @@ public class UiManager implements Ui {
         return logic.findAccount(userName, password);
     }
 
-    private void setUserDetailsInModel(NricUserPair nricUserPair) {
-        String userName = nricUserPair.userName;
-        UserType userType = nricUserPair.userType;
-        logic.setUserDetailsInModel(userType, userName);
-    }
 }

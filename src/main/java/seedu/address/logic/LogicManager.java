@@ -139,11 +139,6 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public void setUserDetailsInModel(UserType userType, String userName) {
-        model.setUserDetails(userType, userName);
-    }
-
-    @Override
     public DutyMonth getCurrentDutyMonth() {
         return model.getCurrentDutyMonth();
     }

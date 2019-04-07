@@ -23,14 +23,17 @@ MINDEF Duty Planner is a platform to assist military units in the SAF in the ass
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  {To be added}
+.  Log in into the system as an admin or a general user. NRIC corresponds to the username. Both the NRIC and the password are case-sensitive.
+
+* For admin account: NRIC is Admin, password is Admin
+* For general account: NRIC is the user's NRIC, password is NRIC by default which can be changed.
 
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
+* **`add`**`n/John Doe nr/S9012345N p/98765432 c/Echo s/2 r/CFC t/injured`  : adds a personnel named `John Doe` to the Personnel Database.
 * **`delete`**`3` : deletes the 3rd contact shown in the current list
 * *`exit`* : exits the app
 
@@ -45,6 +48,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ****
 * For Practical Exam: You may use an administrator account with Username: Admin, and Password: Admin
 * For Practical Exam: In personnel list, the password of the users will be listed for your convenience.
+* If you close the login window, you are still able to view the personnel list and the calendar duty list. However, you will not be able to use any commands.
 ****
 Logs user into account +
 NRIC and passwords are case-sensitive. +
@@ -81,17 +85,17 @@ Format: `help`
 Lists out all users with their details. +
 Format: `list`
 
-==== View duties assigned to user : `view` `Not implemented yet`
+==== View duties assigned to user : `view`
 The user can see their details about their own duties assigned to them and their upcoming duties ranked by recency. +
 Format: `view`
 
-==== View duties assigned to other users : `view` `Not implemented yet`
+==== View duties assigned to other users : `view`
 The user can see their details about their own duties assigned to other users. +
-Format: `view NAME`
+Format: `view NRIC`
 
 Example:
 
-* `view Cassell`
+* `view S9012345L`
 
 ==== View roster : `roster` `Not implemented yet`
 The user can see the full duty rosters for particular months. +
@@ -117,26 +121,14 @@ Example:
 
 * `block March`
 
-==== Find who is assigned duty today : `who`
-The user can find out which person is assigned duty today. +
-Format: `who`
-
-==== Find who is assigned duty on a given day : `who`
-The user can find out which person is assigned duty on a given day. +
-Format: `who DATE`
-
-Example:
-
-* `who 14022019`
-
 ==== Make a swap request with another user : `swap`
 The user can request for a duty swap with another user. This will be subject to the agreement of the other user and approval of the admin (i.e. commander). +
 The other user and admin will be notified upon login and they will be prompted to accept or decline the request. +
-Format: `swap d/CURRENTDUTYDATE d/DESIREDDUTYDATE [t/MESSAGE]
+Format: `swap ad/CURRENTDUTYDATE rd/DESIREDDUTYDATE
 
 Example:
 
-* `swap d/14022019 d/21022019 t/Please help a bro out!`
+* `swap ad/14022019 rd/21022019 t/Please help a bro out!`
 
 ==== Locating persons by name: `find`
 
@@ -238,8 +230,8 @@ Examples:
 
 * `edit p/84523546 r/CPL +
 Edits the phone number and rank of the user to be `84523546` and `CPL` respectively.
-* `edit 1 c/Hotel Crower t/ pw/pass` +
-Edits the company of the user to be `Hotel`, clears all existing tags, and changes passworrd to 'pass'.
+* `edit c/Hotel t/ pw/pass` +
+Edits the company of the user to be `Hotel`, clears all existing tags, and changes password to 'pass'.
 // end::editGeneral[]
 
 === Admin Features
@@ -298,7 +290,7 @@ Examples:
 
 * `edit 2 p/84523546 r/CPL u/A` +
 Edits the phone number and rank of the 2nd person to be `84523546` and `CPL` respectively, and grants the person's account administrator privileges.
-* `edit 1 c/Hotel Crower t/ pw/pass` +
+* `edit 1 c/Hotel t/ pw/pass` +
 Edits the company of the 1st person to be `Hotel`, clears all existing tags, and changes passworrd to 'pass'.
 // end::editAdmin[]
 
@@ -326,7 +318,7 @@ Format: `confirm`
 
 === Saving the data
 
-Duty roster data are saved in the hard disk automatically after any command that changes the data. +
+Duty roster personnel list and the duties allocated are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 == FAQ
@@ -335,8 +327,7 @@ There is no need to save manually.
 *A*: Use "swap" command to request a swap. If you receive no updates about it, contact your administrator.
 
 *Q*: What is the main feature of this app? +
-*A*: The main feature is the automated scheduling algorithm, which significantly minimizes the amount of work that +
-the admin has to do.
+*A*: The main feature is the automated scheduling algorithm, which significantly minimizes the amount of work that the admin has to do.
 
 *Q*: What is my username and password? +
 *A*: Your username is by default your NRIC, used so prevalently in the SAF. +
@@ -346,14 +337,15 @@ Your password is also your NRIC by default, unless you or your administrator cha
 *A*: Contact your administrator for help.
 
 *Q*: What should I do if I need help with the app? +
-*A*: You can enter 'help' in the command line, or press Help > Help, or simply press F1. +
-This will open up the User Guide in a new window.
+*A*: You can enter 'help' in the command line, or press Help > Help, or simply press F1. This will open up the User Guide in a new window.
 
 == Command Summary
 
 === All Users
 
 * *Viewing help* : `help` +
+* *Viewing own duties* : `view` +
+* *Viewing other's duties* : `view NRIC` +
 * *Blocking dates* : `block d/date d/date d/date …` +
 * *Make swap request* : `swap` +
 * *List all the users* : `list` +
