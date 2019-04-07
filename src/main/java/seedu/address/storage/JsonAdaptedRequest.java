@@ -26,7 +26,7 @@ class JsonAdaptedRequest {
     @JsonCreator
 
     public JsonAdaptedRequest(@JsonProperty("requesterNric") String requesterNric, @JsonProperty("allocatedDate") String allocatedDate,
-                              @JsonProperty("requestedDate") String requestedDate, @JsonProperty String accepterNric) {
+                              @JsonProperty("requestedDate") String requestedDate, @JsonProperty("accepterNric") String accepterNric) {
         this.requesterNric = requesterNric;
         this.requestedDate = requestedDate;
         this.allocatedDate = allocatedDate;
