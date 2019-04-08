@@ -16,6 +16,8 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PASSWORD_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PASSWORD_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.RANK_DESC_AMY;
@@ -24,6 +26,8 @@ import static seedu.address.logic.commands.CommandTestUtil.SECTION_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SECTION_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.USERTYPE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.USERTYPE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -66,10 +70,11 @@ public class EditCommandSystemTest extends PersonnelDatabaseSystemTest {
         Index index = INDEX_FIRST_PERSON;
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NRIC_DESC_BOB
                 + " " + COMPANY_DESC_BOB + " " + SECTION_DESC_BOB + " " + RANK_DESC_BOB + " " + NAME_DESC_BOB + "  "
-                + PHONE_DESC_BOB + " " + TAG_DESC_HUSBAND + " ";
-        Person editedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
+                + PHONE_DESC_BOB + " " + TAG_DESC_HUSBAND + " " + PASSWORD_DESC_BOB + " " + USERTYPE_DESC_BOB
+                + " " + USERTYPE_DESC_BOB;
+        PersonBuilder personBuilder1 = new PersonBuilder(BOB).withTags(VALID_TAG_HUSBAND);
+        Person editedPerson = personBuilder1.build();
         assertCommandSuccess(command, index, editedPerson);
-
         /* Case: undo editing the last person in the list -> last person restored */
         command = UndoCommand.COMMAND_WORD;
         String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
@@ -84,7 +89,7 @@ public class EditCommandSystemTest extends PersonnelDatabaseSystemTest {
         /* Case: edit a person with new values same as existing values -> edited */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NRIC_DESC_BOB + COMPANY_DESC_BOB
                 + SECTION_DESC_BOB + RANK_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
-                + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+                + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + PASSWORD_DESC_BOB + USERTYPE_DESC_BOB;
         assertCommandSuccess(command, index, BOB);
 
         /* Case: clear tags -> cleared */
@@ -122,7 +127,8 @@ public class EditCommandSystemTest extends PersonnelDatabaseSystemTest {
         index = INDEX_FIRST_PERSON;
         selectPerson(index);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NRIC_DESC_AMY + COMPANY_DESC_AMY
-                + SECTION_DESC_AMY + RANK_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY + TAG_DESC_FRIEND;
+                + SECTION_DESC_AMY + RANK_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY + TAG_DESC_FRIEND
+                + PASSWORD_DESC_AMY + USERTYPE_DESC_AMY;
         // this can be misleading: card selection actually remains unchanged but the
         // browser's url is updated to reflect the new person's name
         assertCommandSuccess(command, index, AMY, index);
@@ -187,23 +193,27 @@ public class EditCommandSystemTest extends PersonnelDatabaseSystemTest {
 
         /* Case: edit a person with new values same as another person's values -> rejected */
         executeCommand(PersonUtil.getAddCommand(BOB));
+        command = EditCommand.COMMAND_WORD + " " + getModel().getPersonnelDatabase().getPersonList().size()
+                + PASSWORD_DESC_BOB;
+        executeCommand(command);
         assertTrue(getModel().getPersonnelDatabase().getPersonList().contains(BOB));
         index = INDEX_FIRST_PERSON;
         assertFalse(getModel().getFilteredPersonList().get(index.getZeroBased()).equals(BOB));
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NRIC_DESC_BOB + COMPANY_DESC_BOB
                 + SECTION_DESC_BOB + RANK_DESC_BOB + NAME_DESC_BOB
-                + PHONE_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+                + PHONE_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + PASSWORD_DESC_BOB + USERTYPE_DESC_BOB;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: edit a person with new values same as another person's values but with different tags -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NRIC_DESC_BOB + COMPANY_DESC_BOB
-                + SECTION_DESC_BOB + RANK_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + TAG_DESC_HUSBAND;
+                + SECTION_DESC_BOB + RANK_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + TAG_DESC_HUSBAND
+                + PASSWORD_DESC_BOB + USERTYPE_DESC_BOB;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: edit a person with new values same as another person's values but with different phone -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NRIC_DESC_BOB + COMPANY_DESC_BOB
                 + SECTION_DESC_BOB + RANK_DESC_BOB + NAME_DESC_BOB
-                + PHONE_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+                + PHONE_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + PASSWORD_DESC_BOB + USERTYPE_DESC_BOB;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
 

@@ -5,10 +5,12 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RANK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SECTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERTYPE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,6 +42,10 @@ public class CommandTestUtil {
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
+    public static final String VALID_PASSWORD_AMY = "password";
+    public static final String VALID_PASSWORD_BOB = "pass";
+    public static final String VALID_USERTYPE_AMY = "A";
+    public static final String VALID_USERTYPE_BOB = "G";
 
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
@@ -58,6 +64,10 @@ public class CommandTestUtil {
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String PASSWORD_DESC_AMY = " " + PREFIX_PASSWORD + VALID_PASSWORD_AMY;
+    public static final String PASSWORD_DESC_BOB = " " + PREFIX_PASSWORD + VALID_PASSWORD_BOB;
+    public static final String USERTYPE_DESC_AMY = " " + PREFIX_USERTYPE + VALID_USERTYPE_AMY;
+    public static final String USERTYPE_DESC_BOB = " " + PREFIX_USERTYPE + VALID_USERTYPE_BOB;
 
     public static final String INVALID_NRIC_DESC = " " + PREFIX_NRIC + "1238675A"; // missing first letter
     public static final String INVALID_COMPANY_DESC = " " + PREFIX_COMPANY + " "; //must have non-space character
@@ -78,12 +88,13 @@ public class CommandTestUtil {
                 .withCompany(VALID_COMPANY_AMY).withSection(VALID_SECTION_AMY)
                 .withRank(VALID_RANK_AMY).withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_FRIEND).withPassword(VALID_PASSWORD_AMY).withUserType(VALID_USERTYPE_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withNric(VALID_NRIC_BOB)
                 .withCompany(VALID_COMPANY_BOB).withSection(VALID_SECTION_BOB)
                 .withRank(VALID_RANK_BOB).withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withPassword(VALID_PASSWORD_BOB).
+                        withUserType(VALID_USERTYPE_BOB).build();
     }
 
     /**

@@ -4,10 +4,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.UserType;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
+import seedu.address.model.person.Password;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Rank;
@@ -41,6 +43,8 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setTags(person.getTags());
+        descriptor.setPassword(person.getPassword());
+        descriptor.setUserType(person.getUserType());
     }
 
     /**
@@ -98,6 +102,26 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Password} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withPassword(String password) {
+        descriptor.setPassword(new Password(password));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withUserType(String userType) {
+        if (userType.equals("A")) {
+            descriptor.setUserType(UserType.ADMIN);
+        } else if (userType.equals("G")) {
+            descriptor.setUserType(UserType.GENERAL);
+        }
         return this;
     }
 
