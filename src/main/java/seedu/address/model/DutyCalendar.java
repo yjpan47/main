@@ -41,12 +41,12 @@ public class DutyCalendar {
         this.dutyStorage = new DutyStorage();
     }
 
-    public DutyCalendar(DutyMonth currentMonth, DutyMonth nextMonth) {
+    public DutyCalendar(DutyMonth currentMonth, DutyMonth nextMonth, DutyStorage dutyStorage) {
         this.currentYear = CalendarUtil.getCurrentYear();
         this.currentMonthIndex = CalendarUtil.getCurrentMonth();
         this.currentMonth = currentMonth;
         this.nextMonth = nextMonth;
-        this.dutyStorage = new DutyStorage();
+        this.dutyStorage = dutyStorage;
     }
 
     public int getCurrentMonthIndex() {
