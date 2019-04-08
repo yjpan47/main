@@ -17,7 +17,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2103-AY1819S2-W15-4/main
 
-By: `Team W15-4`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
 == Setting up
 
@@ -337,7 +337,7 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: `config.json`).
 
-=== Duty Package 
+=== Duty Package
 
 ==== Current Implementation
 
@@ -361,9 +361,9 @@ Each `Duty` class should contain the details such as the day index, list of `Per
 
 * `Duty#getPersonsString()` -- method for the view command. Returns the string of all the personnels allocated to that particular duty, minus the NRIC of the person passed as the parameter
 
-`DutySettings` class enables the users to customise the number of points and manpower requied for each duty day 
+`DutySettings` class enables the users to customise the number of points and manpower requied for each duty day
 
-`DutyStorage` class stores the accumulated points of each person. 
+`DutyStorage` class stores the accumulated points of each person.
 
 *Scheduling Algorithm*
 
@@ -376,7 +376,7 @@ Each `Duty` class should contain the details such as the day index, list of `Per
 ** A priority queue of all people based on their accumulated points with the lowest at the head of the queue.
 ** A list of duties will be generated and sorted by their points allocated in descending order.
 ** Starting from the top of the list of duties, the priority queue will be continuously polled to look for the instances of compatible duty-person pairing. For a duty-person pair to be compatible, it requries the duty to not contain the person and the person to not block the day of the duty. Once a duty is completedly filled, it moves on to the next duty in the list. The person will be added back into the priority queue with an adjusted duty point, thus most likely pushed to the back of the queue, allowing others to be assigned duties.
-** Ideally, people with lower accumulated points will be assigned to duties with higher points allocated. This allows the scheduler to automatically balance the points of each person by the end of the month. 
+** Ideally, people with lower accumulated points will be assigned to duties with higher points allocated. This allows the scheduler to automatically balance the points of each person by the end of the month.
 
 ==== Design Considerations
 ===== Aspect: need for DutyDate classes

@@ -1,11 +1,21 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import seedu.address.commons.core.UserType;
+import seedu.address.model.PersonnelDatabase;
+import seedu.address.model.person.Person;
+
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RANK_AMY;
@@ -14,14 +24,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_SECTION_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SECTION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import seedu.address.model.PersonnelDatabase;
-import seedu.address.model.person.Person;
-
 
 
 /**
@@ -62,10 +64,12 @@ public class TypicalPersons {
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withNric(VALID_NRIC_AMY).withCompany(VALID_COMPANY_AMY)
             .withSection(VALID_SECTION_AMY).withRank(VALID_RANK_AMY).withName(VALID_NAME_AMY)
-            .withPhone(VALID_PHONE_AMY).withTags(VALID_TAG_FRIEND).build();
+            .withPhone(VALID_PHONE_AMY).withTags(VALID_TAG_FRIEND).withPassword(VALID_PASSWORD_AMY)
+            .withUserType(UserType.ADMIN).build();
     public static final Person BOB = new PersonBuilder().withNric(VALID_NRIC_BOB).withCompany(VALID_COMPANY_BOB)
             .withSection(VALID_SECTION_BOB).withRank(VALID_RANK_BOB).withName(VALID_NAME_BOB)
-            .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .withPassword(VALID_PASSWORD_BOB).withUserType(UserType.GENERAL).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
