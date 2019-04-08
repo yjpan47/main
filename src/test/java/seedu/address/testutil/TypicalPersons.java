@@ -31,7 +31,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
  */
 public class TypicalPersons {
 
-    public static final Person ALICE = new PersonBuilder().withNric("S9673582K").withCompany("Leopard")
+    public static final Person ALICE = new PersonBuilder().withNric("S9673566K").withCompany("Leopard")
             .withSection("1").withRank("CFC").withName("Alice Pauline")
             .withPhone("94351253").withTags("outstanding").buildReduced();
     public static final Person BENSON = new PersonBuilder().withNric("S9478974B").withCompany("Hawk")
