@@ -11,6 +11,8 @@ import java.util.Set;
 import seedu.address.commons.core.UserType;
 import seedu.address.logic.commands.BlockDateCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
+
 /**
  * Parses input arguments and creates a new BlockDateCommand object
  */
@@ -31,7 +33,7 @@ public class BlockDateCommandParser implements Parser<BlockDateCommand> {
 
         for (String date : dates) {
             Integer dateAdded = Integer.parseInt(date);
-            if (dateAdded > 31) {
+            if (dateAdded > 31 || dateAdded < 0 ) {
                 throw new ParseException(MESSAGE_INVALID_DATE);
             }
         }
