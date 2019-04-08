@@ -52,7 +52,7 @@ public class AddCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+        Person validPerson = new PersonBuilder().buildReduced();
 
         CommandResult commandResult = new AddCommand(validPerson).execute(modelStub, commandHistory);
 
@@ -63,7 +63,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() throws Exception {
-        Person validPerson = new PersonBuilder().build();
+        Person validPerson = new PersonBuilder().buildReduced();
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
@@ -74,8 +74,8 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
+        Person alice = new PersonBuilder().withName("Alice").buildReduced();
+        Person bob = new PersonBuilder().withName("Bob").buildReduced();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
@@ -246,6 +246,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public DutyMonth getDummyNextMonth() {
+            throw new AssertionError(CALLED_ERROR);
+        }
+
+        @Override
         public DutyStorage getDutyStorage() {
             throw  new AssertionError(CALLED_ERROR);
         }
@@ -262,6 +267,11 @@ public class AddCommandTest {
 
         @Override
         public DutySettings getDutySettings() {
+            throw new AssertionError(CALLED_ERROR);
+        }
+
+        @Override
+        public void scheduleDutyForNextMonth() {
             throw new AssertionError(CALLED_ERROR);
         }
     }

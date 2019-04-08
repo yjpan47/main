@@ -26,7 +26,7 @@ public class ScheduleCommand extends Command {
             + "taking into account the duty points of each person and their blocked out dates. "
             + "It will sort by available dates and distribute duties accordingly. \n";
 
-    public static final String SCHEDULE_SUCCESS = "\n\n%1$s\n\n%2$s\n\n"
+    public static final String SCHEDULE_SUCCESS = "%1$s\n\n%2$s\n\n"
             + "This schedule has yet been confirmed!\n"
             + "Type <confirm> to confirm this schedule or <schedule> to reassign!";
 
@@ -37,23 +37,20 @@ public class ScheduleCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        DutyMonth dutyMonth = model.getDutyCalendar().getNextMonth();
+        DutyMonth nextMonth = model.getDutyCalendar().getNextMonth();
         DutyStorage dutyStorage = model.getDutyStorage();
-
-        if (dutyMonth.isConfirmed()) {
+        if (nextMonth.isConfirmed()) {
             return new CommandResult(String.format(SCHEDULE_ALREADY_CONFIRMED,
-                    DateUtil.getMonth(dutyMonth.getMonthIndex()),
-                    dutyMonth.getYear(),
-                    dutyMonth.printDuties(),
-                    dutyStorage.printPoints()));
+                    DateUtil.getMonth(nextMonth.getMonthIndex()), nextMonth.getYear(),
+                    nextMonth.printDuties(), dutyStorage.printPoints()));
         }
 
-
         model.scheduleDutyForNextMonth();
+        DutyMonth dummy = model.getDummyNextMonth();
 
         return new CommandResult(String.format(SCHEDULE_SUCCESS,
-                dutyMonth.printDuties(),
-                dutyMonth.printPoints(dutyStorage)));
+                dummy.printDuties(),
+                dummy.printPoints(dutyStorage)));
     }
 
     @Override

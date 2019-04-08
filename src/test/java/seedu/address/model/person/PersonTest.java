@@ -10,12 +10,14 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_RANK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SECTION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.commons.core.UserType;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -38,16 +40,20 @@ public class PersonTest {
         assertFalse(ALICE.isSamePerson(null));
 
         // different phone and name -> returns false
-        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withName(VALID_NAME_BOB).build();
+        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withNric(VALID_NRIC_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
-        // different name -> returns false
+        // different name -> returns true
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        assertTrue(ALICE.isSamePerson(editedAlice));
+
+        // different Nric -> returns false
+        editedAlice = new PersonBuilder(ALICE).withNric(VALID_NRIC_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
-        // same name, same nric, different attributes -> returns true
+        // same nric, different attributes -> returns true
         editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withRank(VALID_RANK_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withName(VALID_NAME_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
     }
 
@@ -96,5 +102,17 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different password -> returns false
+        editedAlice = new PersonBuilder(ALICE).withPassword(VALID_NRIC_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different UserType -> returns false
+        editedAlice = new PersonBuilder(ALICE).withUserType(UserType.ADMIN).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different UserType -> returns false
+        Person editedAMY = new PersonBuilder(AMY).withUserType(UserType.GENERAL).build();
+        assertFalse(AMY.equals(editedAMY));
     }
 }
