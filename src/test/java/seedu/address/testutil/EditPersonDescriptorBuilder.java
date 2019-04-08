@@ -117,9 +117,9 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withUserType(String userType) {
-        if (userType.equals("A")) {
+        if ("A".equals(userType)) {
             descriptor.setUserType(UserType.ADMIN);
-        } else if (userType.equals("G")) {
+        } else if ("G".equals(userType)) {
             descriptor.setUserType(UserType.GENERAL);
         }
         return this;
