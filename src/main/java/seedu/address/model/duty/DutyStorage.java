@@ -11,8 +11,21 @@ import seedu.address.model.person.Person;
  */
 public class DutyStorage {
 
-    private HashMap<Person, Integer> dutyPoints = new HashMap<>();
-    private HashMap<Person, List<Duty>> dutyRecords = new HashMap<>();
+    private HashMap<Person, Integer> dutyPoints;
+    private HashMap<Person, List<String>> dutyRecords;
+
+
+
+    public DutyStorage() {
+        this.dutyPoints = new HashMap<>();
+        this.dutyRecords = new HashMap<>();
+    }
+
+    public DutyStorage(HashMap<Person, Integer> dutyPoints, HashMap<Person, List<String>> dutyRecords) {
+        this.dutyPoints = dutyPoints;
+        this.dutyRecords = dutyRecords;
+    }
+
     /**
      * Updates points for each duty done by person
      */
@@ -23,7 +36,7 @@ public class DutyStorage {
                 this.dutyPoints.replace(person, this.dutyPoints.get(person) + duty.getPoints());
 
                 this.dutyRecords.putIfAbsent(person, new ArrayList<>());
-                this.dutyRecords.get(person).add(duty);
+                this.dutyRecords.get(person).add(duty.toString());
             }
         }
     }
@@ -34,6 +47,10 @@ public class DutyStorage {
 
     public HashMap<Person, Integer> getDutyPoints() {
         return dutyPoints;
+    }
+
+    public HashMap<Person, List<String>> getDutyRecords() {
+        return dutyRecords;
     }
 
     /**
