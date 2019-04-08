@@ -7,12 +7,12 @@ import seedu.address.testutil.Assert;
 
 public class PasswordTest {
     @Test
-    public void constructor_null_throwsNullPointerException() {
+    public void constructorNullThrowsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> new Password(null));
     }
 
     @Test
-    public void constructor_invalidPassword_throwsIllegalArgumentException() {
+    public void constructorInvalidPasswordIhrowsIllegalArgumentException() {
         String invalidPassword = " ";
         Assert.assertThrows(IllegalArgumentException.class, () -> new Name(invalidPassword));
     }
