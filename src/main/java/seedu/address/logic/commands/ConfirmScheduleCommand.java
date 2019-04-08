@@ -9,6 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.duty.DutyMonth;
 import seedu.address.model.duty.DutyStorage;
+
 /**
  * Set the schedule generated into stone by confirming it
  */
@@ -27,27 +28,30 @@ public class ConfirmScheduleCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        DutyMonth dutyMonth = model.getDutyCalendar().getNextMonth();
+        DutyMonth nextMonth = model.getDutyCalendar().getNextMonth();
         DutyStorage dutyStorage = model.getDutyStorage();
 
-        if (dutyMonth.getScheduledDuties() == null) {
+        if (nextMonth.isConfirmed()) {
+            return new CommandResult(String.format(SCHEDULE_ALREADY_CONFIRMED,
+                    DateUtil.getMonth(nextMonth.getMonthIndex()),
+                    nextMonth.getYear(),
+                    nextMonth.printDuties(),
+                    nextMonth.printPoints(dutyStorage)));
+        }
+
+        DutyMonth dummyMonth = model.getDutyCalendar().getDummyNextMonth();
+
+        if (dummyMonth.getScheduledDuties() == null) {
             return new CommandResult(NO_SCHEDULE_YET);
         }
 
-        if (dutyMonth.isConfirmed()) {
-            return new CommandResult(String.format(SCHEDULE_ALREADY_CONFIRMED,
-                    DateUtil.getMonth(dutyMonth.getMonthIndex()),
-                    dutyMonth.getYear(),
-                    dutyMonth.printDuties(),
-                    dutyMonth.printPoints(dutyStorage)));
-        }
-
-        dutyStorage.update(dutyMonth.getScheduledDuties());
-        dutyMonth.confirm();
+        dutyStorage.update(dummyMonth.getScheduledDuties());
+        model.getDutyCalendar().confirm();
+        model.commitPersonnelDatabase();
         return new CommandResult(String.format(SCHEDULE_SUCCESS,
-                DateUtil.getMonth(dutyMonth.getMonthIndex()),
-                dutyMonth.getYear(),
-                dutyMonth.printDuties(),
+                DateUtil.getMonth(dummyMonth.getMonthIndex()),
+                dummyMonth.getYear(),
+                dummyMonth.printDuties(),
                 dutyStorage.printPoints()));
     }
 

@@ -18,35 +18,59 @@ import seedu.address.model.person.Person;
 public class DutyMonth {
 
     private boolean confirmed = false;
-    private List<Duty> scheduledDuties;
 
     private int year;
     private int monthIndex;
     private int firstDayOfWeekIndex;
-    private HashMap<Person, List<Integer>> blockedDays;
+    private List<Duty> scheduledDuties = new ArrayList<>();
+    private HashMap<Person, List<Integer>> blockedDays = new HashMap<>();
 
+    /**
+     * Default constructor
+     * @param year current year
+     * @param monthIndex current index of month (0 - 11)
+     * @param firstDayOfWeekIndex day of the week of first day of current month (1 for Sunday - 7 for Saturday)
+     */
     public DutyMonth(int year, int monthIndex, int firstDayOfWeekIndex) {
         if (DateUtil.isValidYear(year) && DateUtil.isValidMonth(monthIndex)
                 && DateUtil.isValidDayOfWeek(firstDayOfWeekIndex)) {
             this.year = year;
             this.monthIndex = monthIndex;
             this.firstDayOfWeekIndex = firstDayOfWeekIndex;
-            this.blockedDays = new HashMap<>();
-            this.scheduledDuties = new ArrayList<>();
         } else {
             throw new InvalidParameterException("Invalid Date");
         }
     }
 
-    public DutyMonth(int year, int monthIndex, int firstDayOfWeekIndex,
+    /**
+     * Constructor for reconstructing DutyMonth object from json
+     * @param year current year
+     * @param monthIndex current index of month (0 - 11)
+     * @param firstDayOfWeekIndex day of the week of first day of current month (1 for Sunday - 7 for Saturday)
+     * @param duties the list of the duties
+     * @param blockedDays the list of blocked dates
+     */
+    public DutyMonth(boolean confirmed, int year, int monthIndex, int firstDayOfWeekIndex,
                      List<Duty> duties, HashMap<Person, List<Integer>> blockedDays) {
+        this.confirmed = confirmed;
         this.year = year;
         this.monthIndex = monthIndex;
         this.firstDayOfWeekIndex = firstDayOfWeekIndex;
-
-        this.scheduledDuties = duties;
-        this.blockedDays = new HashMap<>(blockedDays);
+        this.scheduledDuties.addAll(duties);
+        this.blockedDays.putAll(blockedDays);
     }
+
+    /**
+     * Constructor for making a dummy copy of the dutyMonth for the purpose of scheduling
+     * @param dutyMonth to be copied.
+     */
+    public DutyMonth(DutyMonth dutyMonth) {
+        this.year = dutyMonth.getYear();
+        this.monthIndex = dutyMonth.getMonthIndex();
+        this.firstDayOfWeekIndex = dutyMonth.getFirstDayOfWeekIndex();
+        this.blockedDays = new HashMap<>(dutyMonth.getBlockedDates());
+    }
+
     /**
      * Adds a day to the blocked list for the person inputted
      */
@@ -61,7 +85,7 @@ public class DutyMonth {
         }
     }
     /**
-     * Scehdule allocates duties for the DutyMonth
+     * Schedule allocates duties for the DutyMonth
      */
     public void schedule(List<Person> persons, DutySettings dutySettings, DutyStorage dutyStorage) {
 
@@ -148,7 +172,6 @@ public class DutyMonth {
         return duties;
     }
 
-
     public int getFirstDayOfWeekIndex() {
         return firstDayOfWeekIndex;
     }
@@ -226,8 +249,9 @@ public class DutyMonth {
     }
 
     public void confirm() {
-        confirmed = true;
+        this.confirmed = true;
     }
+
     /**
      * Checks if a person has a duty on a given day
      */
