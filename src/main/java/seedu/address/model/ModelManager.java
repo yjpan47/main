@@ -166,6 +166,17 @@ public class ModelManager implements Model {
         return getDutyCalendar().getNextMonth();
     }
 
+    @Override
+    public DutyMonth getDummyNextMonth() {
+        return getDutyCalendar().getDummyNextMonth();
+    }
+
+    @Override
+    public void scheduleDutyForNextMonth() {
+        versionedPersonnelDatabase.scheduleDutyForNextMonth(getFilteredPersonList(),
+                getDutySettings(), getDutyStorage());
+    }
+
     //=========== Swap Requests ===============================================================================
 
     @Override

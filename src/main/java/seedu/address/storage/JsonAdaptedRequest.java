@@ -15,29 +15,32 @@ class JsonAdaptedRequest {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Request's %s field is missing!";
 
-    private final String nric;
+    private final String requesterNric;
     private final String allocatedDate;
     private final String requestedDate;
+    private final String accepterNric;
 
     /**
      * Constructs a {@code JsonAdaptedRequest} with the given request details.
      */
     @JsonCreator
 
-    public JsonAdaptedRequest(@JsonProperty("nric") String nric, @JsonProperty("allocatedDate") String allocatedDate,
-                              @JsonProperty("requestedDate") String requestedDate) {
-        this.nric = nric;
+    public JsonAdaptedRequest(@JsonProperty("requesterNric") String requesterNric, @JsonProperty("allocatedDate") String allocatedDate,
+                              @JsonProperty("requestedDate") String requestedDate, @JsonProperty("accepterNric") String accepterNric) {
+        this.requesterNric = requesterNric;
         this.requestedDate = requestedDate;
         this.allocatedDate = allocatedDate;
+        this.accepterNric = accepterNric;
     }
 
     /**
      * Converts a given {@code Request} into this class for Jackson use.
      */
     public JsonAdaptedRequest(Request source) {
-        nric = source.getNric();
+        requesterNric = source.getRequesterNric();
         allocatedDate = source.getAllocatedDate().toString();
         requestedDate = source.getRequestedDate().toString();
+        accepterNric = source.getAccepterNric();
     }
 
     /**
@@ -46,10 +49,9 @@ class JsonAdaptedRequest {
      * @throws IllegalValueException if there were any data constraints violated in the adapted request.
      */
     public Request toModelType() throws IllegalValueException {
-        if (nric == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "NRIC"));
+        if (requesterNric == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "requester NRIC"));
         }
-        final String modelNric = nric;
 
         if (allocatedDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "allocated date"));
@@ -63,7 +65,11 @@ class JsonAdaptedRequest {
 
         final LocalDate modelRequestedDate = LocalDate.parse(requestedDate);
 
-        return new Request(modelNric, modelRequestedDate, modelAllocatedDate);
+        if (accepterNric == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "accepter NRIC"));
+        }
+
+        return new Request(requesterNric, modelAllocatedDate, modelRequestedDate, accepterNric);
     }
 
 }

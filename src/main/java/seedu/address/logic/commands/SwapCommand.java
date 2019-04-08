@@ -95,7 +95,7 @@ public class SwapCommand extends Command {
 
     @Override
     public CommandResult executeAdmin(Model model, CommandHistory history) throws CommandException {
-        throw new CommandException(Messages.MESSAGE_NO_AUTHORITY);
+        return execute(model, history);
     }
 
     @Override

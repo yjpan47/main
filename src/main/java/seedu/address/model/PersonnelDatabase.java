@@ -9,6 +9,8 @@ import java.util.List;
 import javafx.beans.InvalidationListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.InvalidationListenerManager;
+import seedu.address.model.duty.DutySettings;
+import seedu.address.model.duty.DutyStorage;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.request.Request;
@@ -61,11 +63,29 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
     }
 
     /**
-     * Replaces the contents of the duty duty with {@code dutyCalendar}.
+     * Replaces the contents of the duty calendar with {@code dutyCalendar}.
      * {@code dutyCalendar} must not contain duplicate duties.
      */
     public void setDutyCalendar(DutyCalendar dutyCalendar) {
         this.dutyCalendar.setDutyCalendar(dutyCalendar);
+        indicateModified();
+    }
+
+    /**
+     * Replaces the contents of the request list with {@code requestList}.
+     */
+    public void setRequests(List<Request> requestList) {
+        this.requests.clear();
+        this.requests.addAll(requestList);
+        indicateModified();
+    }
+
+    /**
+     * Schedules duty for next month in {@code dutyCalendar}.
+     */
+    public void scheduleDutyForNextMonth(List<Person> persons,
+                                         DutySettings dutySettings, DutyStorage dutyStorage) {
+        this.dutyCalendar.scheduleDutyForNextMonth(persons,dutySettings, dutyStorage);
     }
 
     /**
@@ -76,11 +96,14 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
 
         setPersons(newData.getPersonList());
         setDutyCalendar(newData.getDutyCalendar());
+        setRequests(newData.getRequestList());
     }
 
     // Sort the persons in the personnel database by name
     public void sort() {
+
         this.persons.sort();
+        indicateModified();
     }
 
     //// person-level operations
@@ -140,7 +163,7 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
 
 
     /**
-     * Adds a swap request to the request manager by fields.
+     * Adds a swap request to the request list by fields.
      */
     public void addRequest(String nric, LocalDate allocatedDate, LocalDate requestedDate) {
         requests.add(new Request(nric, allocatedDate, requestedDate));
@@ -148,7 +171,7 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
     }
 
     /**
-     * Adds a swap request to the request manager.
+     * Adds a swap request to the request list.
      */
     public void addRequest(Request request) {
         requests.add(request);

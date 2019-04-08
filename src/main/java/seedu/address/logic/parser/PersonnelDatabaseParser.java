@@ -25,6 +25,7 @@ import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.SwapCommand;
+import seedu.address.logic.commands.UnconfirmCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewCommand;
 
@@ -110,6 +111,9 @@ public class PersonnelDatabaseParser {
 
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments, userType, userName);
+
+        case UnconfirmCommand.COMMAND_WORD:
+                return new UnconfirmCommand();
 
         case DutySettingsCommand.COMMAND_WORD:
             return new DutySettingsCommandParser().parse(arguments, userType, userName);

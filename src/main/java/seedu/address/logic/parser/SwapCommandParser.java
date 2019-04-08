@@ -23,19 +23,19 @@ public class SwapCommandParser implements Parser<SwapCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public SwapCommand parse(String args, UserType userType, String userName) throws ParseException {
-        if (userType == UserType.GENERAL) {
-            return generalParse(args, userName);
+        if (!userName.equals(UserType.DEFAULT_ADMIN_USERNAME)) {
+            return parseForPersonnelUser(args, userName);
         } else {
             throw new ParseException(MESSAGE_NO_AUTHORITY_PARSE);
         }
     }
 
     /**
-     * Parses the given {@code String} of arguments in the context of the SwapCommand for General accounts
-     * and returns an SwapCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the SwapCommand for accounts associated with
+     * a personnel and returns an SwapCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public SwapCommand generalParse(String args, String userName) throws ParseException {
+    public SwapCommand parseForPersonnelUser(String args, String userName) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ALLOCATED_DATE, PREFIX_REQUESTED_DATE);
 
