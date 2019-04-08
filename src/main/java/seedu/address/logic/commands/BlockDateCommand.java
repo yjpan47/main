@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DATE;
+
 import java.util.List;
 
 import seedu.address.commons.util.DateUtil;
@@ -13,7 +15,7 @@ import seedu.address.model.person.Person;
  */
 public class BlockDateCommand extends Command {
 
-    public static final String COMMAND_WORD = "bd";
+    public static final String COMMAND_WORD = "block";
     public static final String MESSAGE_USAGE = COMMAND_WORD + " Blocks out certain duty dates for the upcoming "
             + "month for the current person using.\n"
             + "Parameters: Dates in numbers for the next month\n"
@@ -33,24 +35,19 @@ public class BlockDateCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        DateUtil dateUtil = new DateUtil();
+
         Person person = model.findPerson(userName);
         DutyMonth nextMonth = model.getDutyCalendar().getNextMonth();
-        int currentYear = model.getDutyCalendar().getCurrentYear();
         if (blockedDates.size() > 15) {
             throw new CommandException(MESSAGE_TOO_MANY_BLOCKED_DATES);
         }
-        for (int blockedDay : blockedDates){
-            if (dateUtil.isValidDate(currentYear,nextMonth.getMonthIndex(),blockedDay)){
-                throw new CommandException()
-            }
-        }
+
         for (Integer blockedDay : blockedDates) {
             nextMonth.addBlockedDay(person, blockedDay);
+            System.out.println(blockedDay);
         }
 
         model.commitPersonnelDatabase();
-
         return new CommandResult(String.format(MESSAGE_BLOCK_DATES_SUCCESS));
     }
 
