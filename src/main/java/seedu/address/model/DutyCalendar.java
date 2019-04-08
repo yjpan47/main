@@ -21,6 +21,7 @@ public class DutyCalendar {
 
     private DutyMonth currentMonth;
     private DutyMonth nextMonth;
+    private DutyMonth dummyNextMonth;
 
     private DutyStorage dutyStorage;
 
@@ -61,6 +62,9 @@ public class DutyCalendar {
         return nextMonth;
     }
 
+    public DutyMonth getDummyNextMonth() {
+        return dummyNextMonth;
+    }
 
     public DutyStorage getDutyStorage() {
         return dutyStorage;
@@ -69,7 +73,6 @@ public class DutyCalendar {
     public int getCurrentYear() {
         return currentYear;
     }
-
 
     public void setDutyCalendar(DutyCalendar dutyCalendar) {
         if (dutyCalendar.getCurrentMonth().getMonthIndex() == CalendarUtil.getCurrentMonth()) {
@@ -82,7 +85,19 @@ public class DutyCalendar {
 
     public void scheduleDutyForNextMonth(List<Person> persons,
                                          DutySettings dutySettings, DutyStorage dutyStorage) {
-        nextMonth.schedule(persons, dutySettings, dutyStorage);
+        this.dummyNextMonth = new DutyMonth(nextMonth);
+        dummyNextMonth.schedule(persons, dutySettings, dutyStorage);
+    }
+
+    public void confirm() {
+        this.nextMonth = this.dummyNextMonth;
+        this.nextMonth.confirm();
+    }
+
+    public void unconfirm() {
+        int yearOfNextMonth = currentMonthIndex == 11 ? currentYear + 1 : currentYear;
+        this.nextMonth = new DutyMonth(yearOfNextMonth, this.currentMonthIndex + 1 ,
+                CalendarUtil.dayOfFirstDayOfMonth(yearOfNextMonth, this.currentMonthIndex + 1));
     }
 
     /**

@@ -204,4 +204,9 @@ public interface Model {
      * Returns DutyMonth for current month
      */
     DutyMonth getCurrentDutyMonth();
+
+    /**
+     * Returns dummy DutyMonth
+     */
+    DutyMonth getDummyNextMonth();
 }

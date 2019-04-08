@@ -86,7 +86,6 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
     public void scheduleDutyForNextMonth(List<Person> persons,
                                          DutySettings dutySettings, DutyStorage dutyStorage) {
         this.dutyCalendar.scheduleDutyForNextMonth(persons,dutySettings, dutyStorage);
-        indicateModified();
     }
 
     /**
