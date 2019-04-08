@@ -24,7 +24,6 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
 
     private final List<Request> requests;
 
-    private Person currentUser;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
     /*
@@ -154,11 +153,6 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
     public void addRequest(Request request) {
         requests.add(request);
         indicateModified();
-    }
-
-    public Person getCurrentUser() {
-        return currentUser;
-
     }
 
     @Override
