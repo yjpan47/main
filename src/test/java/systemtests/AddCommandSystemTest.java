@@ -4,7 +4,9 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.commands.CommandTestUtil.COMPANY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.COMPANY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NRIC_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_RANK_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
@@ -18,13 +20,16 @@ import static seedu.address.logic.commands.CommandTestUtil.SECTION_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SECTION_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_RANK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SECTION_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.AMY_TO_ADD;
+import static seedu.address.testutil.TypicalPersons.BOB_TO_ADD;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.IDA;
@@ -39,8 +44,10 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rank;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -56,7 +63,7 @@ public class AddCommandSystemTest extends PersonnelDatabaseSystemTest {
         /* Case: add a person without tags to a non-empty address book, command with leading spaces and trailing spaces
          * -> added
          */
-        Person toAdd = AMY;
+        Person toAdd = AMY_TO_ADD;
         String command = "   " + AddCommand.COMMAND_WORD + "  " + NRIC_DESC_AMY + " " + COMPANY_DESC_AMY + " "
                 + SECTION_DESC_AMY + " " + RANK_DESC_AMY + " " + NAME_DESC_AMY + "  " + PHONE_DESC_AMY
                 + "   " + TAG_DESC_FRIEND + " ";
@@ -74,7 +81,7 @@ public class AddCommandSystemTest extends PersonnelDatabaseSystemTest {
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: add a person with all fields same as another person in the address book except nric -> added */
-        toAdd = new PersonBuilder(AMY).withNric(VALID_NRIC_BOB).build();
+        toAdd = new PersonBuilder(AMY_TO_ADD).withNric(VALID_NRIC_BOB).buildReduced();
         command = AddCommand.COMMAND_WORD + NRIC_DESC_BOB + COMPANY_DESC_AMY + SECTION_DESC_AMY + RANK_DESC_AMY
                 + NAME_DESC_AMY + PHONE_DESC_AMY + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
@@ -84,7 +91,7 @@ public class AddCommandSystemTest extends PersonnelDatabaseSystemTest {
         assertCommandSuccess(ALICE);
 
         /* Case: add a person with tags, command with parameters in random order -> added */
-        toAdd = BOB;
+        toAdd = BOB_TO_ADD;
         command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + PHONE_DESC_BOB + NAME_DESC_BOB + COMPANY_DESC_BOB
                 + NRIC_DESC_BOB + SECTION_DESC_BOB + RANK_DESC_BOB + TAG_DESC_HUSBAND;
         assertCommandSuccess(command, toAdd);
@@ -115,8 +122,18 @@ public class AddCommandSystemTest extends PersonnelDatabaseSystemTest {
         command = PersonUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
-        /* Case: add a duplicate person except with different phone number -> rejected */
-        toAdd = new PersonBuilder(HOON).withPhone(VALID_PHONE_BOB).build();
+        /* Case: add a duplicate person except with different company -> rejected */
+        toAdd = new PersonBuilder(HOON).withCompany(VALID_COMPANY_BOB).build();
+        command = PersonUtil.getAddCommand(toAdd);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+
+        /* Case: add a duplicate person except with different rank -> rejected */
+        toAdd = new PersonBuilder(HOON).withRank(VALID_RANK_BOB).build();
+        command = PersonUtil.getAddCommand(toAdd);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+
+        /* Case: add a duplicate person except with different name -> rejected */
+        toAdd = new PersonBuilder(HOON).withName(VALID_NAME_BOB).build();
         command = PersonUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
@@ -160,6 +177,16 @@ public class AddCommandSystemTest extends PersonnelDatabaseSystemTest {
         command = AddCommand.COMMAND_WORD + NRIC_DESC_AMY + COMPANY_DESC_AMY + SECTION_DESC_AMY + RANK_DESC_AMY
                 + NAME_DESC_AMY + PHONE_DESC_AMY + INVALID_TAG_DESC;
         assertCommandFailure(command, Tag.MESSAGE_CONSTRAINTS);
+
+        /* Case: invalid NRIC -> rejected */
+        command = AddCommand.COMMAND_WORD + INVALID_NRIC_DESC + COMPANY_DESC_AMY + SECTION_DESC_AMY + RANK_DESC_AMY
+                + NAME_DESC_AMY + PHONE_DESC_AMY;
+        assertCommandFailure(command, Nric.MESSAGE_CONSTRAINTS);
+
+        /* Case: invalid Rank -> rejected */
+        command = AddCommand.COMMAND_WORD + NRIC_DESC_AMY + COMPANY_DESC_AMY + SECTION_DESC_AMY + INVALID_RANK_DESC
+                + NAME_DESC_AMY + PHONE_DESC_AMY;
+        assertCommandFailure(command, Rank.MESSAGE_CONSTRAINTS);
     }
 
     /**
