@@ -44,13 +44,13 @@ public class ListCommandTest {
     }
 
     @Test
-    public void executeGeneral_listIsNotFiltered_showsSameList() {
+    public void executeGeneralListIsNotFilteredShowsSameList() {
         CommandResult expectedCommandResult = new CommandResult(MESSAGE_SUCCESS, false, false, true);
         assertCommandSuccessGeneral(new ListCommand(), model, commandHistory, expectedCommandResult, expectedModel);
     }
 
     @Test
-    public void executeGeneral_listIsFiltered_showsEverything() {
+    public void executeGeneralListIsFilteredShowsEverything() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         CommandResult expectedCommandResult = new CommandResult(MESSAGE_SUCCESS, false, false, true);
         assertCommandSuccessGeneral(new ListCommand(), model, commandHistory, expectedCommandResult, expectedModel);

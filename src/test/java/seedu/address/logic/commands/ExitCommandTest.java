@@ -22,7 +22,7 @@ public class ExitCommandTest {
     }
 
     @Test
-    public void executeGeneral_exit_success() {
+    public void executeGeneralExitSuccess() {
         CommandResult expectedCommandResult = new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true, false);
         assertCommandSuccessGeneral(new ExitCommand(), model, commandHistory, expectedCommandResult, expectedModel);
     }

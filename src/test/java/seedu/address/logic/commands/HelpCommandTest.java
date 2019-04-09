@@ -22,7 +22,7 @@ public class HelpCommandTest {
     }
 
     @Test
-    public void executeGeneral_help_success() {
+    public void executeGeneralHelpSuccess() {
         CommandResult expectedCommandResult = new CommandResult(SHOWING_HELP_MESSAGE, true, false, false);
         assertCommandSuccessGeneral(new HelpCommand(), model, commandHistory, expectedCommandResult, expectedModel);
     }
