@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureGeneral;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccessGeneral;
 import static seedu.address.logic.commands.CommandTestUtil.deleteFirstPerson;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersonnelDatabase;
 
@@ -35,7 +37,7 @@ public class RedoCommandTest {
     }
 
     @Test
-    public void execute() {
+    public void executeAdmin() {
         // multiple redoable states in model
         expectedModel.redoPersonnelDatabase();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
@@ -46,5 +48,19 @@ public class RedoCommandTest {
 
         // no redoable state in model
         assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
+    }
+
+    @Test
+    public void executeGeneral() {
+        // multiple redoable states in model
+        expectedModel.redoPersonnelDatabase();
+        assertCommandSuccessGeneral(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
+
+        // single redoable state in model
+        expectedModel.redoPersonnelDatabase();
+        assertCommandSuccessGeneral(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
+
+        // no redoable state in model
+        assertCommandFailureGeneral(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
     }
 }

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccessGeneral;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.logic.commands.ListCommand.MESSAGE_SUCCESS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -40,5 +41,18 @@ public class ListCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         CommandResult expectedCommandResult = new CommandResult(MESSAGE_SUCCESS, false, false, true);
         assertCommandSuccess(new ListCommand(), model, commandHistory, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void executeGeneral_listIsNotFiltered_showsSameList() {
+        CommandResult expectedCommandResult = new CommandResult(MESSAGE_SUCCESS, false, false, true);
+        assertCommandSuccessGeneral(new ListCommand(), model, commandHistory, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void executeGeneral_listIsFiltered_showsEverything() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        CommandResult expectedCommandResult = new CommandResult(MESSAGE_SUCCESS, false, false, true);
+        assertCommandSuccessGeneral(new ListCommand(), model, commandHistory, expectedCommandResult, expectedModel);
     }
 }

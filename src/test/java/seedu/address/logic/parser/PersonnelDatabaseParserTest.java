@@ -133,8 +133,10 @@ public class PersonnelDatabaseParserTest {
 
     @Test
     public void parseCommand_schedule() throws Exception {
+
         assertTrue(parser.parseCommand(ScheduleCommand.COMMAND_WORD, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME)
                 instanceof ScheduleCommand);
+
         assertTrue(parser.parseCommand("schedule", UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof UndoCommand);
     }
     @Test
@@ -158,7 +160,7 @@ public class PersonnelDatabaseParserTest {
 
     @Test
     public void parseCommand_view() throws Exception {
-        assertTrue(parser.parseCommand("view", UserType.ADMIN, "S9000000A") instanceof ViewCommand);
+        assertTrue(parser.parseCommand("view S9673582K", UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof ViewCommand);
     }
 
     @Test
