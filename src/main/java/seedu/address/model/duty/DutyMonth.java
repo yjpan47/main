@@ -252,6 +252,10 @@ public class DutyMonth {
         this.confirmed = true;
     }
 
+    public void unconfirm() {
+        this.confirmed = false;
+    }
+
     /**
      * Checks if a person has a duty on a given day
      */

@@ -9,6 +9,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.duty.Duty;
+import seedu.address.model.duty.DutyMonth;
+import seedu.address.model.duty.DutyStorage;
 import seedu.address.model.person.Person;
 
 /**
@@ -23,7 +26,8 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s\n"
+            + "Please run \"schedule\" again.";
 
     private final Index targetIndex;
 
@@ -42,6 +46,15 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
+
+        DutyMonth dutyMonth = model.getDutyCalendar().getNextMonth();
+        DutyStorage dutyStorage = model.getDutyStorage();
+        for (Duty duty : dutyMonth.getScheduledDuties()) {
+            duty.removePerson(personToDelete);
+        }
+        dutyStorage.removePerson(personToDelete);
+        dutyMonth.unconfirm();
+
         model.commitPersonnelDatabase();
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
     }

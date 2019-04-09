@@ -39,7 +39,8 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_TAG + "injury";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New person added: %1$s\n"
+            + "Please run \"schedule\" again.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Person toAdd;
@@ -61,6 +62,9 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
+
+        model.getDutyCalendar().getNextMonth().unconfirm();
+
         model.commitPersonnelDatabase();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
