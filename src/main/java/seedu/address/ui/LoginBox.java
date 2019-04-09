@@ -7,7 +7,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UserType;
+
+import java.util.logging.Logger;
 
 /**
  * Opens up a login box for users to enter their login details.
@@ -20,6 +23,7 @@ public class LoginBox {
     private Label label;
     private Stage window;
     private final UserFinder userFinder;
+    private final Logger logger = LogsCenter.getLogger(CalendarView.class);
 
     public LoginBox(UserFinder userFinder) {
         this.userFinder = userFinder;
@@ -62,14 +66,17 @@ public class LoginBox {
         if (userField.getText().equals("Admin") && passField.getText().equals("Admin")) {
             userType = UserType.ADMIN;
             userName = userField.getText();
+            logger.info("Logged in with username: " + userName);
             window.close();
         } else {
             UserType foundUser = userFinder.findAccount(userField.getText(), passField.getText());
             if (foundUser == null) {
                 label.setText("User not found!");
+                logger.info("The User: " + userField.getText() + " was not found.");
             } else {
                 userType = foundUser;
                 userName = userField.getText();
+                logger.info("Logged in with username: " + userName);
                 window.close();
             }
         }
