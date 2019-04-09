@@ -106,20 +106,16 @@ Example:
 * `roster February`
 
 ==== Block dates : `block`
-The user can block dates and set which dates they are unavailable to duties for upcoming months. A user can block up to 15 days per month. +
-Format: `block MONTH DAY DAY DAY ...`
+The user can block dates and set which dates they are unavailable to duties for the upcoming month. A user can block up to 15 days. +
+Format: `block DATE DATE DATE ...`
 
 Example:
 
-* `block March 3 6 15 21 30`
+* `block 3 6 15 21 30`
 
-==== View blocked dates : `block`
-The user can view the dates they have blocked for a particular month. +
-Format: `block MONTH`
-
-Example:
-
-* `block March`
+==== View blocked dates : `block` (Coming in v2.0)
+The user can view the dates they have blocked for the upcoming month. +
+Format: `block`
 
 ==== Make a swap request with another user : `swap`
 The user can request for a duty swap with another user. This will be subject to the agreement of the other user and approval of the admin (i.e. commander). +
@@ -346,7 +342,7 @@ Your password is also your NRIC by default, unless you or your administrator cha
 * *Viewing help* : `help` +
 * *Viewing own duties* : `view` +
 * *Viewing other's duties* : `view NRIC` +
-* *Blocking dates* : `block d/date d/date d/date …` +
+* *Blocking dates* : `block DATE DATE DATE …` +
 * *Make swap request* : `swap` +
 * *List all the users* : `list` +
 * *Locate person by name* : `find` +
