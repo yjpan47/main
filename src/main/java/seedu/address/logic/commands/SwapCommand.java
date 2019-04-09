@@ -48,7 +48,6 @@ public class SwapCommand extends Command {
         this.userName = userName;
     }
 
-    @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         int currentMonthIndex = model.getDutyCalendar().getCurrentMonth().getMonthIndex();

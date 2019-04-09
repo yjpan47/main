@@ -46,7 +46,6 @@ public class AcceptSwapCommand extends Command {
         this.index = index;
     }
 
-    @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Request> requests = model.getPersonnelDatabase().getRequestList();

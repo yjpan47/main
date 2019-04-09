@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult executeAdmin(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -62,11 +62,6 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult executeGeneral(Model model, CommandHistory history) throws CommandException {
         throw new CommandException(Messages.MESSAGE_NO_AUTHORITY);
-    }
-
-    @Override
-    public CommandResult executeAdmin(Model model, CommandHistory history) throws CommandException {
-        return execute(model, history);
     }
 
     @Override

@@ -60,7 +60,6 @@ import org.junit.Test;
 
 import seedu.address.commons.core.UserType;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.core.UserType;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Company;
@@ -154,7 +153,7 @@ public class EditCommandParserTest {
                 .withName(VALID_NAME_AMY).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withPassword(VALID_PASSWORD_BOB)
                 .withUserType(VALID_USERTYPE_BOB).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor, UserType.DEAULT_ADMIN_USERNAME);
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor, UserType.DEFAULT_ADMIN_USERNAME);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
