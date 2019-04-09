@@ -133,17 +133,16 @@ public class PersonnelDatabaseParserTest {
 
     @Test
     public void parseCommand_schedule() throws Exception {
-
         assertTrue(parser.parseCommand(ScheduleCommand.COMMAND_WORD, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME)
                 instanceof ScheduleCommand);
-
-        assertTrue(parser.parseCommand("schedule", UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof UndoCommand);
+        assertTrue(parser.parseCommand("schedule", UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof ScheduleCommand);
     }
     @Test
     public void parseCommand_blockDate() throws Exception {
-        assertEquals((BlockDateCommand) parser.parseCommand(BlockDateCommand.COMMAND_WORD + " 2 4 5 6 9 10",
-                UserType.ADMIN, "S9000000A"),
-                new BlockDateCommand(List.of(2, 4, 5, 6, 9, 10), "S9000000A"));
+        BlockDateCommand command = (BlockDateCommand) parser.parseCommand(BlockDateCommand.COMMAND_WORD + " 2 4 5 6 9 10",
+                UserType.ADMIN, "S9000000A");
+        BlockDateCommand newCommand = new BlockDateCommand(List.of(2, 4, 5, 6, 9, 10), "S9000000A");
+        assertEquals(command, newCommand);
     }
     @Test
     public void parseCommand_redoCommandWord_returnsRedoCommand() throws Exception {
