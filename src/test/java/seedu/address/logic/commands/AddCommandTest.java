@@ -252,7 +252,7 @@ public class AddCommandTest {
 
         @Override
         public DutyStorage getDutyStorage() {
-            throw  new AssertionError(CALLED_ERROR);
+            throw new AssertionError(CALLED_ERROR);
         }
 
         @Override

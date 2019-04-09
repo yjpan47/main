@@ -2,7 +2,6 @@ package seedu.address.commons.core;
 
 import org.junit.Assert;
 import org.junit.Test;
-import seedu.address.commons.core.UserType;
 
 public class UserTypeTest {
     @Test
