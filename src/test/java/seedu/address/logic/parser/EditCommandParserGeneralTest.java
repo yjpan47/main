@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_NO_AUTHORITY_PARSE;
 import static seedu.address.logic.commands.CommandTestUtil.COMPANY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.COMPANY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_COMPANY_DESC;
@@ -50,6 +49,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_USERTYPE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_USERTYPE_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CommandParserTestUtil.GENERAL_USER;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -60,7 +60,6 @@ import org.junit.Test;
 
 import seedu.address.commons.core.UserType;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.core.UserType;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Company;
@@ -72,215 +71,206 @@ import seedu.address.model.person.Rank;
 import seedu.address.model.person.Section;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.TypicalPersons;
 
-public class EditCommandParserTest {
+public class EditCommandParserGeneralTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_ADMIN);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_GENERAL);
 
     private EditCommandParser parser = new EditCommandParser();
 
+    private String nricOfUser = TypicalPersons.getTypicalPersonNric(0);
+
     @Test
-    public void parse_missingParts_failure() {
-        // no index specified
-        assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
+    public void parse_missingExtraParts_failure() {
+        //  extra index specified for general command
+        assertParseFailure(parser, "1" + VALID_PHONE_BOB, MESSAGE_INVALID_FORMAT,
+                UserType.GENERAL, GENERAL_USER);
 
         // no field specified
-        assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, " ", EditCommand.MESSAGE_NOT_EDITED, UserType.GENERAL,
+                GENERAL_USER);
 
-        // no index and no field specified
-        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+        // extra index and no field specified
+        assertParseFailure(parser, "1", MESSAGE_INVALID_FORMAT, UserType.GENERAL,
+                GENERAL_USER);
 
-        //Missing user
-        assertParseFailure(parser, "1" + VALID_PHONE_BOB, MESSAGE_NO_AUTHORITY_PARSE, null, "General");
-    }
+        // general accounts cannot edit username
+        assertParseFailure(parser, VALID_NRIC_BOB, MESSAGE_INVALID_FORMAT, UserType.GENERAL, GENERAL_USER);
 
-    @Test
-    public void parse_invalidPreamble_failure() {
-        // negative index
-        assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
-
-        // zero index
-        assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
-
-        // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
-
-        // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+        // general accounts cannot edit userType
+        assertParseFailure(parser, VALID_USERTYPE_BOB, MESSAGE_INVALID_FORMAT, UserType.GENERAL, GENERAL_USER);
     }
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_NRIC_DESC, Nric.MESSAGE_CONSTRAINTS); // invalid nric
-        assertParseFailure(parser, "1" + INVALID_COMPANY_DESC, Company.MESSAGE_CONSTRAINTS); // invalid company
-        assertParseFailure(parser, "1" + INVALID_SECTION_DESC, Section.MESSAGE_CONSTRAINTS); // invalid section
-        assertParseFailure(parser, "1" + INVALID_RANK_DESC, Rank.MESSAGE_CONSTRAINTS); // invalid rank
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
-        assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
-        assertParseFailure(parser, "1" + INVALID_PASSWORD_DESC, Password.MESSAGE_CONSTRAINTS); // invalid password
-        assertParseFailure(parser, "1" + INVALID_USERTYPE_DESC, UserType.MESSAGE_CONSTRAINTS); // invalid userType
+        assertParseFailure(parser, INVALID_COMPANY_DESC, Company.MESSAGE_CONSTRAINTS,
+                UserType.GENERAL, nricOfUser); // invalid company
+        assertParseFailure(parser, INVALID_SECTION_DESC, Section.MESSAGE_CONSTRAINTS,
+                UserType.GENERAL, nricOfUser); // invalid section
+        assertParseFailure(parser, INVALID_RANK_DESC, Rank.MESSAGE_CONSTRAINTS,
+                UserType.GENERAL, nricOfUser); // invalid rank
+        assertParseFailure(parser, INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS,
+                UserType.GENERAL, nricOfUser); // invalid name
+        assertParseFailure(parser, INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS,
+                UserType.GENERAL, nricOfUser); // invalid phone
+        assertParseFailure(parser, INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS,
+                UserType.GENERAL, nricOfUser); // invalid tag
+        assertParseFailure(parser, INVALID_PASSWORD_DESC, Password.MESSAGE_CONSTRAINTS,
+                UserType.GENERAL, nricOfUser); // invalid password
 
         // invalid name followed by valid phone
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + PHONE_DESC_AMY, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_AMY, Name.MESSAGE_CONSTRAINTS,
+                UserType.GENERAL, nricOfUser);
 
         // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
-        assertParseFailure(parser, "1" + PHONE_DESC_BOB + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, PHONE_DESC_BOB + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS,
+                UserType.GENERAL, nricOfUser);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS,
+                UserType.GENERAL, nricOfUser);
+        assertParseFailure(parser, TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS,
+                UserType.GENERAL, nricOfUser);
+        assertParseFailure(parser, TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS,
+                UserType.GENERAL, nricOfUser);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_PHONE_DESC,
-                Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NAME_DESC + INVALID_PHONE_DESC,
+                Name.MESSAGE_CONSTRAINTS, UserType.GENERAL, nricOfUser);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + NRIC_DESC_BOB + COMPANY_DESC_BOB + SECTION_DESC_BOB
+        String userInput = COMPANY_DESC_BOB + SECTION_DESC_BOB
                 + RANK_DESC_BOB + PHONE_DESC_BOB + TAG_DESC_HUSBAND
-                 + NAME_DESC_AMY + TAG_DESC_FRIEND + PASSWORD_DESC_BOB + USERTYPE_DESC_BOB;
+                + NAME_DESC_AMY + TAG_DESC_FRIEND + PASSWORD_DESC_BOB;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withNric(VALID_NRIC_BOB)
-                .withCompany(VALID_COMPANY_BOB).withSection(VALID_SECTION_BOB).withRank(VALID_RANK_BOB)
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withCompany(VALID_COMPANY_BOB)
+                .withSection(VALID_SECTION_BOB).withRank(VALID_RANK_BOB)
                 .withName(VALID_NAME_AMY).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withPassword(VALID_PASSWORD_BOB)
-                .withUserType(VALID_USERTYPE_BOB).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor, UserType.DEAULT_ADMIN_USERNAME);
-        assertParseSuccess(parser, userInput, expectedCommand);
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withPassword(VALID_PASSWORD_BOB).build();
+        EditCommand expectedCommand = new EditCommand(descriptor, nricOfUser);
+
+        assertParseSuccess(parser, userInput, expectedCommand, UserType.GENERAL, nricOfUser);
     }
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + NAME_DESC_BOB;
+        String userInput = PHONE_DESC_BOB + NAME_DESC_BOB;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withName(VALID_NAME_BOB).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor, UserType.DEFAULT_ADMIN_USERNAME);
+        EditCommand expectedCommand = new EditCommand(descriptor, nricOfUser);
 
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(parser, userInput, expectedCommand, UserType.GENERAL, nricOfUser);
     }
 
     @Test
     public void parse_oneFieldSpecified_success() {
-        // nric
-        Index targetIndex = INDEX_THIRD_PERSON;
-        String userInput = targetIndex.getOneBased() + NRIC_DESC_AMY;
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withNric(VALID_NRIC_AMY).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor, UserType.DEFAULT_ADMIN_USERNAME);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        String userInput;
+        EditPersonDescriptor descriptor;
+        EditCommand expectedCommand;
+        nricOfUser = TypicalPersons.getTypicalPersonNric(4);
 
         // company
-        userInput = targetIndex.getOneBased() + COMPANY_DESC_AMY;
+        userInput = COMPANY_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withCompany(VALID_COMPANY_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor, UserType.DEFAULT_ADMIN_USERNAME);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        expectedCommand = new EditCommand(descriptor, nricOfUser);
+        assertParseSuccess(parser, userInput, expectedCommand, UserType.GENERAL, nricOfUser);
 
         //section
-        userInput = targetIndex.getOneBased() + SECTION_DESC_AMY;
+        userInput = SECTION_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withSection(VALID_SECTION_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor, UserType.DEFAULT_ADMIN_USERNAME);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        expectedCommand = new EditCommand(descriptor, nricOfUser);
+        assertParseSuccess(parser, userInput, expectedCommand, UserType.GENERAL, nricOfUser);
 
         // rank
-        userInput = targetIndex.getOneBased() + RANK_DESC_AMY;
+        userInput = RANK_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withRank(VALID_RANK_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor, UserType.DEFAULT_ADMIN_USERNAME);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        expectedCommand = new EditCommand(descriptor, nricOfUser);
+        assertParseSuccess(parser, userInput, expectedCommand, UserType.GENERAL, nricOfUser);
 
         // name
-        userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
+        userInput = NAME_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor, UserType.DEFAULT_ADMIN_USERNAME);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        expectedCommand = new EditCommand(descriptor, nricOfUser);
+        assertParseSuccess(parser, userInput, expectedCommand, UserType.GENERAL, nricOfUser);
 
         // phone
-        userInput = targetIndex.getOneBased() + PHONE_DESC_AMY;
+        userInput = PHONE_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor, UserType.DEFAULT_ADMIN_USERNAME);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        expectedCommand = new EditCommand(descriptor, nricOfUser);
+        assertParseSuccess(parser, userInput, expectedCommand, UserType.GENERAL, nricOfUser);
 
         // tags
-        userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
+        userInput = TAG_DESC_FRIEND;
         descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor, UserType.DEFAULT_ADMIN_USERNAME);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        expectedCommand = new EditCommand(descriptor, nricOfUser);
+        assertParseSuccess(parser, userInput, expectedCommand, UserType.GENERAL, nricOfUser);
 
         // password
-        userInput = targetIndex.getOneBased() + PASSWORD_DESC_AMY;
+        userInput = PASSWORD_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withPassword(VALID_PASSWORD_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor, "Admin");
-        assertParseSuccess(parser, userInput, expectedCommand);
-
-        // userType
-        userInput = targetIndex.getOneBased() + USERTYPE_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withUserType(VALID_USERTYPE_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor, "Admin");
-        assertParseSuccess(parser, userInput, expectedCommand);
+        expectedCommand = new EditCommand(descriptor, nricOfUser);
+        assertParseSuccess(parser, userInput, expectedCommand, UserType.GENERAL, nricOfUser);
     }
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_AMY
+        String userInput = PHONE_DESC_AMY
                 + TAG_DESC_FRIEND + PHONE_DESC_AMY + TAG_DESC_FRIEND
                 + PHONE_DESC_BOB + TAG_DESC_HUSBAND;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor, UserType.DEFAULT_ADMIN_USERNAME);
+        EditCommand expectedCommand = new EditCommand(descriptor, nricOfUser);
 
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(parser, userInput, expectedCommand, UserType.GENERAL, nricOfUser);
     }
 
     @Test
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
-        Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_BOB;
+        String userInput = INVALID_PHONE_DESC + PHONE_DESC_BOB;
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor, UserType.DEFAULT_ADMIN_USERNAME);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        EditCommand expectedCommand = new EditCommand(descriptor, nricOfUser);
+        assertParseSuccess(parser, userInput, expectedCommand, UserType.GENERAL, nricOfUser);
 
         // other valid values specified
-        userInput = targetIndex.getOneBased() + SECTION_DESC_BOB + NAME_DESC_BOB + INVALID_PHONE_DESC
+        userInput = SECTION_DESC_BOB + NAME_DESC_BOB + INVALID_PHONE_DESC
                 + PHONE_DESC_BOB;
         descriptor = new EditPersonDescriptorBuilder().withSection(VALID_SECTION_BOB)
                 .withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor,UserType.DEFAULT_ADMIN_USERNAME);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        expectedCommand = new EditCommand(descriptor,nricOfUser);
+        assertParseSuccess(parser, userInput, expectedCommand, UserType.GENERAL, nricOfUser);
     }
 
     @Test
     public void parse_invalidValueFollowedByValidValue_failure() {
         // no other valid values specified
-        Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + INVALID_PHONE_DESC;
-        assertParseFailure(parser, userInput, Phone.MESSAGE_CONSTRAINTS);
+        String userInput = PHONE_DESC_BOB + INVALID_PHONE_DESC;
+        assertParseFailure(parser, userInput, Phone.MESSAGE_CONSTRAINTS, UserType.GENERAL, nricOfUser);
 
         // other valid values specified
-        userInput = targetIndex.getOneBased() + SECTION_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_PHONE_DESC;
-        assertParseFailure(parser, userInput, Phone.MESSAGE_CONSTRAINTS);
+        userInput = SECTION_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_PHONE_DESC;
+        assertParseFailure(parser, userInput, Phone.MESSAGE_CONSTRAINTS, UserType.GENERAL, nricOfUser);
     }
 
     @Test
     public void parse_resetTags_success() {
-        Index targetIndex = INDEX_THIRD_PERSON;
-        String userInput = targetIndex.getOneBased() + TAG_EMPTY;
+        nricOfUser = TypicalPersons.getTypicalPersonNric(2);
+        String userInput = TAG_EMPTY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor, UserType.DEFAULT_ADMIN_USERNAME);
+        EditCommand expectedCommand = new EditCommand(descriptor, nricOfUser);
 
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(parser, userInput, expectedCommand, UserType.GENERAL, nricOfUser);
     }
 }
