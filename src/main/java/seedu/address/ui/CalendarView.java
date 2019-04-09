@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.logging.Logger;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,6 +12,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.duty.Duty;
 import seedu.address.model.duty.DutyMonth;
 import seedu.address.model.person.Person;
@@ -24,7 +27,7 @@ public class CalendarView extends UiPart<Region> {
         {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
     private Label[] dateLabels;
     private final DutyMonth dutyMonth;
-    //private final Logger logger = LogsCenter.getLogger(CalendarView.class);
+    private final Logger logger = LogsCenter.getLogger(CalendarView.class);
 
     @FXML
     private Label monthLabel;
@@ -44,14 +47,18 @@ public class CalendarView extends UiPart<Region> {
 
     public CalendarView(DutyMonth dutyMonth) {
         super(FXML);
+        logger.info("Creating new calendar");
         this.dutyMonth = dutyMonth;
         gridPaneBottom.prefHeightProperty().bind(vBoxCalendar.heightProperty().subtract(20));
         scrollPane.setFitToWidth(true);
         initdateLabels();
         try {
             fillDutyCalendar();
+        } catch (NullPointerException n){
+            logger.info("Calendar nullpointer exception");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(e);
+            logger.info("Calendar fill duty IndexOutOfBounds for " + monthArray[dutyMonth.getMonthIndex()]
+            + " " + dutyMonth.getYear());
         }
     }
 
@@ -92,6 +99,8 @@ public class CalendarView extends UiPart<Region> {
             gridPaneBottom.add(vBox, column, row);
             tempDuty.setStyle("-fx-control-inner-background: blue;");
         }
+        logger.info("Calendar filled duties for " + monthArray[dutyMonth.getMonthIndex()]
+                + " " + dutyMonth.getYear());
     }
 }
 
