@@ -159,7 +159,7 @@ public class PersonnelDatabaseParserTest {
 
     @Test
     public void parseCommand_view() throws Exception {
-        assertTrue(parser.parseCommand("view", UserType.ADMIN, "S9000000A") instanceof ViewCommand);
+        assertTrue(parser.parseCommand("view S9673582K", UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof ViewCommand);
     }
 
     @Test

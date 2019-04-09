@@ -5,6 +5,26 @@
     "section": "4",
     "rank": "CPL",
     "name": "Hans Muster",
-    "phone": "9482424"
-  } ]
+    "phone": "9482424",
+    "tagged" : [ "injury" ],
+    "password" : "E9543565P",
+    "userType" : "GENERAL"
+  } ],
+  "requests" : [ ],
+  "currentMonth" : {
+    "year" : 2019,
+    "monthIndex" : 3,
+    "firstDayWeekIndex" : 2,
+    "confirmed" : "false",
+    "duties" : [ ],
+    "hashMap" : [ ]
+  },
+  "nextMonth" : {
+    "year" : 2019,
+    "monthIndex" : 4,
+    "firstDayWeekIndex" : 4,
+    "confirmed" : "false",
+    "duties" : [ ],
+    "hashMap" : [ ]
+  }
 }

@@ -14,7 +14,7 @@ public class ScheduleCommandTest {
     private final Model expectedModel = new ModelManager(getTypicalPersonnelDatabase(), new UserPrefs());
     private final CommandHistory commandHistory = new CommandHistory();
 
-    void execute() { }
+    void executeAdmin() { }
 
     void setUp() { }
 }

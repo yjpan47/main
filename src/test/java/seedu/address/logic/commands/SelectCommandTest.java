@@ -3,7 +3,9 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureGeneral;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccessGeneral;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -29,31 +31,55 @@ public class SelectCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
+    public void executeAdminValidIndexUnfilteredListSuccess() {
         Index lastPersonIndex = Index.fromOneBased(model.getFilteredPersonList().size());
 
-        assertExecutionSuccess(INDEX_FIRST_PERSON);
-        assertExecutionSuccess(INDEX_THIRD_PERSON);
-        assertExecutionSuccess(lastPersonIndex);
+        assertExecutionSuccessAdmin(INDEX_FIRST_PERSON);
+        assertExecutionSuccessAdmin(INDEX_THIRD_PERSON);
+        assertExecutionSuccessAdmin(lastPersonIndex);
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_failure() {
+    public void executeGeneralValidIndexUnfilteredListSuccess() {
+        Index lastPersonIndex = Index.fromOneBased(model.getFilteredPersonList().size());
+
+        assertExecutionSuccessGeneral(INDEX_FIRST_PERSON);
+        assertExecutionSuccessGeneral(INDEX_THIRD_PERSON);
+        assertExecutionSuccessGeneral(lastPersonIndex);
+    }
+
+    @Test
+    public void executeAdminInvalidIndexUnfilteredListFailure() {
         Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
 
-        assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertExecutionFailureAdmin(outOfBoundsIndex, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() {
+    public void executeGeneralInvalidIndexUnfilteredListFailure() {
+        Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+
+        assertExecutionFailureGeneral(outOfBoundsIndex, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void executeAdminValidIndexFilteredListSuccess() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
 
-        assertExecutionSuccess(INDEX_FIRST_PERSON);
+        assertExecutionSuccessAdmin(INDEX_FIRST_PERSON);
     }
 
     @Test
-    public void execute_invalidIndexFilteredList_failure() {
+    public void executeGeneralValidIndexFilteredListSuccess() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
+
+        assertExecutionSuccessGeneral(INDEX_FIRST_PERSON);
+    }
+
+    @Test
+    public void executeAdminInvalidIndexFilteredListFailure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
 
@@ -61,7 +87,19 @@ public class SelectCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundsIndex.getZeroBased() < model.getPersonnelDatabase().getPersonList().size());
 
-        assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertExecutionFailureAdmin(outOfBoundsIndex, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void executeGeneralInvalidIndexFilteredListFailure() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
+
+        Index outOfBoundsIndex = INDEX_SECOND_PERSON;
+        // ensures that outOfBoundIndex is still in bounds of address book list
+        assertTrue(outOfBoundsIndex.getZeroBased() < model.getPersonnelDatabase().getPersonList().size());
+
+        assertExecutionFailureGeneral(outOfBoundsIndex, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -87,10 +125,10 @@ public class SelectCommandTest {
     }
 
     /**
-     * Executes a {@code SelectCommand} with the given {@code index},
+     * Executes (admin) a {@code SelectCommand} with the given {@code index},
      * and checks that the model's selected person is set to the person at {@code index} in the filtered person list.
      */
-    private void assertExecutionSuccess(Index index) {
+    private void assertExecutionSuccessAdmin(Index index) {
         SelectCommand selectCommand = new SelectCommand(index);
         String expectedMessage = String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, index.getOneBased());
         expectedModel.setSelectedPerson(model.getFilteredPersonList().get(index.getZeroBased()));
@@ -99,11 +137,32 @@ public class SelectCommandTest {
     }
 
     /**
-     * Executes a {@code SelectCommand} with the given {@code index}, and checks that a {@code CommandException}
+     * Executes (admin) a {@code SelectCommand} with the given {@code index}, and checks that a {@code CommandException}
      * is thrown with the {@code expectedMessage}.
      */
-    private void assertExecutionFailure(Index index, String expectedMessage) {
+    private void assertExecutionFailureAdmin(Index index, String expectedMessage) {
         SelectCommand selectCommand = new SelectCommand(index);
         assertCommandFailure(selectCommand, model, commandHistory, expectedMessage);
+    }
+
+    /**
+     * Executes (general) a {@code SelectCommand} with the given {@code index},
+     * and checks that the model's selected person is set to the person at {@code index} in the filtered person list.
+     */
+    private void assertExecutionSuccessGeneral(Index index) {
+        SelectCommand selectCommand = new SelectCommand(index);
+        String expectedMessage = String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, index.getOneBased());
+        expectedModel.setSelectedPerson(model.getFilteredPersonList().get(index.getZeroBased()));
+
+        assertCommandSuccessGeneral(selectCommand, model, commandHistory, expectedMessage, expectedModel);
+    }
+
+    /**
+     * Executes (general) a {@code SelectCommand} with the given {@code index}, and checks that a {@code CommandException}
+     * is thrown with the {@code expectedMessage}.
+     */
+    private void assertExecutionFailureGeneral(Index index, String expectedMessage) {
+        SelectCommand selectCommand = new SelectCommand(index);
+        assertCommandFailureGeneral(selectCommand, model, commandHistory, expectedMessage);
     }
 }
