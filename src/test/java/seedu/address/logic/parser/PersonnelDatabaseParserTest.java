@@ -135,11 +135,13 @@ public class PersonnelDatabaseParserTest {
     public void parseCommand_schedule() throws Exception {
         assertTrue(parser.parseCommand(ScheduleCommand.COMMAND_WORD, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME)
                 instanceof ScheduleCommand);
-        assertTrue(parser.parseCommand("schedule July", UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof UndoCommand);
+        assertTrue(parser.parseCommand("schedule", UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof UndoCommand);
     }
     @Test
     public void parseCommand_blockDate() throws Exception {
-        assertTrue(parser.parseCommand(BlockDateCommand.COMMAND_WORD, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof BlockDateCommand);
+        assertEquals((BlockDateCommand) parser.parseCommand(BlockDateCommand.COMMAND_WORD + " 2 4 5 6 9 10",
+                UserType.ADMIN, "S9000000A"),
+                new BlockDateCommand(List.of(2, 4, 5, 6, 9, 10), "S9000000A"));
     }
     @Test
     public void parseCommand_redoCommandWord_returnsRedoCommand() throws Exception {
@@ -156,7 +158,7 @@ public class PersonnelDatabaseParserTest {
 
     @Test
     public void parseCommand_view() throws Exception {
-        assertTrue(parser.parseCommand("view", UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof ViewCommand);
+        assertTrue(parser.parseCommand("view", UserType.ADMIN, "S9000000A") instanceof ViewCommand);
     }
 
     @Test
