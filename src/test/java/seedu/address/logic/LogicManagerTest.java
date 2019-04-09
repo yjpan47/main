@@ -152,7 +152,7 @@ public class LogicManagerTest {
                                            String expectedMessage, Model expectedModel) {
 
         try {
-            CommandResult result = logic.execute(inputCommand, UserType.ADMIN, "Admin");
+            CommandResult result = logic.execute(inputCommand, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME);
             assertEquals(expectedException, null);
             assertEquals(expectedMessage, result.getFeedbackToUser());
         } catch (CommandException | ParseException e) {
@@ -169,7 +169,7 @@ public class LogicManagerTest {
      */
     private void assertHistoryCorrect(String... expectedCommands) {
         try {
-            CommandResult result = logic.execute(HistoryCommand.COMMAND_WORD, UserType.ADMIN, "Admin");
+            CommandResult result = logic.execute(HistoryCommand.COMMAND_WORD, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME);
             String expectedMessage = String.format(
                     HistoryCommand.MESSAGE_SUCCESS, String.join("\n", expectedCommands));
             assertEquals(expectedMessage, result.getFeedbackToUser());

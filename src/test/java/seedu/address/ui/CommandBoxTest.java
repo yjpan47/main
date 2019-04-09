@@ -38,7 +38,7 @@ public class CommandBoxTest extends GuiUnitTest {
                 }
                 throw new CommandException("Command failed");
             }
-        }, UserType.ADMIN, "Admin", history);
+        }, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME, history);
         commandBoxHandle = new CommandBoxHandle(getChildNode(commandBox.getRoot(),
                 CommandBoxHandle.COMMAND_INPUT_FIELD_ID));
         uiPartRule.setUiPart(commandBox);

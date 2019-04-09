@@ -223,10 +223,13 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isList()) {
                 handleList();
             }
+
+
             //CalendarView calendarView = new CalendarView(logic.getCurrentDutyMonth());
             CalendarView calendarView = new CalendarView(logic.getNextDutyMonth());
             calendarViewPlaceholder.getChildren().clear();
             calendarViewPlaceholder.getChildren().add(calendarView.getRoot());
+            browserPanel.refreshRequestListDisplay();
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);

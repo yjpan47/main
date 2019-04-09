@@ -246,6 +246,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public DutyMonth getDummyNextMonth() {
+            throw new AssertionError(CALLED_ERROR);
+        }
+
+        @Override
         public DutyStorage getDutyStorage() {
             throw new AssertionError(CALLED_ERROR);
         }
@@ -262,6 +267,11 @@ public class AddCommandTest {
 
         @Override
         public DutySettings getDutySettings() {
+            throw new AssertionError(CALLED_ERROR);
+        }
+
+        @Override
+        public void scheduleDutyForNextMonth() {
             throw new AssertionError(CALLED_ERROR);
         }
     }

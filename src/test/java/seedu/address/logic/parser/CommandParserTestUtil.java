@@ -18,7 +18,7 @@ public class CommandParserTestUtil {
      * Uses UserType.Admin as useerType and "Admin" as username.
      */
     public static void assertParseSuccess(Parser parser, String userInput, Command expectedCommand) {
-        assertParseSuccess(parser, userInput, expectedCommand, UserType.ADMIN, "Admin");
+        assertParseSuccess(parser, userInput, expectedCommand, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME);
     }
 
     /**
@@ -41,7 +41,7 @@ public class CommandParserTestUtil {
      * Uses UserType.ADMIN as userType and "Admin" as username.
      */
     public static void assertParseFailure(Parser parser, String userInput, String expectedMessage) {
-        assertParseFailure(parser, userInput, expectedMessage, UserType.ADMIN, "Admin");
+        assertParseFailure(parser, userInput, expectedMessage, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME);
     }
 
     /**

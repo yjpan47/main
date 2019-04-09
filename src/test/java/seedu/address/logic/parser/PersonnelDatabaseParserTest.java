@@ -48,22 +48,22 @@ public class PersonnelDatabaseParserTest {
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person),
-                UserType.ADMIN, "Admin");
+                UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME);
         assertEquals(new AddCommand(person), command);
     }
 
     @Test
     public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD, UserType.ADMIN, "Admin") instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3",
-                UserType.ADMIN, "Admin") instanceof ClearCommand);
+                UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof ClearCommand);
     }
 
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
-                UserType.ADMIN, "Admin");
+                UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME);
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
     }
 
@@ -73,15 +73,15 @@ public class PersonnelDatabaseParserTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor),
-                UserType.ADMIN, "Admin");
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor, "Admin"), command);
+                UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME);
+        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor, UserType.DEFAULT_ADMIN_USERNAME), command);
     }
 
     @Test
     public void parseCommand_exit() throws Exception {
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD, UserType.ADMIN, "Admin") instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3", UserType.ADMIN,
-                "Admin") instanceof ExitCommand);
+                UserType.DEFAULT_ADMIN_USERNAME) instanceof ExitCommand);
     }
 
     @Test
@@ -89,27 +89,27 @@ public class PersonnelDatabaseParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")),
-                UserType.ADMIN, "Admin");
+                UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME);
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD, UserType.ADMIN,
-                "Admin") instanceof HelpCommand);
+                UserType.DEFAULT_ADMIN_USERNAME) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3", UserType.ADMIN,
-                "Admin") instanceof HelpCommand);
+                UserType.DEFAULT_ADMIN_USERNAME) instanceof HelpCommand);
     }
 
     @Test
     public void parseCommand_history() throws Exception {
-        assertTrue(parser.parseCommand(HistoryCommand.COMMAND_WORD, UserType.ADMIN, "Admin")
+        assertTrue(parser.parseCommand(HistoryCommand.COMMAND_WORD, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME)
                 instanceof HistoryCommand);
         assertTrue(parser.parseCommand(HistoryCommand.COMMAND_WORD + " 3", UserType.ADMIN,
-                "Admin") instanceof HistoryCommand);
+                UserType.DEFAULT_ADMIN_USERNAME) instanceof HistoryCommand);
 
         try {
-            parser.parseCommand("histories", UserType.ADMIN, "Admin");
+            parser.parseCommand("histories", UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME);
             throw new AssertionError("The expected ParseException was not thrown.");
         } catch (ParseException pe) {
             assertEquals(MESSAGE_UNKNOWN_COMMAND, pe.getMessage());
@@ -118,59 +118,58 @@ public class PersonnelDatabaseParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD, UserType.ADMIN, "Admin") instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3", UserType.ADMIN, "Admin")
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3", UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME)
                 instanceof ListCommand);
     }
 
     @Test
     public void parseCommand_select() throws Exception {
         SelectCommand command = (SelectCommand) parser.parseCommand(
-                SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
-                UserType.ADMIN, "Admin");
+                SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                , UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME);
         assertEquals(new SelectCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
     public void parseCommand_schedule() throws Exception {
-        assertTrue(parser.parseCommand(ScheduleCommand.COMMAND_WORD, UserType.ADMIN, "Admin")
+        assertTrue(parser.parseCommand(ScheduleCommand.COMMAND_WORD, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME)
                 instanceof ScheduleCommand);
-        assertTrue(parser.parseCommand("schedule July", UserType.ADMIN, "Admin") instanceof UndoCommand);
+        assertTrue(parser.parseCommand("schedule July", UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof UndoCommand);
     }
     @Test
     public void parseCommand_blockDate() throws Exception {
-        assertTrue(parser.parseCommand(BlockDateCommand.COMMAND_WORD, UserType.ADMIN, "Admin")
-                instanceof BlockDateCommand);
+        assertTrue(parser.parseCommand(BlockDateCommand.COMMAND_WORD, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof BlockDateCommand);
     }
     @Test
     public void parseCommand_redoCommandWord_returnsRedoCommand() throws Exception {
-        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD, UserType.ADMIN, "Admin") instanceof RedoCommand);
-        assertTrue(parser.parseCommand("redo 1", UserType.ADMIN, "Admin") instanceof RedoCommand);
+        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof RedoCommand);
+        assertTrue(parser.parseCommand("redo 1", UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof RedoCommand);
     }
 
     @Test
     public void parseCommand_undoCommandWord_returnsUndoCommand() throws Exception {
-        assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD, UserType.ADMIN, "Admin")
+        assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME)
                 instanceof UndoCommand);
-        assertTrue(parser.parseCommand("undo 3", UserType.ADMIN, "Admin") instanceof UndoCommand);
+        assertTrue(parser.parseCommand("undo 3", UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof UndoCommand);
     }
 
     @Test
     public void parseCommand_view() throws Exception {
-        assertTrue(parser.parseCommand("view", UserType.ADMIN, "Admin") instanceof ViewCommand);
+        assertTrue(parser.parseCommand("view", UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof ViewCommand);
     }
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() throws Exception {
         thrown.expect(ParseException.class);
         thrown.expectMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
-        parser.parseCommand("", UserType.ADMIN, "Admin");
+        parser.parseCommand("", UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME);
     }
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() throws Exception {
         thrown.expect(ParseException.class);
         thrown.expectMessage(MESSAGE_UNKNOWN_COMMAND);
-        parser.parseCommand("unknownCommand", UserType.ADMIN, "Admin");
+        parser.parseCommand("unknownCommand", UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME);
     }
 }

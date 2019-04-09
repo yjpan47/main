@@ -12,13 +12,13 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Requests a swap of duty dates (for non-admin users only)
+ * Requests a swap of duty dates for next month (for users who are personnel only)
  */
 public class SwapCommand extends Command {
 
     public static final String COMMAND_WORD = "swap";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Requests for swap of duty on allocated date for another date. "
+            + ": Requests for swap of duty on allocated date for another date in next month. "
             + "Parameters: "
             + PREFIX_ALLOCATED_DATE + "DATE (ddmmyy) "
             + PREFIX_REQUESTED_DATE + "DATE (ddmmyy) "
@@ -26,10 +26,12 @@ public class SwapCommand extends Command {
             + PREFIX_ALLOCATED_DATE + "010119 "
             + PREFIX_REQUESTED_DATE + "050119 ";
 
-    public static final String MESSAGE_SUCCESS = "Request submitted";
+    public static final String MESSAGE_SUCCESS = "Request submitted.";
+    public static final String MESSAGE_UNMATCHING_MONTH = "Allocated month and requested month don't match.";
     public static final String MESSAGE_INVALID_YEAR = "Invalid year input.";
     public static final String MESSAGE_INVALID_MONTH = "Invalid month input.";
-    public static final String MESSAGE_INVALID_DAY = "You do not have duty on the input allocated date";
+    public static final String MESSAGE_INVALID_DAY_ALLOCATED = "You do not have duty on the input allocated date.";
+    public static final String MESSAGE_INVALID_DAY_REQUESTED = "You already have duty on the input requested date.";
 
     private final LocalDate allocatedDate;
     private final LocalDate requestedDate;
@@ -53,34 +55,29 @@ public class SwapCommand extends Command {
         int nextMonthIndex = model.getDutyCalendar().getNextMonth().getMonthIndex();
         int currentYear = model.getDutyCalendar().getCurrentYear();
         int allocatedDateDay = allocatedDate.getDayOfMonth();
-        int allocatedDateMonth = allocatedDate.getMonthValue();
-        int requestedDateMonth = requestedDate.getMonthValue();
+        int requestedDateDay = requestedDate.getDayOfMonth();
+        int allocatedDateMonth = allocatedDate.getMonthValue() - 1;
+        int requestedDateMonth = requestedDate.getMonthValue() - 1;
         int allocatedDateYear = allocatedDate.getYear();
         int requestedDateYear = requestedDate.getYear();
-        if (currentMonthIndex < 12) {
-            if (currentYear != allocatedDateYear || currentYear != requestedDateYear) {
-                throw new CommandException(MESSAGE_INVALID_YEAR);
-            }
-        } else {
-            if ((allocatedDateMonth == 1 && allocatedDateYear != currentYear + 1)
-                    || (allocatedDateMonth == 12 && allocatedDateYear != currentYear)
-                    || (requestedDateMonth == 1 && requestedDateYear != currentYear + 1)
-                    || (requestedDateMonth == 12 && requestedDateYear != currentYear)) {
-                throw new CommandException(MESSAGE_INVALID_YEAR);
-            }
+
+        if (allocatedDateMonth != requestedDateMonth || allocatedDateYear != requestedDateYear) {
+            throw new CommandException(MESSAGE_UNMATCHING_MONTH);
+        }
+        if (currentMonthIndex == 11 && currentYear != requestedDateYear - 1
+                || currentMonthIndex < 11 && currentYear != requestedDateYear) {
+            throw new CommandException(MESSAGE_INVALID_YEAR);
         }
 
-        if (allocatedDateMonth != currentMonthIndex && allocatedDateMonth != nextMonthIndex
-                || requestedDateMonth != currentMonthIndex
-                && requestedDateMonth != nextMonthIndex) {
+        if (allocatedDateMonth != nextMonthIndex) {
             throw new CommandException(MESSAGE_INVALID_MONTH);
         }
 
-        if (currentMonthIndex == allocatedDateMonth
-                && !model.getDutyCalendar().getCurrentMonth().isAssignedToDuty(userName, allocatedDateDay)
-                || nextMonthIndex == allocatedDateMonth
-                && !model.getDutyCalendar().getNextMonth().isAssignedToDuty(userName, allocatedDateDay)) {
-            throw new CommandException(MESSAGE_INVALID_DAY);
+        if (!model.getDutyCalendar().getNextMonth().isAssignedToDuty(userName, allocatedDateDay)) {
+            throw new CommandException(MESSAGE_INVALID_DAY_ALLOCATED);
+        }
+        if (model.getDutyCalendar().getNextMonth().isAssignedToDuty(userName, requestedDateDay)) {
+            throw new CommandException(MESSAGE_INVALID_DAY_REQUESTED);
         }
 
         model.addSwapRequest(userName, allocatedDate, requestedDate);
@@ -95,7 +92,7 @@ public class SwapCommand extends Command {
 
     @Override
     public CommandResult executeAdmin(Model model, CommandHistory history) throws CommandException {
-        throw new CommandException(Messages.MESSAGE_NO_AUTHORITY);
+        return execute(model, history);
     }
 
     @Override

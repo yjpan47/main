@@ -75,14 +75,14 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyPersonnelDatabase> addressBookOptional;
+        Optional<ReadOnlyPersonnelDatabase> personnelDatabaseOptional;
         ReadOnlyPersonnelDatabase initialData;
         try {
-            addressBookOptional = storage.readPersonnelDatabase();
-            if (!addressBookOptional.isPresent()) {
+            personnelDatabaseOptional = storage.readPersonnelDatabase();
+            if (!personnelDatabaseOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample PersonnelDatabase");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSamplePersonnelDatabase);
+            initialData = personnelDatabaseOptional.orElseGet(SampleDataUtil::getSamplePersonnelDatabase);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be "
                     + "starting with an empty PersonnelDatabase and Calendar");

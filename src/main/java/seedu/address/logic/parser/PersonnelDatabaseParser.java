@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.UserType;
+import seedu.address.logic.commands.AcceptSwapCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.BlockDateCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -25,6 +26,7 @@ import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.SwapCommand;
+import seedu.address.logic.commands.UnconfirmCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewCommand;
 
@@ -56,6 +58,9 @@ public class PersonnelDatabaseParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
+
+        case AcceptSwapCommand.COMMAND_WORD:
+            return new AcceptSwapCommandParser().parse(arguments, userType, userName);
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments, userType, userName);
@@ -110,6 +115,9 @@ public class PersonnelDatabaseParser {
 
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments, userType, userName);
+
+        case UnconfirmCommand.COMMAND_WORD:
+                return new UnconfirmCommand();
 
         case DutySettingsCommand.COMMAND_WORD:
             return new DutySettingsCommandParser().parse(arguments, userType, userName);

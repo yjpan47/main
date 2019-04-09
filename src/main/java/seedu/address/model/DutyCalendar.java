@@ -2,7 +2,11 @@ package seedu.address.model;
 
 import seedu.address.commons.util.CalendarUtil;
 import seedu.address.model.duty.DutyMonth;
+import seedu.address.model.duty.DutySettings;
 import seedu.address.model.duty.DutyStorage;
+import seedu.address.model.person.Person;
+
+import java.util.List;
 
 /**
  * Represents a Calendar that contains duties for the current and the following months
@@ -17,6 +21,7 @@ public class DutyCalendar {
 
     private DutyMonth currentMonth;
     private DutyMonth nextMonth;
+    private DutyMonth dummyNextMonth;
 
     private DutyStorage dutyStorage;
 
@@ -57,6 +62,9 @@ public class DutyCalendar {
         return nextMonth;
     }
 
+    public DutyMonth getDummyNextMonth() {
+        return dummyNextMonth;
+    }
 
     public DutyStorage getDutyStorage() {
         return dutyStorage;
@@ -66,7 +74,6 @@ public class DutyCalendar {
         return currentYear;
     }
 
-
     public void setDutyCalendar(DutyCalendar dutyCalendar) {
         if (dutyCalendar.getCurrentMonth().getMonthIndex() == CalendarUtil.getCurrentMonth()) {
             this.currentMonth = dutyCalendar.getCurrentMonth();
@@ -74,6 +81,23 @@ public class DutyCalendar {
         } else {
             this.rollover(dutyCalendar);
         }
+    }
+
+    public void scheduleDutyForNextMonth(List<Person> persons,
+                                         DutySettings dutySettings, DutyStorage dutyStorage) {
+        this.dummyNextMonth = new DutyMonth(nextMonth);
+        dummyNextMonth.schedule(persons, dutySettings, dutyStorage);
+    }
+
+    public void confirm() {
+        this.nextMonth = this.dummyNextMonth;
+        this.nextMonth.confirm();
+    }
+
+    public void unconfirm() {
+        int yearOfNextMonth = currentMonthIndex == 11 ? currentYear + 1 : currentYear;
+        this.nextMonth = new DutyMonth(yearOfNextMonth, this.currentMonthIndex + 1 ,
+                CalendarUtil.dayOfFirstDayOfMonth(yearOfNextMonth, this.currentMonthIndex + 1));
     }
 
     /**
