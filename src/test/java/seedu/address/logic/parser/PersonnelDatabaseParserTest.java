@@ -126,8 +126,8 @@ public class PersonnelDatabaseParserTest {
     @Test
     public void parseCommand_select() throws Exception {
         SelectCommand command = (SelectCommand) parser.parseCommand(
-                SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
-                , UserType.ADMIN, "Admin");
+                SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
+                UserType.ADMIN, "Admin");
         assertEquals(new SelectCommand(INDEX_FIRST_PERSON), command);
     }
 
@@ -139,7 +139,8 @@ public class PersonnelDatabaseParserTest {
     }
     @Test
     public void parseCommand_blockDate() throws Exception {
-        assertTrue(parser.parseCommand(BlockDateCommand.COMMAND_WORD, UserType.ADMIN, "Admin") instanceof BlockDateCommand);
+        assertTrue(parser.parseCommand(BlockDateCommand.COMMAND_WORD, UserType.ADMIN, "Admin")
+                instanceof BlockDateCommand);
     }
     @Test
     public void parseCommand_redoCommandWord_returnsRedoCommand() throws Exception {

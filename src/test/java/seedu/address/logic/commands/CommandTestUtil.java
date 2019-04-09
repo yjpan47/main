@@ -95,8 +95,8 @@ public class CommandTestUtil {
                 .withCompany(VALID_COMPANY_BOB).withSection(VALID_SECTION_BOB)
                 .withRank(VALID_RANK_BOB).withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withPassword(VALID_PASSWORD_BOB).
-                        withUserType(VALID_USERTYPE_BOB).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withPassword(VALID_PASSWORD_BOB)
+                .withUserType(VALID_USERTYPE_BOB).build();
     }
 
     /**

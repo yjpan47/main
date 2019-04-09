@@ -3,9 +3,17 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.experimental.theories.internal.ParameterizedAssertionError;
+//import org.junit.experimental.theories.internal.ParameterizedAssertionError;
+
 import seedu.address.commons.core.UserType;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Company;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
+import seedu.address.model.person.Password;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rank;
+import seedu.address.model.person.Section;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -132,11 +140,11 @@ public class PersonBuilder {
     }
 
     public Person build() {
-            return new Person(nric, company, section, rank, name, phone, tags, password, userType);
+        return new Person(nric, company, section, rank, name, phone, tags, password, userType);
     }
 
     public Person buildReduced() {
-        return  new Person(nric, company, section, rank, name, phone, tags);
+        return new Person(nric, company, section, rank, name, phone, tags);
     }
 
 }
