@@ -4,6 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureGeneral;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -42,6 +43,20 @@ public class DeleteCommandTest {
         expectedModel.commitPersonnelDatabase();
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void executeGeneral_validIndexUnfilteredList_throwsCommandException() {
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+
+        ModelManager expectedModel = new ModelManager(model.getPersonnelDatabase(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete);
+        expectedModel.commitPersonnelDatabase();
+
+        assertCommandFailureGeneral(deleteCommand, model, commandHistory, Messages.MESSAGE_NO_AUTHORITY);
     }
 
     @Test
