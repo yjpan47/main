@@ -91,7 +91,7 @@ public class DeleteCommandTest {
         expectedModel.commitPersonnelDatabase();
 
         // delete -> first person deleted
-        deleteCommand.execute(model, commandHistory);
+        deleteCommand.executeAdmin(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered person list to show all persons
         expectedModel.undoPersonnelDatabase();
@@ -133,7 +133,7 @@ public class DeleteCommandTest {
         expectedModel.commitPersonnelDatabase();
 
         // delete -> deletes second person in unfiltered person list / first person in filtered person list
-        deleteCommand.execute(model, commandHistory);
+        deleteCommand.executeAdmin(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered person list to show all persons
         expectedModel.undoPersonnelDatabase();

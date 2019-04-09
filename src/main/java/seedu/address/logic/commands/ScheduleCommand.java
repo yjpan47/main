@@ -35,7 +35,7 @@ public class ScheduleCommand extends Command {
 
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult executeAdmin(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         DutyMonth nextMonth = model.getDutyCalendar().getNextMonth();
         DutyStorage dutyStorage = model.getDutyStorage();
@@ -51,11 +51,6 @@ public class ScheduleCommand extends Command {
         return new CommandResult(String.format(SCHEDULE_SUCCESS,
                 dummy.printDuties(),
                 dummy.printPoints(dutyStorage)));
-    }
-
-    @Override
-    public CommandResult executeAdmin(Model model, CommandHistory commandHistory) throws CommandException {
-        return execute(model, commandHistory);
     }
 
     @Override

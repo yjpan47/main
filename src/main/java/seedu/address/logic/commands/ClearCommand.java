@@ -16,9 +16,8 @@ public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
 
-
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult executeAdmin(Model model, CommandHistory history) {
         requireNonNull(model);
         model.setPersonnelDatabase(new PersonnelDatabase());
         model.commitPersonnelDatabase();
@@ -28,10 +27,5 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult executeGeneral(Model model, CommandHistory history) throws CommandException {
         throw new CommandException(Messages.MESSAGE_NO_AUTHORITY);
-    }
-
-    @Override
-    public CommandResult executeAdmin(Model model, CommandHistory history) {
-        return execute(model, history);
     }
 }

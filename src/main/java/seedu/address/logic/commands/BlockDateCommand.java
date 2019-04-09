@@ -29,7 +29,6 @@ public class BlockDateCommand extends Command {
         this.userName = userName;
     }
 
-    @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
 
         Person person = model.findPerson(userName);

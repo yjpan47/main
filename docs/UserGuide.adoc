@@ -18,7 +18,7 @@ By: `CS2103 W15-4`      Since: `Feb 2019`      Licence: `MIT`
 
 == Introduction
 
-MINDEF Duty Planner is a platform to assist military units in the SAF in the assignment of daily duties amonst the servicemen. The application is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). The software is designed to automate the process of fairly assigning duties to available servicemen for an entire month. It also enables servicemen to conveniently indicate the days they are unavailable for duty. It seeks to fairly distribute duties by taking into account the varying importance of each duty (e.g. Sunday duties are worth more than weekday duties).
+MINDEF Duty Planner is a platform to assist military units in the SAF in the assignment of daily duties amongst the servicemen. The application is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). The software is designed to automate the process of fairly assigning duties to available servicemen for an entire month. It also enables servicemen to conveniently indicate the days they are unavailable for duty. It seeks to fairly distribute duties by taking into account the varying importance of each duty (e.g. Sunday duties are worth more than weekday duties).
 
 == Quick Start
 

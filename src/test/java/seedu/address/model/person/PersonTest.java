@@ -112,7 +112,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different UserType -> returns false
-        Person editedAMY = new PersonBuilder(AMY).withUserType(UserType.GENERAL).build();
-        assertFalse(AMY.equals(editedAMY));
+        Person editedAmy = new PersonBuilder(AMY).withUserType(UserType.GENERAL).build();
+        assertFalse(AMY.equals(editedAmy));
     }
 }

@@ -54,7 +54,7 @@ public class AddCommandTest {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Person validPerson = new PersonBuilder().buildReduced();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub, commandHistory);
+        CommandResult commandResult = new AddCommand(validPerson).executeAdmin(modelStub, commandHistory);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
@@ -69,7 +69,7 @@ public class AddCommandTest {
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
-        addCommand.execute(modelStub, commandHistory);
+        addCommand.executeAdmin(modelStub, commandHistory);
     }
 
     @Test
@@ -252,7 +252,7 @@ public class AddCommandTest {
 
         @Override
         public DutyStorage getDutyStorage() {
-            throw  new AssertionError(CALLED_ERROR);
+            throw new AssertionError(CALLED_ERROR);
         }
 
         @Override
