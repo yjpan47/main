@@ -25,6 +25,9 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.duty.Duty;
+import seedu.address.model.duty.DutyMonth;
+import seedu.address.model.duty.DutyStorage;
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
@@ -126,6 +129,14 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        DutyMonth dutyMonth = model.getDutyCalendar().getNextMonth();
+        DutyStorage dutyStorage = model.getDutyStorage();
+        for (Duty duty : dutyMonth.getScheduledDuties()) {
+            duty.replacePerson(personToEdit, editedPerson);
+        }
+        dutyStorage.replaceperson(personToEdit, editedPerson);
+
         model.commitPersonnelDatabase();
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }

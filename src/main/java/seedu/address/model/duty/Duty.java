@@ -89,6 +89,19 @@ public class Duty {
         }
     }
 
+    public boolean contains(Person person) {
+        return this.persons.contains(person);
+    }
+
+    public void removePerson(Person person) {
+        this.persons.remove(person);
+    }
+
+    public void replacePerson(Person remove, Person replace) {
+        this.persons.remove(remove);
+        this.persons.add(replace);
+    }
+
     public boolean isFilled() {
         return this.persons.size() == this.capacity;
     }
