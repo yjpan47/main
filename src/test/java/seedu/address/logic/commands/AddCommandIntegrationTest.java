@@ -42,7 +42,7 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void executeGeneral_newPerson_throwsCommandException() {
+    public void executeGeneralNewPersonThrowsCommandException() {
         Person validPerson = new PersonBuilder().buildReduced();
 
         Model expectedModel = new ModelManager(model.getPersonnelDatabase(), new UserPrefs());

@@ -79,7 +79,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void executeGeneral_zeroKeywords_noPersonFound() {
+    public void executeGeneralZeroKeywordsNoPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
@@ -89,7 +89,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void executeGeneral_multipleKeywords_multiplePersonsFound() {
+    public void executeGeneralMultipleKeywordsMultiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);

@@ -46,12 +46,9 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void executeGeneral_validIndexUnfilteredList_throwsCommandException() {
+    public void executeGeneralValidIndexUnfilteredListThrowsCommandException() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
-
         ModelManager expectedModel = new ModelManager(model.getPersonnelDatabase(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
         expectedModel.commitPersonnelDatabase();

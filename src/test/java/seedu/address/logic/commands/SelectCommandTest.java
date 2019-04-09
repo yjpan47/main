@@ -31,7 +31,7 @@ public class SelectCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void executeAdmin_validIndexUnfilteredList_success() {
+    public void executeAdminValidIndexUnfilteredListSuccess() {
         Index lastPersonIndex = Index.fromOneBased(model.getFilteredPersonList().size());
 
         assertExecutionSuccessAdmin(INDEX_FIRST_PERSON);
@@ -40,7 +40,7 @@ public class SelectCommandTest {
     }
 
     @Test
-    public void executeGeneral_validIndexUnfilteredList_success() {
+    public void executeGeneralValidIndexUnfilteredListSuccess() {
         Index lastPersonIndex = Index.fromOneBased(model.getFilteredPersonList().size());
 
         assertExecutionSuccessGeneral(INDEX_FIRST_PERSON);
@@ -49,21 +49,21 @@ public class SelectCommandTest {
     }
 
     @Test
-    public void executeAdmin_invalidIndexUnfilteredList_failure() {
+    public void executeAdminInvalidIndexUnfilteredListFailure() {
         Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
 
         assertExecutionFailureAdmin(outOfBoundsIndex, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
-    public void executeGeneral_invalidIndexUnfilteredList_failure() {
+    public void executeGeneralInvalidIndexUnfilteredListFailure() {
         Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
 
         assertExecutionFailureGeneral(outOfBoundsIndex, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
-    public void executeAdmin_validIndexFilteredList_success() {
+    public void executeAdminValidIndexFilteredListSuccess() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
 
@@ -71,7 +71,7 @@ public class SelectCommandTest {
     }
 
     @Test
-    public void executeGeneral_validIndexFilteredList_success() {
+    public void executeGeneralValidIndexFilteredListSuccess() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
 
@@ -79,7 +79,7 @@ public class SelectCommandTest {
     }
 
     @Test
-    public void executeAdmin_invalidIndexFilteredList_failure() {
+    public void executeAdminInvalidIndexFilteredListFailure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
 
@@ -91,7 +91,7 @@ public class SelectCommandTest {
     }
 
     @Test
-    public void executeGeneral_invalidIndexFilteredList_failure() {
+    public void executeGeneralInvalidIndexFilteredListFailure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
 

@@ -9,7 +9,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureGeneral;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccessGeneral;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -41,7 +40,7 @@ public class EditCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void executeAdmin_allFieldsSpecifiedUnfilteredList_success() {
+    public void executeAdminAllFieldsSpecifiedUnfilteredListSuccess() {
         Person editedPerson = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor, UserType.DEFAULT_ADMIN_USERNAME);
@@ -56,7 +55,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void executeGeneral_allFieldsSpecifiedUnfilteredList_success() {
+    public void executeGeneralAllFieldsSpecifiedUnfilteredListSuccess() {
         Person editedPerson = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         Person toChange = model.getFilteredPersonList().get(0);
@@ -72,7 +71,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void executeAdmin_someFieldsSpecifiedUnfilteredList_success() {
+    public void executeAdminSomeFieldsSpecifiedUnfilteredListSuccess() {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
@@ -94,7 +93,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void executeGeneral_someFieldsSpecifiedUnfilteredList_success() {
+    public void executeGeneralSomeFieldsSpecifiedUnfilteredListSuccess() {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
@@ -116,7 +115,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void executeAdmin_noFieldSpecifiedUnfilteredList_success() {
+    public void executeAdminNoFieldSpecifiedUnfilteredListSuccess() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor(), UserType.DEFAULT_ADMIN_USERNAME);
         Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
@@ -129,7 +128,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void executeGeneral_noFieldSpecified_success() {
+    public void executeGeneralNoFieldSpecifiedSuccess() {
         Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditCommand editCommand = new EditCommand(new EditPersonDescriptor(), editedPerson.getNric().value);
 
@@ -142,7 +141,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void executeAdmin_filteredList_success() {
+    public void executeAdminFilteredListSuccess() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -160,7 +159,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void executeAdmin_duplicatePersonUnfilteredList_failure() {
+    public void executeAdminDuplicatePersonUnfilteredListFailure() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor, UserType.DEFAULT_ADMIN_USERNAME);
@@ -169,7 +168,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void executeAdmin_duplicatePersonFilteredList_failure() {
+    public void executeAdminDuplicatePersonFilteredListFailure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         // edit person in filtered list into a duplicate in address book
@@ -181,7 +180,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void executeAdmin_invalidPersonIndexUnfilteredList_failure() {
+    public void executeAdminInvalidPersonIndexUnfilteredListFailure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor, UserType.DEFAULT_ADMIN_USERNAME);
@@ -194,7 +193,7 @@ public class EditCommandTest {
      * but smaller than size of address book
      */
     @Test
-    public void executeAdmin_invalidPersonIndexFilteredList_failure() {
+    public void executeAdminInvalidPersonIndexFilteredListFailure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
@@ -207,7 +206,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void executeAdminUndoRedo_validIndexUnfilteredList_success() throws Exception {
+    public void executeAdminUndoRedoValidIndexUnfilteredListSuccess() throws Exception {
         Person editedPerson = new PersonBuilder().build();
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
@@ -229,7 +228,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void executeGeneralUndoRedo_success() throws Exception {
+    public void executeGeneralUndoRedoSuccess() throws Exception {
         Person editedPerson = new PersonBuilder().build();
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
@@ -253,7 +252,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void executeAdminUndoRedo_invalidIndexUnfilteredList_failure() {
+    public void executeAdminUndoRedoInvalidIndexUnfilteredListFailure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor, UserType.DEFAULT_ADMIN_USERNAME);
@@ -341,9 +340,6 @@ public class EditCommandTest {
         assertTrue(standardCommandGeneral.equals(commandWithSameValuesGeneral));
         // same object -> returns true
         assertTrue(standardCommandGeneral.equals(standardCommandGeneral));
-
-        // null -> returns false
-        assertFalse(standardCommandGeneral.equals(null));
 
         // different types -> returns false
         assertFalse(standardCommandGeneral.equals(new ClearCommand()));

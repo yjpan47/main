@@ -37,7 +37,7 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void executeGeneral_emptyAddressBook_throwsCommandException() {
+    public void executeGeneralEmptyAddressBookThrowsCommandException() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
         expectedModel.commitPersonnelDatabase();
@@ -46,7 +46,7 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void executeGeneral_nonEmptyAddressBook_throwsCommandException() {
+    public void executeGeneralNonEmptyAddressBookThrowsCommandException() {
         Model model = new ModelManager(getTypicalPersonnelDatabase(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalPersonnelDatabase(), new UserPrefs());
         expectedModel.setPersonnelDatabase(new PersonnelDatabase());

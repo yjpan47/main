@@ -74,7 +74,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void executeGeneral_personAcceptedByModel_throwsCommandException() throws Exception {
+    public void executeGeneralPersonAcceptedByModelThrowsCommandException() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Person validPerson = new PersonBuilder().buildReduced();
         thrown.expect(CommandException.class);
