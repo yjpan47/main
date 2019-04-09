@@ -192,6 +192,10 @@ public interface Model {
     void addSwapRequest(String nric, LocalDate allocatedDate, LocalDate requestedDate);
 
     /**
+     * Schedule the next duty month in the model.
+     */
+    void scheduleDutyForNextMonth();
+    /**
      * Returns DutyMonth for next month
      */
     DutyMonth getNextDutyMonth();
@@ -200,4 +204,9 @@ public interface Model {
      * Returns DutyMonth for current month
      */
     DutyMonth getCurrentDutyMonth();
+
+    /**
+     * Returns dummy DutyMonth
+     */
+    DutyMonth getDummyNextMonth();
 }

@@ -17,7 +17,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
     public ViewCommand parse(String args, UserType userType, String userName) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
-            if (userName.equals("Admin")) {
+            if (userName.equals(UserType.DEFAULT_ADMIN_USERNAME)) {
                 throw new ParseException(MESSAGE_MASTERADMIN_ERROR);
             }
         } else {

@@ -15,7 +15,7 @@ image::valatheking.png[width="150", align="left"]
 {empty}[https://github.com/Valatheking[github]] [<<valatheking#, portfolio>>]
 
 Role: Team Lead +
-Responsibilites: Authentication features
+Responsibilites: block command
 
 '''
 
@@ -33,7 +33,7 @@ image::mechome.png[width="150", align="left"]
 {empty}[https://github.com/mechome[github]] [<<mechome#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Graphic User Interface
+Responsibilities: swap command
 
 '''
 
@@ -42,7 +42,7 @@ image::exactlyprecise.png[width="150", align="left"]
 {empty}[https://github.com/exactlyprecise[github]] [<<exactlyprecise#, portfolio>>]
 
 Role: Developer +
-Responsibilities: User Commands
+Responsibilities: UI and authentication
 
 '''
 
@@ -51,6 +51,6 @@ image::dreampursuer95.png[width="150", align="left"]
 {empty}[https://github.com/dreampursuer95[github]] [<<dreampursuer#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Admin Commands
+Responsibilities: Duty model and storage
 
 '''

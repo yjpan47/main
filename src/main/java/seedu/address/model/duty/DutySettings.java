@@ -1,8 +1,11 @@
 package seedu.address.model.duty;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Objects;
 
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.util.DateUtil;
 /**
  * Duty Settings class to hold all the duty settings
@@ -74,4 +77,28 @@ public class DutySettings implements Serializable {
         }
         return sb.toString();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof DutySettings)) { //this handles null as well.
+            return false;
+        }
+
+        DutySettings o = (DutySettings) other;
+
+        return (Arrays.equals(this.dutyPointsInWeek, o.dutyPointsInWeek))
+            && (Arrays.equals(this.dutyCapacityInWeek, o.dutyCapacityInWeek))
+            && (this.dutyPointsException.equals(o.dutyPointsException))
+                && (this.dutyCapacityException.equals(o.dutyCapacityException));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.dutyPointsInWeek, this.dutyCapacityInWeek,
+                this.dutyPointsException, this.dutyCapacityException);
+    }
+
 }

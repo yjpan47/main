@@ -59,7 +59,8 @@ public class LoginBox {
      * Finds the account in the list of accounts and lets the user login.
      */
     private void findAccount() {
-        if (userField.getText().equals("Admin") && passField.getText().equals("Admin")) {
+        if (userField.getText().equals(UserType.DEFAULT_ADMIN_USERNAME)
+                && passField.getText().equals(UserType.DEFAULT_ADMIN_USERNAME)) {
             userType = UserType.ADMIN;
             userName = userField.getText();
             window.close();
