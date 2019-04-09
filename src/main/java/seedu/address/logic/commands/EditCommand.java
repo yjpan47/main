@@ -115,7 +115,6 @@ public class EditCommand extends Command {
     public CommandResult executeAdmin(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
@@ -195,8 +194,11 @@ public class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         if (index == null) {
-            return editPersonDescriptor.equals(e.editPersonDescriptor)
-                    && userName.equals(e.userName);
+            if (e.index == null) {
+                return editPersonDescriptor.equals(e.editPersonDescriptor)
+                        && userName.equals(e.userName);
+            }
+            return false;
         }
         return index.equals(e.index)
                 && editPersonDescriptor.equals(e.editPersonDescriptor)

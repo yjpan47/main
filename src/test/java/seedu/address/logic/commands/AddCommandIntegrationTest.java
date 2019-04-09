@@ -1,12 +1,14 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureGeneral;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersonnelDatabase;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -37,6 +39,17 @@ public class AddCommandIntegrationTest {
 
         assertCommandSuccess(new AddCommand(validPerson), model, commandHistory,
                 String.format(AddCommand.MESSAGE_SUCCESS, validPerson), expectedModel);
+    }
+
+    @Test
+    public void executeGeneral_newPerson_throwsCommandException() {
+        Person validPerson = new PersonBuilder().buildReduced();
+
+        Model expectedModel = new ModelManager(model.getPersonnelDatabase(), new UserPrefs());
+        expectedModel.addPerson(validPerson);
+        expectedModel.commitPersonnelDatabase();
+
+        assertCommandFailureGeneral(new AddCommand(validPerson), model, commandHistory, Messages.MESSAGE_NO_AUTHORITY);
     }
 
     @Test
