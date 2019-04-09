@@ -313,6 +313,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public DutyCalendar getDutyCalendar() {
+            return new DutyCalendar();
+        }
+
+        @Override
         public void commitPersonnelDatabase() {
             // called by {@code AddCommand#execute()}
         }
