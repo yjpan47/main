@@ -31,7 +31,6 @@ public class SelectCommand extends Command {
         this.targetIndex = targetIndex;
     }
 
-    @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 

@@ -27,7 +27,6 @@ public class ViewCommand extends Command {
         this.userName = userName;
     }
 
-    @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         String messageDuty = MESSAGE_SUCCESS;

@@ -34,7 +34,7 @@ public class DutySettingsCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult executeAdmin(Model model, CommandHistory history) throws CommandException {
         DutySettings dutySettings = model.getDutySettings();
         if (isView) {
             return new CommandResult(String.format(VIEW_SETTINGS,
@@ -45,11 +45,6 @@ public class DutySettingsCommand extends Command {
             return new CommandResult(String.format(CHANGE_SETTINGS_SUCCESS,
                     dutySettings.printDayOfWeek()));
         }
-    }
-
-    @Override
-    public CommandResult executeAdmin(Model model, CommandHistory commandHistory) throws CommandException {
-        return execute(model, commandHistory);
     }
 
     @Override

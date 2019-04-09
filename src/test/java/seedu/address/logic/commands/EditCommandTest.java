@@ -163,7 +163,7 @@ public class EditCommandTest {
         expectedModel.commitPersonnelDatabase();
 
         // edit -> first person edited
-        editCommand.execute(model, commandHistory);
+        editCommand.executeAdmin(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered person list to show all persons
         expectedModel.undoPersonnelDatabase();
