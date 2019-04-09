@@ -101,4 +101,9 @@ public class TypicalPersons {
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
+
+    public static String getTypicalPersonNric(int i) {
+        Person targetedPerson = getTypicalPersons().get(i);
+        return targetedPerson.getNric().value;
+    }
 }

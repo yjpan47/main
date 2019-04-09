@@ -188,8 +188,13 @@ public class EditCommand extends Command {
 
         // state check
         EditCommand e = (EditCommand) other;
+        if (index == null) {
+            return editPersonDescriptor.equals(e.editPersonDescriptor)
+                    && userName.equals(e.userName);
+        }
         return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+                && editPersonDescriptor.equals(e.editPersonDescriptor)
+                && userName.equals(e.userName);
     }
 
     /**
@@ -327,7 +332,6 @@ public class EditCommand extends Command {
 
             // state check
             EditPersonDescriptor e = (EditPersonDescriptor) other;
-
             return getNric().equals(e.getNric())
                     && getCompany().equals(e.getCompany())
                     && getSection().equals(e.getSection())
