@@ -19,8 +19,8 @@ import static seedu.address.testutil.TypicalPersons.getTypicalPersonnelDatabase;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.core.UserType;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.Model;
@@ -116,7 +116,8 @@ public class EditCommandTest {
 
     @Test
     public void executeAdminNoFieldSpecifiedUnfilteredListSuccess() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor(), UserType.DEFAULT_ADMIN_USERNAME);
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor(),
+                UserType.DEFAULT_ADMIN_USERNAME);
         Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
@@ -300,11 +301,13 @@ public class EditCommandTest {
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_PERSON, DESC_AMY, UserType.DEFAULT_ADMIN_USERNAME);
+        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_PERSON, DESC_AMY,
+                UserType.DEFAULT_ADMIN_USERNAME);
 
         // same values -> returns true
         EditPersonDescriptor copyDescriptor = new EditPersonDescriptor(DESC_AMY);
-        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_PERSON, copyDescriptor, UserType.DEFAULT_ADMIN_USERNAME);
+        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_PERSON, copyDescriptor,
+                UserType.DEFAULT_ADMIN_USERNAME);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true

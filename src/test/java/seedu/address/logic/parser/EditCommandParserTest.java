@@ -256,7 +256,7 @@ public class EditCommandParserTest {
                 + PHONE_DESC_BOB;
         descriptor = new EditPersonDescriptorBuilder().withSection(VALID_SECTION_BOB)
                 .withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor,UserType.DEFAULT_ADMIN_USERNAME);
+        expectedCommand = new EditCommand(targetIndex, descriptor, UserType.DEFAULT_ADMIN_USERNAME);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
