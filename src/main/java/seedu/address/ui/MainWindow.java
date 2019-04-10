@@ -277,6 +277,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleCalendar();
                 refreshCalendarNext();
                 break;
+            default: //do nothing
+                break;
         }
     }
 
