@@ -82,7 +82,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_storageThrowsIoException_throwsCommandException() throws Exception {
+    public void executeStorageThrowsIoExceptionThrowsCommandException() throws Exception {
         // Setup LogicManager with JsonPersonnelDatabaseIoExceptionThrowingStub
         JsonPersonnelDatabaseStorage personnelDatabaseStorage =
                 new JsonPersonnelDatabaseIoExceptionThrowingStub(temporaryFolder.newFile().toPath());
