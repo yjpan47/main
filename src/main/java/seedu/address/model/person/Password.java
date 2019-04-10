@@ -13,9 +13,27 @@ public class Password {
     public final String value;
 
     public Password(String password) {
+        this(password, true);
+    }
+
+    /**
+     *  Creates password, can choose if hashing required
+     */
+    private Password(String password, Boolean toHash) {
         requireNonNull(password);
         checkArgument(isValidPassword(password), MESSAGE_CONSTRAINTS);
-        value = password;
+        if (toHash) {
+            value = Integer.toString(password.hashCode());
+        } else {
+            value = password;
+        }
+    }
+
+    /**
+     * Creates password using text into the value itself
+     */
+    public static Password hashlessPassword(String password) {
+        return new Password(password, false);
     }
 
     /**
