@@ -33,7 +33,7 @@ class JsonAdaptedPerson {
     private final String section;
     private final String rank;
     private final String name;
-    private final String password;
+    private final String passwordHashed;
     private final String phone;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final UserType userType;
@@ -57,7 +57,7 @@ class JsonAdaptedPerson {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
-        this.password = password;
+        this.passwordHashed = password;
         this.userType = userType;
     }
 
@@ -71,7 +71,7 @@ class JsonAdaptedPerson {
         rank = source.getRank().value;
         name = source.getName().fullName;
         phone = source.getPhone().value;
-        password = source.getPassword().value;
+        passwordHashed = source.getPassword().value;
         userType = source.getUserType();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -137,14 +137,11 @@ class JsonAdaptedPerson {
         }
         final Phone modelPhone = new Phone(phone);
 
-        if (password == null) {
+        if (passwordHashed == null) {
             throw new IllegalValueException(String.format(
                     MISSING_FIELD_MESSAGE_FORMAT, Password.class.getSimpleName()));
         }
-        if (!Password.isValidPassword(password)) {
-            throw new IllegalValueException(Password.MESSAGE_CONSTRAINTS);
-        }
-        final Password modelPassword = new Password(password);
+        final Password modelPassword = Password.hashlessPassword(passwordHashed);
 
         if (userType == null) {
             throw new IllegalValueException(String.format(
