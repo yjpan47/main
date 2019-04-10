@@ -26,7 +26,7 @@ public class ConfirmScheduleCommand extends Command {
     public static final String NO_SCHEDULE_YET = "No schedules found! Tye <schedule> to make a schedule!";
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult executeAdmin(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         DutyMonth nextMonth = model.getDutyCalendar().getNextMonth();
         DutyStorage dutyStorage = model.getDutyStorage();
@@ -53,11 +53,6 @@ public class ConfirmScheduleCommand extends Command {
                 dummyMonth.getYear(),
                 dummyMonth.printDuties(),
                 dutyStorage.printPoints()));
-    }
-
-    @Override
-    public CommandResult executeAdmin(Model model, CommandHistory commandHistory) throws CommandException {
-        return execute(model, commandHistory);
     }
 
     @Override

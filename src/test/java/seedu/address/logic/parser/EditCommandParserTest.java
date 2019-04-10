@@ -1,19 +1,24 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_NO_AUTHORITY_PARSE;
 import static seedu.address.logic.commands.CommandTestUtil.COMPANY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.COMPANY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_COMPANY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NRIC_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PASSWORD_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_RANK_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SECTION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_USERTYPE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PASSWORD_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PASSWORD_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.RANK_DESC_AMY;
@@ -24,12 +29,16 @@ import static seedu.address.logic.commands.CommandTestUtil.SECTION_DESC_BOB;
 //import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.USERTYPE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.USERTYPE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RANK_AMY;
@@ -38,6 +47,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_SECTION_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SECTION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_USERTYPE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_USERTYPE_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -47,13 +58,14 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.core.UserType;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
+import seedu.address.model.person.Password;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Rank;
 import seedu.address.model.person.Section;
@@ -79,6 +91,9 @@ public class EditCommandParserTest {
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+
+        //Missing user
+        assertParseFailure(parser, "1" + VALID_PHONE_BOB, MESSAGE_NO_AUTHORITY_PARSE, null, "General");
     }
 
     @Test
@@ -105,6 +120,8 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
+        assertParseFailure(parser, "1" + INVALID_PASSWORD_DESC, Password.MESSAGE_CONSTRAINTS); // invalid password
+        assertParseFailure(parser, "1" + INVALID_USERTYPE_DESC, UserType.MESSAGE_CONSTRAINTS); // invalid userType
 
         // invalid name followed by valid phone
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + PHONE_DESC_AMY, Name.MESSAGE_CONSTRAINTS);
@@ -129,14 +146,14 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + NRIC_DESC_BOB + COMPANY_DESC_BOB + SECTION_DESC_BOB
                 + RANK_DESC_BOB + PHONE_DESC_BOB + TAG_DESC_HUSBAND
-                 + NAME_DESC_AMY + TAG_DESC_FRIEND;
+                 + NAME_DESC_AMY + TAG_DESC_FRIEND + PASSWORD_DESC_BOB + USERTYPE_DESC_BOB;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withNric(VALID_NRIC_BOB)
                 .withCompany(VALID_COMPANY_BOB).withSection(VALID_SECTION_BOB).withRank(VALID_RANK_BOB)
                 .withName(VALID_NAME_AMY).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withPassword(VALID_PASSWORD_BOB)
+                .withUserType(VALID_USERTYPE_BOB).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor, UserType.DEFAULT_ADMIN_USERNAME);
-
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -196,6 +213,18 @@ public class EditCommandParserTest {
         descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
         expectedCommand = new EditCommand(targetIndex, descriptor, UserType.DEFAULT_ADMIN_USERNAME);
         assertParseSuccess(parser, userInput, expectedCommand);
+
+        // password
+        userInput = targetIndex.getOneBased() + PASSWORD_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withPassword(VALID_PASSWORD_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor, "Admin");
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // userType
+        userInput = targetIndex.getOneBased() + USERTYPE_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withUserType(VALID_USERTYPE_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor, "Admin");
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
@@ -229,6 +258,18 @@ public class EditCommandParserTest {
                 .withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor,UserType.DEFAULT_ADMIN_USERNAME);
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_invalidValueFollowedByValidValue_failure() {
+        // no other valid values specified
+        Index targetIndex = INDEX_FIRST_PERSON;
+        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + INVALID_PHONE_DESC;
+        assertParseFailure(parser, userInput, Phone.MESSAGE_CONSTRAINTS);
+
+        // other valid values specified
+        userInput = targetIndex.getOneBased() + SECTION_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_PHONE_DESC;
+        assertParseFailure(parser, userInput, Phone.MESSAGE_CONSTRAINTS);
     }
 
     @Test

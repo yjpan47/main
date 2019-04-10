@@ -26,7 +26,6 @@ public class FindCommand extends Command {
         this.predicate = predicate;
     }
 
-    @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);

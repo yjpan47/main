@@ -25,6 +25,9 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.duty.Duty;
+import seedu.address.model.duty.DutyMonth;
+import seedu.address.model.duty.DutyStorage;
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
@@ -109,10 +112,9 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult executeAdmin(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
@@ -126,6 +128,14 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        DutyMonth dutyMonth = model.getDutyCalendar().getNextMonth();
+        DutyStorage dutyStorage = model.getDutyStorage();
+        for (Duty duty : dutyMonth.getScheduledDuties()) {
+            duty.replacePerson(personToEdit, editedPerson);
+        }
+        dutyStorage.replaceperson(personToEdit, editedPerson);
+
         model.commitPersonnelDatabase();
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
@@ -147,11 +157,6 @@ public class EditCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitPersonnelDatabase();
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
-    }
-
-    @Override
-    public CommandResult executeAdmin(Model model, CommandHistory history) throws CommandException {
-        return execute(model, history);
     }
 
     /**
@@ -188,8 +193,16 @@ public class EditCommand extends Command {
 
         // state check
         EditCommand e = (EditCommand) other;
+        if (index == null) {
+            if (e.index == null) {
+                return editPersonDescriptor.equals(e.editPersonDescriptor)
+                        && userName.equals(e.userName);
+            }
+            return false;
+        }
         return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+                && editPersonDescriptor.equals(e.editPersonDescriptor)
+                && userName.equals(e.userName);
     }
 
     /**
@@ -327,7 +340,6 @@ public class EditCommand extends Command {
 
             // state check
             EditPersonDescriptor e = (EditPersonDescriptor) other;
-
             return getNric().equals(e.getNric())
                     && getCompany().equals(e.getCompany())
                     && getSection().equals(e.getSection())

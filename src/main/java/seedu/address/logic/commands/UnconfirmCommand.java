@@ -17,16 +17,11 @@ public class UnconfirmCommand extends Command {
     public static final String SCHEDULE_SUCCESS = "Unconfirm successful!";
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult executeAdmin(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         model.getDutyCalendar().unconfirm();
         model.commitPersonnelDatabase();
         return new CommandResult(SCHEDULE_SUCCESS);
-    }
-
-    @Override
-    public CommandResult executeAdmin(Model model, CommandHistory commandHistory) throws CommandException {
-        return execute(model, commandHistory);
     }
 
     @Override

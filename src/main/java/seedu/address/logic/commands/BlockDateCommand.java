@@ -16,7 +16,7 @@ public class BlockDateCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " Blocks out certain duty dates for the upcoming "
             + "month for the current person using.\n"
             + "Parameters: Dates in numbers for the next month\n"
-            + "Example: " + COMMAND_WORD + "2 4 5 6 9 10";
+            + "Example: " + COMMAND_WORD + " 2 4 5 6 9 10";
     public static final String MESSAGE_BLOCK_DATES_SUCCESS = "Dates for next month have been successfully blocked!";
     public static final String MESSAGE_TOO_MANY_BLOCKED_DATES = "Too many dates to block, number of blocked days "
             + "should be less than 15";
@@ -29,7 +29,6 @@ public class BlockDateCommand extends Command {
         this.userName = userName;
     }
 
-    @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
 
         Person person = model.findPerson(userName);
@@ -70,6 +69,6 @@ public class BlockDateCommand extends Command {
 
         // state check
         BlockDateCommand e = (BlockDateCommand) other;
-        return blockedDates.equals(e.blockedDates);
+        return blockedDates.equals(e.blockedDates) && userName.equals(e.userName);
     }
 }

@@ -4,6 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DATE;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -34,10 +35,16 @@ public class BlockDateCommandParser implements Parser<BlockDateCommand> {
             if (dateAdded > 31) {
                 throw new ParseException(MESSAGE_INVALID_DATE);
             }
+            blockedDatesDuplicates.add(dateAdded);
         }
         Set<Integer> set = new HashSet<>(blockedDatesDuplicates);
         List<Integer> blockedDates = new ArrayList<>(set);
-
+        blockedDates.sort(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1 - o2;
+            }
+        });
         return new BlockDateCommand(blockedDates, userName);
     }
 }

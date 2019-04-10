@@ -14,5 +14,22 @@
     "rank": "CPL",
     "name": "Alice Pauline",
     "phone": "94351253"
-  } ]
+  } ],
+  "requests" : [ ],
+  "currentMonth" : {
+    "year" : 2019,
+    "monthIndex" : 3,
+    "firstDayWeekIndex" : 2,
+    "confirmed" : "false",
+    "duties" : [ ],
+    "hashMap" : [ ]
+  },
+  "nextMonth" : {
+    "year" : 2019,
+    "monthIndex" : 4,
+    "firstDayWeekIndex" : 4,
+    "confirmed" : "false",
+    "duties" : [ ],
+    "hashMap" : [ ]
+  }
 }

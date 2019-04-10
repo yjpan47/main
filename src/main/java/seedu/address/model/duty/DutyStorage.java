@@ -13,9 +13,7 @@ public class DutyStorage {
 
     private HashMap<Person, Integer> dutyPoints;
     private HashMap<Person, List<String>> dutyRecords;
-
-
-
+    
     public DutyStorage() {
         this.dutyPoints = new HashMap<>();
         this.dutyRecords = new HashMap<>();
@@ -56,7 +54,6 @@ public class DutyStorage {
     /**
      * Prints the points accumulated by each person
      */
-
     public String printPoints() {
         StringBuilder sb = new StringBuilder();
         sb.append("--- Points Accumulated ----\n");
@@ -68,6 +65,7 @@ public class DutyStorage {
         }
         return sb.toString();
     }
+
     /**
      * Comparator method to compare person by points
      */
@@ -83,6 +81,23 @@ public class DutyStorage {
                 return this.dutyPoints.get(p1) - this.dutyPoints.get(p2);
             }
         };
+    }
+
+    public void removePerson(Person person) {
+        if (this.dutyPoints.containsKey(person) && this.dutyRecords.containsKey(person)) {
+            this.dutyPoints.remove(person);
+            this.dutyRecords.remove(person);
+        }
+    }
+
+    public void replaceperson(Person personToEdit, Person editedPerson) {
+        if (this.dutyPoints.containsKey(personToEdit) && this.dutyRecords.containsKey(personToEdit)) {
+            this.dutyPoints.put(editedPerson, this.dutyPoints.get(personToEdit));
+            this.dutyRecords.put(editedPerson, this.dutyRecords.get(personToEdit));
+
+            this.dutyPoints.remove(personToEdit);
+            this.dutyRecords.remove(personToEdit);
+        }
     }
 }
 

@@ -1,72 +1,50 @@
-= John Doe - Project Portfolio
+= Cho Ming En - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: AddressBook - Level 4
+== PROJECT: MINDEF Duty Planner
 
 ---
 
 == Overview
 
-AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+MINDEF Duty Planner is a platform to assist military units in the SAF in the assignment of daily duties amongst the servicemen. The application is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). The software is designed to automate the process of fairly assigning duties to available servicemen for an entire month. It also enables servicemen to conveniently indicate the days they are unavailable for duty. It seeks to fairly distribute duties by taking into account the varying importance of each duty (e.g. Sunday duties are worth more than weekday duties).
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+* *Major enhancement*: Added *the ability to request swapping of duties (using the 'swap' command), respond to swap requests (using the 'acceptswap' command) and approve or reject swap requests.*
+** What it does: allows a user who is a particular person in the personnel database to request for a swap of his duty with another person's duty. Both duties have to be in the current month or the next month.
+** Justification: This feature is very useful for a serviceman who is suddenly unavailable to perform guard duty due to ad hoc reasons. He can broadcast his swap request onto the app in the large panel on the bottom right and other servicemen can view his request and respond if they are willing and able to swap with him. After that, an admin user will approve or reject the swap.
+** Highlights: This functionality is very convenient for the users because it requires no verbal communication at all and the process is completely streamlined to be performed on the app. Physical or verbal communication is only necessary if there are disputes. This enhancement involves changes in logic (commands), UI (browser panel), storage (storing of requests) and model (structure of requests). Implementing this feature required understanding how and when saving to a json file happens so as to trigger the save event when needed. It was also difficult to convert the browser panel from an object that displays web pages to a text object, having no prior experience in GUI.
+** Credits: _Valavan for the idea of swap requests and my team for helping me to develop the idea_
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+* *Minor enhancement*: Converted the Person class to one suitable for the duty planner. This means removing the email and address fields (which are classes in themselves) and adding in Company, Section, Rank and NRIC. This was very time-consuming, especially with having to adapt all the tests involving Person objects with no exception. We could theoretically have done away with the individual classes for each field but I decided to preserve the existing structure to reduce complications after analysis of the trade-offs.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Minor enhancement*: Morphed the browser panel to display the list of open swap requests (i.e swap requests that are awaiting response) instead of a website.
+
+* *Code contributed*: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#=undefined&search=mechome[Code]]
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+*** Curated Issues Tracker
 ** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Renamed the internal address book class to personnel database to reflect our product differentiation: https://github.com/CS2103-AY1819S2-W15-4/main/pull/33[#33], https://github.com/CS2103-AY1819S2-W15-4/main/pull/70[#70], https://github.com/CS2103-AY1819S2-W15-4/main/pull/71[#71]
+*** Added and edited tests for existing features (example: JsonAdaptedPersonTest.java, see https://github.com/CS2103-AY1819S2-W15-4/main/pull/34[#34], https://github.com/CS2103-AY1819S2-W15-4/main/pull/70[#70], https://github.com/CS2103-AY1819S2-W15-4/main/pull/71[#71])
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Edited the User Guide to reflect our product: https://github.com/CS2103-AY1819S2-W15-4/main/pull/33[#33], https://github.com/CS2103-AY1819S2-W15-4/main/pull/71[#71]
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
-
-_{you can add/remove categories in the list above}_
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2103-AY1819S2-W13-3/main/issues/174[1], https://github.com/CS2103-AY1819S2-W13-3/main/issues/164[2], https://github.com/CS2103-AY1819S2-W13-3/main/issues/170[3], https://github.com/CS2103-AY1819S2-W13-3/main/issues/181[4])
 
 == Contributions to the User Guide
-
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
-
-include::../UserGuide.adoc[tag=undoredo]
-
-include::../UserGuide.adoc[tag=dataencryption]
 
 == Contributions to the Developer Guide
 
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
-
-include::../DeveloperGuide.adoc[tag=undoredo]
-
-include::../DeveloperGuide.adoc[tag=dataencryption]
-
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_

@@ -3,7 +3,6 @@ package seedu.address.logic;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.commons.core.UserType.ADMIN;
 import static seedu.address.logic.commands.CommandTestUtil.COMPANY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_AMY;
@@ -83,7 +82,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_storageThrowsIoException_throwsCommandException() throws Exception {
+    public void executeStorageThrowsIoExceptionThrowsCommandException() throws Exception {
         // Setup LogicManager with JsonPersonnelDatabaseIoExceptionThrowingStub
         JsonPersonnelDatabaseStorage personnelDatabaseStorage =
                 new JsonPersonnelDatabaseIoExceptionThrowingStub(temporaryFolder.newFile().toPath());
@@ -94,9 +93,10 @@ public class LogicManagerTest {
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + NRIC_DESC_AMY + COMPANY_DESC_AMY + SECTION_DESC_AMY
                 + RANK_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Person expectedPerson = new PersonBuilder(AMY).withTags().buildReduced();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
+        expectedModel.getDutyCalendar().getNextMonth().unconfirm();
         expectedModel.commitPersonnelDatabase();
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandBehavior(CommandException.class, addCommand, expectedMessage, expectedModel);

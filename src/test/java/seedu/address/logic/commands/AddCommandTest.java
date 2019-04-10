@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_NO_AUTHORITY;
 
 import java.nio.file.Path;
 import java.time.LocalDate;
@@ -54,7 +55,7 @@ public class AddCommandTest {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Person validPerson = new PersonBuilder().buildReduced();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub, commandHistory);
+        CommandResult commandResult = new AddCommand(validPerson).executeAdmin(modelStub, commandHistory);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
@@ -69,7 +70,16 @@ public class AddCommandTest {
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
-        addCommand.execute(modelStub, commandHistory);
+        addCommand.executeAdmin(modelStub, commandHistory);
+    }
+
+    @Test
+    public void executeGeneralPersonAcceptedByModelThrowsCommandException() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person validPerson = new PersonBuilder().buildReduced();
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(MESSAGE_NO_AUTHORITY);
+        new AddCommand(validPerson).executeGeneral(modelStub, commandHistory);
     }
 
     @Test
@@ -252,7 +262,7 @@ public class AddCommandTest {
 
         @Override
         public DutyStorage getDutyStorage() {
-            throw  new AssertionError(CALLED_ERROR);
+            throw new AssertionError(CALLED_ERROR);
         }
 
         @Override
@@ -310,6 +320,11 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
+        }
+
+        @Override
+        public DutyCalendar getDutyCalendar() {
+            return new DutyCalendar();
         }
 
         @Override
