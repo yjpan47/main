@@ -50,11 +50,13 @@ public class UndoCommandTest {
     public void executeGeneral() {
         // multiple undoable states in model
         expectedModel.undoPersonnelDatabase();
-        assertCommandSuccessGeneral(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccessGeneral(new UndoCommand(), model, commandHistory,
+                UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // single undoable state in model
         expectedModel.undoPersonnelDatabase();
-        assertCommandSuccessGeneral(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccessGeneral(new UndoCommand(), model, commandHistory,
+                UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // no undoable states in model
         assertCommandFailureGeneral(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
