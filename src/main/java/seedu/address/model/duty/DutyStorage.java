@@ -3,7 +3,9 @@ package seedu.address.model.duty;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.person.Person;
@@ -126,23 +128,65 @@ public class DutyStorage {
         };
     }
 
-    public void removePerson(Person person) {
-        this.dutyPoints.remove(person);
-        this.dutyRecords.remove(person);
-        this.prevDutyPoints.remove(person);
-        this.prevDutyRecords.remove(person);
+    public void removePerson(Person remove) {
+        for (Person p : this.dutyPoints.keySet()) {
+            if (remove.getNric().toString().equals(p.getNric().toString())) {
+                this.dutyPoints.remove(p);
+                break;
+            }
+        }
+
+        for (Person p : this.prevDutyPoints.keySet()) {
+            if (remove.getNric().toString().equals(p.getNric().toString())) {
+                this.prevDutyPoints.remove(p);
+                break;
+            }
+        }
+
+        for (Person p : this.dutyRecords.keySet()) {
+            if (remove.getNric().toString().equals(p.getNric().toString())) {
+                this.dutyRecords.remove(p);
+                break;
+            }
+        }
+
+        for (Person p : this.prevDutyRecords.keySet()) {
+            if (remove.getNric().toString().equals(p.getNric().toString())) {
+                this.prevDutyRecords.remove(p);
+                break;
+            }
+        }
+
+
+
     }
 
     public void replacePerson(Person personToEdit, Person editedPerson) {
-        this.dutyPoints.put(editedPerson, this.dutyPoints.get(personToEdit));
-        this.dutyRecords.put(editedPerson, this.dutyRecords.get(personToEdit));
-        this.prevDutyPoints.put(editedPerson, this.prevDutyPoints.get(personToEdit));
-        this.prevDutyRecords.put(editedPerson, this.prevDutyRecords.get(personToEdit));
+        Set<Person> persons = new HashSet<>();
+        persons.addAll(this.dutyPoints.keySet());
+        persons.addAll(this.dutyRecords.keySet());
+        persons.addAll(this.prevDutyPoints.keySet());
+        persons.addAll(this.prevDutyRecords.keySet());
 
-        this.dutyPoints.remove(personToEdit);
-        this.dutyRecords.remove(personToEdit);
-        this.prevDutyPoints.remove(personToEdit);
-        this.prevDutyRecords.remove(personToEdit);
+        Person target = null;
+        for (Person p : persons) {
+            if (personToEdit.getNric().toString().equals(p.getNric().toString())) {
+                target = p;
+                break;
+            }
+        }
+
+        if (target != null) {
+            this.dutyPoints.put(editedPerson, this.dutyPoints.get(target));
+            this.dutyRecords.put(editedPerson, this.dutyRecords.get(target));
+            this.prevDutyPoints.put(editedPerson, this.prevDutyPoints.get(target));
+            this.prevDutyRecords.put(editedPerson, this.prevDutyRecords.get(target));
+
+            this.dutyPoints.remove(target);
+            this.dutyRecords.remove(target);
+            this.prevDutyPoints.remove(target);
+            this.prevDutyRecords.remove(target);
+        }
     }
 }
 
