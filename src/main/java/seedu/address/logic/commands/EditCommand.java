@@ -134,7 +134,7 @@ public class EditCommand extends Command {
         for (Duty duty : dutyMonth.getScheduledDuties()) {
             duty.replacePerson(personToEdit, editedPerson);
         }
-        dutyStorage.replaceperson(personToEdit, editedPerson);
+        dutyStorage.replacePerson(personToEdit, editedPerson);
 
         model.commitPersonnelDatabase();
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));

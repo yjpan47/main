@@ -20,6 +20,7 @@ public class UnconfirmCommand extends Command {
     public CommandResult executeAdmin(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         model.getDutyCalendar().unconfirm();
+        model.getDutyCalendar().getDutyStorage().undo();
         model.commitPersonnelDatabase();
         return new CommandResult(SCHEDULE_SUCCESS);
     }

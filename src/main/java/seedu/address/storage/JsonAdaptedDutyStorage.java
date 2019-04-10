@@ -35,13 +35,16 @@ public class JsonAdaptedDutyStorage {
         Set<Person> persons = new HashSet<>();
         persons.addAll(source.getDutyPoints().keySet());
         persons.addAll(source.getDutyRecords().keySet());
+        persons.addAll(source.getPrevDutyPoints().keySet());
+        persons.addAll(source.getPrevDutyRecords().keySet());
         for (Person person : persons) {
             String nric = person.getNric().toString();
             int dutyPoints = source.getDutyPoints().getOrDefault(person, 0);
             List<String> dutyRecords = source.getDutyRecords().getOrDefault(person, new ArrayList<>());
-            JsonAdaptedDutyStoragePerson jsonAdaptedDutyStoragePerson = new JsonAdaptedDutyStoragePerson(nric, dutyPoints, dutyRecords);
+            int prevDutyPoints = source.getPrevDutyPoints().getOrDefault(person, 0);
+            List<String> prevDutyRecords = source.getPrevDutyRecords().getOrDefault(person, new ArrayList<>());
+            JsonAdaptedDutyStoragePerson jsonAdaptedDutyStoragePerson = new JsonAdaptedDutyStoragePerson(nric, dutyPoints, dutyRecords, prevDutyPoints, prevDutyRecords);
             this.dutyStorageList.add(jsonAdaptedDutyStoragePerson);
-            System.out.println(dutyStorageList.size());
         }
     }
 
@@ -51,6 +54,8 @@ public class JsonAdaptedDutyStorage {
     public DutyStorage toModelType (ObservableList<Person> personList) {
         HashMap<Person, Integer> dutyPoints = new HashMap<>();
         HashMap<Person, List<String>> dutyRecords = new HashMap<>();
+        HashMap<Person, Integer> prevDutyPoints = new HashMap<>();
+        HashMap<Person, List<String>> prevDutyRecords = new HashMap<>();
         for (JsonAdaptedDutyStoragePerson jsonAdaptedDutyStoragePerson : this.dutyStorageList) {
             Person person = null;
             for (Person p : personList) {
@@ -61,8 +66,10 @@ public class JsonAdaptedDutyStorage {
             if (person != null) {
                 dutyPoints.put(person, jsonAdaptedDutyStoragePerson.getDutyPoints());
                 dutyRecords.put(person, jsonAdaptedDutyStoragePerson.getDutyRecords());
+                prevDutyPoints.put(person, jsonAdaptedDutyStoragePerson.getPrevDutyPoints());
+                prevDutyRecords.put(person, jsonAdaptedDutyStoragePerson.getPrevDutyRecords());
             }
         }
-        return new DutyStorage(dutyPoints, dutyRecords);
+        return new DutyStorage(dutyPoints, dutyRecords, prevDutyPoints, prevDutyRecords);
     }
 }
