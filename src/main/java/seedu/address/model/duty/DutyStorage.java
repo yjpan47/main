@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.model.person.Person;
 /**
@@ -11,21 +12,65 @@ import seedu.address.model.person.Person;
  */
 public class DutyStorage {
 
-    private HashMap<Person, Integer> dutyPoints = new HashMap<>();
-    private HashMap<Person, List<Duty>> dutyRecords = new HashMap<>();
+    private HashMap<Person, Integer> dutyPoints;
+    private HashMap<Person, List<String>> dutyRecords;
+
+    private HashMap<Person, Integer> prevDutyPoints;
+    private HashMap<Person, List<String>> prevDutyRecords;
+
+    public DutyStorage() {
+        this.dutyPoints = new HashMap<>();
+        this.dutyRecords = new HashMap<>();
+        this.prevDutyPoints = new HashMap<>();
+        this.prevDutyRecords = new HashMap<>();
+    }
+
+    public DutyStorage(HashMap<Person, Integer> dutyPoints, HashMap<Person, List<String>> dutyRecords,
+                       HashMap<Person, Integer> prevDutyPoints, HashMap<Person, List<String>> prevDutyRecords) {
+        this.dutyPoints = dutyPoints;
+        this.dutyRecords = dutyRecords;
+
+        this.prevDutyPoints = prevDutyPoints;
+        this.prevDutyRecords = prevDutyRecords;
+    }
 
     /**
      * Updates points for each duty done by person
      */
     public void update(List<Duty> duties) {
+
+        // Store dutyPoints in a previous pointer
+        this.prevDutyPoints.clear();
+        for (Person person : this.dutyPoints.keySet()) {
+            this.prevDutyPoints.put(person, this.dutyPoints.get(person));
+        }
+
+        // Store dutyRecords in a previous pointer
+        this.prevDutyRecords.clear();
+        for (Person person : this.dutyRecords.keySet()) {
+            this.prevDutyRecords.put(person, new ArrayList<>(this.dutyRecords.get(person)));
+        }
+
         for (Duty duty : duties) {
             for (Person person : duty.getPersons()) {
                 this.dutyPoints.putIfAbsent(person, 0);
                 this.dutyPoints.replace(person, this.dutyPoints.get(person) + duty.getPoints());
 
                 this.dutyRecords.putIfAbsent(person, new ArrayList<>());
-                this.dutyRecords.get(person).add(duty);
+                this.dutyRecords.get(person).add(duty.toString());
             }
+        }
+    }
+
+    public void undo() {
+        this.dutyPoints.clear();
+        for (Person person : this.prevDutyPoints.keySet()) {
+            this.dutyPoints.put(person, this.prevDutyPoints.get(person));
+        }
+
+        this.dutyRecords.clear();
+        for (Person person : this.prevDutyRecords.keySet()) {
+            this.dutyRecords.put(person, new ArrayList<>(this.prevDutyRecords.get(person)));
         }
     }
 
@@ -35,6 +80,18 @@ public class DutyStorage {
 
     public HashMap<Person, Integer> getDutyPoints() {
         return dutyPoints;
+    }
+
+    public HashMap<Person, List<String>> getDutyRecords() {
+        return dutyRecords;
+    }
+
+    public HashMap<Person, Integer> getPrevDutyPoints() {
+        return prevDutyPoints;
+    }
+
+    public HashMap<Person, List<String>> getPrevDutyRecords() {
+        return prevDutyRecords;
     }
 
     /**
@@ -70,20 +127,22 @@ public class DutyStorage {
     }
 
     public void removePerson(Person person) {
-        if (this.dutyPoints.containsKey(person) && this.dutyRecords.containsKey(person)) {
-            this.dutyPoints.remove(person);
-            this.dutyRecords.remove(person);
-        }
+        this.dutyPoints.remove(person);
+        this.dutyRecords.remove(person);
+        this.prevDutyPoints.remove(person);
+        this.prevDutyRecords.remove(person);
     }
 
-    public void replaceperson(Person personToEdit, Person editedPerson) {
-        if (this.dutyPoints.containsKey(personToEdit) && this.dutyRecords.containsKey(personToEdit)) {
-            this.dutyPoints.put(editedPerson, this.dutyPoints.get(personToEdit));
-            this.dutyRecords.put(editedPerson, this.dutyRecords.get(personToEdit));
+    public void replacePerson(Person personToEdit, Person editedPerson) {
+        this.dutyPoints.put(editedPerson, this.dutyPoints.get(personToEdit));
+        this.dutyRecords.put(editedPerson, this.dutyRecords.get(personToEdit));
+        this.prevDutyPoints.put(editedPerson, this.prevDutyPoints.get(personToEdit));
+        this.prevDutyRecords.put(editedPerson, this.prevDutyRecords.get(personToEdit));
 
-            this.dutyPoints.remove(personToEdit);
-            this.dutyRecords.remove(personToEdit);
-        }
+        this.dutyPoints.remove(personToEdit);
+        this.dutyRecords.remove(personToEdit);
+        this.prevDutyPoints.remove(personToEdit);
+        this.prevDutyRecords.remove(personToEdit);
     }
 }
 

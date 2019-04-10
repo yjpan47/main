@@ -64,6 +64,7 @@ public class AddCommand extends Command {
         model.addPerson(toAdd);
 
         model.getDutyCalendar().getNextMonth().unconfirm();
+        model.getDutyCalendar().getDutyStorage().undo();
 
         model.commitPersonnelDatabase();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));

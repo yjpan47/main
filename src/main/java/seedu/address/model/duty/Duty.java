@@ -161,6 +161,12 @@ public class Duty {
         return this.points;
     }
 
+    @Override
+    public String toString() {
+        return String.format("Duty : %d %s %d | ", this.getDayIndex(), this.getMonthString(), this.getYear()) +
+                String.format("%s | ", this.getdayOfWeek()) +
+                String.format("%d points\n", this.getPoints());
+    }
 
 }
 

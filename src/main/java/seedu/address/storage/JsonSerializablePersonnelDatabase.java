@@ -28,6 +28,7 @@ class JsonSerializablePersonnelDatabase {
     private final List<JsonAdaptedRequest> requests = new ArrayList<>();
     private final JsonAdaptedDutyMonth currentMonth;
     private final JsonAdaptedDutyMonth nextMonth;
+    private final JsonAdaptedDutyStorage dutyStorage;
 
     /**
      * Constructs a {@code JsonSerializablePersonnelDatabase} with the given persons and duty months.
@@ -36,11 +37,13 @@ class JsonSerializablePersonnelDatabase {
     public JsonSerializablePersonnelDatabase(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
                                              @JsonProperty("requests") List<JsonAdaptedRequest> requests,
                                              @JsonProperty("currentMonth") JsonAdaptedDutyMonth currentMonth,
-                                             @JsonProperty("nextMonth") JsonAdaptedDutyMonth nextMonth) {
+                                             @JsonProperty("nextMonth") JsonAdaptedDutyMonth nextMonth,
+                                             @JsonProperty("dutyStorage") JsonAdaptedDutyStorage dutyStorage) {
         this.persons.addAll(persons);
         this.requests.addAll(requests);
         this.currentMonth = currentMonth;
         this.nextMonth = nextMonth;
+        this.dutyStorage = dutyStorage;
     }
 
     /**
@@ -53,6 +56,7 @@ class JsonSerializablePersonnelDatabase {
         requests.addAll(source.getRequestList().stream().map(JsonAdaptedRequest::new).collect(Collectors.toList()));
         this.currentMonth = new JsonAdaptedDutyMonth(source.getDutyCalendar().getCurrentMonth());
         this.nextMonth = new JsonAdaptedDutyMonth(source.getDutyCalendar().getNextMonth());
+        this.dutyStorage = new JsonAdaptedDutyStorage(source.getDutyCalendar().getDutyStorage());
     }
 
     /**
@@ -75,7 +79,7 @@ class JsonSerializablePersonnelDatabase {
             personnelDatabase.addRequest(request);
         }
         personnelDatabase.setDutyCalendar(new DutyCalendar(currentMonth.toModelType(personList),
-                nextMonth.toModelType(personList)));
+                nextMonth.toModelType(personList), dutyStorage.toModelType(personList)));
 
         return personnelDatabase;
     }

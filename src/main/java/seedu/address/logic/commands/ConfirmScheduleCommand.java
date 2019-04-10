@@ -36,7 +36,7 @@ public class ConfirmScheduleCommand extends Command {
                     DateUtil.getMonth(nextMonth.getMonthIndex()),
                     nextMonth.getYear(),
                     nextMonth.printDuties(),
-                    nextMonth.printPoints(dutyStorage)));
+                    dutyStorage.printPoints()));
         }
 
         DutyMonth dummyMonth = model.getDutyCalendar().getDummyNextMonth();
