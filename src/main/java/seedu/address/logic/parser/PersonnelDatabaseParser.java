@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.UserType;
 import seedu.address.logic.commands.ApproveSwapCommand;
+import seedu.address.logic.commands.RejectSwapCommand;
 import seedu.address.logic.commands.ViewCurrentCommand;
 import seedu.address.logic.commands.ViewNextCommand;
 import seedu.address.logic.commands.AcceptSwapCommand;
@@ -141,6 +142,9 @@ public class PersonnelDatabaseParser {
 
         case ApproveSwapCommand.COMMAND_WORD:
             return new ApproveSwapCommandParser().parse(arguments, userType, userName);
+
+        case RejectSwapCommand.COMMAND_WORD:
+            return new RejectSwapCommandParser().parse(arguments, userType, userName);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
