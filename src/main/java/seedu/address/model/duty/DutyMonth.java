@@ -269,11 +269,11 @@ public class DutyMonth {
         return false;
     }
 
-    public void swap(Person t1, Person t2, DutyStorage dutyStorage) {
-        for (Duty duty : this.getScheduledDuties()) {
-            duty.replacePerson(t1, t2);
-            duty.replacePerson(t2, t1);
-        }
+    public void swap(Person t1, Person t2, int dayOne, int dayTwo, DutyStorage dutyStorage) {
+        Duty dutyOne = this.getScheduledDuties().get(dayOne - 1);
+        Duty dutyTwo = this.getScheduledDuties().get(dayTwo - 1);
+            dutyOne.replacePerson(t1, t2);
+            dutyTwo.replacePerson(t2, t1);
         dutyStorage.undo();
         dutyStorage.update(this.getScheduledDuties());
     }
