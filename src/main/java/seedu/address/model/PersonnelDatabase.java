@@ -173,6 +173,14 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
         indicateModified();
     }
 
+    public void deleteRequestsWithPerson(Person personToDelete) {
+        List<Request> filteredRequests = requests.stream().filter(req -> !personToDelete.equals(req.getAccepter())
+                && !personToDelete.equals(req.getRequester())).collect(Collectors.toList());
+        requests.clear();
+        requests.addAll(filteredRequests);
+        indicateModified();
+    }
+
     @Override
     public void addListener(InvalidationListener listener) {
         invalidationListenerManager.addListener(listener);

@@ -185,6 +185,11 @@ public class ModelManager implements Model {
         versionedPersonnelDatabase.addRequest(new Request(findPerson(nric), allocatedDate, requestedDate));
     }
 
+    @Override
+    public void deleteRequestsWithPerson(Person personToDelete) {
+        versionedPersonnelDatabase.deleteRequestsWithPerson(personToDelete);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
