@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.UiCommandInteraction;
 import seedu.address.commons.core.UserType;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
@@ -34,6 +35,8 @@ public class MainWindow extends UiPart<Stage> {
     private final String userName;
     private Stage primaryStage;
     private Logic logic;
+    //Whether the window is of current month or not
+    private boolean isCurrentMonth;
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
@@ -69,6 +72,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private TitledPane contactList;
+
+    @FXML
+    private TitledPane calendarPane;
 
     public MainWindow(Stage primaryStage, Logic logic, UserType user, String userName) {
         super(FXML, primaryStage);
@@ -146,6 +152,7 @@ public class MainWindow extends UiPart<Stage> {
 
         CalendarView calendarView = new CalendarView(logic.getCurrentDutyMonth());
         calendarViewPlaceholder.getChildren().add(calendarView.getRoot());
+        isCurrentMonth = true;
 
         CommandBox commandBox = new CommandBox(this::executeCommand, user, userName, logic.getHistory());
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
@@ -191,9 +198,34 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Displays the personnel list accordion
+     */
     @FXML
     public void handleList() {
         accordion.setExpandedPane(contactList);
+    }
+
+    /**
+     * Displays the calendarView accordion
+     */
+    @FXML
+    public void handleCalendar() {
+        accordion.setExpandedPane(calendarPane);
+    }
+
+    public void refreshCalendarCurrent() {
+        CalendarView calendarView = new CalendarView(logic.getCurrentDutyMonth());
+        calendarViewPlaceholder.getChildren().clear();
+        calendarViewPlaceholder.getChildren().add(calendarView.getRoot());
+        isCurrentMonth = true;
+    }
+
+    public void refreshCalendarNext() {
+        CalendarView calendarView = new CalendarView(logic.getNextDutyMonth());
+        calendarViewPlaceholder.getChildren().clear();
+        calendarViewPlaceholder.getChildren().add(calendarView.getRoot());
+        isCurrentMonth = false;
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -211,30 +243,55 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText, user, userName);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
-            if (commandResult.isShowHelp()) {
-                handleHelp();
+            UiCommandInteraction uiCommand =commandResult.getUiCommandInteraction();
+            refreshCalendar(uiCommand);
+            if (uiCommand != null) {
+                handleUiCommand(uiCommand);
             }
 
-            if (commandResult.isExit()) {
-                handleExit();
-            }
-
-            if (commandResult.isList()) {
-                handleList();
-            }
-
-
-            //CalendarView calendarView = new CalendarView(logic.getCurrentDutyMonth());
-            CalendarView calendarView = new CalendarView(logic.getNextDutyMonth());
-            calendarViewPlaceholder.getChildren().clear();
-            calendarViewPlaceholder.getChildren().add(calendarView.getRoot());
             browserPanel.refreshRequestListDisplay();
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
+        }
+    }
+
+    public void handleUiCommand(UiCommandInteraction uiCommand) {
+        switch (uiCommand) {
+            case EXIT:
+                handleExit();
+                break;
+            case HELP:
+                handleHelp();
+                break;
+            case PEOPLE_LIST:
+                handleList();
+                break;
+            case CALENDAR_CURRENT:
+                handleCalendar();
+                refreshCalendarCurrent();
+                break;
+            case CALENDAR_NEXT:
+                handleCalendar();
+                refreshCalendarNext();
+                break;
+            default: //do nothing
+                break;
+        }
+    }
+
+    public void refreshCalendar(UiCommandInteraction uiCommandInteraction) {
+        if (uiCommandInteraction == UiCommandInteraction.CALENDAR_NEXT) {
+            return;
+        } else if (uiCommandInteraction == UiCommandInteraction.CALENDAR_CURRENT) {
+            return;
+        }
+        if (isCurrentMonth) {
+            refreshCalendarCurrent();
+        } else {
+            refreshCalendarNext();
         }
     }
 

@@ -135,7 +135,8 @@ public class PersonnelDatabaseParserTest {
     public void parseCommand_schedule() throws Exception {
         assertTrue(parser.parseCommand(ScheduleCommand.COMMAND_WORD, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME)
                 instanceof ScheduleCommand);
-        assertTrue(parser.parseCommand("schedule", UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof ScheduleCommand);
+        assertTrue(parser.parseCommand("schedule", UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME)
+                instanceof ScheduleCommand);
     }
     @Test
     public void parseCommand_blockDate() throws Exception {
@@ -146,20 +147,24 @@ public class PersonnelDatabaseParserTest {
     }
     @Test
     public void parseCommand_redoCommandWord_returnsRedoCommand() throws Exception {
-        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof RedoCommand);
-        assertTrue(parser.parseCommand("redo 1", UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof RedoCommand);
+        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME)
+                instanceof RedoCommand);
+        assertTrue(parser.parseCommand("redo 1", UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME)
+                instanceof RedoCommand);
     }
 
     @Test
     public void parseCommand_undoCommandWord_returnsUndoCommand() throws Exception {
         assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME)
                 instanceof UndoCommand);
-        assertTrue(parser.parseCommand("undo 3", UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof UndoCommand);
+        assertTrue(parser.parseCommand("undo 3", UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME)
+                instanceof UndoCommand);
     }
 
     @Test
     public void parseCommand_view() throws Exception {
-        assertTrue(parser.parseCommand("view S9673582K", UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof ViewCommand);
+        assertTrue(parser.parseCommand("view S9673582K", UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME)
+                instanceof ViewCommand);
     }
 
     @Test

@@ -31,6 +31,11 @@ import seedu.address.model.person.Person;
  */
 public class TypicalPersons {
 
+    public static final String GENERAL_DAN_USERNAME = "S9687543K";
+    public static final String GENERAL_DAN_PASSWORD = "Pass";
+    public static final String ADMIN_TAN_USERNAME = "S9876543P";
+    public static final String ADMIN_TAN_PASSWORD = "password";
+
     public static final Person ALICE = new PersonBuilder().withNric("S9673566K").withCompany("Leopard")
             .withSection("1").withRank("CFC").withName("Alice Pauline")
             .withPhone("94351253").withTags("outstanding").buildReduced();
@@ -52,6 +57,12 @@ public class TypicalPersons {
     public static final Person GEORGE = new PersonBuilder().withNric("T0065782J").withCompany("1st")
             .withSection("2").withRank("CFC").withName("George Best")
             .withPhone("+942442").buildReduced();
+    public static final Person GENERAL_DAN = new PersonBuilder().withNric(GENERAL_DAN_USERNAME).withCompany("3rd")
+            .withSection("5").withRank("LTC").withName("Dan").withPhone("98765432")
+            .withPassword(GENERAL_DAN_PASSWORD).withUserType(UserType.GENERAL).build();
+    public static final Person ADMIN_TAN = new PersonBuilder().withNric(ADMIN_TAN_USERNAME).withCompany("7th")
+            .withSection("4").withRank("CFC").withName("Tan").withPhone("12345678")
+            .withPassword(ADMIN_TAN_PASSWORD).withUserType(UserType.ADMIN).build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withNric("S1234567H").withCompany("Jaguar")
@@ -99,7 +110,8 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE,
+                GENERAL_DAN, ADMIN_TAN));
     }
 
     public static String getTypicalPersonNric(int i) {

@@ -10,9 +10,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.duty.DutyMonth;
-import seedu.address.model.duty.DutySettings;
 import seedu.address.model.duty.DutyStorage;
-import seedu.address.model.person.Person;
 
 /**
  * Schedules the upcoming duties for the month
