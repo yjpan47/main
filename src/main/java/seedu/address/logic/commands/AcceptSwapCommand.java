@@ -19,7 +19,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class AcceptSwapCommand extends Command {
 
-    public static final String COMMAND_WORD = "acceptswap";
+    public static final String COMMAND_WORD = "acceptSwap";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Accepts swap of duty from request list in browser panel. "
             + "Parameters: "
@@ -39,7 +39,7 @@ public class AcceptSwapCommand extends Command {
     private final Index index;
 
     /**
-     * Creates a SwapCommand to swap the specified {@code Person}
+     * Creates an AcceptSwapCommand to accept the specified request.
      */
     public AcceptSwapCommand(String userName, Index index) {
         this.userName = userName;

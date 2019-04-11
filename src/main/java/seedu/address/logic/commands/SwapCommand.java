@@ -38,7 +38,7 @@ public class SwapCommand extends Command {
     private final String userName;
 
     /**
-     * Creates a SwapCommand to swap the specified {@code Person}
+     * Creates a SwapCommand to request to swap duties.
      */
     public SwapCommand(LocalDate allocatedDate, LocalDate requestedDate, String userName) {
         requireNonNull(allocatedDate);

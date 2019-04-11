@@ -50,4 +50,17 @@ public class Request {
     public void setAccepterNric(String accepterNric) {
         this.accepterNric = accepterNric;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getRequesterNric()).append(" requests a swap from ")
+                .append(getAllocatedDate().toString()).append(" to ")
+                .append(getRequestedDate().toString());
+        if (isAccepterValid()) {
+            sb.append(". ").append(getAccepterNric()).append(" has accepted");
+        }
+
+        return sb.toString();
+    }
 }
