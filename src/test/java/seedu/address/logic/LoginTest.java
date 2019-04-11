@@ -15,8 +15,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalPersonnelDatabase;
 
 public class LoginTest {
     private Model model = new ModelManager(getTypicalPersonnelDatabase(), new UserPrefs());
-    private CommandHistory commandHistory = new CommandHistory();
-    Logic logic = new LogicManager(model, null);
+    private Logic logic = new LogicManager(model, null);
     public static final String WRONG_USERNAME = "General";
     public static final String WRONG_PASSWORD = "General";
 
