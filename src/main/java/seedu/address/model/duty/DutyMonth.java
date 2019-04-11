@@ -269,12 +269,16 @@ public class DutyMonth {
         return false;
     }
 
-    public void swap(Person t1, Person t2, DutyStorage dutyStorage) {
-        for (Duty duty : this.getScheduledDuties()) {
-            duty.replacePerson(t1, t2);
-            duty.replacePerson(t2, t1);
+    public void swap(Person t1, Person t2, DutyStorage dutyStorage) throws IllegalAccessException {
+        if (this.isConfirmed()) {
+            for (Duty duty : this.getScheduledDuties()) {
+                duty.replacePerson(t1, t2);
+                duty.replacePerson(t2, t1);
+            }
+            dutyStorage.undo();
+            dutyStorage.update(this.getScheduledDuties());
+        } else {
+            throw new IllegalAccessException("Schedule has yet being confirmed!");
         }
-        dutyStorage.undo();
-        dutyStorage.update(this.getScheduledDuties());
     }
 }
