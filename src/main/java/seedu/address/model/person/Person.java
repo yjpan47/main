@@ -159,20 +159,7 @@ public class Person {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(" NRIC: ")
-                .append(getNric())
-                .append(" Company: ")
-                .append(getCompany())
-                .append(" Section: ")
-                .append(getSection())
-                .append(" Rank: ")
-                .append(getRank())
-                .append(" Name: ")
-                .append(getName())
-                .append(" Phone: ")
-                .append(getPhone())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
+        builder.append(this.getRank().toString() + " " + this.getName().toString());
         return builder.toString();
     }
 

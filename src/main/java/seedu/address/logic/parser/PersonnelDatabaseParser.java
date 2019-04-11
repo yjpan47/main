@@ -23,6 +23,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.PointsCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SelectCommand;
@@ -125,6 +126,10 @@ public class PersonnelDatabaseParser {
         case DutySettingsCommand.COMMAND_WORD:
             return new DutySettingsCommandParser().parse(arguments, userType, userName);
 
+
+        case PointsCommand.COMMAND_WORD:
+            return new PointsCommandParser().parse(arguments, userType, userName);
+            
         case ViewCurrentCommand.COMMAND_WORD:
             return new ViewCurrentCommand();
 
