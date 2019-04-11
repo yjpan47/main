@@ -7,8 +7,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.UserType;
-import seedu.address.logic.ViewCurrentCommand;
-import seedu.address.logic.ViewNextCommand;
+import seedu.address.logic.commands.ViewCurrentCommand;
+import seedu.address.logic.commands.ViewNextCommand;
 import seedu.address.logic.commands.AcceptSwapCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.BlockDateCommand;
