@@ -111,6 +111,17 @@ public class DutyStorage {
         return sb.toString();
     }
 
+
+    public String printDetails(Person person) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("Points : %d\n", this.dutyPoints.getOrDefault(person, 0)));
+        sb.append("--- All Duties ---\n");
+        for (String dutyDetails : this.dutyRecords.getOrDefault(person, new ArrayList<>())) {
+            sb.append(dutyDetails);
+        }
+        return sb.toString();
+    }
+
     /**
      * Comparator method to compare person by points
      */

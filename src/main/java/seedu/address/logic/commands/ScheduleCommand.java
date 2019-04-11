@@ -29,7 +29,7 @@ public class ScheduleCommand extends Command {
             + "Type <confirm> to confirm this schedule or <schedule> to reassign!";
 
     public static final String SCHEDULE_ALREADY_CONFIRMED = "Schedule for %s %s already confirmed! "
-            + "See below for details\n\n%s\n\n%s\n\n";
+            + "See below for details\n%s\n%s\n";
 
 
     @Override
