@@ -22,6 +22,7 @@ import seedu.address.model.duty.DutySettings;
 import seedu.address.model.duty.DutyStorage;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.request.Request;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -181,7 +182,7 @@ public class ModelManager implements Model {
 
     @Override
     public void addSwapRequest(String nric, LocalDate allocatedDate, LocalDate requestedDate) {
-        versionedPersonnelDatabase.addRequest(nric, allocatedDate, requestedDate);
+        versionedPersonnelDatabase.addRequest(new Request(findPerson(nric), allocatedDate, requestedDate));
     }
 
     //=========== Filtered Person List Accessors =============================================================

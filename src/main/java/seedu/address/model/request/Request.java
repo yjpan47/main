@@ -1,34 +1,36 @@
 package seedu.address.model.request;
 
+import seedu.address.model.person.Person;
+
 import java.time.LocalDate;
+import java.util.Optional;
 
 /**
- * Request class to get requested info such as duty dates and requesterNric
+ * Request class to get requested info such as duty dates and requester
  */
 public class Request {
-    public static final String EMPTY_ACCEPTER_FIELD = "EMPTY";
 
-    private String requesterNric;
+    private Person requester;
     private LocalDate allocatedDate;
     private LocalDate requestedDate;
-    private String accepterNric;
+    private Optional<Person> accepter;
 
-    public Request(String requesterNric, LocalDate allocatedDate, LocalDate requestedDate) {
-        this.requesterNric = requesterNric;
+    public Request(Person requester, LocalDate allocatedDate, LocalDate requestedDate) {
+        this.requester = requester;
         this.allocatedDate = allocatedDate;
         this.requestedDate = requestedDate;
-        this.accepterNric = EMPTY_ACCEPTER_FIELD;
+        this.accepter = Optional.empty();
     }
 
-    public Request(String requesterNric, LocalDate allocatedDate, LocalDate requestedDate, String accepterNric) {
-        this.requesterNric = requesterNric;
+    public Request(Person requester, LocalDate allocatedDate, LocalDate requestedDate, Person accepter) {
+        this.requester = requester;
         this.allocatedDate = allocatedDate;
         this.requestedDate = requestedDate;
-        this.accepterNric = accepterNric;
+        this.accepter = Optional.of(accepter);
     }
 
     public String getRequesterNric() {
-        return requesterNric;
+        return requester.getNric().toString();
     }
 
     public LocalDate getAllocatedDate() {
@@ -40,15 +42,23 @@ public class Request {
     }
 
     public boolean isAccepterValid() {
-        return !getAccepterNric().equals(EMPTY_ACCEPTER_FIELD);
+        return accepter.isPresent();
     }
 
     public String getAccepterNric() {
-        return accepterNric;
+        return accepter.get().getNric().toString();
     }
 
-    public void setAccepterNric(String accepterNric) {
-        this.accepterNric = accepterNric;
+    public Person getRequester() {
+        return requester;
+    }
+
+    public Person getAccepter() {
+        return accepter.get();
+    }
+
+    public void setAccepter(Person accepter) {
+        this.accepter = Optional.of(accepter);
     }
 
     @Override

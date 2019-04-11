@@ -72,7 +72,7 @@ public class AcceptSwapCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_DAY_REQUESTED);
         }
 
-        targetRequest.setAccepterNric(userName);
+        targetRequest.setAccepter(model.findPerson(userName));
         model.commitPersonnelDatabase();
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }

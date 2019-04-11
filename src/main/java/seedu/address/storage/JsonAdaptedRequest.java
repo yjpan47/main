@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.Person;
 import seedu.address.model.request.Request;
 
 /**
@@ -15,32 +16,34 @@ class JsonAdaptedRequest {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Request's %s field is missing!";
 
-    private final String requesterNric;
+    private final JsonAdaptedPerson requester;
     private final String allocatedDate;
     private final String requestedDate;
-    private final String accepterNric;
+    private final JsonAdaptedPerson accepter;
 
     /**
      * Constructs a {@code JsonAdaptedRequest} with the given request details.
      */
     @JsonCreator
 
-    public JsonAdaptedRequest(@JsonProperty("requesterNric") String requesterNric, @JsonProperty("allocatedDate") String allocatedDate,
-                              @JsonProperty("requestedDate") String requestedDate, @JsonProperty("accepterNric") String accepterNric) {
-        this.requesterNric = requesterNric;
+    public JsonAdaptedRequest(@JsonProperty("requester") JsonAdaptedPerson requester,
+                              @JsonProperty("allocatedDate") String allocatedDate,
+                              @JsonProperty("requestedDate") String requestedDate,
+                              @JsonProperty("accepter") JsonAdaptedPerson accepter) {
+        this.requester = requester;
         this.requestedDate = requestedDate;
         this.allocatedDate = allocatedDate;
-        this.accepterNric = accepterNric;
+        this.accepter = accepter;
     }
 
     /**
      * Converts a given {@code Request} into this class for Jackson use.
      */
     public JsonAdaptedRequest(Request source) {
-        requesterNric = source.getRequesterNric();
+        requester = new JsonAdaptedPerson(source.getRequester());
         allocatedDate = source.getAllocatedDate().toString();
         requestedDate = source.getRequestedDate().toString();
-        accepterNric = source.getAccepterNric();
+        accepter = new JsonAdaptedPerson(source.getAccepter());
     }
 
     /**
@@ -49,9 +52,11 @@ class JsonAdaptedRequest {
      * @throws IllegalValueException if there were any data constraints violated in the adapted request.
      */
     public Request toModelType() throws IllegalValueException {
-        if (requesterNric == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "requester NRIC"));
+        if (requester == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "requester"));
         }
+
+        Person modelRequester = requester.toModelType();
 
         if (allocatedDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "allocated date"));
@@ -65,11 +70,13 @@ class JsonAdaptedRequest {
 
         final LocalDate modelRequestedDate = LocalDate.parse(requestedDate);
 
-        if (accepterNric == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "accepter NRIC"));
+        if (accepter == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "accepter"));
         }
 
-        return new Request(requesterNric, modelAllocatedDate, modelRequestedDate, accepterNric);
+        Person modelAccepter = accepter.toModelType();
+
+        return new Request(modelRequester, modelAllocatedDate, modelRequestedDate, modelAccepter);
     }
 
 }

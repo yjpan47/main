@@ -165,15 +165,6 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
         indicateModified();
     }
 
-
-    /**
-     * Adds a swap request to the request list by fields.
-     */
-    public void addRequest(String nric, LocalDate allocatedDate, LocalDate requestedDate) {
-        requests.add(new Request(nric, allocatedDate, requestedDate));
-        indicateModified();
-    }
-
     /**
      * Adds a swap request to the request list.
      */
