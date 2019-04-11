@@ -6,6 +6,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.duty.DutyMonth;
+import seedu.address.model.person.Person;
 import seedu.address.model.request.Request;
 
 import java.time.LocalDate;
@@ -22,9 +23,9 @@ public class ApproveSwapCommand extends Command {
 
     public static final String COMMAND_WORD = "approveSwap";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Approves swap of duty from request list that can be viewed using viewSwaps. "
+            + ": Approves swap of duty from request list that can be viewed using viewSwaps. \n"
             + "Parameters: "
-            + "INDEX"
+            + "INDEX \n"
             + "Example: " + COMMAND_WORD + " "
             + "2";
 
@@ -55,6 +56,10 @@ public class ApproveSwapCommand extends Command {
         DutyMonth nextMonth = model.getDutyCalendar().getNextMonth();
         int allocatedDateDay = allocatedDate.getDayOfMonth();
         int requestedDateDay = requestedDate.getDayOfMonth();
+        Person requester = model.findPerson(targetRequest.getRequesterNric());
+        Person accepter = model.findPerson(targetRequest.getAccepterNric());
+        nextMonth.swap(requester, accepter, allocatedDateDay, requestedDateDay,
+                model.getDutyCalendar().getDutyStorage());
 
         model.commitPersonnelDatabase();
         return new CommandResult(String.format(MESSAGE_SUCCESS));
