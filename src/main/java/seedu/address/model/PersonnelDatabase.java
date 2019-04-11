@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.beans.InvalidationListener;
 import javafx.collections.ObservableList;
@@ -76,6 +77,9 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
      */
     public void setRequests(List<Request> requestList) {
         this.requests.clear();
+        requestList = requestList.stream()
+                .filter(req -> req.getAllocatedDate().getMonthValue() - 1
+                        == (getDutyCalendar().getCurrentMonthIndex() + 1) % 12).collect(Collectors.toList());
         this.requests.addAll(requestList);
         indicateModified();
     }
