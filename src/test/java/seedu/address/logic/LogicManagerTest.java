@@ -170,7 +170,8 @@ public class LogicManagerTest {
      */
     private void assertHistoryCorrect(String... expectedCommands) {
         try {
-            CommandResult result = logic.execute(HistoryCommand.COMMAND_WORD, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME);
+            CommandResult result = logic.execute(HistoryCommand.COMMAND_WORD, UserType.ADMIN,
+                    UserType.DEFAULT_ADMIN_USERNAME);
             String expectedMessage = String.format(
                     HistoryCommand.MESSAGE_SUCCESS, String.join("\n", expectedCommands));
             assertEquals(expectedMessage, result.getFeedbackToUser());

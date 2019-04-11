@@ -54,11 +54,13 @@ public class RedoCommandTest {
     public void executeGeneral() {
         // multiple redoable states in model
         expectedModel.redoPersonnelDatabase();
-        assertCommandSuccessGeneral(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccessGeneral(new RedoCommand(), model, commandHistory,
+                RedoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // single redoable state in model
         expectedModel.redoPersonnelDatabase();
-        assertCommandSuccessGeneral(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccessGeneral(new RedoCommand(), model, commandHistory,
+                RedoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // no redoable state in model
         assertCommandFailureGeneral(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);

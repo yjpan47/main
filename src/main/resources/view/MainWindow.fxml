@@ -68,7 +68,7 @@
                 </StackPane>
               </SplitPane>
             </TitledPane>
-            <TitledPane animated="false" text="Calendar">
+            <TitledPane fx:id="calendarPane" animated="false" text="Calendar">
               <content>
                 <VBox fx:id="calendarViewPlaceholder" VBox.vgrow="ALWAYS">
                 </VBox>

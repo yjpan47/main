@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureG
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccessGeneral;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
@@ -15,6 +16,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalPersonnelDatabase;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
+// import seedu.address.commons.core.UiCommandInteraction;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 //import seedu.address.model.DutyCalendar;
@@ -130,7 +132,7 @@ public class SelectCommandTest {
      */
     private void assertExecutionSuccessAdmin(Index index) {
         SelectCommand selectCommand = new SelectCommand(index);
-        String expectedMessage = String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, index.getOneBased());
+        String expectedMessage = String.format(MESSAGE_SELECT_PERSON_SUCCESS, index.getOneBased());
         expectedModel.setSelectedPerson(model.getFilteredPersonList().get(index.getZeroBased()));
 
         assertCommandSuccess(selectCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -151,14 +153,15 @@ public class SelectCommandTest {
      */
     private void assertExecutionSuccessGeneral(Index index) {
         SelectCommand selectCommand = new SelectCommand(index);
-        String expectedMessage = String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, index.getOneBased());
+        String expectedMessage = String.format(MESSAGE_SELECT_PERSON_SUCCESS, index.getOneBased());
         expectedModel.setSelectedPerson(model.getFilteredPersonList().get(index.getZeroBased()));
 
         assertCommandSuccessGeneral(selectCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     /**
-     * Executes (general) a {@code SelectCommand} with the given {@code index}, and checks that a {@code CommandException}
+     * Executes (general) a {@code SelectCommand} with the given {@code index},
+     * and checks that a {@code CommandException}
      * is thrown with the {@code expectedMessage}.
      */
     private void assertExecutionFailureGeneral(Index index, String expectedMessage) {
