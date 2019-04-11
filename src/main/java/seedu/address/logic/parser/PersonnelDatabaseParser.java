@@ -32,6 +32,7 @@ import seedu.address.logic.commands.UnconfirmCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewCommand;
 
+import seedu.address.logic.commands.ViewSwapsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -119,7 +120,7 @@ public class PersonnelDatabaseParser {
             return new ViewCommandParser().parse(arguments, userType, userName);
 
         case UnconfirmCommand.COMMAND_WORD:
-                return new UnconfirmCommand();
+            return new UnconfirmCommand();
 
         case DutySettingsCommand.COMMAND_WORD:
             return new DutySettingsCommandParser().parse(arguments, userType, userName);
@@ -128,7 +129,11 @@ public class PersonnelDatabaseParser {
             return new ViewCurrentCommand();
 
         case ViewNextCommand.COMMAND_WORD:
-                return new ViewNextCommand();
+            return new ViewNextCommand();
+
+        case ViewSwapsCommand.COMMAND_WORD:
+            return new ViewSwapsCommand();
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
