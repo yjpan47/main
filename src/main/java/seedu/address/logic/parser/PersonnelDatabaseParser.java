@@ -125,10 +125,9 @@ public class PersonnelDatabaseParser {
         case DutySettingsCommand.COMMAND_WORD:
             return new DutySettingsCommandParser().parse(arguments, userType, userName);
 
-
         case PointsCommand.COMMAND_WORD:
             return new PointsCommandParser().parse(arguments, userType, userName);
-            
+
         case ViewCurrentCommand.COMMAND_WORD:
             return new ViewCurrentCommand();
 
