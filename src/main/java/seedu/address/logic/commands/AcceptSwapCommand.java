@@ -46,7 +46,7 @@ public class AcceptSwapCommand extends Command {
     }
 
     /**
-     * Executes the command 
+     * Executes the command
      */
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);

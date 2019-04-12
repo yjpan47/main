@@ -92,7 +92,9 @@ public class Duty {
     public boolean contains(Person person) {
         return this.persons.contains(person);
     }
-
+    /**
+     * Remove person from duty
+     */
     public void removePerson(Person remove) {
         Person target = null;
         for (Person person : this.getPersons()) {
@@ -105,7 +107,9 @@ public class Duty {
             this.persons.remove(target);
         }
     }
-
+    /**
+     * Replace person in duty
+     */
     public void replacePerson(Person remove, Person replace) {
         Person target = null;
         for (Person person : this.getPersons()) {
@@ -180,9 +184,9 @@ public class Duty {
 
     @Override
     public String toString() {
-        return String.format("Duty : %d %s %d | ", this.getDayIndex(), this.getMonthString(), this.getYear()) +
-                String.format("%s | ", this.getdayOfWeek()) +
-                String.format("%d points\n", this.getPoints());
+        return String.format("Duty : %d %s %d | ", this.getDayIndex(), this.getMonthString(), this.getYear())
+                + String.format("%s | ", this.getdayOfWeek())
+                + String.format("%d points\n", this.getPoints());
     }
 
 }

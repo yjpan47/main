@@ -268,7 +268,9 @@ public class DutyMonth {
         }
         return false;
     }
-
+    /**
+     * Swaps duty for two persons
+     */
     public void swap(Person t1, Person t2, DutyStorage dutyStorage) {
         for (Duty duty : this.getScheduledDuties()) {
             duty.replacePerson(t1, t2);

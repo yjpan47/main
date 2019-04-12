@@ -63,7 +63,9 @@ public class DutyStorage {
             }
         }
     }
-
+    /**
+     * Undoes the storage for dutyPoints
+     */
     public void undo() {
         this.dutyPoints.clear();
         for (Person person : this.prevDutyPoints.keySet()) {
@@ -111,7 +113,9 @@ public class DutyStorage {
         return sb.toString();
     }
 
-
+    /**
+     * Prints the duties for that month
+     */
     public String printDetails(Person person) {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("Points : %d\n", this.dutyPoints.getOrDefault(person, 0)));
@@ -138,7 +142,9 @@ public class DutyStorage {
             }
         };
     }
-
+    /**
+     * Removes Person for Duty Storage
+     */
     public void removePerson(Person remove) {
         for (Person p : this.dutyPoints.keySet()) {
             if (remove.getNric().toString().equals(p.getNric().toString())) {
@@ -171,7 +177,9 @@ public class DutyStorage {
 
 
     }
-
+    /**
+     * Replaces person for duty storage
+     */
     public void replacePerson(Person personToEdit, Person editedPerson) {
         Set<Person> persons = new HashSet<>();
         persons.addAll(this.dutyPoints.keySet());
