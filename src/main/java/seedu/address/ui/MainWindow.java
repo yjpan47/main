@@ -213,14 +213,18 @@ public class MainWindow extends UiPart<Stage> {
     public void handleCalendar() {
         accordion.setExpandedPane(calendarPane);
     }
-
+    /**
+     * Refreshes current calendar view
+     */
     public void refreshCalendarCurrent() {
         CalendarView calendarView = new CalendarView(logic.getCurrentDutyMonth());
         calendarViewPlaceholder.getChildren().clear();
         calendarViewPlaceholder.getChildren().add(calendarView.getRoot());
         isCurrentMonth = true;
     }
-
+    /**
+     * Refreshes next month calendar view
+     */
     public void refreshCalendarNext() {
         CalendarView calendarView = new CalendarView(logic.getNextDutyMonth());
         calendarViewPlaceholder.getChildren().clear();
@@ -243,7 +247,7 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText, user, userName);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            UiCommandInteraction uiCommand =commandResult.getUiCommandInteraction();
+            UiCommandInteraction uiCommand = commandResult.getUiCommandInteraction();
             refreshCalendar(uiCommand);
             if (uiCommand != null) {
                 handleUiCommand(uiCommand);
@@ -257,31 +261,35 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
-
+    /**
+     * Handles command inputs
+     */
     public void handleUiCommand(UiCommandInteraction uiCommand) {
         switch (uiCommand) {
-            case EXIT:
-                handleExit();
-                break;
-            case HELP:
-                handleHelp();
-                break;
-            case PEOPLE_LIST:
-                handleList();
-                break;
-            case CALENDAR_CURRENT:
-                handleCalendar();
-                refreshCalendarCurrent();
-                break;
-            case CALENDAR_NEXT:
-                handleCalendar();
-                refreshCalendarNext();
-                break;
-            default: //do nothing
-                break;
+        case EXIT:
+            handleExit();
+            break;
+        case HELP:
+            handleHelp();
+            break;
+        case PEOPLE_LIST:
+            handleList();
+            break;
+        case CALENDAR_CURRENT:
+            handleCalendar();
+            refreshCalendarCurrent();
+            break;
+        case CALENDAR_NEXT:
+            handleCalendar();
+            refreshCalendarNext();
+            break;
+        default: //do nothing
+            break;
         }
     }
-
+    /**
+     * Refreshes calendar
+     */
     public void refreshCalendar(UiCommandInteraction uiCommandInteraction) {
         if (uiCommandInteraction == UiCommandInteraction.CALENDAR_NEXT) {
             return;

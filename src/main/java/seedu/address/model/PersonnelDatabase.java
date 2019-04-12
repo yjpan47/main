@@ -85,7 +85,7 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
      */
     public void scheduleDutyForNextMonth(List<Person> persons,
                                          DutySettings dutySettings, DutyStorage dutyStorage) {
-        this.dutyCalendar.scheduleDutyForNextMonth(persons,dutySettings, dutyStorage);
+        this.dutyCalendar.scheduleDutyForNextMonth(persons, dutySettings, dutyStorage);
     }
 
     /**
@@ -98,8 +98,9 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
         setDutyCalendar(newData.getDutyCalendar());
         setRequests(newData.getRequestList());
     }
-
-    // Sort the persons in the personnel database by name
+    /**
+     * Sorts the persons in the personnal database by name
+     */
     public void sort() {
 
         this.persons.sort();

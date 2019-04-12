@@ -120,24 +120,22 @@ public class PersonnelDatabaseParser {
             return new ViewCommandParser().parse(arguments, userType, userName);
 
         case UnconfirmCommand.COMMAND_WORD:
-                return new UnconfirmCommand();
+            return new UnconfirmCommand();
 
         case DutySettingsCommand.COMMAND_WORD:
             return new DutySettingsCommandParser().parse(arguments, userType, userName);
 
-
         case PointsCommand.COMMAND_WORD:
             return new PointsCommandParser().parse(arguments, userType, userName);
-            
+
         case ViewCurrentCommand.COMMAND_WORD:
             return new ViewCurrentCommand();
 
         case ViewNextCommand.COMMAND_WORD:
-                return new ViewNextCommand();
+            return new ViewNextCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

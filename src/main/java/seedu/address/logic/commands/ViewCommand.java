@@ -26,7 +26,9 @@ public class ViewCommand extends Command {
     public ViewCommand(String userName) {
         this.userName = userName;
     }
-
+    /**
+     * Executes the command
+     */
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         String messageDuty = MESSAGE_SUCCESS;

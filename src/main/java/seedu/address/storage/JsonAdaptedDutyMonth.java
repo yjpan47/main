@@ -20,7 +20,7 @@ import seedu.address.model.person.Person;
  */
 public class JsonAdaptedDutyMonth {
 
-    public static final String INVALID_BOOLEAN_VALUE= "Invalid boolean value!";
+    public static final String INVALID_BOOLEAN_VALUE = "Invalid boolean value!";
 
     private final String confirmed;
     private final int year;

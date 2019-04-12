@@ -12,7 +12,7 @@ import seedu.address.model.person.Person;
  */
 public class BlockDateCommand extends Command {
 
-    public static final String COMMAND_WORD = "bd";
+    public static final String COMMAND_WORD = "block";
     public static final String MESSAGE_USAGE = COMMAND_WORD + " Blocks out certain duty dates for the upcoming "
             + "month for the current person using.\n"
             + "Parameters: Dates in numbers for the next month\n"
@@ -28,7 +28,9 @@ public class BlockDateCommand extends Command {
         this.blockedDates = blockedDates;
         this.userName = userName;
     }
-
+    /**
+     * Executes the command
+     */
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
 
         Person person = model.findPerson(userName);

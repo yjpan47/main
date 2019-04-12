@@ -32,7 +32,7 @@ public class BlockDateCommandParser implements Parser<BlockDateCommand> {
 
         for (String date : dates) {
             Integer dateAdded = Integer.parseInt(date);
-            if (dateAdded > 31) {
+            if (dateAdded > 31 || dateAdded < 1) {
                 throw new ParseException(MESSAGE_INVALID_DATE);
             }
             blockedDatesDuplicates.add(dateAdded);
@@ -47,4 +47,8 @@ public class BlockDateCommandParser implements Parser<BlockDateCommand> {
         });
         return new BlockDateCommand(blockedDates, userName);
     }
+    /**
+     * Checks if an input date is valid given year,month and date
+     */
+
 }

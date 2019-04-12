@@ -1,8 +1,6 @@
 package guitests.guihandles;
 
-import javafx.scene.Node;
 import javafx.scene.control.TextArea;
-import org.w3c.dom.Text;
 
 /**
  * A handler for the {@code BrowserPanel} of the UI.

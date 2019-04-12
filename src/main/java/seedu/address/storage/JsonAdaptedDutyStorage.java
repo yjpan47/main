@@ -43,7 +43,8 @@ public class JsonAdaptedDutyStorage {
             List<String> dutyRecords = source.getDutyRecords().getOrDefault(person, new ArrayList<>());
             int prevDutyPoints = source.getPrevDutyPoints().getOrDefault(person, 0);
             List<String> prevDutyRecords = source.getPrevDutyRecords().getOrDefault(person, new ArrayList<>());
-            JsonAdaptedDutyStoragePerson jsonAdaptedDutyStoragePerson = new JsonAdaptedDutyStoragePerson(nric, dutyPoints, dutyRecords, prevDutyPoints, prevDutyRecords);
+            JsonAdaptedDutyStoragePerson jsonAdaptedDutyStoragePerson = new JsonAdaptedDutyStoragePerson(nric,
+                    dutyPoints, dutyRecords, prevDutyPoints, prevDutyRecords);
             this.dutyStorageList.add(jsonAdaptedDutyStoragePerson);
         }
     }

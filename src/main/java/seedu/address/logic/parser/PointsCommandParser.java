@@ -6,8 +6,10 @@ import seedu.address.commons.core.UserType;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.PointsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
-public class PointsCommandParser  implements Parser<PointsCommand> {
+/**
+ * Parses input arguments and creates a new PointsCommnad object
+ */
+public class PointsCommandParser implements Parser<PointsCommand> {
 
     @Override
     public PointsCommand parse(String args, UserType userType, String userName) throws ParseException {

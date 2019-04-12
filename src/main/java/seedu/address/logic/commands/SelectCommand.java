@@ -30,7 +30,9 @@ public class SelectCommand extends Command {
     public SelectCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
-
+    /**
+     * Executes the command
+     */
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
