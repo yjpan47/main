@@ -48,8 +48,8 @@ public class HelpCommandSystemTest extends PersonnelDatabaseSystemTest {
         //assertHelpWindowNotOpen();
 
         //use menu button
-        getMainMenu().openHelpWindowUsingMenu();
-        assertHelpWindowOpen();
+        //getMainMenu().openHelpWindowUsingMenu();
+        //assertHelpWindowOpen();
 
         //use command box
         executeCommand(HelpCommand.COMMAND_WORD);
