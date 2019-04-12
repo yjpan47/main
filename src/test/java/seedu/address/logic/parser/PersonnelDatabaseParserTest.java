@@ -54,7 +54,8 @@ public class PersonnelDatabaseParserTest {
 
     @Test
     public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD, UserType.ADMIN,
+                UserType.DEFAULT_ADMIN_USERNAME) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3",
                 UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof ClearCommand);
     }
@@ -79,7 +80,8 @@ public class PersonnelDatabaseParserTest {
 
     @Test
     public void parseCommand_exit() throws Exception {
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD, UserType.ADMIN,
+                UserType.DEFAULT_ADMIN_USERNAME) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3", UserType.ADMIN,
                 UserType.DEFAULT_ADMIN_USERNAME) instanceof ExitCommand);
     }
@@ -118,16 +120,18 @@ public class PersonnelDatabaseParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3", UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME)
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD, UserType.ADMIN,
+                UserType.DEFAULT_ADMIN_USERNAME) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3",
+                UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME)
                 instanceof ListCommand);
     }
 
     @Test
     public void parseCommand_select() throws Exception {
         SelectCommand command = (SelectCommand) parser.parseCommand(
-                SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
-                , UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME);
+                SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
+                UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME);
         assertEquals(new SelectCommand(INDEX_FIRST_PERSON), command);
     }
 
@@ -140,8 +144,8 @@ public class PersonnelDatabaseParserTest {
     }
     @Test
     public void parseCommand_blockDate() throws Exception {
-        BlockDateCommand command = (BlockDateCommand) parser.parseCommand(BlockDateCommand.COMMAND_WORD + " 2 4 5 6 9 10",
-                UserType.ADMIN, "S9000000A");
+        BlockDateCommand command = (BlockDateCommand) parser.parseCommand(BlockDateCommand.COMMAND_WORD
+                        + " 2 4 5 6 9 10", UserType.ADMIN, "S9000000A");
         BlockDateCommand newCommand = new BlockDateCommand(List.of(2, 4, 5, 6, 9, 10), "S9000000A");
         assertEquals(command, newCommand);
     }
