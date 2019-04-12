@@ -1,18 +1,17 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.duty.DutyMonth;
 import seedu.address.model.request.Request;
-
-import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static java.util.Objects.requireNonNull;
-
 
 /**
  * Accepts a swap of duty dates (for users who are personnel only)
@@ -46,6 +45,9 @@ public class AcceptSwapCommand extends Command {
         this.index = index;
     }
 
+    /**
+     * Executes the command 
+     */
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Request> requests = model.getPersonnelDatabase().getRequestList();

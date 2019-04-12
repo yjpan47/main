@@ -1,10 +1,10 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.core.UiCommandInteraction;
-
 import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
+
+import seedu.address.commons.core.UiCommandInteraction;
 
 /**
  * Represents the result of a command execution.

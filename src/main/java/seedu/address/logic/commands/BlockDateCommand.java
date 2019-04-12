@@ -28,7 +28,9 @@ public class BlockDateCommand extends Command {
         this.blockedDates = blockedDates;
         this.userName = userName;
     }
-
+    /**
+     * Executes the command
+     */
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
 
         Person person = model.findPerson(userName);
