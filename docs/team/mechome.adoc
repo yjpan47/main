@@ -46,7 +46,6 @@ MINDEF Duty Planner is a platform to assist military units in the SAF in the ass
 == Contributions to the Developer Guide
 
 |===
-<<<<<<< HEAD
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.
 |===
 
@@ -57,4 +56,4 @@ include::../DeveloperGuide.adoc[tag=dataencryption]
 =======
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
->>>>>>> 3c08827d47f76f29af458126ad97934d0ed0ab74
+
