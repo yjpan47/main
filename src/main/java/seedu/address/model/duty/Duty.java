@@ -93,13 +93,30 @@ public class Duty {
         return this.persons.contains(person);
     }
 
-    public void removePerson(Person person) {
-        this.persons.remove(person);
+    public void removePerson(Person remove) {
+        Person target = null;
+        for (Person person : this.getPersons()) {
+            if (remove.getNric().toString().equals(person.getNric().toString())) {
+                target = person;
+            }
+        }
+
+        if (target != null) {
+            this.persons.remove(target);
+        }
     }
 
     public void replacePerson(Person remove, Person replace) {
-        this.persons.remove(remove);
-        this.persons.add(replace);
+        Person target = null;
+        for (Person person : this.getPersons()) {
+            if (remove.getNric().toString().equals(person.getNric().toString())) {
+                target = person;
+            }
+        }
+        if (target != null) {
+            this.persons.remove(target);
+            this.persons.add(replace);
+        }
     }
 
     public boolean isFilled() {
@@ -161,6 +178,12 @@ public class Duty {
         return this.points;
     }
 
+    @Override
+    public String toString() {
+        return String.format("Duty : %d %s %d | ", this.getDayIndex(), this.getMonthString(), this.getYear()) +
+                String.format("%s | ", this.getdayOfWeek()) +
+                String.format("%d points\n", this.getPoints());
+    }
 
 }
 

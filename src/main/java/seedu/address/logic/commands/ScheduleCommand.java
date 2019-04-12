@@ -10,9 +10,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.duty.DutyMonth;
-import seedu.address.model.duty.DutySettings;
 import seedu.address.model.duty.DutyStorage;
-import seedu.address.model.person.Person;
 
 /**
  * Schedules the upcoming duties for the month
@@ -31,7 +29,7 @@ public class ScheduleCommand extends Command {
             + "Type <confirm> to confirm this schedule or <schedule> to reassign!";
 
     public static final String SCHEDULE_ALREADY_CONFIRMED = "Schedule for %s %s already confirmed! "
-            + "See below for details\n\n%s\n\n%s\n\n";
+            + "See below for details\n%s\n%s\n";
 
 
     @Override

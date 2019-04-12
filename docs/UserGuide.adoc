@@ -85,6 +85,14 @@ Format: `help`
 Lists out all users with their details. +
 Format: `list`
 
+==== View all duties for current month: `viewCurrent`
+Brings up calendar view, with all duties for the current month. +
+Format: `viewCurrent`
+
+==== View all duties for enxt month: `viewNext`
+Brings up calendar view, with all duties for the next month. +
+Format: `viewNext`
+
 ==== View duties assigned to user : `view`
 The user can see their details about their own duties assigned to them and their upcoming duties ranked by recency. +
 Format: `view`
@@ -105,21 +113,17 @@ Example:
 
 * `roster February`
 
-==== Block dates : `block`
-The user can block dates and set which dates they are unavailable to duties for upcoming months. A user can block up to 15 days per month. +
-Format: `block MONTH DAY DAY DAY ...`
+==== Block dates : `bd`
+The user can block dates and set which dates they are unavailable to duties for the upcoming month. A user can block up to 15 days. +
+Format: `bd DATE DATE DATE ...`
 
 Example:
 
-* `block March 3 6 15 21 30`
+* `bd 3 6 15 21 30`
 
-==== View blocked dates : `block`
-The user can view the dates they have blocked for a particular month. +
-Format: `block MONTH`
-
-Example:
-
-* `block March`
+==== View blocked dates : `block` (Coming in v2.0)
+The user can view the dates they have blocked for the upcoming month. +
+Format: `block`
 
 ==== Make a swap request with another user : `swap`
 The user can request for a duty swap with another user. This will be subject to the agreement of the other user and approval of the admin (i.e. commander). +
@@ -298,7 +302,7 @@ Edits the company of the 1st person to be `Hotel`, clears all existing tags, and
 This command invokes the scheduling algorithm for the upcoming month. It generates a viable duty schedule roster where each duty slot for the upcoming month will be filled by the people currently in the database. ++
 
 .In order to ensure fair scheduling system,
-. We introduce a point system to each individual such that a servivemen can earn points by doing duties. The points awarded to servicemen are cumulative, thus the points awarded are carried over to the next month. +
+. We introduce a point system to each individual such that a servicemen can earn points by doing duties. The points awarded to servicemen are cumulative, thus the points awarded are carried over to the next month. +
 . Each duty is worth a certain number of points and a person gains that amount of points by doing that duty. For example, if all Sunday duties are worth 4 points, a servicemen who is assigned a Sunday duty will by awarded 4 points. +
 . Before the scheduling command is called, each person has the opportunity to indicate the days in which they are unavailable to do duty. (See 3.9 block command)  +
 
@@ -346,7 +350,7 @@ Your password is also your NRIC by default, unless you or your administrator cha
 * *Viewing help* : `help` +
 * *Viewing own duties* : `view` +
 * *Viewing other's duties* : `view NRIC` +
-* *Blocking dates* : `block d/date d/date d/date …` +
+* *Blocking dates* : `bd DATE DATE DATE …` +
 * *Make swap request* : `swap` +
 * *List all the users* : `list` +
 * *Locate person by name* : `find` +

@@ -13,13 +13,15 @@ MINDEF Duty Planner is a platform to assist military units in the SAF in the ass
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to request swapping of duties, respond to swap requests and approve or reject swap requests.*
+* *Major enhancement*: Added *the ability to request swapping of duties (using the 'swap' command), respond to swap requests (using the 'acceptswap' command) and approve or reject swap requests.*
 ** What it does: allows a user who is a particular person in the personnel database to request for a swap of his duty with another person's duty. Both duties have to be in the current month or the next month.
 ** Justification: This feature is very useful for a serviceman who is suddenly unavailable to perform guard duty due to ad hoc reasons. He can broadcast his swap request onto the app in the large panel on the bottom right and other servicemen can view his request and respond if they are willing and able to swap with him. After that, an admin user will approve or reject the swap.
 ** Highlights: This functionality is very convenient for the users because it requires no verbal communication at all and the process is completely streamlined to be performed on the app. Physical or verbal communication is only necessary if there are disputes. This enhancement involves changes in logic (commands), UI (browser panel), storage (storing of requests) and model (structure of requests). Implementing this feature required understanding how and when saving to a json file happens so as to trigger the save event when needed. It was also difficult to convert the browser panel from an object that displays web pages to a text object, having no prior experience in GUI.
 ** Credits: _Valavan for the idea of swap requests and my team for helping me to develop the idea_
 
 * *Minor enhancement*: Converted the Person class to one suitable for the duty planner. This means removing the email and address fields (which are classes in themselves) and adding in Company, Section, Rank and NRIC. This was very time-consuming, especially with having to adapt all the tests involving Person objects with no exception. We could theoretically have done away with the individual classes for each field but I decided to preserve the existing structure to reduce complications after analysis of the trade-offs.
+
+* *Minor enhancement*: Morphed the browser panel to display the list of open swap requests (i.e swap requests that are awaiting response) instead of a website.
 
 * *Code contributed*: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#=undefined&search=mechome[Code]]
 
@@ -28,8 +30,10 @@ MINDEF Duty Planner is a platform to assist military units in the SAF in the ass
 ** Project management:
 *** Curated Issues Tracker
 ** Enhancements to existing features:
+*** Renamed the internal address book class to personnel database to reflect our product differentiation: https://github.com/CS2103-AY1819S2-W15-4/main/pull/33[#33], https://github.com/CS2103-AY1819S2-W15-4/main/pull/70[#70], https://github.com/CS2103-AY1819S2-W15-4/main/pull/71[#71]
+*** Added and edited tests for existing features (example: JsonAdaptedPersonTest.java, see https://github.com/CS2103-AY1819S2-W15-4/main/pull/34[#34], https://github.com/CS2103-AY1819S2-W15-4/main/pull/70[#70], https://github.com/CS2103-AY1819S2-W15-4/main/pull/71[#71])
 ** Documentation:
-*** Edited the User Guide to reflect our product: https://github.com[#14]
+*** Edited the User Guide to reflect our product: https://github.com/CS2103-AY1819S2-W15-4/main/pull/33[#33], https://github.com/CS2103-AY1819S2-W15-4/main/pull/71[#71]
 ** Community:
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2103-AY1819S2-W13-3/main/issues/174[1], https://github.com/CS2103-AY1819S2-W13-3/main/issues/164[2], https://github.com/CS2103-AY1819S2-W13-3/main/issues/170[3], https://github.com/CS2103-AY1819S2-W13-3/main/issues/181[4])
 
@@ -39,13 +43,10 @@ MINDEF Duty Planner is a platform to assist military units in the SAF in the ass
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
-
-include::../UserGuide.adoc[tag=dataencryption]
-
 == Contributions to the Developer Guide
 
 |===
+<<<<<<< HEAD
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.
 |===
 
@@ -53,3 +54,7 @@ include::../DeveloperGuide.adoc[tag=undoredo]
 
 include::../DeveloperGuide.adoc[tag=dataencryption]
 
+=======
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+>>>>>>> 3c08827d47f76f29af458126ad97934d0ed0ab74

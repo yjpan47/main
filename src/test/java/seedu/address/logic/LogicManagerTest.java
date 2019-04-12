@@ -82,7 +82,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_storageThrowsIoException_throwsCommandException() throws Exception {
+    public void executeStorageThrowsIoExceptionThrowsCommandException() throws Exception {
         // Setup LogicManager with JsonPersonnelDatabaseIoExceptionThrowingStub
         JsonPersonnelDatabaseStorage personnelDatabaseStorage =
                 new JsonPersonnelDatabaseIoExceptionThrowingStub(temporaryFolder.newFile().toPath());
@@ -93,9 +93,10 @@ public class LogicManagerTest {
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + NRIC_DESC_AMY + COMPANY_DESC_AMY + SECTION_DESC_AMY
                 + RANK_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Person expectedPerson = new PersonBuilder(AMY).withTags().buildReduced();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
+        expectedModel.getDutyCalendar().getNextMonth().unconfirm();
         expectedModel.commitPersonnelDatabase();
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandBehavior(CommandException.class, addCommand, expectedMessage, expectedModel);
@@ -169,7 +170,8 @@ public class LogicManagerTest {
      */
     private void assertHistoryCorrect(String... expectedCommands) {
         try {
-            CommandResult result = logic.execute(HistoryCommand.COMMAND_WORD, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME);
+            CommandResult result = logic.execute(HistoryCommand.COMMAND_WORD, UserType.ADMIN,
+                    UserType.DEFAULT_ADMIN_USERNAME);
             String expectedMessage = String.format(
                     HistoryCommand.MESSAGE_SUCCESS, String.join("\n", expectedCommands));
             assertEquals(expectedMessage, result.getFeedbackToUser());
