@@ -1,7 +1,7 @@
 package systemtests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+//import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -99,8 +99,8 @@ public class HelpCommandSystemTest extends PersonnelDatabaseSystemTest {
     /**
      * Asserts that the help window isn't open.
      */
-//    private void assertHelpWindowNotOpen() {
-//        assertFalse(ERROR_MESSAGE, HelpWindowHandle.isWindowPresent());
-//    }
+    //    private void assertHelpWindowNotOpen() {
+    //        assertFalse(ERROR_MESSAGE, HelpWindowHandle.isWindowPresent());
+    //    }
 
 }
