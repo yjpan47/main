@@ -24,6 +24,7 @@ public class ConfirmScheduleCommand extends Command {
     public static final String SCHEDULE_ALREADY_CONFIRMED = "Schedule for %s %s already confirmed! "
             + "See below for details\n\n%s\n\n%s\n\n";
     public static final String NO_SCHEDULE_YET = "No schedules found! Tye <schedule> to make a schedule!";
+    public static final String NOT_ENOUGH_DUTIES = "Not enough duties are filled to be confirmed!";
 
     @Override
     public CommandResult executeAdmin(Model model, CommandHistory history) throws CommandException {
@@ -43,6 +44,8 @@ public class ConfirmScheduleCommand extends Command {
 
         if (dummyMonth.getScheduledDuties() == null) {
             return new CommandResult(NO_SCHEDULE_YET);
+        } else if (!dummyMonth.allDutiesAreFiled()) {
+            return new CommandResult(NOT_ENOUGH_DUTIES);
         }
 
         dutyStorage.update(dummyMonth.getScheduledDuties());
