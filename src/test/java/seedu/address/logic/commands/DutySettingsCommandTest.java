@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureGeneral;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.DutySettingsCommand.CHANGE_SETTINGS_SUCCESS;
+//import static seedu.address.logic.commands.DutySettingsCommand.CHANGE_SETTINGS_SUCCESS;
 import static seedu.address.logic.commands.DutySettingsCommand.VIEW_SETTINGS;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersonnelDatabase;
 
