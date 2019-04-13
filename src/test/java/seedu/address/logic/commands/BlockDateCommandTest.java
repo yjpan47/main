@@ -29,7 +29,7 @@ public class BlockDateCommandTest {
         Integer[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
         List<Integer> blockedDates = new ArrayList<>();
         Collections.addAll(blockedDates, arr);
-        assertCommandFailure(new BlockDateCommand(blockedDates,"Admin"), model, new CommandHistory(), 
-                Messages.MESSAGE_NO_AUTHORITY_PARSE);
+        assertCommandFailure(new BlockDateCommand(blockedDates, "Admin"), model, new CommandHistory()
+                , Messages.MESSAGE_NO_AUTHORITY_PARSE);
     }
 }
