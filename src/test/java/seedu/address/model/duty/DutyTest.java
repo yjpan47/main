@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.Assert;
