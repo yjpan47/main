@@ -1,13 +1,13 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.BlockDateCommand.MESSAGE_BLOCK_DATES_SUCCESS;
-
 import static seedu.address.logic.commands.BlockDateCommand.MESSAGE_TOO_MANY_BLOCKED_DATES;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureGeneral;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccessGeneral;
-import static seedu.address.testutil.TypicalPersons.getTypicalPersonnelDatabase;
 import static seedu.address.testutil.TypicalPersons.GENERAL_DAN_USERNAME;
+import static seedu.address.testutil.TypicalPersons.getTypicalPersonnelDatabase;
+
 
 import java.util.ArrayList;
 //import java.util.Arrays;

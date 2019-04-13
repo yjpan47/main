@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.RemoveBlockCommand.MESSAGE_REMOVED_BLOCKED_DATES;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccessGeneral;
+import static seedu.address.logic.commands.RemoveBlockCommand.MESSAGE_REMOVED_BLOCKED_DATES;
 //import static seedu.address.logic.commands.ViewBlockCommand.MESSAGE_BLOCKED_DATES;
 //import static seedu.address.testutil.TypicalPersons.GENERAL_DAN;
 import static seedu.address.testutil.TypicalPersons.GENERAL_DAN_USERNAME;
@@ -32,6 +32,7 @@ public class RemoveBlockCommandTest {
     public void execute() {
         assertCommandFailure(new RemoveBlockCommand("Admin"), model, new CommandHistory(),
                 Messages.MESSAGE_NO_AUTHORITY);
-        assertCommandSuccessGeneral(new RemoveBlockCommand(GENERAL_DAN_USERNAME), model, new CommandHistory(), new CommandResult(String.format(MESSAGE_REMOVED_BLOCKED_DATES)), model);
+        assertCommandSuccessGeneral(new RemoveBlockCommand(GENERAL_DAN_USERNAME), model,
+                new CommandHistory(), new CommandResult(String.format(MESSAGE_REMOVED_BLOCKED_DATES)), model);
     }
 }

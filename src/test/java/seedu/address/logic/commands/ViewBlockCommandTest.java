@@ -32,6 +32,8 @@ public class ViewBlockCommandTest {
     public void execute() {
         assertCommandFailure(new ViewBlockCommand("Admin"), model, new CommandHistory(),
                 Messages.MESSAGE_NO_AUTHORITY);
-        assertCommandSuccessGeneral(new ViewBlockCommand(GENERAL_DAN_USERNAME), model, new CommandHistory(), new CommandResult(String.format(MESSAGE_BLOCKED_DATES + "\n" + model.getNextDutyMonth().getBlockedDates().get(GENERAL_DAN))), model);
+        assertCommandSuccessGeneral(new ViewBlockCommand(GENERAL_DAN_USERNAME), model, new CommandHistory(),
+                new CommandResult(String.format(MESSAGE_BLOCKED_DATES
+                        + "\n" + model.getNextDutyMonth().getBlockedDates().get(GENERAL_DAN))), model);
     }
 }
