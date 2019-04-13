@@ -1,0 +1,454 @@
+{
+  "persons" : [ {
+    "nric" : "S9673566K",
+    "company" : "Leopard",
+    "section" : "1",
+    "rank" : "CFC",
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "tagged" : [ "outstanding" ],
+    "userType" : "GENERAL",
+    "passwordHashed" : "-1129997118"
+  }, {
+    "nric" : "S9478974B",
+    "company" : "Hawk",
+    "section" : "2",
+    "rank" : "PTE",
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "tagged" : [ "injured" ],
+    "userType" : "GENERAL",
+    "passwordHashed" : "1394700475"
+  }, {
+    "nric" : "S9324325I",
+    "company" : "Cougar",
+    "section" : "3",
+    "rank" : "REC",
+    "name" : "Carl Kurz",
+    "phone" : "95352563",
+    "tagged" : [ ],
+    "userType" : "GENERAL",
+    "passwordHashed" : "360173442"
+  }, {
+    "nric" : "T0034567L",
+    "company" : "Falcon",
+    "section" : "4",
+    "rank" : "LCP",
+    "name" : "Daniel Meier",
+    "phone" : "87652533",
+    "tagged" : [ "friends" ],
+    "userType" : "GENERAL",
+    "passwordHashed" : "1708444043"
+  }, {
+    "nric" : "S9876567I",
+    "company" : "Ninja",
+    "section" : "2",
+    "rank" : "REC",
+    "name" : "Elle Meyer",
+    "phone" : "9482224",
+    "tagged" : [ ],
+    "userType" : "GENERAL",
+    "passwordHashed" : "647780836"
+  }, {
+    "nric" : "S9357825I",
+    "company" : "2nd",
+    "section" : "1",
+    "rank" : "PTE",
+    "name" : "Fiona Kunz",
+    "phone" : "9482427",
+    "tagged" : [ ],
+    "userType" : "GENERAL",
+    "passwordHashed" : "448980413"
+  }, {
+    "nric" : "T0065782J",
+    "company" : "1st",
+    "section" : "2",
+    "rank" : "CFC",
+    "name" : "George Best",
+    "phone" : "+942442",
+    "tagged" : [ ],
+    "userType" : "GENERAL",
+    "passwordHashed" : "1795316364"
+  }, {
+    "nric" : "S9687543K",
+    "company" : "3rd",
+    "section" : "5",
+    "rank" : "LTC",
+    "name" : "Dan",
+    "phone" : "98765432",
+    "tagged" : [ ],
+    "userType" : "GENERAL",
+    "passwordHashed" : "2480177"
+  }, {
+    "nric" : "S9876543P",
+    "company" : "7th",
+    "section" : "4",
+    "rank" : "CFC",
+    "name" : "Tan",
+    "phone" : "12345678",
+    "tagged" : [ ],
+    "userType" : "ADMIN",
+    "passwordHashed" : "1216985755"
+  } ],
+  "requests" : [ ],
+  "currentMonth" : {
+    "year" : 2019,
+    "monthIndex" : 3,
+    "firstDayWeekIndex" : 2,
+    "confirmed" : "false",
+    "needsRollover" : "false",
+    "duties" : [ ],
+    "blockedDays" : {
+      "dateList" : [ ],
+      "personNricList" : [ ]
+    }
+  },
+  "nextMonth" : {
+    "year" : 2021,
+    "monthIndex" : 4,
+    "firstDayWeekIndex" : 4,
+    "confirmed" : "true",
+    "needsRollover" : "false",
+    "duties" : [ {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 1,
+      "dayOfWeekIndex" : 4,
+      "capacity" : 2,
+      "vacancies" : 0,
+      "points" : 2,
+      "persons" : [ "S9876567I", "S9687543K" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 2,
+      "dayOfWeekIndex" : 5,
+      "capacity" : 2,
+      "vacancies" : 0,
+      "points" : 2,
+      "persons" : [ "S9876567I", "S9687543K" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 3,
+      "dayOfWeekIndex" : 6,
+      "capacity" : 2,
+      "vacancies" : 0,
+      "points" : 3,
+      "persons" : [ "T0065782J", "S9687543K" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 4,
+      "dayOfWeekIndex" : 7,
+      "capacity" : 3,
+      "vacancies" : 0,
+      "points" : 4,
+      "persons" : [ "T0034567L", "S9687543K", "S9876567I" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 5,
+      "dayOfWeekIndex" : 1,
+      "capacity" : 3,
+      "vacancies" : 0,
+      "points" : 4,
+      "persons" : [ "T0065782J", "S9357825I", "T0034567L" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 6,
+      "dayOfWeekIndex" : 2,
+      "capacity" : 2,
+      "vacancies" : 0,
+      "points" : 2,
+      "persons" : [ "S9357825I", "T0034567L" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 7,
+      "dayOfWeekIndex" : 3,
+      "capacity" : 2,
+      "vacancies" : 0,
+      "points" : 2,
+      "persons" : [ "S9673566K", "S9324325I" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 8,
+      "dayOfWeekIndex" : 4,
+      "capacity" : 2,
+      "vacancies" : 0,
+      "points" : 2,
+      "persons" : [ "S9876543P", "S9687543K" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 9,
+      "dayOfWeekIndex" : 5,
+      "capacity" : 2,
+      "vacancies" : 0,
+      "points" : 2,
+      "persons" : [ "S9876543P", "S9687543K" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 10,
+      "dayOfWeekIndex" : 6,
+      "capacity" : 2,
+      "vacancies" : 0,
+      "points" : 3,
+      "persons" : [ "S9478974B", "S9324325I" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 11,
+      "dayOfWeekIndex" : 7,
+      "capacity" : 3,
+      "vacancies" : 0,
+      "points" : 4,
+      "persons" : [ "S9673566K", "S9876543P", "S9478974B" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 12,
+      "dayOfWeekIndex" : 1,
+      "capacity" : 3,
+      "vacancies" : 0,
+      "points" : 4,
+      "persons" : [ "S9324325I", "S9357825I", "T0065782J" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 13,
+      "dayOfWeekIndex" : 2,
+      "capacity" : 2,
+      "vacancies" : 0,
+      "points" : 2,
+      "persons" : [ "S9478974B", "S9673566K" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 14,
+      "dayOfWeekIndex" : 3,
+      "capacity" : 2,
+      "vacancies" : 0,
+      "points" : 2,
+      "persons" : [ "S9357825I", "T0034567L" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 15,
+      "dayOfWeekIndex" : 4,
+      "capacity" : 2,
+      "vacancies" : 0,
+      "points" : 2,
+      "persons" : [ "S9357825I", "T0065782J" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 16,
+      "dayOfWeekIndex" : 5,
+      "capacity" : 2,
+      "vacancies" : 0,
+      "points" : 2,
+      "persons" : [ "S9673566K", "S9324325I" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 17,
+      "dayOfWeekIndex" : 6,
+      "capacity" : 2,
+      "vacancies" : 0,
+      "points" : 3,
+      "persons" : [ "S9324325I", "S9673566K" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 18,
+      "dayOfWeekIndex" : 7,
+      "capacity" : 3,
+      "vacancies" : 0,
+      "points" : 4,
+      "persons" : [ "S9687543K", "S9876567I", "S9876543P" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 19,
+      "dayOfWeekIndex" : 1,
+      "capacity" : 3,
+      "vacancies" : 0,
+      "points" : 4,
+      "persons" : [ "S9876543P", "S9673566K", "S9478974B" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 20,
+      "dayOfWeekIndex" : 2,
+      "capacity" : 2,
+      "vacancies" : 0,
+      "points" : 2,
+      "persons" : [ "T0034567L", "S9478974B" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 21,
+      "dayOfWeekIndex" : 3,
+      "capacity" : 2,
+      "vacancies" : 0,
+      "points" : 2,
+      "persons" : [ "S9673566K", "S9357825I" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 22,
+      "dayOfWeekIndex" : 4,
+      "capacity" : 2,
+      "vacancies" : 0,
+      "points" : 2,
+      "persons" : [ "S9876543P", "S9357825I" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 23,
+      "dayOfWeekIndex" : 5,
+      "capacity" : 2,
+      "vacancies" : 0,
+      "points" : 2,
+      "persons" : [ "S9876567I", "T0065782J" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 24,
+      "dayOfWeekIndex" : 6,
+      "capacity" : 2,
+      "vacancies" : 0,
+      "points" : 3,
+      "persons" : [ "S9876543P", "S9876567I" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 25,
+      "dayOfWeekIndex" : 7,
+      "capacity" : 3,
+      "vacancies" : 0,
+      "points" : 4,
+      "persons" : [ "S9324325I", "S9687543K", "S9876567I" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 26,
+      "dayOfWeekIndex" : 1,
+      "capacity" : 3,
+      "vacancies" : 0,
+      "points" : 4,
+      "persons" : [ "S9357825I", "T0065782J", "T0034567L" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 27,
+      "dayOfWeekIndex" : 2,
+      "capacity" : 2,
+      "vacancies" : 0,
+      "points" : 2,
+      "persons" : [ "S9876543P", "S9324325I" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 28,
+      "dayOfWeekIndex" : 3,
+      "capacity" : 2,
+      "vacancies" : 0,
+      "points" : 2,
+      "persons" : [ "S9478974B", "T0034567L" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 29,
+      "dayOfWeekIndex" : 4,
+      "capacity" : 2,
+      "vacancies" : 0,
+      "points" : 2,
+      "persons" : [ "S9478974B", "T0065782J" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 30,
+      "dayOfWeekIndex" : 5,
+      "capacity" : 2,
+      "vacancies" : 0,
+      "points" : 2,
+      "persons" : [ "S9324325I", "T0034567L" ]
+    }, {
+      "year" : 2019,
+      "monthIndex" : 4,
+      "dayIndex" : 31,
+      "dayOfWeekIndex" : 6,
+      "capacity" : 2,
+      "vacancies" : 0,
+      "points" : 3,
+      "persons" : [ "S9673566K", "S9478974B" ]
+    } ],
+    "blockedDays" : {
+      "dateList" : [ ],
+      "personNricList" : [ ]
+    }
+  },
+  "dutyStorage" : {
+    "dutyStorageList" : [ {
+      "dutyPoints" : 21,
+      "dutyRecords" : [ "Duty : 1 May 2019 | Wednesday | 2 points\n", "Duty : 2 May 2019 | Thursday | 2 points\n", "Duty : 4 May 2019 | Saturday | 4 points\n", "Duty : 18 May 2019 | Saturday | 4 points\n", "Duty : 23 May 2019 | Thursday | 2 points\n", "Duty : 24 May 2019 | Friday | 3 points\n", "Duty : 25 May 2019 | Saturday | 4 points\n" ],
+      "nric" : "S9876567I",
+      "prevDutyPoints" : 0,
+      "prevDutyRecords" : [ ]
+    }, {
+      "dutyPoints" : 22,
+      "dutyRecords" : [ "Duty : 4 May 2019 | Saturday | 4 points\n", "Duty : 5 May 2019 | Sunday | 4 points\n", "Duty : 6 May 2019 | Monday | 2 points\n", "Duty : 14 May 2019 | Tuesday | 2 points\n", "Duty : 20 May 2019 | Monday | 2 points\n", "Duty : 26 May 2019 | Sunday | 4 points\n", "Duty : 28 May 2019 | Tuesday | 2 points\n", "Duty : 30 May 2019 | Thursday | 2 points\n" ],
+      "nric" : "T0034567L",
+      "prevDutyPoints" : 0,
+      "prevDutyRecords" : [ ]
+    }, {
+      "dutyPoints" : 22,
+      "dutyRecords" : [ "Duty : 7 May 2019 | Tuesday | 2 points\n", "Duty : 11 May 2019 | Saturday | 4 points\n", "Duty : 13 May 2019 | Monday | 2 points\n", "Duty : 16 May 2019 | Thursday | 2 points\n", "Duty : 17 May 2019 | Friday | 3 points\n", "Duty : 19 May 2019 | Sunday | 4 points\n", "Duty : 21 May 2019 | Tuesday | 2 points\n", "Duty : 31 May 2019 | Friday | 3 points\n" ],
+      "nric" : "S9673566K",
+      "prevDutyPoints" : 0,
+      "prevDutyRecords" : [ ]
+    }, {
+      "dutyPoints" : 22,
+      "dutyRecords" : [ "Duty : 7 May 2019 | Tuesday | 2 points\n", "Duty : 10 May 2019 | Friday | 3 points\n", "Duty : 12 May 2019 | Sunday | 4 points\n", "Duty : 16 May 2019 | Thursday | 2 points\n", "Duty : 17 May 2019 | Friday | 3 points\n", "Duty : 25 May 2019 | Saturday | 4 points\n", "Duty : 27 May 2019 | Monday | 2 points\n", "Duty : 30 May 2019 | Thursday | 2 points\n" ],
+      "nric" : "S9324325I",
+      "prevDutyPoints" : 0,
+      "prevDutyRecords" : [ ]
+    }, {
+      "dutyPoints" : 21,
+      "dutyRecords" : [ "Duty : 3 May 2019 | Friday | 3 points\n", "Duty : 5 May 2019 | Sunday | 4 points\n", "Duty : 12 May 2019 | Sunday | 4 points\n", "Duty : 15 May 2019 | Wednesday | 2 points\n", "Duty : 23 May 2019 | Thursday | 2 points\n", "Duty : 26 May 2019 | Sunday | 4 points\n", "Duty : 29 May 2019 | Wednesday | 2 points\n" ],
+      "nric" : "T0065782J",
+      "prevDutyPoints" : 0,
+      "prevDutyRecords" : [ ]
+    }, {
+      "dutyPoints" : 22,
+      "dutyRecords" : [ "Duty : 5 May 2019 | Sunday | 4 points\n", "Duty : 6 May 2019 | Monday | 2 points\n", "Duty : 12 May 2019 | Sunday | 4 points\n", "Duty : 14 May 2019 | Tuesday | 2 points\n", "Duty : 15 May 2019 | Wednesday | 2 points\n", "Duty : 21 May 2019 | Tuesday | 2 points\n", "Duty : 22 May 2019 | Wednesday | 2 points\n", "Duty : 26 May 2019 | Sunday | 4 points\n" ],
+      "nric" : "S9357825I",
+      "prevDutyPoints" : 0,
+      "prevDutyRecords" : [ ]
+    }, {
+      "dutyPoints" : 23,
+      "dutyRecords" : [ "Duty : 8 May 2019 | Wednesday | 2 points\n", "Duty : 9 May 2019 | Thursday | 2 points\n", "Duty : 11 May 2019 | Saturday | 4 points\n", "Duty : 18 May 2019 | Saturday | 4 points\n", "Duty : 19 May 2019 | Sunday | 4 points\n", "Duty : 22 May 2019 | Wednesday | 2 points\n", "Duty : 24 May 2019 | Friday | 3 points\n", "Duty : 27 May 2019 | Monday | 2 points\n" ],
+      "nric" : "S9876543P",
+      "prevDutyPoints" : 0,
+      "prevDutyRecords" : [ ]
+    }, {
+      "dutyPoints" : 23,
+      "dutyRecords" : [ "Duty : 1 May 2019 | Wednesday | 2 points\n", "Duty : 2 May 2019 | Thursday | 2 points\n", "Duty : 3 May 2019 | Friday | 3 points\n", "Duty : 4 May 2019 | Saturday | 4 points\n", "Duty : 8 May 2019 | Wednesday | 2 points\n", "Duty : 9 May 2019 | Thursday | 2 points\n", "Duty : 18 May 2019 | Saturday | 4 points\n", "Duty : 25 May 2019 | Saturday | 4 points\n" ],
+      "nric" : "S9687543K",
+      "prevDutyPoints" : 0,
+      "prevDutyRecords" : [ ]
+    }, {
+      "dutyPoints" : 22,
+      "dutyRecords" : [ "Duty : 10 May 2019 | Friday | 3 points\n", "Duty : 11 May 2019 | Saturday | 4 points\n", "Duty : 13 May 2019 | Monday | 2 points\n", "Duty : 19 May 2019 | Sunday | 4 points\n", "Duty : 20 May 2019 | Monday | 2 points\n", "Duty : 28 May 2019 | Tuesday | 2 points\n", "Duty : 29 May 2019 | Wednesday | 2 points\n", "Duty : 31 May 2019 | Friday | 3 points\n" ],
+      "nric" : "S9478974B",
+      "prevDutyPoints" : 0,
+      "prevDutyRecords" : [ ]
+    } ]
+  }
+}
