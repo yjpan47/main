@@ -37,7 +37,7 @@ public class BlockDateCommand extends Command {
 
         Person person = model.findPerson(userName);
         DutyMonth nextMonth = model.getDutyCalendar().getNextMonth();
-        if (nextMonth.isConfirmed()){
+        if (nextMonth.isConfirmed()) {
             throw new CommandException(MESSAGE_DUTY_CONFIRMED);
         }
         if (blockedDates.size() > 15) {
