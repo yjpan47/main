@@ -29,6 +29,6 @@ public class ConfirmScheduleCommandTest {
     public void execute() {
 
         assertCommandFailureGeneral(new ScheduleCommand(), model, new CommandHistory(), Messages.MESSAGE_NO_AUTHORITY);
-        
+
     }
 }
