@@ -35,6 +35,13 @@ public class DutyStorage {
         this.prevDutyRecords = prevDutyRecords;
     }
 
+    public DutyStorage(DutyStorage dutyStorage) {
+        this.dutyPoints = new HashMap<>(dutyStorage.getDutyPoints());
+        this.dutyRecords = new HashMap<>(dutyStorage.getDutyRecords());
+        this.prevDutyPoints = new HashMap<>(dutyStorage.getPrevDutyPoints());
+        this.prevDutyRecords = new HashMap<>(dutyStorage.getPrevDutyRecords());
+    }
+
     /**
      * Updates points for each duty done by person
      */

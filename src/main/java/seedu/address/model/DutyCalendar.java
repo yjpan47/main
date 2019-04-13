@@ -81,7 +81,7 @@ public class DutyCalendar {
         if (dutyCalendar.getCurrentMonth().getMonthIndex() == CalendarUtil.getCurrentMonth()) {
             this.currentMonth = dutyCalendar.getCurrentMonth();
             this.nextMonth = dutyCalendar.getNextMonth();
-            this.dutyStorage = dutyCalendar.getDutyStorage();
+            this.dutyStorage = new DutyStorage(dutyCalendar.getDutyStorage());
         } else {
             this.rollover(dutyCalendar);
         }
