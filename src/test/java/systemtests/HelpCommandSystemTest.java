@@ -30,6 +30,7 @@ public class HelpCommandSystemTest extends PersonnelDatabaseSystemTest {
 
     @Test
     public void openHelpWindow() {
+        setUp();
         //use accelerator
         getCommandBox().click();
         getMainMenu().openHelpWindowUsingAccelerator();
@@ -74,6 +75,7 @@ public class HelpCommandSystemTest extends PersonnelDatabaseSystemTest {
 
     @Test
     public void help_multipleCommands_onlyOneHelpWindowOpen() {
+        setUp();
         getMainMenu().openHelpWindowUsingMenu();
 
         getMainWindowHandle().focus();

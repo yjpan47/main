@@ -14,7 +14,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 
@@ -35,6 +34,7 @@ import seedu.address.model.Model;
 import seedu.address.model.PersonnelDatabase;
 import seedu.address.testutil.TypicalPersons;
 import seedu.address.ui.CommandBox;
+import seedu.address.ui.NricUserPair;
 
 /**
  * A system test class for PersonnelDatabase, which provides access to handles of GUI components and helper methods
@@ -57,10 +57,17 @@ public abstract class PersonnelDatabaseSystemTest {
         SystemTestSetupHelper.initialize();
     }
 
-    @Before
     public void setUp() {
         setupHelper = new SystemTestSetupHelper();
         testApp = setupHelper.setupApplication(this::getInitialData, getDataFileLocation());
+        mainWindowHandle = setupHelper.setupMainWindowHandle();
+
+        assertApplicationStartingStateIsCorrect();
+    }
+
+    public void setUp(NricUserPair nricUserPair) {
+        setupHelper = new SystemTestSetupHelper();
+        testApp = setupHelper.setupApplication(this::getInitialData, getDataFileLocation(), nricUserPair);
         mainWindowHandle = setupHelper.setupMainWindowHandle();
 
         assertApplicationStartingStateIsCorrect();

@@ -132,7 +132,9 @@ public class EditCommand extends Command {
         DutyMonth dutyMonth = model.getDutyCalendar().getNextMonth();
         DutyStorage dutyStorage = model.getDutyStorage();
         for (Duty duty : dutyMonth.getScheduledDuties()) {
-            duty.replacePerson(personToEdit, editedPerson);
+            if (duty.contains(personToEdit)) {
+                duty.replacePerson(personToEdit, editedPerson);
+            }
         }
         dutyStorage.replacePerson(personToEdit, editedPerson);
 
