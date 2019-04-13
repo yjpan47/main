@@ -43,7 +43,11 @@ class JsonAdaptedRequest {
         requester = new JsonAdaptedPerson(source.getRequester());
         allocatedDate = source.getAllocatedDate().toString();
         requestedDate = source.getRequestedDate().toString();
-        accepter = new JsonAdaptedPerson(source.getAccepter());
+        if (source.getAccepter() == null) {
+            accepter = null;
+        } else {
+            accepter = new JsonAdaptedPerson(source.getAccepter());
+        }
     }
 
     /**
@@ -70,13 +74,12 @@ class JsonAdaptedRequest {
 
         final LocalDate modelRequestedDate = LocalDate.parse(requestedDate);
 
-        if (accepter == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "accepter"));
+        if (accepter != null) {
+            Person modelAccepter = accepter.toModelType();
+            return new Request(modelRequester, modelAllocatedDate, modelRequestedDate, modelAccepter);
+        } else {
+            return new Request(modelRequester, modelAllocatedDate, modelRequestedDate);
         }
-
-        Person modelAccepter = accepter.toModelType();
-
-        return new Request(modelRequester, modelAllocatedDate, modelRequestedDate, modelAccepter);
     }
 
 }

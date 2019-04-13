@@ -13,20 +13,20 @@ public class Request {
     private Person requester;
     private LocalDate allocatedDate;
     private LocalDate requestedDate;
-    private Optional<Person> accepter;
+    private Person accepter;
 
     public Request(Person requester, LocalDate allocatedDate, LocalDate requestedDate) {
         this.requester = requester;
         this.allocatedDate = allocatedDate;
         this.requestedDate = requestedDate;
-        this.accepter = Optional.empty();
+        this.accepter = null;
     }
 
     public Request(Person requester, LocalDate allocatedDate, LocalDate requestedDate, Person accepter) {
         this.requester = requester;
         this.allocatedDate = allocatedDate;
         this.requestedDate = requestedDate;
-        this.accepter = Optional.of(accepter);
+        this.accepter = accepter;
     }
 
     public String getRequesterNric() {
@@ -42,23 +42,27 @@ public class Request {
     }
 
     public boolean isAccepterValid() {
-        return accepter.isPresent();
+        return accepter != null;
     }
 
     public String getAccepterNric() {
-        return accepter.get().getNric().toString();
+        return accepter.getNric().toString();
     }
 
     public Person getRequester() {
         return requester;
     }
 
+    public void setRequester(Person requester) {
+        this.requester = requester;
+    }
+
     public Person getAccepter() {
-        return accepter.get();
+        return accepter;
     }
 
     public void setAccepter(Person accepter) {
-        this.accepter = Optional.of(accepter);
+        this.accepter = accepter;
     }
 
     @Override

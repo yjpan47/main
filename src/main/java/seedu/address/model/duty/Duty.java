@@ -160,7 +160,7 @@ public class Duty {
         String personString = "";
         for (Person person : this.persons) {
             if (!person.getNric().toString().equals(nric)) {
-                personString = personString + "  " + person.getName().toString();
+                personString = personString + " " + person.getName().toString();
             }
         }
         return personString;
