@@ -22,7 +22,6 @@ public class JsonAdaptedDuty {
     private final int dayIndex;
     private final int dayOfWeekIndex;
     private final int capacity;
-    private final int vacancies;
     private final int points;
 
     private List<String> persons = new ArrayList<>();
@@ -34,14 +33,13 @@ public class JsonAdaptedDuty {
 
     public JsonAdaptedDuty(@JsonProperty("year") int year, @JsonProperty("monthIndex") int monthIndex,
                            @JsonProperty("dayIndex") int dayIndex, @JsonProperty("dayOfWeekIndex") int dayOfWeekIndex,
-                           @JsonProperty("capacity") int capacity, @JsonProperty("vacancies") int vacancies,
-                           @JsonProperty("points") int points, @JsonProperty("persons") List<String> persons) {
+                           @JsonProperty("capacity") int capacity, @JsonProperty("points") int points,
+                           @JsonProperty("persons") List<String> persons) {
         this.year = year;
         this.monthIndex = monthIndex;
         this.dayIndex = dayIndex;
         this.dayOfWeekIndex = dayOfWeekIndex;
         this.capacity = capacity;
-        this.vacancies = vacancies;
         this.points = points;
         if (persons != null) {
             this.persons.addAll(persons);
@@ -57,7 +55,6 @@ public class JsonAdaptedDuty {
         dayIndex = source.getDayIndex();
         dayOfWeekIndex = source.getDayOfWeekIndex();
         capacity = source.getCapacity();
-        vacancies = source.getVacancies();
         points = source.getPoints();
         for (Person person : source.getPersons()) {
             this.persons.add(person.getNric().toString());
@@ -68,15 +65,6 @@ public class JsonAdaptedDuty {
      * Converts this Jackson-friendly adapted duty object into the model's {@code Duty} object.
      */
     public Duty toModelType(ObservableList<Person> personList) {
-
-        final int modelYear = year;
-        final int modelMonthIndex = monthIndex;
-        final int modelDayIndex = dayIndex;
-        final int modelDayOfWeekIndex = dayOfWeekIndex;
-        final int modelCapacity = capacity;
-        final int modelVacancies = vacancies;
-        final int modelPoints = points;
-
         final List<Person> modelPersonList = new ArrayList<>();
         for (String nric : persons) {
             for (Person person : personList) {
@@ -86,8 +74,8 @@ public class JsonAdaptedDuty {
             }
         }
 
-        return new Duty(modelYear, modelMonthIndex, modelDayIndex, modelDayOfWeekIndex,
-                modelCapacity, modelVacancies, modelPoints, modelPersonList);
+        return new Duty(year, monthIndex, dayIndex, dayOfWeekIndex,
+                capacity, points, modelPersonList);
     }
 
 }

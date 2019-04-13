@@ -195,6 +195,7 @@ public class DutyMonth {
     public HashMap<Person, List<Integer>> getBlockedDates() {
         return this.blockedDays;
     }
+
     /**
      * Prints the scheduled duties for the DutyMonth
      */
@@ -202,20 +203,21 @@ public class DutyMonth {
 
         StringBuilder sb = new StringBuilder();
 
+        if (this.getUnfilledDuties().size() > 0) {
+            sb.append("--- WARNING: THESE DUTIES ARE NOT COMPLETELY UNFILLED! ---\n");
+            for (Duty duty : this.getUnfilledDuties()) {
+                sb.append(String.format("%s | Filled: (%d/%d)\n", duty, duty.getPersons().size(), duty.getCapacity()));
+            }
+            sb.append("\nUse <settings> command to change manpower requirements or <add> command to add more persons.\n\n");
+        }
+
         sb.append(String.format("---- Duty Roster for %1$s %2$s  ---- \n",
                 DateUtil.getMonth(this.monthIndex), this.year));
 
         for (Duty duty : this.getScheduledDuties()) {
-            sb.append(String.format("%-3d %-10s (%d/%d) : [",
-                    duty.getDayIndex(), DateUtil.getDayOfWeek(duty.getDayOfWeekIndex()),
-                    duty.getPersons().size(), duty.getCapacity()));
-
-            for (Person person : duty.getPersons()) {
-                sb.append(String.format("%s %s , ", person.getRank(), person.getName()));
-            }
-
-            sb.append(" ]\n");
+            sb.append(String.format("%s | %s | %s \n", duty, duty.getStatus(), duty.getPersons()));
         }
+
         return sb.toString();
     }
     /**
@@ -223,7 +225,7 @@ public class DutyMonth {
      */
     public String printPoints(DutyStorage dutyStorage) {
         StringBuilder sb = new StringBuilder();
-        sb.append("--- Points Awarded ----\n");
+        sb.append("--- POINTS AWARDED ----\n");
 
         Set<Person> personsThisMonth = new HashSet<>();
         for (Duty duty : this.scheduledDuties) {
@@ -236,10 +238,8 @@ public class DutyMonth {
                     .filter(duty -> duty.getPersons().contains(person))
                     .mapToInt(Duty::getPoints)
                     .sum();
-            sb.append(String.format("%3s %-20s %3d       + %-2d\n",
-                    person.getRank(), person.getName(),
-                    pointsInThePast,
-                    pointsThisMonth));
+            sb.append(String.format("%s | Points Accumulated: %d | Points Awarded: %d\n",
+                    person, pointsInThePast, pointsThisMonth));
         }
         return sb.toString();
     }
@@ -268,7 +268,18 @@ public class DutyMonth {
         }
         return false;
     }
-    
+
+    public List<Duty> getUnfilledDuties() {
+        List<Duty> unfilledDuties = new ArrayList<>();
+        for (Duty duty : this.getScheduledDuties()) {
+            if (!duty.isFilled()) {
+                unfilledDuties.add(duty);
+            }
+        }
+        return unfilledDuties;
+    }
+
+
     public void swap(Person t1, Person t2, DutyStorage dutyStorage) throws IllegalAccessException {
         if (this.isConfirmed()) {
             for (Duty duty : this.getScheduledDuties()) {

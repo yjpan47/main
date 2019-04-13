@@ -20,10 +20,14 @@ public class ConfirmScheduleCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + "Confirms previously generated schedule\n";
 
-    public static final String SCHEDULE_SUCCESS = "Schedule for %s %s confirmed! See below for details\n\n%s\n\n%s\n\n";
-    public static final String SCHEDULE_ALREADY_CONFIRMED = "Schedule for %s %s already confirmed! "
-            + "See below for details\n\n%s\n\n%s\n\n";
-    public static final String NO_SCHEDULE_YET = "No schedules found! Tye <schedule> to make a schedule!";
+    public static final String SCHEDULE_SUCCESS = "Schedule for %s %s confirmed! See below for details\n\n%s\n%s\n";
+    public static final String SCHEDULE_ALREADY_CONFIRMED = "Schedule for %s %s already confirmed!\n" +
+            "Calendar for %s updated!\n" +
+            "See below for details\n\n" +
+            "%s\n%s\n";
+    public static final String MESSAGE_NO_SCHEDULE_YET = "No schedules found! Tye <schedule> to make a schedule!";
+    public static final String MESSAGE_SCHEDULE_NOT_FILLED = "Not all dates in recent schedule are filled!\n" +
+            "Use <settings> command to change manpower requirements or <add> command to add more persons.";
 
     @Override
     public CommandResult executeAdmin(Model model, CommandHistory history) throws CommandException {
@@ -35,6 +39,7 @@ public class ConfirmScheduleCommand extends Command {
             return new CommandResult(String.format(SCHEDULE_ALREADY_CONFIRMED,
                     DateUtil.getMonth(nextMonth.getMonthIndex()),
                     nextMonth.getYear(),
+                    DateUtil.getMonth(nextMonth.getMonthIndex()),
                     nextMonth.printDuties(),
                     dutyStorage.printPoints()));
         }
@@ -42,7 +47,11 @@ public class ConfirmScheduleCommand extends Command {
         DutyMonth dummyMonth = model.getDutyCalendar().getDummyNextMonth();
 
         if (dummyMonth.getScheduledDuties() == null) {
-            return new CommandResult(NO_SCHEDULE_YET);
+            return new CommandResult(MESSAGE_NO_SCHEDULE_YET);
+        }
+
+        if (dummyMonth.getUnfilledDuties().size() > 0) {
+            return new CommandResult(MESSAGE_SCHEDULE_NOT_FILLED);
         }
 
         dutyStorage.update(dummyMonth.getScheduledDuties());

@@ -73,6 +73,7 @@ public class DutyCalendar {
     public int getCurrentYear() {
         return currentYear;
     }
+
     /**
      *  Sets Duty Calendar
      */

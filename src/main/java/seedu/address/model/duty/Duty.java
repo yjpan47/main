@@ -30,9 +30,6 @@ public class Duty {
     // Total number of persons needed for this duty
     private int capacity;
 
-    // Number of people still needed
-    private int vacancies;
-
     // Points awarded for doing this duty
     private int points;
 
@@ -57,19 +54,17 @@ public class Duty {
      * @param dayIndex this dayIndex
      * @param dayOfWeekIndex this dayOfWeekIndex
      * @param capacity this capacity
-     * @param vacancies this vacancies
      * @param points this points
      * @param personList this personList
      */
     public Duty(int year, int monthIndex, int dayIndex, int dayOfWeekIndex, int capacity,
-                int vacancies, int points, List<Person> personList) {
+                 int points, List<Person> personList) {
         if (DateUtil.isValidDate(year, monthIndex, dayIndex) && DateUtil.isValidDayOfWeek(dayOfWeekIndex)) {
             this.year = year;
             this.monthIndex = monthIndex;
             this.dayIndex = dayIndex;
             this.dayOfWeekIndex = dayOfWeekIndex;
             this.capacity = capacity;
-            this.vacancies = vacancies;
             this.points = points;
             this.persons = new ArrayList<>(personList);
         } else {
@@ -174,10 +169,6 @@ public class Duty {
         return this.capacity;
     }
 
-    public int getVacancies() {
-        return this.vacancies;
-    }
-
     public int getPoints() {
         return this.points;
     }
@@ -186,7 +177,11 @@ public class Duty {
     public String toString() {
         return String.format("Duty : %d %s %d | ", this.getDayIndex(), this.getMonthString(), this.getYear())
                 + String.format("%s | ", this.getdayOfWeek())
-                + String.format("%d points\n", this.getPoints());
+                + String.format("%d points", this.getPoints());
+    }
+
+    public String getStatus() {
+        return String.format("Filled: %d/%d", this.persons.size(), this.getCapacity());
     }
 
 }
