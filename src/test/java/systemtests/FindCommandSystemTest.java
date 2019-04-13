@@ -13,6 +13,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.UserType;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -20,11 +22,13 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
+import seedu.address.ui.NricUserPair;
 
 public class FindCommandSystemTest extends PersonnelDatabaseSystemTest {
 
     @Test
     public void find() {
+        setUp();
         /* Case: find multiple persons in personnel database, command with leading spaces and trailing spaces
          * -> 2 persons found
          */
@@ -143,6 +147,15 @@ public class FindCommandSystemTest extends PersonnelDatabaseSystemTest {
         /* Case: mixed case command word -> rejected */
         command = "FiNd Meier";
         assertCommandFailure(command, MESSAGE_UNKNOWN_COMMAND);
+    }
+
+    @Test
+    public void findNonUser() {
+        NricUserPair nullAccount = new NricUserPair(null, UserType.DEFAULT_ADMIN_USERNAME);
+        setUp(nullAccount);
+        /*Case: General User -> rejected */
+        assertCommandFailure(FindCommand.COMMAND_WORD, Messages.MESSAGE_NO_USER);
+
     }
 
     /**

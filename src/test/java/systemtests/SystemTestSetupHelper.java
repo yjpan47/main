@@ -10,6 +10,7 @@ import guitests.guihandles.MainWindowHandle;
 import javafx.stage.Stage;
 import seedu.address.TestApp;
 import seedu.address.model.ReadOnlyPersonnelDatabase;
+import seedu.address.ui.NricUserPair;
 
 /**
  * Contains helper methods that system tests require.
@@ -26,6 +27,24 @@ public class SystemTestSetupHelper {
             FxToolkit.registerStage(Stage::new);
             FxToolkit.setupApplication(() -> {
                 testApp = new TestApp(personnelDatabase, saveFileLocation);
+                return testApp;
+            });
+        } catch (TimeoutException te) {
+            throw new AssertionError("Application takes too long to set up.", te);
+        }
+
+        return testApp;
+    }
+
+    /**
+     * Sets up a new {@code TestApp} and returns it.
+     */
+    public TestApp setupApplication(Supplier<ReadOnlyPersonnelDatabase> personnelDatabase, Path saveFileLocation,
+                                    NricUserPair nricUserPair) {
+        try {
+            FxToolkit.registerStage(Stage::new);
+            FxToolkit.setupApplication(() -> {
+                testApp = new TestApp(personnelDatabase, saveFileLocation, nricUserPair);
                 return testApp;
             });
         } catch (TimeoutException te) {

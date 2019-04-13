@@ -64,6 +64,7 @@ public class EditCommandSystemTest extends PersonnelDatabaseSystemTest {
 
     @Test
     public void edit() {
+        setUp();
         Model model = getModel();
 
         /* ----------------- Performing edit operation while an unfiltered list is being shown ---------------------- */

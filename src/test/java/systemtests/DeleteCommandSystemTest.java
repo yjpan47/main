@@ -13,12 +13,14 @@ import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.UserType;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.ui.NricUserPair;
 
 public class DeleteCommandSystemTest extends PersonnelDatabaseSystemTest {
 
@@ -109,6 +111,22 @@ public class DeleteCommandSystemTest extends PersonnelDatabaseSystemTest {
 
         /* Case: mixed case command word -> rejected */
         assertCommandFailure("DelETE 1", MESSAGE_UNKNOWN_COMMAND);
+    }
+
+    @Test
+    public void deleteNonAdmin() {
+        tearDown();
+        NricUserPair generalAccount = new NricUserPair(UserType.GENERAL, UserType.DEFAULT_ADMIN_USERNAME);
+        setUp(generalAccount);
+        /*Case: General User -> rejected */
+        assertCommandFailure(DeleteCommand.COMMAND_WORD, Messages.MESSAGE_NO_AUTHORITY_PARSE);
+        assertCommandFailure(DeleteCommand.COMMAND_WORD + " 1", Messages.MESSAGE_NO_AUTHORITY_PARSE);
+        tearDown();
+        NricUserPair nullAccount = new NricUserPair(null, UserType.DEFAULT_ADMIN_USERNAME);
+        setUp(nullAccount);
+        /*Case: General User -> rejected */
+        assertCommandFailure(DeleteCommand.COMMAND_WORD + " 1", Messages.MESSAGE_NO_USER);
+
     }
 
     /**
