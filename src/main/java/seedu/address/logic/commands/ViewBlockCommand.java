@@ -9,7 +9,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.duty.DutyMonth;
 import seedu.address.model.person.Person;
-
+/**
+ * Command to view blocked Dates for the next month
+ */
 public class ViewBlockCommand extends Command {
 
     public static final String COMMAND_WORD = "viewblock";

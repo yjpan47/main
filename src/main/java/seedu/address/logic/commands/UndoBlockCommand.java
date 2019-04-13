@@ -6,7 +6,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.duty.DutyMonth;
 import seedu.address.model.person.Person;
-
+/**
+ * Removes all blocked Dates for next month
+ */
 public class UndoBlockCommand extends Command {
 
     public static final String COMMAND_WORD = "undoblock";
