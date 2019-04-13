@@ -25,6 +25,7 @@
     "monthIndex" : 3,
     "firstDayWeekIndex" : 2,
     "confirmed" : "false",
+    "needsRollover" : "false",
     "duties" : [ ],
     "blockedDays" : {
       "dateList" : [ ],
@@ -36,6 +37,7 @@
     "monthIndex" : 4,
     "firstDayWeekIndex" : 4,
     "confirmed" : "false",
+    "needsRollover" : "false",
     "duties" : [ ],
     "blockedDays" : {
       "dateList" : [ ],

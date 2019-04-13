@@ -72,6 +72,16 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
     }
 
     /**
+     * Replaces the contents of the duty calendar with {@code dutyCalendar} without rollover
+     * {@code dutyCalendar} must not contain duplicate duties.
+     */
+    public void setDutyCalendar(DutyCalendar dutyCalendar, boolean needsRollover) {
+        this.dutyCalendar.setDutyCalendar(dutyCalendar, needsRollover);
+        indicateModified();
+
+    }
+
+    /**
      * Replaces the contents of the request list with {@code requestList}.
      */
     public void setRequests(List<Request> requestList) {
