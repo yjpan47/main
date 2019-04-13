@@ -25,12 +25,12 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.PointsCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.RemoveBlockCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.SwapCommand;
 import seedu.address.logic.commands.UnconfirmCommand;
-import seedu.address.logic.commands.UndoBlockCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewBlockCommand;
 import seedu.address.logic.commands.ViewCommand;
@@ -139,8 +139,8 @@ public class PersonnelDatabaseParser {
         case ViewBlockCommand.COMMAND_WORD:
             return new ViewBlockCommand(userName);
 
-        case UndoBlockCommand.COMMAND_WORD:
-            return new UndoBlockCommand(userName);
+        case RemoveBlockCommand.COMMAND_WORD:
+            return new RemoveBlockCommand(userName);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
