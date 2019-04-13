@@ -29,6 +29,7 @@ public class DeleteCommandSystemTest extends PersonnelDatabaseSystemTest {
 
     @Test
     public void delete() {
+        setUp();
         /* ----------------- Performing delete operation while an unfiltered list is being shown -------------------- */
 
         /* Case: delete the first person in the list, command with leading spaces and trailing spaces -> deleted */
@@ -115,7 +116,6 @@ public class DeleteCommandSystemTest extends PersonnelDatabaseSystemTest {
 
     @Test
     public void deleteNonAdmin() {
-        tearDown();
         NricUserPair generalAccount = new NricUserPair(UserType.GENERAL, UserType.DEFAULT_ADMIN_USERNAME);
         setUp(generalAccount);
         /*Case: General User -> rejected */

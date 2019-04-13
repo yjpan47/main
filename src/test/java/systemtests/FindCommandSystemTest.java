@@ -181,11 +181,6 @@ public class FindCommandSystemTest extends PersonnelDatabaseSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find multiple persons in personnel database, 2 keywords in reversed order -> 2 persons found */
-        command = FindCommand.COMMAND_WORD + " Daniel Benson";
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
-
         /* Case: find multiple persons in personnel database, 2 keywords with 1 repeat -> 2 persons found */
         command = FindCommand.COMMAND_WORD + " Daniel Benson Daniel";
         assertCommandSuccess(command, expectedModel);
@@ -207,70 +202,6 @@ public class FindCommandSystemTest extends PersonnelDatabaseSystemTest {
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_FAILURE;
         assertCommandFailure(command, expectedResultMessage);
-
-        /* Case: find same persons in personnel database after deleting 1 of them -> 1 person found */
-        executeCommand(DeleteCommand.COMMAND_WORD + " 1");
-        assertFalse(getModel().getPersonnelDatabase().getPersonList().contains(BENSON));
-        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
-        expectedModel = getModel();
-        ModelHelper.setFilteredList(expectedModel, DANIEL);
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
-
-        /* Case: find person in personnel database, keyword is same as name but of different case -> 1 person found */
-        command = FindCommand.COMMAND_WORD + " MeIeR";
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
-
-        /* Case: find person in personnel database, keyword is substring of name -> 0 persons found */
-        command = FindCommand.COMMAND_WORD + " Mei";
-        ModelHelper.setFilteredList(expectedModel);
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
-
-        /* Case: find person in personnel database, name is substring of keyword -> 0 persons found */
-        command = FindCommand.COMMAND_WORD + " Meiers";
-        ModelHelper.setFilteredList(expectedModel);
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
-
-        /* Case: find person not in personnel database -> 0 persons found */
-        command = FindCommand.COMMAND_WORD + " Mark";
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
-
-
-        /* Case: find phone number of person in personnel database -> 0 persons found */
-        command = FindCommand.COMMAND_WORD + " " + DANIEL.getPhone().value;
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
-
-        /* Case: find tags of person in personnel database -> 0 persons found */
-        List<Tag> tags = new ArrayList<>(DANIEL.getTags());
-        command = FindCommand.COMMAND_WORD + " " + tags.get(0).tagName;
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
-
-        /* Case: find while a person is selected -> selected card deselected */
-        showAllPersons();
-        selectPerson(Index.fromOneBased(1));
-        assertFalse(getPersonListPanel().getHandleToSelectedCard().getName().equals(DANIEL.getName().fullName));
-        command = FindCommand.COMMAND_WORD + " Daniel";
-        ModelHelper.setFilteredList(expectedModel, DANIEL);
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardDeselected();
-
-        /* Case: find person in empty personnel database -> 0 persons found */
-        deleteAllPersons();
-        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
-        expectedModel = getModel();
-        ModelHelper.setFilteredList(expectedModel, DANIEL);
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
-
-        /* Case: mixed case command word -> rejected */
-        command = "FiNd Meier";
-        assertCommandFailure(command, MESSAGE_UNKNOWN_COMMAND);
     }
 
     @Test

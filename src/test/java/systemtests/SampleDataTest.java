@@ -45,6 +45,7 @@ public class SampleDataTest extends PersonnelDatabaseSystemTest {
 
     @Test
     public void personnelDatabase_dataFileDoesNotExist_loadSampleData() {
+        setUp();
         Person[] expectedList = SampleDataUtil.getSamplePersons();
         assertListMatching(getPersonListPanel(), expectedList);
     }

@@ -8,7 +8,7 @@ public class PlanDutyCommandSystemTest extends PersonnelDatabaseSystemTest {
 
     @Test
     public void planDuty() {
-        //setUp();
+        setUp();
         Model model = getModel();
 
         //tests to be added after algorithms are in place
