@@ -8,10 +8,11 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.UserType;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.PenalizeCommand;
 import seedu.address.logic.commands.RewardCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-public class RewardCommandParser implements Parser<RewardCommand> {
+public class PenalizeCommandParser implements Parser<PenalizeCommand> {
 
     private static final Prefix PREFIX_INDEXES = new Prefix("i/");
     private static final Prefix PREFIX_POINTS = new Prefix("p/");
@@ -19,34 +20,30 @@ public class RewardCommandParser implements Parser<RewardCommand> {
     private static final String MESSAGE_POINTS_OUT_OF_RANGE = "Input points out of range";
 
     @Override
-    public RewardCommand parse(String args, UserType userType, String userName) throws ParseException {
+    public PenalizeCommand parse(String args, UserType userType, String userName) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_INDEXES, PREFIX_POINTS);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_INDEXES, PREFIX_POINTS)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RewardCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PenalizeCommand.MESSAGE_USAGE));
+        }
+
+        int points = Integer.parseInt(argMultimap.getValue(PREFIX_POINTS).get());
+        if (points <= 0) {
+            throw new InvalidParameterException();
         }
 
         try {
-            int points = Integer.parseInt(argMultimap.getValue(PREFIX_POINTS).get());
-
-            if (points <= 0) {
-                throw new InvalidParameterException();
-            }
-
             HashSet<Index> indexes = new HashSet<>();
             for (String s : argMultimap.getValue(PREFIX_INDEXES).get().split(" ")) {
                 indexes.add(ParserUtil.parseIndex(s));
             }
-            return new RewardCommand(points, indexes);
+            return new PenalizeCommand(points, indexes);
         } catch (InvalidParameterException pe) {
-           throw new ParseException(MESSAGE_POINTS_OUT_OF_RANGE);
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RewardCommand.MESSAGE_USAGE), pe);
-
+            throw new ParseException(MESSAGE_POINTS_OUT_OF_RANGE);
+        } catch (Exception pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PenalizeCommand.MESSAGE_USAGE), pe);
         }
-
-
     }
 
     /**

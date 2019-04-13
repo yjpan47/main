@@ -20,10 +20,12 @@ public class ConfirmScheduleCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + "Confirms previously generated schedule\n";
 
-    public static final String SCHEDULE_SUCCESS = "Schedule for %s %s confirmed! See below for details\n\n%s\n%s\n";
+    public static final String SCHEDULE_SUCCESS = "Schedule for %s %s confirmed!\n" +
+            "Open calendar and type <viewNext> to view next month's schedule!\n" +
+            "Scroll below for details\n\n%s\n%s\n";
     public static final String SCHEDULE_ALREADY_CONFIRMED = "Schedule for %s %s already confirmed!\n" +
-            "Calendar for %s updated!\n" +
-            "See below for details\n\n" +
+            "Open calendar and type <viewNext> to view next month's schedule!\n" +
+            "Scroll below for details\n\n" +
             "%s\n%s\n";
     public static final String MESSAGE_NO_SCHEDULE_YET = "No schedules found! Tye <schedule> to make a schedule!";
     public static final String MESSAGE_SCHEDULE_NOT_FILLED = "Not all dates in recent schedule are filled!\n" +
@@ -39,7 +41,6 @@ public class ConfirmScheduleCommand extends Command {
             return new CommandResult(String.format(SCHEDULE_ALREADY_CONFIRMED,
                     DateUtil.getMonth(nextMonth.getMonthIndex()),
                     nextMonth.getYear(),
-                    DateUtil.getMonth(nextMonth.getMonthIndex()),
                     nextMonth.printDuties(),
                     dutyStorage.printPoints()));
         }

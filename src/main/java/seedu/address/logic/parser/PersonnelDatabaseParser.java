@@ -23,6 +23,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.PenalizeCommand;
 import seedu.address.logic.commands.PointsCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RewardCommand;
@@ -139,6 +140,9 @@ public class PersonnelDatabaseParser {
 
         case RewardCommand.COMMAND_WORD:
                 return new RewardCommandParser().parse(arguments, userType, userName);
+
+        case PenalizeCommand.COMMAND_WORD:
+                return new PenalizeCommandParser().parse(arguments, userType, userName);
 
         case ViewBlockCommand.COMMAND_WORD:
             return new ViewBlockCommand(userName);

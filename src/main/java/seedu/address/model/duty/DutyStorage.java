@@ -13,8 +13,8 @@ import seedu.address.model.person.Person;
  */
 public class DutyStorage {
 
-    private final String RECORD_REWARDED = "Rewarded %d points\n";
-    private final String RECORD_PENALIZED = "Penalized %d points\n";
+    private final String RECORD_REWARDED = "Reward: %d points added";
+    private final String RECORD_PENALIZED = "Penalty: %d points deducted";
 
     private HashMap<Person, Integer> dutyPoints;
     private HashMap<Person, List<String>> dutyRecords;
@@ -141,7 +141,7 @@ public class DutyStorage {
         StringBuilder sb = new StringBuilder();
         sb.append(person).append("\n");
         sb.append(String.format("Points : %d\n", this.dutyPoints.getOrDefault(person, 0)));
-        sb.append("--- All Duties ---\n");
+        sb.append("--- RECORDS ---\n");
         for (String dutyDetails : this.dutyRecords.getOrDefault(person, new ArrayList<>())) {
             sb.append(dutyDetails).append("\n");
         }
@@ -258,9 +258,9 @@ public class DutyStorage {
         for (Person person : this.dutyPoints.keySet()) {
             if (person.getNric().toString().equals(target.getNric().toString())) {
                 this.dutyPoints.replace(person, this.dutyPoints.get(person) - points);
-                return;
             }
         }
+
         for (Person person : this.dutyRecords.keySet()) {
             if (person.getNric().toString().equals(target.getNric().toString())) {
                 this.dutyRecords.get(person).add(String.format(RECORD_PENALIZED, points));
@@ -269,7 +269,7 @@ public class DutyStorage {
 
         for (Person person : this.prevDutyPoints.keySet()) {
             if (person.getNric().toString().equals(target.getNric().toString())) {
-                this.dutyPoints.replace(person, this.prevDutyPoints.get(person) - points);
+                this.prevDutyPoints.replace(person, this.prevDutyPoints.get(person) - points);
                 return;
             }
         }

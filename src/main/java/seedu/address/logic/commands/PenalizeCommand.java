@@ -15,23 +15,22 @@ import seedu.address.model.Model;
 import seedu.address.model.duty.DutyStorage;
 import seedu.address.model.person.Person;
 
-public class RewardCommand extends Command {
+public class PenalizeCommand extends Command {
 
-    public static final String COMMAND_WORD = "reward";
+    public static final String COMMAND_WORD = "penalize";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Rewards points for selected people\n";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Penalize points for selected people\n";
 
-    public static final String MESSAGE_REWARD_SUCCESS = "Successfully rewarded %d points for the following people: \n%s\n\n%s";
+    public static final String MESSAGE_PENALIZE_SUCCESS = "Successfully penalized %d points for the following people: \n%s\n\n%s";
 
     public static final String MESSAGE_INVALID_INDEX = "The person index %d is invalid";
 
     private final int points;
     private final Set<Index> indexes;
 
-    public RewardCommand(int points, Set<Index> indexes) {
+    public PenalizeCommand(int points, Set<Index> indexes) {
         this.points = points;
         this.indexes = indexes;
-
     }
 
     @Override
@@ -46,10 +45,10 @@ public class RewardCommand extends Command {
             }
             Person target = lastShownList.get(index.getZeroBased());
             personTargeted.add(target);
-            dutyStorage.reward(target, this.points);
+            dutyStorage.penalize(target, this.points);
         }
         model.commitPersonnelDatabase();
-        return new CommandResult(String.format(MESSAGE_REWARD_SUCCESS, this.points, personTargeted, dutyStorage.printPoints()));
+        return new CommandResult(String.format(MESSAGE_PENALIZE_SUCCESS, this.points, personTargeted, dutyStorage.printPoints()));
     }
 
     @Override
