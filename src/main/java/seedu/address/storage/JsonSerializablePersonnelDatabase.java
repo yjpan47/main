@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.DutyCalendar;
 import seedu.address.model.PersonnelDatabase;
 import seedu.address.model.ReadOnlyPersonnelDatabase;
+import seedu.address.model.duty.DutyMonth;
 import seedu.address.model.person.Person;
 import seedu.address.model.request.Request;
 
@@ -78,8 +79,27 @@ class JsonSerializablePersonnelDatabase {
             Request request = jsonAdaptedRequest.toModelType();
             personnelDatabase.addRequest(request);
         }
-        personnelDatabase.setDutyCalendar(new DutyCalendar(currentMonth.toModelType(personList),
-                nextMonth.toModelType(personList), dutyStorage.toModelType(personList)));
+
+        DutyMonth modelCurrentMonth = currentMonth.toModelType(personList);
+        if (modelCurrentMonth.isRollover()) {
+            personnelDatabase.setDutyCalendar(new DutyCalendar(modelCurrentMonth,
+                    nextMonth.toModelType(personList), dutyStorage.toModelType(personList)));
+        } else {
+            personnelDatabase.setDutyCalendar(new DutyCalendar(modelCurrentMonth,
+                    nextMonth.toModelType(personList), dutyStorage.toModelType(personList)), false);
+        }
+
+
+
+        if (personnelDatabase.getDutyCalendar().getCurrentMonth().getMonthIndex() != personnelDatabase
+            .getDutyCalendar().getNextMonth().getMonthIndex() - 1 && personnelDatabase.getDutyCalendar()
+                .getCurrentMonth().getMonthIndex() != 12) {
+            throw new IllegalValueException("The month indices of the current month and the next month do not match!");
+        } else if (personnelDatabase.getDutyCalendar().getCurrentMonth().getMonthIndex() != 11 && personnelDatabase
+                .getDutyCalendar().getCurrentMonth().getYear() != personnelDatabase
+                .getDutyCalendar().getNextMonth().getYear()) {
+            throw new IllegalValueException("The year indices of the current month and the next month do not match!");
+        }
 
         return personnelDatabase;
     }
