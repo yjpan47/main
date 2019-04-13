@@ -22,15 +22,6 @@ public class CalendarUtil {
     }
 
     /**
-     * Gets current month in String format
-     */
-    public static String getMonthString(int monthIndex) {
-        String[] months = {"January", "February", "March", "April", "May", "June", "July",
-            "August", "September", "October", "November", "December"};
-        return months[monthIndex];
-    }
-
-    /**
      * Returns the day of the week of the first day of the particular month
      * @param monthIndex the month to be passed in
      * @return the index of the day of the week of the first day
