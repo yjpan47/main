@@ -61,7 +61,6 @@ import seedu.address.model.person.Section;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
-import seedu.address.testutil.TypicalPersons;
 import seedu.address.ui.NricUserPair;
 
 public class EditCommandSystemTest extends PersonnelDatabaseSystemTest {
