@@ -6,8 +6,8 @@ import java.security.InvalidParameterException;
  */
 public class DateUtil {
 
-    private static int MAX_VALID_YR = 9999;
-    private static int MIN_VALID_YR = 2000;
+    private final static int MAX_VALID_YR = 9999;
+    private final static int MIN_VALID_YR = 2000;
 
     private static final String[] months = {"January", "February", "March", "April",
         "May", "June", "July", "August", "September", "October", "November", "December"};

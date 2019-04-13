@@ -5,8 +5,8 @@ package seedu.address.commons.core;
  */
 class DateValidity {
 
-    private static int MAX_VALID_YR = 9999;
-    private static int MIN_VALID_YR = 2000;
+    private final static int MAX_VALID_YR = 9999;
+    private final static int MIN_VALID_YR = 2000;
 
     static boolean isLeap(int year) {
         return (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0));
