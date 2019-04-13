@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_NO_USER;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +20,13 @@ public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
 
     public static final String MESSAGE_SUCCESS = "Viewing %1$s's duties!\n";
-    public static final String MESSAGE_NOSUCHPERSON = "This person does not exist in the personnel database";
 
     private final String userName;
 
     public ViewCommand(String userName) {
         this.userName = userName;
     }
+
     /**
      * Executes the command
      */
@@ -34,7 +35,7 @@ public class ViewCommand extends Command {
         String messageDuty = MESSAGE_SUCCESS;
 
         if (!model.hasPerson(userName)) {
-            throw new CommandException(MESSAGE_NOSUCHPERSON);
+            throw new CommandException(MESSAGE_NO_USER);
         }
 
         List<Duty> duties = new ArrayList<>();

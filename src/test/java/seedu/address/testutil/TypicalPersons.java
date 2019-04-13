@@ -23,6 +23,7 @@ import java.util.List;
 
 import seedu.address.commons.core.UserType;
 import seedu.address.model.PersonnelDatabase;
+import seedu.address.model.duty.DutySettings;
 import seedu.address.model.person.Person;
 
 
@@ -35,6 +36,8 @@ public class TypicalPersons {
     public static final String GENERAL_DAN_PASSWORD = "Pass";
     public static final String ADMIN_TAN_USERNAME = "S9876543P";
     public static final String ADMIN_TAN_PASSWORD = "password";
+
+    public static final String ALICE_NRIC = "S9673566K";
 
     public static final Person ALICE = new PersonBuilder().withNric("S9673566K").withCompany("Leopard")
             .withSection("1").withRank("CFC").withName("Alice Pauline")
@@ -109,6 +112,19 @@ public class TypicalPersons {
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
+        return ab;
+    }
+
+    /**
+     * Returns an {@code PersonnelDatabase} with all the typical persons and planned duties.
+     */
+    public static PersonnelDatabase getTypicalPersonnelDatabaseWithDuties() {
+        PersonnelDatabase ab = new PersonnelDatabase();
+        for (Person person : getTypicalPersons()) {
+            ab.addPerson(person);
+        }
+        ab.getDutyCalendar().getNextMonth().schedule(ab.getPersonList(), new DutySettings(),
+                ab.getDutyCalendar().getDutyStorage());
         return ab;
     }
 
