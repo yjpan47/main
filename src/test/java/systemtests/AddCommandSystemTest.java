@@ -35,7 +35,6 @@ import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.IDA;
 import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
-import javafx.collections.ObservableList;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
@@ -198,7 +197,6 @@ public class AddCommandSystemTest extends PersonnelDatabaseSystemTest {
         NricUserPair generalAccount = new NricUserPair(UserType.GENERAL, UserType.DEFAULT_ADMIN_USERNAME);
         setUp(generalAccount);
         /*Case: General User -> rejected */
-        Person toAdd = AMY_TO_ADD;
         String command = "   " + AddCommand.COMMAND_WORD + "  " + NRIC_DESC_AMY + " " + COMPANY_DESC_AMY + " "
                 + SECTION_DESC_AMY + " " + RANK_DESC_AMY + " " + NAME_DESC_AMY + "  " + PHONE_DESC_AMY
                 + "   " + TAG_DESC_FRIEND + " ";
@@ -207,7 +205,6 @@ public class AddCommandSystemTest extends PersonnelDatabaseSystemTest {
         NricUserPair nullAccount = new NricUserPair(null, UserType.DEFAULT_ADMIN_USERNAME);
         setUp(nullAccount);
         /*Case: General User -> rejected */
-        toAdd = AMY_TO_ADD;
         command = "   " + AddCommand.COMMAND_WORD + "  " + NRIC_DESC_AMY + " " + COMPANY_DESC_AMY + " "
                 + SECTION_DESC_AMY + " " + RANK_DESC_AMY + " " + NAME_DESC_AMY + "  " + PHONE_DESC_AMY
                 + "   " + TAG_DESC_FRIEND + " ";
