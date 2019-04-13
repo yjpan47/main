@@ -86,6 +86,20 @@ public class DutyCalendar {
             this.rollover(dutyCalendar);
         }
     }
+
+    /**
+     *  Sets Duty Calendar without rollover for testing purposes
+     */
+    public void setDutyCalendar(DutyCalendar dutyCalendar, boolean needsRollover) {
+        if (!needsRollover) {
+            this.currentMonth = dutyCalendar.getCurrentMonth();
+            this.nextMonth = dutyCalendar.getNextMonth();
+            this.dutyStorage = dutyCalendar.getDutyStorage();
+        } else {
+            setDutyCalendar(dutyCalendar);
+        }
+    }
+
     /**
      * Schedules the cuties for next Month
      */
@@ -94,6 +108,7 @@ public class DutyCalendar {
         this.dummyNextMonth = new DutyMonth(nextMonth);
         dummyNextMonth.schedule(persons, dutySettings, dutyStorage);
     }
+
     /**
      * Confirms Schedule
      */
@@ -101,6 +116,7 @@ public class DutyCalendar {
         this.nextMonth = this.dummyNextMonth;
         this.nextMonth.confirm();
     }
+
     /**
      * Unconfirms schedule
      */

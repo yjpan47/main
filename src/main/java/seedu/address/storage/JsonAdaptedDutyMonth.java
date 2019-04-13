@@ -3,7 +3,7 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+//import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -23,6 +23,7 @@ public class JsonAdaptedDutyMonth {
     public static final String INVALID_BOOLEAN_VALUE = "Invalid boolean value!";
 
     private final String confirmed;
+    private final String needsRollover;
     private final int year;
     private final int monthIndex;
     private final int firstDayWeekIndex;
@@ -37,12 +38,14 @@ public class JsonAdaptedDutyMonth {
     public JsonAdaptedDutyMonth(@JsonProperty("year") int year, @JsonProperty("monthIndex") int monthIndex,
                            @JsonProperty("firstDayWeekIndex") int firstDayWeekIndex,
                            @JsonProperty("confirmed") String confirmed,
+                           @JsonProperty("needsRollover") String needsRollover,
                            @JsonProperty("duties") List<JsonAdaptedDuty> duties,
                            @JsonProperty("blockedDays") JsonAdaptedBlockHashMap blockedDays) {
         this.year = year;
         this.monthIndex = monthIndex;
         this.firstDayWeekIndex = firstDayWeekIndex;
         this.confirmed = confirmed;
+        this.needsRollover = needsRollover;
         if (duties != null) {
             this.duties.addAll(duties);
         }
@@ -58,6 +61,7 @@ public class JsonAdaptedDutyMonth {
         } else {
             confirmed = "false";
         }
+        needsRollover = "true";
         year = source.getYear();
         monthIndex = source.getMonthIndex();
         firstDayWeekIndex = source.getFirstDayOfWeekIndex();
@@ -81,13 +85,20 @@ public class JsonAdaptedDutyMonth {
         } else if (!this.confirmed.equals("false")) {
             throw new IllegalValueException(INVALID_BOOLEAN_VALUE);
         }
+        boolean modelRollover = true;
+        if (this.needsRollover.equals("true")) {
+            modelRollover = true;
+        } else if (!this.needsRollover.equals("false")) {
+            modelRollover = false;
+        }
         final List<Duty> monthDuties = new ArrayList<>();
         for (JsonAdaptedDuty duty : duties) {
             monthDuties.add(duty.toModelType(personList));
         }
         final HashMap<Person, List<Integer>> modelBlockedDays = blockedDays.toModelType(personList);
 
-        return new DutyMonth(modelConfirmed, year, monthIndex, firstDayWeekIndex, monthDuties, modelBlockedDays);
+        return new DutyMonth(modelConfirmed, modelRollover, year, monthIndex, firstDayWeekIndex, monthDuties,
+                modelBlockedDays);
     }
 
 }

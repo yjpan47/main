@@ -6,14 +6,18 @@
     "rank": "CPL",
     "name": "Alice Pauline",
     "phone": "94351253",
-    "tagged": [ "friends" ]
+    "tagged": [ "friends" ],
+    "password" : "S9765432A",
+    "userType" : "GENERAL"
   }, {
     "nric": "S9765432A",
     "company": "Delta",
     "section": "2",
     "rank": "CPL",
     "name": "Alice Pauline",
-    "phone": "94351253"
+    "phone": "94351253",
+    "password" : "S9765432A",
+    "userType" : "GENERAL"
   } ],
   "requests" : [ ],
   "currentMonth" : {
@@ -21,15 +25,26 @@
     "monthIndex" : 3,
     "firstDayWeekIndex" : 2,
     "confirmed" : "false",
+    "needsRollover" : "false",
     "duties" : [ ],
-    "hashMap" : [ ]
+    "blockedDays" : {
+      "dateList" : [ ],
+      "personNricList" : [ ]
+    }
   },
   "nextMonth" : {
     "year" : 2019,
     "monthIndex" : 4,
     "firstDayWeekIndex" : 4,
     "confirmed" : "false",
+    "needsRollover" : "false",
     "duties" : [ ],
-    "hashMap" : [ ]
+    "blockedDays" : {
+      "dateList" : [ ],
+      "personNricList" : [ ]
+    }
+  },
+  "dutyStorage" : {
+    "dutyStorageList" : []
   }
 }

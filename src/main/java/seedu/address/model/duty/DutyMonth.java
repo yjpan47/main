@@ -18,6 +18,7 @@ import seedu.address.model.person.Person;
 public class DutyMonth {
 
     private boolean confirmed = false;
+    private boolean needsRollover = true;
 
     private int year;
     private int monthIndex;
@@ -44,15 +45,18 @@ public class DutyMonth {
 
     /**
      * Constructor for reconstructing DutyMonth object from json
+     * @param confirmed whether this object is confirmed
+     * @param needsRollover whether this needs a rollover
      * @param year current year
      * @param monthIndex current index of month (0 - 11)
      * @param firstDayOfWeekIndex day of the week of first day of current month (1 for Sunday - 7 for Saturday)
      * @param duties the list of the duties
      * @param blockedDays the list of blocked dates
      */
-    public DutyMonth(boolean confirmed, int year, int monthIndex, int firstDayOfWeekIndex,
+    public DutyMonth(boolean confirmed, boolean needsRollover, int year, int monthIndex, int firstDayOfWeekIndex,
                      List<Duty> duties, HashMap<Person, List<Integer>> blockedDays) {
         this.confirmed = confirmed;
+        this.needsRollover = needsRollover;
         this.year = year;
         this.monthIndex = monthIndex;
         this.firstDayOfWeekIndex = firstDayOfWeekIndex;
@@ -84,6 +88,10 @@ public class DutyMonth {
             throw new InvalidParameterException("Invalid Date");
         }
     }
+    public void removeBlockedDays(Person person) {
+        this.blockedDays.get(person).clear();
+    }
+
     /**
      * Schedule allocates duties for the DutyMonth
      */
@@ -246,6 +254,10 @@ public class DutyMonth {
 
     public boolean isConfirmed() {
         return confirmed;
+    }
+
+    public boolean isRollover() {
+        return this.needsRollover;
     }
 
     public void confirm() {

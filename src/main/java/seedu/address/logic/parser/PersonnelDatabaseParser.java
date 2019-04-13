@@ -31,7 +31,9 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.SwapCommand;
 import seedu.address.logic.commands.UnconfirmCommand;
+import seedu.address.logic.commands.UndoBlockCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.ViewBlockCommand;
 import seedu.address.logic.commands.ViewCommand;
 
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -137,6 +139,12 @@ public class PersonnelDatabaseParser {
 
         case RewardCommand.COMMAND_WORD:
                 return new RewardCommandParser().parse(arguments, userType, userName);
+
+        case ViewBlockCommand.COMMAND_WORD:
+            return new ViewBlockCommand(userName);
+
+        case UndoBlockCommand.COMMAND_WORD:
+            return new UndoBlockCommand(userName);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
