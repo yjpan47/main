@@ -51,15 +51,17 @@ public class UiManager implements Ui {
         }
     }
 
+    /**
+     * Stricly only for testing purposes
+     */
     @Override
-    public void testStartAdmin(Stage primaryStage) {
+    public void startTest(Stage primaryStage, NricUserPair nricUserPair) {
         logger.info("Starting UI...");
 
         //Set the application icon.
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            NricUserPair nricUserPair = new NricUserPair(UserType.ADMIN, "ADMIN");
             mainWindow = new MainWindow(primaryStage, logic, nricUserPair.userType, nricUserPair.userName);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
