@@ -147,9 +147,6 @@ public class PersonnelDatabaseParser {
         case ViewBlockCommand.COMMAND_WORD:
             return new ViewBlockCommand(userName);
 
-        case UndoBlockCommand.COMMAND_WORD:
-            return new UndoBlockCommand(userName);
-
         case RemoveBlockCommand.COMMAND_WORD:
             return new RemoveBlockCommand(userName);
 
