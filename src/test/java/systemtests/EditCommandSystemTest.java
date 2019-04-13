@@ -251,7 +251,7 @@ public class EditCommandSystemTest extends PersonnelDatabaseSystemTest {
 
     @Test
     public void editGeneral() {
-        NricUserPair nricUserPair = new NricUserPair(UserType.GENERAL, TypicalPersons.ALICE_NRIC);
+        NricUserPair nricUserPair = new NricUserPair(UserType.GENERAL, ALICE_NRIC);
         setUp(nricUserPair);
 
         Model model = getModel();
@@ -270,8 +270,8 @@ public class EditCommandSystemTest extends PersonnelDatabaseSystemTest {
          * -> and multiple spaces between each field edited
          */
         PersonBuilder personBuilder1 = new PersonBuilder(BOB).withTags(VALID_TAG_HUSBAND)
-                .withNric(TypicalPersons.ALICE_NRIC).withUserType(UserType.GENERAL)
-                .withPassword(TypicalPersons.ALICE_NRIC);
+                .withNric(ALICE_NRIC).withUserType(UserType.GENERAL)
+                .withPassword(ALICE_NRIC);
         Person editedPerson = personBuilder1.build();
         command = " " + EditCommand.COMMAND_WORD + "  "
                 + COMPANY_DESC_BOB + " " + SECTION_DESC_BOB + " " + RANK_DESC_BOB + " " + NAME_DESC_BOB + "  "
