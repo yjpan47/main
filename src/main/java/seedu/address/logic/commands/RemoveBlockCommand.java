@@ -9,14 +9,14 @@ import seedu.address.model.person.Person;
 /**
  * Removes all blocked Dates for next month
  */
-public class UndoBlockCommand extends Command {
+public class RemoveBlockCommand extends Command {
 
-    public static final String COMMAND_WORD = "undoblock";
+    public static final String COMMAND_WORD = "removeblock";
     public static final String MESSAGE_USAGE = COMMAND_WORD + "Undo blocked Dates for next month";
     public static final String MESSAGE_REMOVED_BLOCKED_DATES = "Undo Block Dates successful!";
     private final String userName;
 
-    public UndoBlockCommand(String userName) {
+    public RemoveBlockCommand(String userName) {
         this.userName = userName;
     }
     /**
@@ -49,12 +49,12 @@ public class UndoBlockCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UndoBlockCommand)) {
+        if (!(other instanceof RemoveBlockCommand)) {
             return false;
         }
 
         // state check
-        UndoBlockCommand e = (UndoBlockCommand) other;
+        RemoveBlockCommand e = (RemoveBlockCommand) other;
         return userName.equals(e.userName);
     }
 }

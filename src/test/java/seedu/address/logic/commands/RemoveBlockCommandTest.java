@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.UndoBlockCommand.MESSAGE_REMOVED_BLOCKED_DATES;
+import static seedu.address.logic.commands.RemoveBlockCommand.MESSAGE_REMOVED_BLOCKED_DATES;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccessGeneral;
 //import static seedu.address.logic.commands.ViewBlockCommand.MESSAGE_BLOCKED_DATES;
 //import static seedu.address.testutil.TypicalPersons.GENERAL_DAN;
@@ -22,16 +22,16 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for UndoBlockCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for RemoveBlockCommand.
  */
-public class UndoBlockCommandTest {
+public class RemoveBlockCommandTest {
 
     private Model model = new ModelManager(getTypicalPersonnelDatabase(), new UserPrefs());
 
     @Test
     public void execute() {
-        assertCommandFailure(new UndoBlockCommand("Admin"), model, new CommandHistory(),
+        assertCommandFailure(new RemoveBlockCommand("Admin"), model, new CommandHistory(),
                 Messages.MESSAGE_NO_AUTHORITY);
-        assertCommandSuccessGeneral(new UndoBlockCommand(GENERAL_DAN_USERNAME), model, new CommandHistory(), new CommandResult(String.format(MESSAGE_REMOVED_BLOCKED_DATES)), model);
+        assertCommandSuccessGeneral(new RemoveBlockCommand(GENERAL_DAN_USERNAME), model, new CommandHistory(), new CommandResult(String.format(MESSAGE_REMOVED_BLOCKED_DATES)), model);
     }
 }
