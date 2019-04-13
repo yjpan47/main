@@ -3,6 +3,7 @@ package systemtests;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.COMPANY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.COMPANY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_COMPANY_DESC;
@@ -35,6 +36,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalPersons.ALICE_NRIC;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
@@ -59,6 +61,8 @@ import seedu.address.model.person.Section;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.TypicalPersons;
+import seedu.address.ui.NricUserPair;
 
 public class EditCommandSystemTest extends PersonnelDatabaseSystemTest {
 
@@ -230,6 +234,100 @@ public class EditCommandSystemTest extends PersonnelDatabaseSystemTest {
                 + SECTION_DESC_BOB + RANK_DESC_BOB + NAME_DESC_BOB
                 + PHONE_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + PASSWORD_DESC_BOB + USERTYPE_DESC_BOB;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
+    }
+
+    @Test
+    public void editNonUser() {
+        NricUserPair nricUserPair = new NricUserPair(null, UserType.DEFAULT_ADMIN_USERNAME);
+        setUp(nricUserPair);
+        Index index = INDEX_FIRST_PERSON;
+        String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NRIC_DESC_BOB
+                + " " + COMPANY_DESC_BOB + " " + SECTION_DESC_BOB + " " + RANK_DESC_BOB + " " + NAME_DESC_BOB + "  "
+                + PHONE_DESC_BOB + " " + TAG_DESC_HUSBAND + " " + PASSWORD_DESC_BOB + " " + USERTYPE_DESC_BOB
+                + " " + USERTYPE_DESC_BOB;
+        assertCommandFailure(command, Messages.MESSAGE_NO_USER);
+        assertCommandFailure(EditCommand.COMMAND_WORD, Messages.MESSAGE_NO_USER);
+    }
+
+    @Test
+    public void editGeneral() {
+        NricUserPair nricUserPair = new NricUserPair(UserType.GENERAL, TypicalPersons.ALICE_NRIC);
+        setUp(nricUserPair);
+
+        Model model = getModel();
+        /*
+        Case: Using admin command style for general account for edit.
+         */
+        Index index = INDEX_FIRST_PERSON;
+        String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  "
+                + COMPANY_DESC_BOB + " " + SECTION_DESC_BOB + " " + RANK_DESC_BOB + " " + NAME_DESC_BOB + "  "
+                + PHONE_DESC_BOB + " " + TAG_DESC_HUSBAND + " ";
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_GENERAL));
+
+        /* ----------------- Performing edit operation while an unfiltered list is being shown ---------------------- */
+
+        /* Case: edit all fields except password and usertype, command with leading spaces, trailing spaces
+         * -> and multiple spaces between each field edited
+         */
+        PersonBuilder personBuilder1 = new PersonBuilder(BOB).withTags(VALID_TAG_HUSBAND)
+                .withNric(TypicalPersons.ALICE_NRIC).withUserType(UserType.GENERAL)
+                .withPassword(TypicalPersons.ALICE_NRIC);
+        Person editedPerson = personBuilder1.build();
+        command = " " + EditCommand.COMMAND_WORD + "  "
+                + COMPANY_DESC_BOB + " " + SECTION_DESC_BOB + " " + RANK_DESC_BOB + " " + NAME_DESC_BOB + "  "
+                + PHONE_DESC_BOB + " " + TAG_DESC_HUSBAND + " ";
+        assertCommandSuccess(command, index, editedPerson);
+
+        /* Case: undo editing the last person in the list -> last person restored */
+        command = UndoCommand.COMMAND_WORD;
+        String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
+        assertCommandSuccess(command, model, expectedResultMessage);
+
+        /* Case: redo editing the last person in the list -> last person edited again */
+        command = RedoCommand.COMMAND_WORD;
+        expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
+        model.setPerson(getModel().getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), editedPerson);
+        assertCommandSuccess(command, model, expectedResultMessage);
+
+        /* Case: clear tags -> cleared */
+        command = EditCommand.COMMAND_WORD + " " + PREFIX_TAG.getPrefix();
+        Person personToEdit = getModel().findPerson(ALICE_NRIC);
+        editedPerson = new PersonBuilder(personToEdit).withTags().build();
+        assertCommandSuccess(command, index, editedPerson);
+
+        /* --------------------------------- Performing invalid edit operation -------------------------------------- */
+
+        /* Case: missing all fields -> rejected */
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " ,
+                EditCommand.MESSAGE_NOT_EDITED);
+
+        /* Case: invalid company -> rejected */
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INVALID_COMPANY_DESC,
+                Company.MESSAGE_CONSTRAINTS);
+
+        /* Case: invalid section -> rejected */
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INVALID_SECTION_DESC,
+                Section.MESSAGE_CONSTRAINTS);
+
+        /* Case: invalid rank -> rejected */
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INVALID_RANK_DESC,
+                Rank.MESSAGE_CONSTRAINTS);
+
+        /* Case: invalid name -> rejected */
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INVALID_NAME_DESC,
+                Name.MESSAGE_CONSTRAINTS);
+
+        /* Case: invalid phone -> rejected */
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INVALID_PHONE_DESC,
+                Phone.MESSAGE_CONSTRAINTS);
+
+        /* Case: invalid tag -> rejected */
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INVALID_TAG_DESC,
+                Tag.MESSAGE_CONSTRAINTS);
+
+        /* Case: giving nric -> rejected */
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + NRIC_DESC_BOB,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_GENERAL));
     }
 
     /**
