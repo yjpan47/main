@@ -23,10 +23,13 @@ public class JsonSerializablePersonnelDatabaseTest {
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonPersonnelDatabase.json");
     private static final Path TYPICAL_PERSON_FILE_WITH_DUTY = TEST_DATA_FOLDER
             .resolve("typicalPersonsWithDutyPersonnelDatabase.json");
+    private static final Path TYPICAL_PERSON_FILE_WITH_BLOCKED_DATES = TEST_DATA_FOLDER
+            .resolve("typicalPersonsWithBlockedDatesPersonnelDatabase.json");
     private static final Path INVALID_DUTYMONTH_INDEX_FILE = TEST_DATA_FOLDER
             .resolve("invalidDutyMonthIndexPersonnelDatabase.json");
     private static final Path INVALID_DUTYMONTH_YEAR_INDEX_FILE = TEST_DATA_FOLDER
             .resolve("invalidDutyYearIndexPersonnelDatabase.json");
+
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -43,6 +46,15 @@ public class JsonSerializablePersonnelDatabaseTest {
     @Test
     public void toModelType_typicalPersonsWithDutyFile_success() throws Exception {
         JsonSerializablePersonnelDatabase dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSON_FILE_WITH_DUTY,
+                JsonSerializablePersonnelDatabase.class).get();
+        PersonnelDatabase personnelDatabaseFromFile = dataFromFile.toModelType();
+        PersonnelDatabase typicalPersonsPersonnelDatabase = TypicalPersons.getTypicalPersonnelDatabase();
+        assertEquals(personnelDatabaseFromFile, typicalPersonsPersonnelDatabase);
+    }
+
+    @Test
+    public void toModelType_typicalPersonsWithBlockedDatesFile_success() throws Exception {
+        JsonSerializablePersonnelDatabase dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSON_FILE_WITH_BLOCKED_DATES,
                 JsonSerializablePersonnelDatabase.class).get();
         PersonnelDatabase personnelDatabaseFromFile = dataFromFile.toModelType();
         PersonnelDatabase typicalPersonsPersonnelDatabase = TypicalPersons.getTypicalPersonnelDatabase();
