@@ -23,6 +23,7 @@ import java.util.List;
 
 import seedu.address.commons.core.UserType;
 import seedu.address.model.PersonnelDatabase;
+import seedu.address.model.duty.DutySettings;
 import seedu.address.model.person.Person;
 
 
@@ -36,27 +37,32 @@ public class TypicalPersons {
     public static final String ADMIN_TAN_USERNAME = "S9876543P";
     public static final String ADMIN_TAN_PASSWORD = "password";
 
+    public static final String ALICE_NRIC = "S9673566K";
+
     public static final Person ALICE = new PersonBuilder().withNric("S9673566K").withCompany("Leopard")
             .withSection("1").withRank("CFC").withName("Alice Pauline")
-            .withPhone("94351253").withTags("outstanding").buildReduced();
+            .withPhone("94351253").withTags("outstanding").withPassword("S9673566K")
+            .withUserType(UserType.GENERAL).build();
     public static final Person BENSON = new PersonBuilder().withNric("S9478974B").withCompany("Hawk")
             .withSection("2").withRank("PTE").withName("Benson Meier")
-            .withPhone("98765432").withTags("injured").buildReduced();
+            .withPhone("98765432").withTags("injured").withPassword("S9478974B")
+            .withUserType(UserType.GENERAL).build();
     public static final Person CARL = new PersonBuilder().withNric("S9324325I").withCompany("Cougar")
             .withSection("3").withRank("REC").withName("Carl Kurz")
-            .withPhone("95352563").buildReduced();
+            .withPhone("95352563").withPassword("S9324325I").withUserType(UserType.GENERAL).build();
     public static final Person DANIEL = new PersonBuilder().withNric("T0034567L").withCompany("Falcon")
             .withSection("4").withRank("LCP").withName("Daniel Meier")
-            .withPhone("87652533").withTags("friends").buildReduced();
+            .withPhone("87652533").withTags("friends").withPassword("T0034567L")
+            .withUserType(UserType.GENERAL).build();
     public static final Person ELLE = new PersonBuilder().withNric("S9876567I").withCompany("Ninja")
             .withSection("2").withRank("REC").withName("Elle Meyer")
-            .withPhone("9482224").buildReduced();
+            .withPhone("9482224").withPassword("S9876567I").withUserType(UserType.GENERAL).build();
     public static final Person FIONA = new PersonBuilder().withNric("S9357825I").withCompany("2nd")
             .withSection("1").withRank("PTE").withName("Fiona Kunz")
-            .withPhone("9482427").buildReduced();
+            .withPhone("9482427").withPassword("S9357825I").withUserType(UserType.GENERAL).build();
     public static final Person GEORGE = new PersonBuilder().withNric("T0065782J").withCompany("1st")
             .withSection("2").withRank("CFC").withName("George Best")
-            .withPhone("+942442").buildReduced();
+            .withPhone("+942442").withPassword("T0065782J").withUserType(UserType.GENERAL).build();
     public static final Person GENERAL_DAN = new PersonBuilder().withNric(GENERAL_DAN_USERNAME).withCompany("3rd")
             .withSection("5").withRank("LTC").withName("Dan").withPhone("98765432")
             .withPassword(GENERAL_DAN_PASSWORD).withUserType(UserType.GENERAL).build();
@@ -106,6 +112,19 @@ public class TypicalPersons {
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
+        return ab;
+    }
+
+    /**
+     * Returns an {@code PersonnelDatabase} with all the typical persons and planned duties.
+     */
+    public static PersonnelDatabase getTypicalPersonnelDatabaseWithDuties() {
+        PersonnelDatabase ab = new PersonnelDatabase();
+        for (Person person : getTypicalPersons()) {
+            ab.addPerson(person);
+        }
+        ab.getDutyCalendar().getNextMonth().schedule(ab.getPersonList(), new DutySettings(),
+                ab.getDutyCalendar().getDutyStorage());
         return ab;
     }
 

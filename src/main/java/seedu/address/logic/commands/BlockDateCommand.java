@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import java.util.List;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -12,7 +13,7 @@ import seedu.address.model.person.Person;
  */
 public class BlockDateCommand extends Command {
 
-    public static final String COMMAND_WORD = "bd";
+    public static final String COMMAND_WORD = "block";
     public static final String MESSAGE_USAGE = COMMAND_WORD + " Blocks out certain duty dates for the upcoming "
             + "month for the current person using.\n"
             + "Parameters: Dates in numbers for the next month\n"
@@ -20,7 +21,8 @@ public class BlockDateCommand extends Command {
     public static final String MESSAGE_BLOCK_DATES_SUCCESS = "Dates for next month have been successfully blocked!";
     public static final String MESSAGE_TOO_MANY_BLOCKED_DATES = "Too many dates to block, number of blocked days "
             + "should be less than 15";
-
+    public static final String MESSAGE_DUTY_CONFIRMED = "Next month's duty has already been confirmed!"
+            + "\nCannot block dates for the upcoming month ";
     private final List<Integer> blockedDates;
     private final String userName;
 
@@ -28,11 +30,16 @@ public class BlockDateCommand extends Command {
         this.blockedDates = blockedDates;
         this.userName = userName;
     }
-
+    /**
+     * Executes the command
+     */
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
 
         Person person = model.findPerson(userName);
         DutyMonth nextMonth = model.getDutyCalendar().getNextMonth();
+        if (nextMonth.isConfirmed()) {
+            throw new CommandException(MESSAGE_DUTY_CONFIRMED);
+        }
         if (blockedDates.size() > 15) {
             throw new CommandException(MESSAGE_TOO_MANY_BLOCKED_DATES);
         }
@@ -52,7 +59,8 @@ public class BlockDateCommand extends Command {
 
     @Override
     public CommandResult executeAdmin(Model model, CommandHistory history) throws CommandException {
-        return execute(model, history);
+        throw new CommandException(Messages.MESSAGE_NO_AUTHORITY_PARSE);
+
     }
 
     @Override

@@ -11,7 +11,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.duty.DutyStorage;
 import seedu.address.model.person.Person;
-
+/**
+ * A command to view the points of the people in the Personnel Database
+ */
 public class PointsCommand extends Command {
 
     public static final String COMMAND_WORD = "points";

@@ -1,13 +1,12 @@
 package seedu.address.testutil;
 
-import seedu.address.model.request.Request;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.model.request.Request;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.

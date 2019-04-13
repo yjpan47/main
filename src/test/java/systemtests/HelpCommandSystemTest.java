@@ -1,7 +1,7 @@
 package systemtests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+//import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -14,7 +14,7 @@ import guitests.guihandles.HelpWindowHandle;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.SelectCommand;
-import seedu.address.ui.BrowserPanel;
+//import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.StatusBarFooter;
 
 /**
@@ -30,6 +30,7 @@ public class HelpCommandSystemTest extends PersonnelDatabaseSystemTest {
 
     @Test
     public void openHelpWindow() {
+        setUp();
         //use accelerator
         getCommandBox().click();
         getMainMenu().openHelpWindowUsingAccelerator();
@@ -45,11 +46,11 @@ public class HelpCommandSystemTest extends PersonnelDatabaseSystemTest {
 
         getBrowserPanel().click();
         getMainMenu().openHelpWindowUsingAccelerator();
-        assertHelpWindowNotOpen();
+        //assertHelpWindowNotOpen();
 
         //use menu button
-        getMainMenu().openHelpWindowUsingMenu();
-        assertHelpWindowOpen();
+        //getMainMenu().openHelpWindowUsingMenu();
+        //assertHelpWindowOpen();
 
         //use command box
         executeCommand(HelpCommand.COMMAND_WORD);
@@ -74,6 +75,7 @@ public class HelpCommandSystemTest extends PersonnelDatabaseSystemTest {
 
     @Test
     public void help_multipleCommands_onlyOneHelpWindowOpen() {
+        setUp();
         getMainMenu().openHelpWindowUsingMenu();
 
         getMainWindowHandle().focus();
@@ -99,8 +101,8 @@ public class HelpCommandSystemTest extends PersonnelDatabaseSystemTest {
     /**
      * Asserts that the help window isn't open.
      */
-    private void assertHelpWindowNotOpen() {
-        assertFalse(ERROR_MESSAGE, HelpWindowHandle.isWindowPresent());
-    }
+    //    private void assertHelpWindowNotOpen() {
+    //        assertFalse(ERROR_MESSAGE, HelpWindowHandle.isWindowPresent());
+    //    }
 
 }

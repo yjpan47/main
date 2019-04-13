@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import seedu.address.model.person.Person;
 /**
@@ -36,6 +35,13 @@ public class DutyStorage {
         this.prevDutyRecords = prevDutyRecords;
     }
 
+    public DutyStorage(DutyStorage dutyStorage) {
+        this.dutyPoints = new HashMap<>(dutyStorage.getDutyPoints());
+        this.dutyRecords = new HashMap<>(dutyStorage.getDutyRecords());
+        this.prevDutyPoints = new HashMap<>(dutyStorage.getPrevDutyPoints());
+        this.prevDutyRecords = new HashMap<>(dutyStorage.getPrevDutyRecords());
+    }
+
     /**
      * Updates points for each duty done by person
      */
@@ -63,7 +69,9 @@ public class DutyStorage {
             }
         }
     }
-
+    /**
+     * Undoes the storage for dutyPoints
+     */
     public void undo() {
         this.dutyPoints.clear();
         for (Person person : this.prevDutyPoints.keySet()) {
@@ -111,7 +119,9 @@ public class DutyStorage {
         return sb.toString();
     }
 
-
+    /**
+     * Prints the duties for that month
+     */
     public String printDetails(Person person) {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("Points : %d\n", this.dutyPoints.getOrDefault(person, 0)));
@@ -138,7 +148,9 @@ public class DutyStorage {
             }
         };
     }
-
+    /**
+     * Removes Person for Duty Storage
+     */
     public void removePerson(Person remove) {
         for (Person p : this.dutyPoints.keySet()) {
             if (remove.getNric().toString().equals(p.getNric().toString())) {
@@ -171,7 +183,9 @@ public class DutyStorage {
 
 
     }
-
+    /**
+     * Replaces person for duty storage
+     */
     public void replacePerson(Person personToEdit, Person editedPerson) {
         Set<Person> persons = new HashSet<>();
         persons.addAll(this.dutyPoints.keySet());

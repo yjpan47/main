@@ -73,6 +73,16 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
     }
 
     /**
+     * Replaces the contents of the duty calendar with {@code dutyCalendar} without rollover
+     * {@code dutyCalendar} must not contain duplicate duties.
+     */
+    public void setDutyCalendar(DutyCalendar dutyCalendar, boolean needsRollover) {
+        this.dutyCalendar.setDutyCalendar(dutyCalendar, needsRollover);
+        indicateModified();
+
+    }
+
+    /**
      * Replaces the contents of the request list with {@code requestList}.
      */
     public void setRequests(List<Request> requestList) {
@@ -89,7 +99,7 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
      */
     public void scheduleDutyForNextMonth(List<Person> persons,
                                          DutySettings dutySettings, DutyStorage dutyStorage) {
-        this.dutyCalendar.scheduleDutyForNextMonth(persons,dutySettings, dutyStorage);
+        this.dutyCalendar.scheduleDutyForNextMonth(persons, dutySettings, dutyStorage);
     }
 
     /**
@@ -102,8 +112,9 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
         setDutyCalendar(newData.getDutyCalendar());
         setRequests(newData.getRequestList());
     }
-
-    // Sort the persons in the personnel database by name
+    /**
+     * Sorts the persons in the personnal database by name
+     */
     public void sort() {
 
         this.persons.sort();

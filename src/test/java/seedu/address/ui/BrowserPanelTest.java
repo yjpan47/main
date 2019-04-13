@@ -2,11 +2,11 @@ package seedu.address.ui;
 
 import static org.junit.Assert.assertEquals;
 
-import javafx.scene.layout.Region;
 import org.junit.Before;
 import org.junit.Test;
 
 import guitests.guihandles.BrowserPanelHandle;
+import javafx.scene.layout.Region;
 import seedu.address.testutil.TypicalRequests;
 
 public class BrowserPanelTest extends GuiUnitTest {

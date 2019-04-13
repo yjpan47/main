@@ -38,6 +38,7 @@ import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.UserType;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.RedoCommand;
@@ -51,11 +52,13 @@ import seedu.address.model.person.Rank;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.ui.NricUserPair;
 
 public class AddCommandSystemTest extends PersonnelDatabaseSystemTest {
 
     @Test
     public void add() {
+        setUp();
         Model model = getModel();
 
         /* ------------------------ Perform add operations on the shown unfiltered list ----------------------------- */
@@ -189,6 +192,26 @@ public class AddCommandSystemTest extends PersonnelDatabaseSystemTest {
         assertCommandFailure(command, Rank.MESSAGE_CONSTRAINTS);
     }
 
+    @Test
+    public void addNonAdmin() {
+        NricUserPair generalAccount = new NricUserPair(UserType.GENERAL, UserType.DEFAULT_ADMIN_USERNAME);
+        setUp(generalAccount);
+        /*Case: General User -> rejected */
+        String command = "   " + AddCommand.COMMAND_WORD + "  " + NRIC_DESC_AMY + " " + COMPANY_DESC_AMY + " "
+                + SECTION_DESC_AMY + " " + RANK_DESC_AMY + " " + NAME_DESC_AMY + "  " + PHONE_DESC_AMY
+                + "   " + TAG_DESC_FRIEND + " ";
+        assertCommandFailure(command, Messages.MESSAGE_NO_AUTHORITY);
+        tearDown();
+        NricUserPair nullAccount = new NricUserPair(null, UserType.DEFAULT_ADMIN_USERNAME);
+        setUp(nullAccount);
+        /*Case: General User -> rejected */
+        command = "   " + AddCommand.COMMAND_WORD + "  " + NRIC_DESC_AMY + " " + COMPANY_DESC_AMY + " "
+                + SECTION_DESC_AMY + " " + RANK_DESC_AMY + " " + NAME_DESC_AMY + "  " + PHONE_DESC_AMY
+                + "   " + TAG_DESC_FRIEND + " ";
+        assertCommandFailure(command, Messages.MESSAGE_NO_USER);
+
+    }
+
     /**
      * Executes the {@code AddCommand} that adds {@code toAdd} to the model and asserts that the,<br>
      * 1. Command box displays an empty string.<br>
@@ -256,4 +279,5 @@ public class AddCommandSystemTest extends PersonnelDatabaseSystemTest {
         assertCommandBoxShowsErrorStyle();
         assertStatusBarUnchanged();
     }
+
 }

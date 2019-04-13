@@ -3,7 +3,7 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+//import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -20,14 +20,15 @@ import seedu.address.model.person.Person;
  */
 public class JsonAdaptedDutyMonth {
 
-    public static final String INVALID_BOOLEAN_VALUE= "Invalid boolean value!";
+    public static final String INVALID_BOOLEAN_VALUE = "Invalid boolean value!";
 
     private final String confirmed;
+    private final String needsRollover;
     private final int year;
     private final int monthIndex;
     private final int firstDayWeekIndex;
     private final List<JsonAdaptedDuty> duties = new ArrayList<>();
-    private final List<JsonAdaptedHashMapUnit> hashMap = new ArrayList<>();
+    private final JsonAdaptedBlockHashMap blockedDays;
 
     /**
      * Constructs a {@code JsonAdaptedDutyMonth} with the given duty month details.
@@ -37,18 +38,18 @@ public class JsonAdaptedDutyMonth {
     public JsonAdaptedDutyMonth(@JsonProperty("year") int year, @JsonProperty("monthIndex") int monthIndex,
                            @JsonProperty("firstDayWeekIndex") int firstDayWeekIndex,
                            @JsonProperty("confirmed") String confirmed,
+                           @JsonProperty("needsRollover") String needsRollover,
                            @JsonProperty("duties") List<JsonAdaptedDuty> duties,
-                                @JsonProperty("hashMap") List<JsonAdaptedHashMapUnit> hashMap) {
+                           @JsonProperty("blockedDays") JsonAdaptedBlockHashMap blockedDays) {
         this.year = year;
         this.monthIndex = monthIndex;
         this.firstDayWeekIndex = firstDayWeekIndex;
         this.confirmed = confirmed;
+        this.needsRollover = needsRollover;
         if (duties != null) {
             this.duties.addAll(duties);
         }
-        if (hashMap != null) {
-            this.hashMap.addAll(hashMap);
-        }
+        this.blockedDays = blockedDays;
     }
 
     /**
@@ -60,6 +61,7 @@ public class JsonAdaptedDutyMonth {
         } else {
             confirmed = "false";
         }
+        needsRollover = "true";
         year = source.getYear();
         monthIndex = source.getMonthIndex();
         firstDayWeekIndex = source.getFirstDayOfWeekIndex();
@@ -70,13 +72,7 @@ public class JsonAdaptedDutyMonth {
                     .collect(Collectors.toList()));
         }
 
-        if (source.getBlockedDates() != null) {
-            for (Map.Entry<Person, List<Integer>> mapValue : source.getBlockedDates().entrySet()) {
-                String nric = mapValue.getKey().getNric().toString();
-                List<Integer> dates = mapValue.getValue();
-                hashMap.add(new JsonAdaptedHashMapUnit(nric, dates));
-            }
-        }
+        blockedDays = new JsonAdaptedBlockHashMap(source.getBlockedDates());
     }
 
     /**
@@ -89,25 +85,20 @@ public class JsonAdaptedDutyMonth {
         } else if (!this.confirmed.equals("false")) {
             throw new IllegalValueException(INVALID_BOOLEAN_VALUE);
         }
+        boolean modelRollover = true;
+        if (this.needsRollover.equals("true")) {
+            modelRollover = true;
+        } else if (!this.needsRollover.equals("false")) {
+            modelRollover = false;
+        }
         final List<Duty> monthDuties = new ArrayList<>();
-        final HashMap<Person, List<Integer>> modelHashMap = new HashMap<>();
         for (JsonAdaptedDuty duty : duties) {
             monthDuties.add(duty.toModelType(personList));
         }
-        for (JsonAdaptedHashMapUnit hashUnit : hashMap) {
-            Person key = null;
-            for (Person person : personList) {
-                if (person.getNric().toString().equals(hashUnit.getPerson())) {
-                    key = person;
-                }
-            }
-            List<Integer> modelBlockedList = new ArrayList<>(hashUnit.getBlockedDates());
-            if (key != null) {
-                modelHashMap.put(key, modelBlockedList);
-            }
-        }
+        final HashMap<Person, List<Integer>> modelBlockedDays = blockedDays.toModelType(personList);
 
-        return new DutyMonth(modelConfirmed, year, monthIndex, firstDayWeekIndex, monthDuties, modelHashMap);
+        return new DutyMonth(modelConfirmed, modelRollover, year, monthIndex, firstDayWeekIndex, monthDuties,
+                modelBlockedDays);
     }
 
 }

@@ -1,23 +1,25 @@
 package seedu.address.logic;
 
-import org.junit.Assert;
-import org.junit.Test;
-import seedu.address.commons.core.UserType;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-
 import static seedu.address.testutil.TypicalPersons.ADMIN_TAN_PASSWORD;
 import static seedu.address.testutil.TypicalPersons.ADMIN_TAN_USERNAME;
 import static seedu.address.testutil.TypicalPersons.GENERAL_DAN_PASSWORD;
 import static seedu.address.testutil.TypicalPersons.GENERAL_DAN_USERNAME;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersonnelDatabase;
 
+import org.junit.Assert;
+import org.junit.Test;
+
+import seedu.address.commons.core.UserType;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+
 public class LoginTest {
-    private Model model = new ModelManager(getTypicalPersonnelDatabase(), new UserPrefs());
-    private Logic logic = new LogicManager(model, null);
     public static final String WRONG_USERNAME = "General";
     public static final String WRONG_PASSWORD = "General";
+    private Model model = new ModelManager(getTypicalPersonnelDatabase(), new UserPrefs());
+    private Logic logic = new LogicManager(model, null);
+
 
     @Test
     public void findFalseUserPassFailure() {

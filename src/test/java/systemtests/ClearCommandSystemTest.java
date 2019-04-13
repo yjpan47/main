@@ -5,17 +5,21 @@ import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.UserType;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.ui.NricUserPair;
 
 public class ClearCommandSystemTest extends PersonnelDatabaseSystemTest {
 
     @Test
     public void clear() {
+        setUp();
         final Model defaultModel = getModel();
 
         /* Case: clear non-empty address book, command with leading spaces and trailing alphanumeric characters and
@@ -54,6 +58,21 @@ public class ClearCommandSystemTest extends PersonnelDatabaseSystemTest {
 
         /* Case: mixed case command word -> rejected */
         assertCommandFailure("ClEaR", MESSAGE_UNKNOWN_COMMAND);
+    }
+
+    @Test
+    public void clearNonAdmin() {
+        NricUserPair generalAccount = new NricUserPair(UserType.GENERAL, UserType.DEFAULT_ADMIN_USERNAME);
+        setUp(generalAccount);
+        /*Case: General User -> rejected */
+
+        assertCommandFailure(ClearCommand.COMMAND_WORD, Messages.MESSAGE_NO_AUTHORITY);
+        tearDown();
+        NricUserPair nullAccount = new NricUserPair(null, UserType.DEFAULT_ADMIN_USERNAME);
+        setUp(nullAccount);
+        /*Case: General User -> rejected */
+        assertCommandFailure(ClearCommand.COMMAND_WORD, Messages.MESSAGE_NO_USER);
+
     }
 
     /**

@@ -29,7 +29,7 @@ public class JsonAdaptedDutyStorage {
     }
 
     /**
-     * Constucts a {@code JsonAdaptedHashMapUnit} with the given hashmap details.
+     * Constucts a {@code JsonAdaptedDutyStorage} with the given hashmap details.
      */
     public JsonAdaptedDutyStorage(DutyStorage source) {
         Set<Person> persons = new HashSet<>();
@@ -43,13 +43,14 @@ public class JsonAdaptedDutyStorage {
             List<String> dutyRecords = source.getDutyRecords().getOrDefault(person, new ArrayList<>());
             int prevDutyPoints = source.getPrevDutyPoints().getOrDefault(person, 0);
             List<String> prevDutyRecords = source.getPrevDutyRecords().getOrDefault(person, new ArrayList<>());
-            JsonAdaptedDutyStoragePerson jsonAdaptedDutyStoragePerson = new JsonAdaptedDutyStoragePerson(nric, dutyPoints, dutyRecords, prevDutyPoints, prevDutyRecords);
+            JsonAdaptedDutyStoragePerson jsonAdaptedDutyStoragePerson = new JsonAdaptedDutyStoragePerson(nric,
+                    dutyPoints, dutyRecords, prevDutyPoints, prevDutyRecords);
             this.dutyStorageList.add(jsonAdaptedDutyStoragePerson);
         }
     }
 
     /**
-     * Converts this Jackson-friendly adapted dutyMonth object into the model's {@code DutyMonth} object.
+     * Converts this Jackson-friendly adapted dutyStorage object into the model's {@code DutyStorage} object.
      */
     public DutyStorage toModelType (ObservableList<Person> personList) {
         HashMap<Person, Integer> dutyPoints = new HashMap<>();

@@ -54,11 +54,11 @@ public class CalendarView extends UiPart<Region> {
         initdateLabels();
         try {
             fillDutyCalendar();
-        } catch (NullPointerException n){
+        } catch (NullPointerException n) {
             logger.warning("Calendar nullpointer exception");
         } catch (IndexOutOfBoundsException e) {
             logger.info("Calendar fill duty IndexOutOfBounds for " + monthArray[dutyMonth.getMonthIndex()]
-            + " " + dutyMonth.getYear());
+                + " " + dutyMonth.getYear());
         }
     }
 

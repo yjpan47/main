@@ -25,7 +25,9 @@ public class FindCommand extends Command {
     public FindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
-
+    /**
+     * Executes the command
+     */
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
