@@ -29,7 +29,7 @@ public class JsonAdaptedDutyStorage {
     }
 
     /**
-     * Constucts a {@code JsonAdaptedHashMapUnit} with the given hashmap details.
+     * Constucts a {@code JsonAdaptedDutyStorage} with the given hashmap details.
      */
     public JsonAdaptedDutyStorage(DutyStorage source) {
         Set<Person> persons = new HashSet<>();
@@ -50,7 +50,7 @@ public class JsonAdaptedDutyStorage {
     }
 
     /**
-     * Converts this Jackson-friendly adapted dutyMonth object into the model's {@code DutyMonth} object.
+     * Converts this Jackson-friendly adapted dutyStorage object into the model's {@code DutyStorage} object.
      */
     public DutyStorage toModelType (ObservableList<Person> personList) {
         HashMap<Person, Integer> dutyPoints = new HashMap<>();
