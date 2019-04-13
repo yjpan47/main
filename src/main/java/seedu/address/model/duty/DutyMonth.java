@@ -65,14 +65,25 @@ public class DutyMonth {
     }
 
     /**
-     * Constructor for making a dummy copy of the dutyMonth for the purpose of scheduling
+     * Constructor for making a copy of the dutyMonth to commit
      * @param dutyMonth to be copied.
      */
-    public DutyMonth(DutyMonth dutyMonth) {
+    public DutyMonth(DutyMonth dutyMonth, boolean toCommit) {
+
         this.year = dutyMonth.getYear();
         this.monthIndex = dutyMonth.getMonthIndex();
         this.firstDayOfWeekIndex = dutyMonth.getFirstDayOfWeekIndex();
-        this.blockedDays = new HashMap<>(dutyMonth.getBlockedDates());
+
+        if (toCommit) {
+            this.scheduledDuties = new ArrayList<>(dutyMonth.getScheduledDuties());
+            this.confirmed = dutyMonth.isConfirmed();
+            for (Person person : dutyMonth.getBlockedDates().keySet()) {
+                this.blockedDays.put(person, new ArrayList<>(dutyMonth.getBlockedDates().get(person)));
+            }
+        } else {
+            this.blockedDays = new HashMap<>(dutyMonth.getBlockedDates());
+            this.confirmed = false;
+        }
     }
 
     /**

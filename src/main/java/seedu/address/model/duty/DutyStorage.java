@@ -13,7 +13,7 @@ import seedu.address.model.person.Person;
  */
 public class DutyStorage {
 
-    private final String RECORD_AWARDED = "Awarded %d points\n";
+    private final String RECORD_REWARDED = "Rewarded %d points\n";
     private final String RECORD_PENALIZED = "Penalized %d points\n";
 
     private HashMap<Person, Integer> dutyPoints;
@@ -36,6 +36,19 @@ public class DutyStorage {
 
         this.prevDutyPoints = prevDutyPoints;
         this.prevDutyRecords = prevDutyRecords;
+    }
+
+    public DutyStorage(DutyStorage dutyStorage) {
+        this.dutyPoints = new HashMap<>(dutyStorage.getDutyPoints());
+        this.dutyRecords = new HashMap<>();
+        for (Person person : dutyStorage.getDutyRecords().keySet()) {
+            this.dutyRecords.put(person, new ArrayList<>(dutyStorage.getDutyRecords().get(person)));
+        }
+        this.prevDutyPoints = new HashMap<>(dutyStorage.getPrevDutyPoints());
+        this.prevDutyRecords = new HashMap<>();
+        for (Person person : dutyStorage.getPrevDutyRecords().keySet()) {
+            this.prevDutyRecords.put(person, new ArrayList<>(dutyStorage.getPrevDutyRecords().get(person)));
+        }
     }
 
     public void addPerson(Person person) {
@@ -225,7 +238,7 @@ public class DutyStorage {
         }
         for (Person person : this.dutyRecords.keySet()) {
             if (person.getNric().toString().equals(target.getNric().toString())) {
-                this.dutyRecords.get(person).add(String.format(RECORD_AWARDED, points));
+                this.dutyRecords.get(person).add(String.format(RECORD_REWARDED, points));
             }
         }
 
@@ -236,7 +249,7 @@ public class DutyStorage {
         }
         for (Person person : this.prevDutyRecords.keySet()) {
             if (person.getNric().toString().equals(target.getNric().toString())) {
-                this.prevDutyRecords.get(person).add(String.format(RECORD_AWARDED, points));
+                this.prevDutyRecords.get(person).add(String.format(RECORD_REWARDED, points));
             }
         }
     }
