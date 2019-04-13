@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccessG
 import static seedu.address.testutil.TypicalPersons.GENERAL_DAN_USERNAME;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersonnelDatabase;
 
-
 import java.util.ArrayList;
 //import java.util.Arrays;
 import java.util.Collections;
