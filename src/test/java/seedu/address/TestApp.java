@@ -8,6 +8,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.UserType;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -17,6 +18,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.storage.JsonPersonnelDatabaseStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.testutil.TestUtil;
+import seedu.address.ui.NricUserPair;
 import systemtests.ModelHelper;
 
 /**
@@ -31,8 +33,12 @@ public class TestApp extends MainApp {
             TestUtil.getFilePathInSandboxFolder("pref_testing.json");
     protected Supplier<ReadOnlyPersonnelDatabase> initialDataSupplier = () -> null;
     protected Path saveFileLocation = SAVE_LOCATION_FOR_TESTING;
+    private NricUserPair nricUserPair = new NricUserPair(UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME);
 
-    public TestApp() {
+    public TestApp(Supplier<ReadOnlyPersonnelDatabase> initialDataSupplier,
+                   Path saveFileLocation, NricUserPair nricUserPair) {
+        this(initialDataSupplier, saveFileLocation);
+        this.nricUserPair = nricUserPair;
     }
 
     public TestApp(Supplier<ReadOnlyPersonnelDatabase> initialDataSupplier, Path saveFileLocation) {
@@ -100,7 +106,7 @@ public class TestApp extends MainApp {
 
     @Override
     public void start(Stage primaryStage) {
-        ui.testStartAdmin(primaryStage);
+        ui.startTest(primaryStage, nricUserPair);
     }
 
     public static void main(String[] args) {

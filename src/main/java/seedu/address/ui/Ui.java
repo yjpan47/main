@@ -10,6 +10,6 @@ public interface Ui {
     /** Starts the UI (and the App).  */
     void start(Stage primaryStage);
 
-    /** Starts the UI (and the App) for Admin systemtest. */
-    void testStartAdmin(Stage primaryStage);
+    /** Starts the UI just for testing */
+    void startTest(Stage primaryStage, NricUserPair nricUserPair);
 }

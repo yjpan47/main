@@ -9,14 +9,14 @@ import seedu.address.model.person.Person;
 /**
  * Removes all blocked Dates for next month
  */
-public class UndoBlockCommand extends Command {
+public class RemoveBlockCommand extends Command {
 
-    public static final String COMMAND_WORD = "undoblock";
+    public static final String COMMAND_WORD = "removeblock";
     public static final String MESSAGE_USAGE = COMMAND_WORD + "Undo blocked Dates for next month";
     public static final String MESSAGE_REMOVED_BLOCKED_DATES = "Undo Block Dates successful!";
     private final String userName;
 
-    public UndoBlockCommand(String userName) {
+    public RemoveBlockCommand(String userName) {
         this.userName = userName;
     }
     /**
@@ -39,22 +39,5 @@ public class UndoBlockCommand extends Command {
     public CommandResult executeAdmin(Model model, CommandHistory history) throws CommandException {
         throw new CommandException(Messages.MESSAGE_NO_AUTHORITY);
 
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof UndoBlockCommand)) {
-            return false;
-        }
-
-        // state check
-        UndoBlockCommand e = (UndoBlockCommand) other;
-        return userName.equals(e.userName);
     }
 }
