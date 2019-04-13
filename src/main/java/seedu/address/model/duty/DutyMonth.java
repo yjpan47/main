@@ -84,6 +84,10 @@ public class DutyMonth {
             throw new InvalidParameterException("Invalid Date");
         }
     }
+    public void removeBlockedDays(Person person) {
+        this.blockedDays.get(person).clear();
+    }
+
     /**
      * Schedule allocates duties for the DutyMonth
      */
