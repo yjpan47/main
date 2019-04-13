@@ -89,9 +89,10 @@ public class DutyMonth {
         }
     }
     public void removeBlockedDays(Person person) {
-        this.blockedDays.get(person).clear();
+        if(this.blockedDays.get(person)!=null){
+            this.blockedDays.get(person).clear();
+        }
     }
-
     /**
      * Schedule allocates duties for the DutyMonth
      */
