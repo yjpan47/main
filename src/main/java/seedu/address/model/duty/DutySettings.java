@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Objects;
 
-import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.util.DateUtil;
 /**
  * Duty Settings class to hold all the duty settings

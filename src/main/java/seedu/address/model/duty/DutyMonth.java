@@ -268,7 +268,7 @@ public class DutyMonth {
         }
         return false;
     }
-
+    
     public void swap(Person t1, Person t2, DutyStorage dutyStorage) throws IllegalAccessException {
         if (this.isConfirmed()) {
             for (Duty duty : this.getScheduledDuties()) {

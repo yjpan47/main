@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REQUESTED_DATE;
 
 import java.time.LocalDate;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -47,7 +46,9 @@ public class SwapCommand extends Command {
         this.requestedDate = requestedDate;
         this.userName = userName;
     }
-
+    /**
+     * Executes the command
+     */
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         int currentMonthIndex = model.getDutyCalendar().getCurrentMonth().getMonthIndex();
