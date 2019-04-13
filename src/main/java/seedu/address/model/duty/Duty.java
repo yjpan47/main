@@ -6,6 +6,8 @@ import java.util.List;
 
 import seedu.address.commons.util.DateUtil;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * Duty class has indexes for current month day and duty class methods
@@ -71,6 +73,7 @@ public class Duty {
             throw new InvalidParameterException("Invalid Date");
         }
     }
+
     /**
      * Adds the input person into the duty
      */
@@ -87,6 +90,7 @@ public class Duty {
     public boolean contains(Person person) {
         return this.persons.contains(person);
     }
+
     /**
      * Remove person from duty
      */
@@ -100,8 +104,11 @@ public class Duty {
 
         if (target != null) {
             this.persons.remove(target);
+        } else {
+            throw new PersonNotFoundException();
         }
     }
+
     /**
      * Replace person in duty
      */
@@ -114,7 +121,13 @@ public class Duty {
         }
         if (target != null) {
             this.persons.remove(target);
-            this.persons.add(replace);
+            if (!this.contains(replace)) {
+                this.persons.add(replace);
+            } else {
+                throw new DuplicatePersonException();
+            }
+        } else {
+            throw new PersonNotFoundException();
         }
     }
 

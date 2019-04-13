@@ -15,8 +15,6 @@ import seedu.address.model.person.Person;
  */
 public class JsonAdaptedDuty {
 
-    //public static final String MISSING_FIELD_MESSAGE_FORMAT = "Duty's %s field is missing!";
-
     private final int year;
     private final int monthIndex;
     private final int dayIndex;
@@ -35,6 +33,7 @@ public class JsonAdaptedDuty {
                            @JsonProperty("dayIndex") int dayIndex, @JsonProperty("dayOfWeekIndex") int dayOfWeekIndex,
                            @JsonProperty("capacity") int capacity, @JsonProperty("points") int points,
                            @JsonProperty("persons") List<String> persons) {
+
         this.year = year;
         this.monthIndex = monthIndex;
         this.dayIndex = dayIndex;
@@ -65,6 +64,7 @@ public class JsonAdaptedDuty {
      * Converts this Jackson-friendly adapted duty object into the model's {@code Duty} object.
      */
     public Duty toModelType(ObservableList<Person> personList) {
+
         final List<Person> modelPersonList = new ArrayList<>();
         for (String nric : persons) {
             for (Person person : personList) {
@@ -76,6 +76,7 @@ public class JsonAdaptedDuty {
 
         return new Duty(year, monthIndex, dayIndex, dayOfWeekIndex,
                 capacity, points, modelPersonList);
+
     }
 
 }
