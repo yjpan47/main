@@ -2,6 +2,7 @@ package seedu.address.logic;
 
 import static seedu.address.logic.ViewCurrentCommand.MESSAGE_SUCCESS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccessGeneral;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersonnelDatabase;
 
 import org.junit.Test;
@@ -19,6 +20,8 @@ public class ViewCurrentCommandTest {
     @Test
     public void execute() {
         assertCommandSuccess(new ViewCurrentCommand(), model, new CommandHistory(),
+                new CommandResult(MESSAGE_SUCCESS, UiCommandInteraction.CALENDAR_CURRENT), model);
+        assertCommandSuccessGeneral(new ViewCurrentCommand(), model, new CommandHistory(),
                 new CommandResult(MESSAGE_SUCCESS, UiCommandInteraction.CALENDAR_CURRENT), model);
     }
 }

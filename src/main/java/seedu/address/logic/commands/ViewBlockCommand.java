@@ -45,21 +45,5 @@ public class ViewBlockCommand extends Command {
 
     }
 
-    @Override
-    public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof ViewBlockCommand)) {
-            return false;
-        }
-
-        // state check
-        ViewBlockCommand e = (ViewBlockCommand) other;
-        return userName.equals(e.userName);
-    }
 }
 

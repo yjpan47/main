@@ -40,21 +40,4 @@ public class RemoveBlockCommand extends Command {
         throw new CommandException(Messages.MESSAGE_NO_AUTHORITY);
 
     }
-
-    @Override
-    public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof RemoveBlockCommand)) {
-            return false;
-        }
-
-        // state check
-        RemoveBlockCommand e = (RemoveBlockCommand) other;
-        return userName.equals(e.userName);
-    }
 }
