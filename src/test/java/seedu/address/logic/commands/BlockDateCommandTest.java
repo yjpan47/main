@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
@@ -27,8 +28,8 @@ public class BlockDateCommandTest {
     public void execute() {
         Integer[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
         List<Integer> blockedDates = new ArrayList<>();
-        Collections.addAll(blockedDates,arr);
-        assertCommandFailure(new BlockDateCommand(blockedDates,"Admin"), model, new CommandHistory(),
+        Collections.addAll(blockedDates, arr);
+        assertCommandFailure(new BlockDateCommand(blockedDates,"Admin"), model, new CommandHistory(), 
                 Messages.MESSAGE_NO_AUTHORITY_PARSE);
     }
 }
