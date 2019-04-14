@@ -18,7 +18,9 @@ public class PointsCommand extends Command {
 
     public static final String COMMAND_WORD = "points";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Display points accumulated by each person.\n";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": displays the duty points accumulated by "
+            + "each person.\nRecords (i.e. duties, points rewarded, points penalized) of each person "
+            + "can also be viewed.\nExample: points 2";
 
     private final Index index;
 

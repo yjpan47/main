@@ -71,7 +71,7 @@ public class DutySettings implements Serializable {
     public String printDayOfWeek() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 7; i++) {
-            sb.append(String.format("%15s : [Manpower Needed = %2d] [Points Awarded = %2d]\n" ,
+            sb.append(String.format("%s : [Manpower Needed = %2d] [Points Awarded = %2d]\n" ,
                     DateUtil.getDayOfWeek(i + 1), this.dutyCapacityInWeek[i], this.dutyPointsInWeek[i]));
         }
         return sb.toString();

@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureGeneral;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.DutySettingsCommand.VIEW_SETTINGS;
+import static seedu.address.logic.commands.DutySettingsCommand.MESSAGE_VIEW_SETTINGS;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersonnelDatabase;
 
 import org.junit.Test;
@@ -20,7 +20,7 @@ public class DutySettingsCommandTest {
     @Test
     public void execute() {
         assertCommandSuccess(new DutySettingsCommand(), model, new CommandHistory(),
-                new CommandResult(String.format(VIEW_SETTINGS, model.getDutySettings().printDayOfWeek())), model);
+                new CommandResult(String.format(MESSAGE_VIEW_SETTINGS, model.getDutySettings().printDayOfWeek())), model);
         assertCommandFailureGeneral(new DutySettingsCommand(), model, new CommandHistory(),
                 Messages.MESSAGE_NO_AUTHORITY);
     }

@@ -17,10 +17,7 @@ public class ScheduleCommand extends Command {
 
     public static final String COMMAND_WORD = "schedule";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Schedules the duties for the upcoming month."
-            + "taking into account the duty points of each person and their blocked out dates. "
-            + "It will sort by available dates and distribute duties accordingly. \n";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": schedules the duties for the upcoming month.\n";
 
     public static final String SCHEDULE_SUCCESS =
             "Schedule Success! Note that this schedule has yet been confirmed!\n"

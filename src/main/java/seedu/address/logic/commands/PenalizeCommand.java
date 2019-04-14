@@ -21,8 +21,8 @@ public class PenalizeCommand extends Command {
 
     public static final String COMMAND_WORD = "penalize";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Penalize points for selected people\n";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": penalize duty points for selected persons\n" +
+            "Example: penalize i/1 3 4 p/20";
 
     public static final String MESSAGE_PENALIZE_SUCCESS =
             "Successfully penalized %d points for the following people: \n%s\n\n%s";
