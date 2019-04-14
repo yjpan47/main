@@ -18,7 +18,20 @@ By: `CS2103 W15-4`      Since: `Feb 2019`      Licence: `MIT`
 
 == Introduction
 
-MINDEF Duty Planner is a platform to assist military units in the SAF in the assignment of daily duties amongst the servicemen. The application is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). The software is designed to automate the process of fairly assigning duties to available servicemen for an entire month. It also enables servicemen to conveniently indicate the days they are unavailable for duty. It seeks to fairly distribute duties by taking into account the varying importance of each duty (e.g. Sunday duties are worth more than weekday duties).
+MINDEF Duty Planner is a platform to assist military units in the SAF in the assignment of daily guard duties amongst the servicemen. +
+ The application is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+ The software is designed to automate the process of fairly assigning duties to available servicemen for an entire month. +
+ The application can be used by both Commanders and servicemen to plan and view duties with various specific commands for each type of user.
+ To start using MINDEF Duty Planner you can go to <<Quick Start>>
+
+== Notation
+
+* Words that are highlighted with a grey background
+represent a  `command` that is present or used in the
+application.
+
+* Words that are highlighted in white represent a kbd:[keyboard] button that
+can be pressed to invoke a described function.
 
 == Quick Start
 
@@ -48,9 +61,11 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ****
 * For Practical Exam: You may use an administrator account with Username: Admin, and Password: Admin
 * For Practical Exam: In personnel list, the password of the users will be listed for your convenience.
-* If you close the login window, you are still able to view the personnel list and the calendar duty list. However, you will not be able to use any commands.
+* If you close the login window, you are still able to view the personnel list and the calendar duty list.
+ However, you will not be able to use any commands.
 ****
-Logs user into account +
+
+==== Logging into a User account +
 NRIC and passwords are case-sensitive. +
 Enter in NRIC and password into the top and bottom text areas respectively, press enter. +
 ****
@@ -60,6 +75,7 @@ Enter in NRIC and password into the top and bottom text areas respectively, pres
 * If you need to change your account, exit the program, then log back into a different account.
 * There are 2 types of accounts: General type accounts, and Admin (or Administrator) type accounts.
 * Admin accounts have access to more commands, or more functionalities for some kind of commands.
+The commands for each type of account are listed in <<Features for all users>>,<<General User Features>> and <<Admin Features>>
 ****
 // end::login[]
 
@@ -89,7 +105,7 @@ Format: `list`
 Brings up calendar view, with all duties for the current month. +
 Format: `viewCurrent`
 
-==== View all duties for enxt month: `viewNext`
+==== View all duties for next month: `viewNext`
 Brings up calendar view, with all duties for the next month. +
 Format: `viewNext`
 
@@ -113,17 +129,7 @@ Example:
 
 * `roster February`
 
-==== Block dates : `block`
-The user can block dates and set which dates they are unavailable to duties for the upcoming month. A user can block up to 15 days. +
-Format: `block DATE DATE DATE ...`
 
-Example:
-
-* `bd 3 6 15 21 30`
-
-==== View blocked dates : `blockView` (Coming in v2.0)
-The user can view the dates they have blocked for the upcoming month. +
-Format: `blockView`
 
 ==== Make a swap request with another user : `swap`
 The user can request for a duty swap with another user. This will be subject to the agreement of the other user and approval of the admin (i.e. commander). +
@@ -216,7 +222,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Exits the program. User will be logged out automatically. +
 Format: `exit`
 
-=== General Features
+=== General User Features
 
 // tag::editGeneral[]
 ==== Edit own details : `edit`
@@ -237,6 +243,25 @@ Edits the phone number and rank of the user to be `84523546` and `CPL` respectiv
 * `edit c/Hotel t/ pw/pass` +
 Edits the company of the user to be `Hotel`, clears all existing tags, and changes password to 'pass'.
 // end::editGeneral[]
+
+==== Block dates : `block`
+The user can block dates and set which dates they are unavailable to duties for the upcoming month. A user can block up to 15 days. +
+Format: `block DATE DATE DATE ...`
+
+[IMPORTANT] This command can only be entered if next month's duty schedule has not been confirmed yet.
+If it has been confirmed please request a swap on the day you wish to duties.
+
+Example:
+
+* `block 3 6 15 21 30`
+
+==== View blocked dates : `viewblock`
+The user can view the dates they have blocked for the upcoming month. +
+Format: `viewblock`
+
+==== Remove blocked dates : `removeblock`
+The user can remove the dates they have blocked for the upcoming month. +
+Format: `removeblock`
 
 === Admin Features
 
@@ -351,7 +376,6 @@ Your password is also your NRIC by default, unless you or your administrator cha
 * *Viewing help* : `help` +
 * *Viewing own duties* : `view` +
 * *Viewing other's duties* : `view NRIC` +
-* *Blocking dates* : `bd DATE DATE DATE …` +
 * *Make swap request* : `swap` +
 * *List all the users* : `list` +
 * *Locate person by name* : `find` +
@@ -362,6 +386,9 @@ Your password is also your NRIC by default, unless you or your administrator cha
 
 === General accounts
 * *Edit own info* : `edit [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONE] [t/TAG] [pw/PASSWORD]` +
+* *Block dates* : `block` +
+* *View Blocked Dates* : `viewblock` +
+* *Remove Blocked Dates* : `removeblock` +
 
 === Admin accounts
 * *Add a user* : `add nr/NRIC c/COMPANY s/SECTION r/RANK n/NAME p/PHONE [t/TAG]` +
