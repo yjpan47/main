@@ -257,7 +257,7 @@ Format: `block DATE DATE DATE ...`
 The date entered must be a valid number for the upcoming month. For example if the next month is February, block 30 is an invalid input.
 ====
 
-[WARNING]
+[CAUTION]
 ====
 This command can only be entered if next month's duty schedule has not been confirmed yet.
 If it has been confirmed please request a swap on the day you wish to duties.
