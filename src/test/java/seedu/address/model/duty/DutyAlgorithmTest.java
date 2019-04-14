@@ -157,6 +157,7 @@ public class DutyAlgorithmTest {
 
     @Test
     public void scheduleDifferentSettingsTest() {
+        System.out.println(dutyStorage.printPoints());
         Random random = new Random();
         for (int i = 0; i < Test_Frequency; i++) {
             for (int day = 1; day <= DAYS_IN_WEEK; day++) {
@@ -175,6 +176,30 @@ public class DutyAlgorithmTest {
             }
         }
     }
+    @Test
+    public void dutyMonthPrintDutiesTest(){
+        String output = "---- Duty Roster for February 2018  ---- \n";
+        assertEquals(dutyMonth1.printDuties(),output);
+    }
+
+    @Test
+    public void dutyMonthPrintPointsTest(){
+        String output = "--- POINTS AWARDED ----\n";
+        assertEquals(dutyMonth1.printPoints(dutyStorage),output);
+    }
+    @Test
+    public void dutyStoragePrintDetailsTest(){
+        String output = "PTE Benson Meier\n" + "Points : 0\n" + "--- RECORDS ---\n";
+        assertEquals(dutyStorage.printDetails(personList.get(1)),output);
+    }
+
+    @Test
+    public void dutyStoragePrintPointsTest(){
+        String output = "--- POINTS ACCUMULATED ----\n";
+        assertEquals(dutyStorage.printPoints(),output);
+    }
+
+
 }
 
 
