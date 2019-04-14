@@ -11,11 +11,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class DutySettingsCommandParser implements Parser<DutySettingsCommand> {
 
+    public static final String MESSAGE_INPUT_OUT_OF_RANGE = "Inputs out of range.";
+
     private static final Prefix PREFIX_DAY_OF_WEEK = new Prefix("d/");
     private static final Prefix PREFIX_POINTS = new Prefix("p/");
     private static final Prefix PREFIX_CAPACITY = new Prefix("m/");
-
-    private static final String MESSAGE_INPUT_OUT_OF_RANGE = "Inputs out of range.";
 
     /**
      * Parses the given {@code String} of arguments in the context of the DutySettingsCommand
