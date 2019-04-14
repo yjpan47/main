@@ -123,16 +123,6 @@ Example:
 
 * `view S9012345L`
 
-==== View roster : `roster` `Not implemented yet`
-The user can see the full duty rosters for particular months. +
-Format: `roster MONTH`
-
-Example:
-
-* `roster February`
-
-
-
 ==== Make a swap request with another user : `swap`
 The user can request for a duty swap with another user. This will be subject to the agreement of the other user and approval of the admin (i.e. commander). +
 The other user and admin will be notified upon login and they will be prompted to accept or decline the request. +
@@ -179,8 +169,14 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: +
+those commands that modify the personnel database's person list (`add`, `delete`, `edit` and `clear`), +
+`confirm` command for scheduling
 ====
+
+****
+* `schedule` command cannot be undo'd, because it does not modify the personnel database directly until confirmed.
+****
 
 Examples:
 
@@ -219,6 +215,10 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `undo` (reverses the `delete 1` command) +
 `redo` (reapplies the `delete 1` command) +
 `redo` (reapplies the `clear` command) +
+
+* `schedule` +
+`confirm` +
+`undo` (reverses the `confirm` command)
 
 ==== Exit : `exit`
 Exits the program. User will be logged out automatically. +
@@ -311,6 +311,10 @@ Each of the following fields entered by the user following each prefix are compu
 * `Phone` should only contain numbers and a plus in front , and it should be at least 3 digits long and a maximum of 20 digits long
 ****
 
+Example:
+
+* `add nr/S9012345L c/Echo s/2 r/CFC n/William Tan p/91234567 t/injured` +
+Adds CFC William Tan in Echo Company Section 2 into the database.
 
 // end::add[]
 ==== Deleting a person : `delete`
@@ -388,6 +392,12 @@ Format: `schedule`
 ==== Confirm a Schedule : `confirm`
 Confirm and finalize the last generated duty schedule (from the schedule command) for the upcoming month. +
 Subsequent attempts to call schedule command will not result in any new duty allocation produced. +
+
+****
+* Schedules can only be confirmed if all of the duties are filled.
+* The duties are only saved after confirming.
+****
+
 Format: `confirm`
 
 === Saving the data
@@ -401,7 +411,7 @@ There is no need to save manually.
 *A*: Use "swap" command to request a swap. If you receive no updates about it, contact your administrator.
 
 *Q*: What is the main feature of this app? +
-*A*: The main feature is the automated scheduling algorithm, which significantly minimizes the amount of work that the admin has to do.
+*A*: The main feature is the automated duty allocation system, which significantly minimizes the amount of work that the admin has to do.
 
 *Q*: What is my username and password? +
 *A*: Your username is by default your NRIC, used so prevalently in the SAF. +
