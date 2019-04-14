@@ -362,6 +362,7 @@ public class DutyMonth {
         dutyTwo.replacePerson(t2, t1);
         dutyStorage.undo();
         dutyStorage.update(this.getScheduledDuties());
+    }
 
     /**
      * Get the number of days in this month
