@@ -232,6 +232,9 @@ public class DutyMonth {
         return this.scheduledDuties;
     }
 
+    /**
+     * Returns if all duties in the month are filled.
+     */
     public boolean allDutiesAreFiled() {
         for (Duty duty : this.scheduledDuties) {
             if (!duty.isFilled()) {
