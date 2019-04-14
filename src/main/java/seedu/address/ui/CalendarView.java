@@ -23,7 +23,10 @@ import seedu.address.model.person.Person;
  */
 public class CalendarView extends UiPart<Region> {
     private static final String FXML = "CalendarView.fxml";
-    private static final String[] dayArray = {"SUN", "MON ", "TUE", "WED", "THU", "FRI", "SAT"};
+    private static final String LARGE_BLANK_SPACE = "                       ";
+    private static final String[] dayArray = {LARGE_BLANK_SPACE + "SUN",
+        LARGE_BLANK_SPACE + "MON ", LARGE_BLANK_SPACE + "TUE", LARGE_BLANK_SPACE + "WED",
+        LARGE_BLANK_SPACE + "THU", LARGE_BLANK_SPACE + "FRI", LARGE_BLANK_SPACE + "SAT"};
     private static final String[] monthArray =
         {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
     private Label[] dateLabels;
@@ -91,16 +94,16 @@ public class CalendarView extends UiPart<Region> {
         for (int i = 1; i <= numberDays; i++) {
             int row = 1 + (firstIndex + i - 2) / 7;
             int column = (firstIndex + i - 2) % 7;
-            Label label = new Label(Integer.toString(i));
+            Label label = new Label("  " + Integer.toString(i));
             Duty duty = dutyMonth.getScheduledDuties().get(i - 1);
 
             ObservableList<String> obsListDuty = FXCollections.observableArrayList(
-                    duty.getPersons().stream().map(Person::toStringWithNric).collect(Collectors.toList()));
+                    duty.getPersons().stream().map(Person::toStringOnCalendar).collect(Collectors.toList()));
             ListView tempDuty = new ListView(obsListDuty);
             VBox vBox = new VBox();
             vBox.getChildren().addAll(label, tempDuty);
             gridPaneBottom.add(vBox, column, row);
-            tempDuty.setStyle("-fx-control-inner-background: blue;");
+            tempDuty.setStyle("-fx-control-inner-background: green;");
         }
         logger.info("Calendar filled duties for " + monthArray[dutyMonth.getMonthIndex()]
                 + " " + dutyMonth.getYear());
