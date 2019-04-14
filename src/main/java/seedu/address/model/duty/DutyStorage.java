@@ -153,22 +153,6 @@ public class DutyStorage {
     }
 
     /**
-     * Comparator method to compare person by points
-     */
-    public Comparator<Person> comparebyPoints() {
-        return (p1, p2) -> {
-            if (!this.dutyPoints.containsKey(p1) && !this.dutyPoints.containsKey(p2)) {
-                return 0;
-            } else if (!this.dutyPoints.containsKey(p1)) {
-                return 1;
-            } else if (!this.dutyPoints.containsKey(p2)) {
-                return -1;
-            } else {
-                return this.dutyPoints.get(p1) - this.dutyPoints.get(p2);
-            }
-        };
-    }
-    /**
      * Removes Person for Duty Storage
      */
     public void removePerson(Person remove) {
@@ -199,8 +183,6 @@ public class DutyStorage {
                 break;
             }
         }
-
-
 
     }
     /**

@@ -198,6 +198,33 @@ public class DutyAlgorithmTest {
         assertEquals(dutyStorage.printPoints(), output);
     }
 
+    @Test
+    public void dutyStorageRewardTest() {
+        Random random = new Random();
+        dutyMonth3.schedule(personList, dutySettings, dutyStorage);
+        dutyStorage.update(dutyMonth3.getScheduledDuties());
+        for (Person person : TypicalPersons.getTypicalPersons()) {
+            int before = dutyStorage.getPoints(person);
+            int points = random.nextInt(RANDOM_POINTS_LIMIT);
+            dutyStorage.reward(person, points);
+            int after = dutyStorage.getPoints(person);
+            assertEquals(before + points, after);
+        }
+    }
+
+    @Test
+    public void dutyStoragePenalizeTest() {
+        Random random = new Random();
+        dutyMonth4.schedule(personList, dutySettings, dutyStorage);
+        dutyStorage.update(dutyMonth4.getScheduledDuties());
+        for (Person person : TypicalPersons.getTypicalPersons()) {
+            int before = dutyStorage.getPoints(person);
+            int points = random.nextInt(RANDOM_POINTS_LIMIT);
+            dutyStorage.penalize(person, points);
+            int after = dutyStorage.getPoints(person);
+            assertEquals(before - points, after);
+        }
+    }
 
 }
 
