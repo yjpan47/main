@@ -65,7 +65,7 @@ public class PersonnelDatabaseParserTest {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
                 UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME);
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON, UserType.DEFAULT_ADMIN_USERNAME), command);
     }
 
     //    @Test

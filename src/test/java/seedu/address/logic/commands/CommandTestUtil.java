@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.UserType;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -241,5 +243,4 @@ public class CommandTestUtil {
         model.deletePerson(firstPerson);
         model.commitPersonnelDatabase();
     }
-
 }

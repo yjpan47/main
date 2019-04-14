@@ -71,6 +71,7 @@ import seedu.address.model.person.Rank;
 import seedu.address.model.person.Section;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.TypicalPersons;
 
 public class EditCommandParserTest {
 
@@ -155,6 +156,8 @@ public class EditCommandParserTest {
                 .withUserType(VALID_USERTYPE_BOB).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor, UserType.DEFAULT_ADMIN_USERNAME);
         assertParseSuccess(parser, userInput, expectedCommand);
+        expectedCommand = new EditCommand(targetIndex, descriptor, TypicalPersons.ADMIN_TAN_USERNAME);
+        assertParseSuccess(parser, userInput, expectedCommand, UserType.ADMIN, TypicalPersons.ADMIN_TAN_USERNAME);
     }
 
     @Test
