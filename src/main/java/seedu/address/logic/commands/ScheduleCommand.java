@@ -29,6 +29,8 @@ public class ScheduleCommand extends Command {
     public static final String SCHEDULE_ALREADY_CONFIRMED = "Schedule for %s %s already confirmed! "
             + "See below for details\n%s\n%s\n";
 
+    public static final String PERSON_LIST_EMPTY = "You cannot schedule with an empty person list! ";
+
 
     @Override
     public CommandResult executeAdmin(Model model, CommandHistory history) throws CommandException {
@@ -39,6 +41,10 @@ public class ScheduleCommand extends Command {
             return new CommandResult(String.format(SCHEDULE_ALREADY_CONFIRMED,
                     DateUtil.getMonth(nextMonth.getMonthIndex()), nextMonth.getYear(),
                     nextMonth.printDuties(), dutyStorage.printPoints()));
+        }
+
+        if (model.getFilteredPersonList().isEmpty()) {
+            return new CommandResult(PERSON_LIST_EMPTY);
         }
 
         model.scheduleDutyForNextMonth();
