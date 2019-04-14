@@ -21,8 +21,8 @@ public class RewardCommand extends Command {
 
     public static final String COMMAND_WORD = "reward";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": rewards duty points for selected persons\n" +
-            "Example: reward i/1 3 4 p/20";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": rewards duty points for selected persons\n"
+            + "Example: reward i/1 3 4 p/20";
 
     public static final String MESSAGE_REWARD_SUCCESS = "Successfully rewarded %d points"
             + " to the following people: \n%s\n\n%s";
