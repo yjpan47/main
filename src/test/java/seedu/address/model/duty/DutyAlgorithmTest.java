@@ -177,15 +177,21 @@ public class DutyAlgorithmTest {
     }
     @Test
     public void dutyMonthPrintDutiesTest() {
-        String output = "---- Duty Roster for February 2018  ---- \n";
-        assertEquals(dutyMonth1.printDuties(), output);
+        String expected = "---- Duty Roster for February 2018  ---- \n";
+        assertEquals(dutyMonth1.printDuties(), expected);
+        dutyMonth4.schedule(personList, dutySettings, dutyStorage);
     }
 
     @Test
     public void dutyMonthPrintPointsTest() {
-        String output = "--- POINTS AWARDED ----\n";
-        assertEquals(dutyMonth1.printPoints(dutyStorage), output);
+        String expected = "--- POINTS AWARDED ----\n";
+        assertEquals(dutyMonth1.printPoints(dutyStorage), expected);
+        dutyMonth5.schedule(personList, dutySettings, dutyStorage);
+        for (Person p : personList) {
+            assertTrue(dutyMonth5.printPoints(dutyStorage).contains(p.toString()));
+        }
     }
+
     @Test
     public void dutyStoragePrintDetailsTest() {
         String output = "PTE Benson Meier\n" + "Points : 0\n" + "--- RECORDS ---\n";
@@ -198,7 +204,33 @@ public class DutyAlgorithmTest {
         assertEquals(dutyStorage.printPoints(), output);
     }
 
+    @Test
+    public void dutyStorageRewardTest() {
+        Random random = new Random();
+        dutyMonth3.schedule(personList, dutySettings, dutyStorage);
+        dutyStorage.update(dutyMonth3.getScheduledDuties());
+        for (Person person : TypicalPersons.getTypicalPersons()) {
+            int before = dutyStorage.getPoints(person);
+            int points = random.nextInt(RANDOM_POINTS_LIMIT);
+            dutyStorage.reward(person, points);
+            int after = dutyStorage.getPoints(person);
+            assertEquals(before + points, after);
+        }
+    }
 
+    @Test
+    public void dutyStoragePenalizeTest() {
+        Random random = new Random();
+        dutyMonth4.schedule(personList, dutySettings, dutyStorage);
+        dutyStorage.update(dutyMonth4.getScheduledDuties());
+        for (Person person : TypicalPersons.getTypicalPersons()) {
+            int before = dutyStorage.getPoints(person);
+            int points = random.nextInt(RANDOM_POINTS_LIMIT);
+            dutyStorage.penalize(person, points);
+            int after = dutyStorage.getPoints(person);
+            assertEquals(before - points, after);
+        }
+    }
 }
 
 
