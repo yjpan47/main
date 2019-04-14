@@ -105,7 +105,7 @@ public class DutyCalendar {
      */
     public void scheduleDutyForNextMonth(List<Person> persons,
                                          DutySettings dutySettings, DutyStorage dutyStorage) {
-        this.dummyNextMonth = new DutyMonth(nextMonth);
+        this.dummyNextMonth = new DutyMonth(nextMonth, false);
         dummyNextMonth.schedule(persons, dutySettings, dutyStorage);
     }
 

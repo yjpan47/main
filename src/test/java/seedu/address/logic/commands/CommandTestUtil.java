@@ -241,5 +241,4 @@ public class CommandTestUtil {
         model.deletePerson(firstPerson);
         model.commitPersonnelDatabase();
     }
-
 }
