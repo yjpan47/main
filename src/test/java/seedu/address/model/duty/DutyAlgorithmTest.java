@@ -52,13 +52,13 @@ public class DutyAlgorithmTest {
     public void dutyMonthContructorTest() {
 
         Assert.assertThrows(InvalidParameterException.class, ()
-                -> new DutyMonth(2020, 12, 2));
+            -> new DutyMonth(2020, 12, 2));
         Assert.assertThrows(InvalidParameterException.class, ()
-                -> new DutyMonth(1999, 11, 8));
+            -> new DutyMonth(1999, 11, 8));
         Assert.assertThrows(InvalidParameterException.class, ()
-                -> new DutyMonth(2010, -1, 4));
+            -> new DutyMonth(2010, -1, 4));
         Assert.assertThrows(InvalidParameterException.class, ()
-                -> new DutyMonth(2018, 4, 0));
+            -> new DutyMonth(2018, 4, 0));
 
         assertEquals(dutyMonth1.getYear(), 2018);
         assertEquals(dutyMonth2.getYear(), 2019);
@@ -72,14 +72,14 @@ public class DutyAlgorithmTest {
 
     @Test
     public void addBlockDayInvalidTest() {
-        Assert.assertThrows(InvalidParameterException.class,
-                () -> dutyMonth2.addBlockedDay(TypicalPersons.ALICE, -1));
-        Assert.assertThrows(InvalidParameterException.class,
-                () -> dutyMonth2.addBlockedDay(TypicalPersons.BOB, 0));
-        Assert.assertThrows(InvalidParameterException.class,
-                () -> dutyMonth2.addBlockedDay(TypicalPersons.BENSON, 29));
-        Assert.assertThrows(InvalidParameterException.class,
-                () -> dutyMonth3.addBlockedDay(TypicalPersons.CARL, 32));
+        Assert.assertThrows(InvalidParameterException.class, ()
+            -> dutyMonth2.addBlockedDay(TypicalPersons.ALICE, -1));
+        Assert.assertThrows(InvalidParameterException.class, ()
+            -> dutyMonth2.addBlockedDay(TypicalPersons.BOB, 0));
+        Assert.assertThrows(InvalidParameterException.class, ()
+            -> dutyMonth2.addBlockedDay(TypicalPersons.BENSON, 29));
+        Assert.assertThrows(InvalidParameterException.class, ()
+            -> dutyMonth3.addBlockedDay(TypicalPersons.CARL, 32));
     }
 
     @Test
