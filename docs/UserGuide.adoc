@@ -381,10 +381,6 @@ Edits the company of the 1st person to be `Hotel`, clears all existing tags, and
 ==== View duty points : `points`
 Displays the duty points accumulated by each person. Additional records of each person (i.e. duties allocated, points rewarded, points penalized) can also be viewed.
 
-// tag::pointsAdmin[]
-==== View duty points : `points`
-Displays the duty points accumulated by each person. Additional records of each person (i.e. duties allocated, points rewarded, points penalized) can also be viewed.
-
 Format:  `points [INDEX]`
 
 [NOTE]
@@ -405,8 +401,7 @@ Manually reward duty points to a person or a list of persons.
 
 Format: `reward i/INDEX [INDEX] [INDEX] ... p/POINTS`
 
-[NOTE]
-Points rewarded can range from 1 to 100 for each command call.
+* Points rewarded can range from 1 to 100 for each command call.
 
 Examples:
 
@@ -422,8 +417,8 @@ Manually penalize duty points for a person or a list of persons.
 
 Format: `penalize i/INDEX [INDEX] [INDEX] ... p/POINTS`
 
-[NOTE]
-Points penalized can range from 1 to 100 for each command call. The duty points of a person can fall to less than zero.
+* Points penalized can range from 1 to 100 for each command call.
+* The duty points of a person can fall to less than zero.
 
 Examples:
 
@@ -439,15 +434,15 @@ View and edit duty settings. Duty settings refer to the *manpower needed* and *p
 
 Format: `settings [d/DAYOFWEEK m/MANPOWER p/POINTS]`
 
-`DAYOFWEEK`: Mon / Tue / Wed / Thur / Fri / Sat / Sun (full spelling e.g. Monday, Tuesday etc. works as well) +
-`MANPOWER`: Number ranging from 1 to 10 +
-`POINTS`: Number ranging from 1 to 100
+* `DAYOFWEEK`: Mon / Tue / Wed / Thur / Fri / Sat / Sun (full spelling e.g. Monday, Tuesday etc. works as well) +
+* `MANPOWER`: Number ranging from 1 to 10 +
+* `POINTS`: Number ranging from 1 to 100
 
 [NOTE]
 Calling the command `settings` alone displays the current duty settings while calling the command `settings` with the day of the week, manpower and points enables the editing of the duty settings.
 
 [NOTE]
-Note that updated duty settings will only take effect the next time a schedule is confirmed. If schedule for next month has already been confirmed, the confirmed schedule will still follow the specifications of the previous duty settings.
+The updated duty settings will only take effect the next time a schedule is confirmed. If schedule for next month has already been confirmed, the confirmed schedule will still follow the specifications of the previous duty settings.
 
 Examples:
 
@@ -472,7 +467,6 @@ The command `schedule` merely provides a viable duty schedule and *does not conf
 
 Once a satisfactory duty schedule is generated, the administrator can go ahead to confirm the duty schedule. (See 4.4.10 Confirm a schedule)
 
-[NOTE]
 Calling `schedule` after next month's duties have already been confirm will only display the confirmed duty schedule.
 // end::scheduleAdmin[]
 
