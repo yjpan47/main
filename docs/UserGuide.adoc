@@ -427,7 +427,7 @@ View and edit duty settings. Duty settings refer to the *manpower needed* and *p
 
 Format: `settings [d/DAYOFWEEK m/MANPOWER p/POINTS]`
 
-`DAYOFWEEK`: Mon / Tue / Wed / Thur / Fri / Sat / Sun (spelling out the entire a of the week e.g. Monday, Tuesday etc. works as well) +
+`DAYOFWEEK`: Mon / Tue / Wed / Thur / Fri / Sat / Sun (full spelling e.g. Monday, Tuesday etc. works as well) +
 `MANPOWER`: Number ranging from 1 to 10 +
 `POINTS`: Number ranging from 1 to 100
 
