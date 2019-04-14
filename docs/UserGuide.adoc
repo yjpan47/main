@@ -378,7 +378,10 @@ Displays the duty points accumulated by each person. Additional records of each 
 
 Format:  `points [INDEX]`
 
-Note that calling the command without index (`points`) provides a list of all persons and their accumulated duty points while calling the command with index (`points INDEX`) provides the accumulated duty points of an individual person and his record (i.e. duties, points rewarded, points penalized).
+[NOTE]
+===
+Note that calling the command without index (`points`) provides a list of all persons and their accumulated duty points while calling the command with index (`points INDEX`) provides the accumulated duty points of an individual person and his record (i.e. duties, points rewarded, points penalized). 
+===
 
 Examples:
 
