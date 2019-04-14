@@ -24,8 +24,8 @@ public class PenalizeCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Penalize points for selected people\n";
 
-    public static final String MESSAGE_PENALIZE_SUCCESS
-            = "Successfully penalized %d points for the following people: \n%s\n\n%s";
+    public static final String MESSAGE_PENALIZE_SUCCESS =
+            "Successfully penalized %d points for the following people: \n%s\n\n%s";
 
     public static final String MESSAGE_INVALID_INDEX = "The person index %d is invalid";
 
@@ -52,7 +52,8 @@ public class PenalizeCommand extends Command {
             dutyStorage.penalize(target, this.points);
         }
         model.commitPersonnelDatabase();
-        return new CommandResult(String.format(MESSAGE_PENALIZE_SUCCESS, this.points, personTargeted, dutyStorage.printPoints()));
+        return new CommandResult(String.format(MESSAGE_PENALIZE_SUCCESS,
+                this.points, personTargeted, dutyStorage.printPoints()));
     }
 
     @Override

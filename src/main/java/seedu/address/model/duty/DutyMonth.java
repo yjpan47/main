@@ -324,20 +324,33 @@ public class DutyMonth {
         return unfilledDuties;
     }
 
-
-    public void swap(Person t1, Person t2, DutyStorage dutyStorage) throws IllegalAccessException {
+    /**
+     * Swap duties between two persons
+     * @param p1 person 1 to be swapped
+     * @param d1 person 1 current duty
+     * @param p2 person 2 to be swapped
+     * @param d2 person 2 current duty
+     * @param dutyStorage dutyStorage
+     */
+    public void swap(Person p1, Duty d1, Person p2, Duty d2, DutyStorage dutyStorage) {
         if (this.isConfirmed()) {
             for (Duty duty : this.getScheduledDuties()) {
-                duty.replacePerson(t1, t2);
-                duty.replacePerson(t2, t1);
+                if (duty.equals(d1)) {
+                    duty.replacePerson(p1, p2);
+                }
+                if (duty.equals(d2)) {
+                    duty.replacePerson(p2, p1);
+                }
             }
             dutyStorage.undo();
             dutyStorage.update(this.getScheduledDuties());
-        } else {
-            throw new IllegalAccessException("Schedule has yet being confirmed!");
         }
     }
 
+    /**
+     * Get the number of days in this month
+     * @return number of days
+     */
     public int getNumberOfDays() {
         return CalendarUtil.getNumOfDays(this.year, this.monthIndex);
     }

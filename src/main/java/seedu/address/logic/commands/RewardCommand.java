@@ -14,13 +14,17 @@ import seedu.address.model.Model;
 import seedu.address.model.duty.DutyStorage;
 import seedu.address.model.person.Person;
 
+/**
+ * Adds duty points to persons
+ */
 public class RewardCommand extends Command {
 
     public static final String COMMAND_WORD = "reward";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Rewards points for selected people\n";
 
-    public static final String MESSAGE_REWARD_SUCCESS = "Successfully rewarded %d points for the following people: \n%s\n\n%s";
+    public static final String MESSAGE_REWARD_SUCCESS = "Successfully rewarded %d points"
+            + "for the following people: \n%s\n\n%s";
 
     public static final String MESSAGE_INVALID_INDEX = "The person index %d is invalid";
 
@@ -48,7 +52,8 @@ public class RewardCommand extends Command {
             dutyStorage.reward(target, this.points);
         }
         model.commitPersonnelDatabase();
-        return new CommandResult(String.format(MESSAGE_REWARD_SUCCESS, this.points, personTargeted, dutyStorage.printPoints()));
+        return new CommandResult(String.format(MESSAGE_REWARD_SUCCESS, this.points,
+                personTargeted, dutyStorage.printPoints()));
     }
 
     @Override
