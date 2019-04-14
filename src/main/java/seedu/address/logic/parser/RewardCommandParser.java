@@ -11,6 +11,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.RewardCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new RewardCommand object
+ */
 public class RewardCommandParser implements Parser<RewardCommand> {
 
     private static final Prefix PREFIX_INDEXES = new Prefix("i/");
@@ -39,9 +42,11 @@ public class RewardCommandParser implements Parser<RewardCommand> {
                 indexes.add(ParserUtil.parseIndex(s));
             }
             return new RewardCommand(points, indexes);
-        } catch (InvalidParameterException pe) {
+        }
+        catch (InvalidParameterException pe) {
            throw new ParseException(MESSAGE_POINTS_OUT_OF_RANGE);
-        } catch (ParseException pe) {
+        }
+        catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RewardCommand.MESSAGE_USAGE), pe);
 
         }

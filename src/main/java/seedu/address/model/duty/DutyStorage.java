@@ -13,8 +13,8 @@ import seedu.address.model.person.Person;
  */
 public class DutyStorage {
 
-    private final String RECORD_REWARDED = "Reward: %d points added";
-    private final String RECORD_PENALIZED = "Penalty: %d points deducted";
+    private static String RECORD_REWARDED = "Reward: %d points added";
+    private static String RECORD_PENALIZED = "Penalty: %d points deducted";
 
     private HashMap<Person, Integer> dutyPoints;
     private HashMap<Person, List<String>> dutyRecords;
@@ -51,6 +51,10 @@ public class DutyStorage {
         }
     }
 
+    /**
+     * Adds a person into dutyStorage
+     * @param person the person to be added
+     */
     public void addPerson(Person person) {
         this.dutyPoints.put(person, 0);
         this.dutyRecords.put(person, new ArrayList<>());
@@ -230,6 +234,11 @@ public class DutyStorage {
         }
     }
 
+    /**
+     * Rewards points to a person
+     * @param target the person to be rewarded
+     * @param points the number of points to be rewarded
+     */
     public void reward(Person target, int points) {
         for (Person person : this.dutyPoints.keySet()) {
             if (person.getNric().toString().equals(target.getNric().toString())) {
@@ -254,6 +263,11 @@ public class DutyStorage {
         }
     }
 
+    /**
+     * Penalize points to a person
+     * @param target the person to be penalized
+     * @param points the number of points to be penalized
+     */
     public void penalize(Person target, int points) {
         for (Person person : this.dutyPoints.keySet()) {
             if (person.getNric().toString().equals(target.getNric().toString())) {

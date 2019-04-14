@@ -69,8 +69,8 @@ public class AddCommand extends Command {
         model.getDutyCalendar().getDutyStorage().undo();
 
         model.commitPersonnelDatabase();
-        return (isConfirmed ? new CommandResult(String.format(MESSAGE_SUCCESS + MESSAGE_RUN_SCHEDULE_AGAIN, toAdd)) :
-                new CommandResult(String.format(MESSAGE_SUCCESS, toAdd)));
+        return (isConfirmed ? new CommandResult(String.format(MESSAGE_SUCCESS + MESSAGE_RUN_SCHEDULE_AGAIN, toAdd))
+                : new CommandResult(String.format(MESSAGE_SUCCESS, toAdd)));
     }
 
     @Override

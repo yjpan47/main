@@ -9,9 +9,11 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.UserType;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.PenalizeCommand;
-import seedu.address.logic.commands.RewardCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new PenalizeCommand object
+ */
 public class PenalizeCommandParser implements Parser<PenalizeCommand> {
 
     private static final Prefix PREFIX_INDEXES = new Prefix("i/");

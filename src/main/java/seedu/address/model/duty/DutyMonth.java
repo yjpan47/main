@@ -183,7 +183,7 @@ public class DutyMonth {
     }
 
     /**
-     * Generates duty object for the month
+     * Generates duties for the month
      */
     private List<Duty> generateAllDuties(DutySettings dutySettings) {
         List<Duty> duties = new ArrayList<>();
@@ -227,18 +227,6 @@ public class DutyMonth {
         return this.scheduledDuties;
     }
 
-    /**
-     * Returns if all duties in the month are filled.
-     */
-    public boolean allDutiesAreFiled() {
-        for (Duty duty : this.scheduledDuties) {
-            if (!duty.isFilled()) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public HashMap<Person, List<Integer>> getBlockedDates() {
         return this.blockedDays;
     }
@@ -255,7 +243,8 @@ public class DutyMonth {
             for (Duty duty : this.getUnfilledDuties()) {
                 sb.append(String.format("%s | Filled: (%d/%d)\n", duty, duty.getPersons().size(), duty.getCapacity()));
             }
-            sb.append("\nUse <settings> command to change manpower requirements or <add> command to add more persons.\n\n");
+            sb.append("\nUse <settings> command to change manpower requirements "
+                    + "or <add> command to add more persons.\n\n");
         }
 
         sb.append(String.format("---- Duty Roster for %1$s %2$s  ---- \n",
@@ -269,7 +258,7 @@ public class DutyMonth {
     }
 
     /**
-     * Prints the points allocated to the duty personnel for that month
+     * Prints the points allocated to duty personnel for that month
      */
     public String printPoints(DutyStorage dutyStorage) {
         StringBuilder sb = new StringBuilder();
@@ -321,6 +310,10 @@ public class DutyMonth {
         return false;
     }
 
+    /**
+     * Return list of unfilled duties after scheduling
+     * @return list of unfilled duties
+     */
     public List<Duty> getUnfilledDuties() {
         List<Duty> unfilledDuties = new ArrayList<>();
         for (Duty duty : this.getScheduledDuties()) {

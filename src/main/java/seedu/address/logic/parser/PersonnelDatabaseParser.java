@@ -26,8 +26,8 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.PenalizeCommand;
 import seedu.address.logic.commands.PointsCommand;
 import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.RewardCommand;
 import seedu.address.logic.commands.RemoveBlockCommand;
+import seedu.address.logic.commands.RewardCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SortCommand;
@@ -139,10 +139,10 @@ public class PersonnelDatabaseParser {
             return new ViewNextCommand();
 
         case RewardCommand.COMMAND_WORD:
-                return new RewardCommandParser().parse(arguments, userType, userName);
+            return new RewardCommandParser().parse(arguments, userType, userName);
 
         case PenalizeCommand.COMMAND_WORD:
-                return new PenalizeCommandParser().parse(arguments, userType, userName);
+            return new PenalizeCommandParser().parse(arguments, userType, userName);
 
         case ViewBlockCommand.COMMAND_WORD:
             return new ViewBlockCommand(userName);

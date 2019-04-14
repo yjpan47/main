@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -15,13 +14,18 @@ import seedu.address.model.Model;
 import seedu.address.model.duty.DutyStorage;
 import seedu.address.model.person.Person;
 
+/**
+ * Deduct duty points from persons
+ */
 public class PenalizeCommand extends Command {
 
     public static final String COMMAND_WORD = "penalize";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Penalize points for selected people\n";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Penalize points for selected people\n";
 
-    public static final String MESSAGE_PENALIZE_SUCCESS = "Successfully penalized %d points for the following people: \n%s\n\n%s";
+    public static final String MESSAGE_PENALIZE_SUCCESS
+            = "Successfully penalized %d points for the following people: \n%s\n\n%s";
 
     public static final String MESSAGE_INVALID_INDEX = "The person index %d is invalid";
 
