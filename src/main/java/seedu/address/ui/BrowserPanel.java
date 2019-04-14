@@ -52,9 +52,7 @@ public class BrowserPanel extends UiPart<Region> {
         for (Request request : requests) {
             if (!request.isAccepterValid()) {
                 counter++;
-                sb.append(counter).append(". ").append(request.getRequesterNric()).append(" requests a swap from ")
-                        .append(request.getAllocatedDate().toString()).append(" to ")
-                        .append(request.getRequestedDate().toString() + ".\n");
+                sb.append(counter).append(". ").append(request.toString()).append(".\n");
             }
         }
         return sb.toString();

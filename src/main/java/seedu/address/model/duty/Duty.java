@@ -3,9 +3,12 @@ package seedu.address.model.duty;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import seedu.address.commons.util.DateUtil;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * Duty class has indexes for current month day and duty class methods
@@ -29,9 +32,6 @@ public class Duty {
 
     // Total number of persons needed for this duty
     private int capacity;
-
-    // Number of people still needed
-    private int vacancies;
 
     // Points awarded for doing this duty
     private int points;
@@ -57,25 +57,24 @@ public class Duty {
      * @param dayIndex this dayIndex
      * @param dayOfWeekIndex this dayOfWeekIndex
      * @param capacity this capacity
-     * @param vacancies this vacancies
      * @param points this points
      * @param personList this personList
      */
     public Duty(int year, int monthIndex, int dayIndex, int dayOfWeekIndex, int capacity,
-                int vacancies, int points, List<Person> personList) {
+                 int points, List<Person> personList) {
         if (DateUtil.isValidDate(year, monthIndex, dayIndex) && DateUtil.isValidDayOfWeek(dayOfWeekIndex)) {
             this.year = year;
             this.monthIndex = monthIndex;
             this.dayIndex = dayIndex;
             this.dayOfWeekIndex = dayOfWeekIndex;
             this.capacity = capacity;
-            this.vacancies = vacancies;
             this.points = points;
             this.persons = new ArrayList<>(personList);
         } else {
             throw new InvalidParameterException("Invalid Date");
         }
     }
+
     /**
      * Adds the input person into the duty
      */
@@ -92,6 +91,7 @@ public class Duty {
     public boolean contains(Person person) {
         return this.persons.contains(person);
     }
+
     /**
      * Remove person from duty
      */
@@ -107,6 +107,7 @@ public class Duty {
             this.persons.remove(target);
         }
     }
+
     /**
      * Replace person in duty
      */
@@ -119,7 +120,13 @@ public class Duty {
         }
         if (target != null) {
             this.persons.remove(target);
-            this.persons.add(replace);
+            if (!this.contains(replace)) {
+                this.persons.add(replace);
+            } else {
+                throw new DuplicatePersonException();
+            }
+        } else {
+            throw new PersonNotFoundException();
         }
     }
 
@@ -164,7 +171,7 @@ public class Duty {
         String personString = "";
         for (Person person : this.persons) {
             if (!person.getNric().toString().equals(nric)) {
-                personString = personString + "  " + person.getName().toString();
+                personString = personString + " " + person.getName().toString();
             }
         }
         return personString;
@@ -172,10 +179,6 @@ public class Duty {
 
     public int getCapacity() {
         return this.capacity;
-    }
-
-    public int getVacancies() {
-        return this.vacancies;
     }
 
     public int getPoints() {
@@ -186,8 +189,34 @@ public class Duty {
     public String toString() {
         return String.format("Duty : %d %s %d | ", this.getDayIndex(), this.getMonthString(), this.getYear())
                 + String.format("%s | ", this.getdayOfWeek())
-                + String.format("%d points\n", this.getPoints());
+                + String.format("%d points", this.getPoints());
     }
 
+    public String getStatus() {
+        return String.format("Filled: %d/%d", this.persons.size(), this.getCapacity());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.year, this.monthIndex, this.dayIndex, this.dayOfWeekIndex);
+    }
+
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Duty)) {
+            return false;
+        }
+
+        Duty otherDuty = (Duty) other;
+        return otherDuty.getYear() == this.getYear()
+                && otherDuty.getMonthIndex() == this.getMonthIndex()
+                && otherDuty.getDayIndex() == this.getDayIndex()
+                && otherDuty.getDayOfWeekIndex() == this.getDayOfWeekIndex();
+    }
 }
 

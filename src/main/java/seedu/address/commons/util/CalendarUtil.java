@@ -1,5 +1,6 @@
 package seedu.address.commons.util;
 
+import java.time.YearMonth;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
@@ -21,13 +22,9 @@ public class CalendarUtil {
         return calendar.get(Calendar.YEAR);
     }
 
-    /**
-     * Gets current month in String format
-     */
-    public static String getMonthString(int monthIndex) {
-        String[] months = {"January", "February", "March", "April", "May", "June", "July",
-            "August", "September", "October", "November", "December"};
-        return months[monthIndex];
+    public static int getNumOfDays(int year, int month) {
+        YearMonth yearMonthInstance = YearMonth.of(year, month);
+        return yearMonthInstance.lengthOfMonth();
     }
 
     /**

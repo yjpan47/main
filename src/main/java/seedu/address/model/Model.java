@@ -192,6 +192,11 @@ public interface Model {
     void addSwapRequest(String nric, LocalDate allocatedDate, LocalDate requestedDate);
 
     /**
+     * Delete a person from requests containing that person.
+     */
+    void deleteRequestsWithPerson(Person personToDelete);
+
+    /**
      * Schedule the next duty month in the model.
      */
     void scheduleDutyForNextMonth();

@@ -1,0 +1,122 @@
+{
+  "_comment": "PersonnelDatabase save file which contains the same Person values as in TypicalPersons#getTypicalPersonnelDatabase()",
+  "persons" : [ {
+    "nric": "S9673566K",
+    "company": "Leopard",
+    "section": "1",
+    "rank": "CFC",
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "tagged" : [ "outstanding" ],
+    "password" : "-1129997118",
+    "userType" : "GENERAL"
+  }, {
+    "nric": "S9478974B",
+    "company": "Hawk",
+    "section": "2",
+    "rank": "PTE",
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "tagged" : [ "injured" ],
+    "password" : "1394700475",
+    "userType" : "GENERAL"
+  }, {
+    "nric": "S9324325I",
+    "company": "Cougar",
+    "section": "3",
+    "rank": "REC",
+    "name" : "Carl Kurz",
+    "phone" : "95352563",
+    "tagged" : [ ],
+    "password" : "360173442",
+    "userType" : "GENERAL"
+  }, {
+    "nric": "T0034567L",
+    "company": "Falcon",
+    "section": "4",
+    "rank": "LCP",
+    "name" : "Daniel Meier",
+    "phone" : "87652533",
+    "tagged" : [ "friends" ],
+    "password" : "1708444043",
+    "userType" : "GENERAL"
+  }, {
+    "nric": "S9876567I",
+    "company": "Ninja",
+    "section": "2",
+    "rank": "REC",
+    "name" : "Elle Meyer",
+    "phone" : "9482224",
+    "tagged" : [ ],
+    "password" : "647780836",
+    "userType" : "GENERAL"
+  }, {
+    "nric": "S9357825I",
+    "company": "2nd",
+    "section": "1",
+    "rank": "PTE",
+    "name" : "Fiona Kunz",
+    "phone" : "9482427",
+    "tagged" : [ ],
+    "password" : "448980413",
+    "userType" : "GENERAL"
+  }, {
+    "nric": "T0065782J",
+    "company": "1st",
+    "section": "2",
+    "rank": "CFC",
+    "name" : "George Best",
+    "phone" : "+942442",
+    "tagged" : [ ],
+    "password" : "1795316364",
+    "userType" : "GENERAL"
+  }, {
+    "nric": "S9687543K",
+    "company": "3rd",
+    "section": "5",
+    "rank": "LTC",
+    "name" : "Dan",
+    "phone" : "98765432",
+    "tagged" : [ ],
+    "password" : "2480177",
+    "userType" : "GENERAL"
+  }, {
+    "nric": "S9876543P",
+    "company": "7th",
+    "section": "4",
+    "rank": "CFC",
+    "name" : "Tan",
+    "phone" : "12345678",
+    "tagged" : [ ],
+    "password" : "1216985755",
+    "userType" : "ADMIN"
+  } ],
+  "requests" : [ ],
+  "currentMonth" : {
+    "year" : 2019,
+    "monthIndex" : 3,
+    "firstDayWeekIndex" : 2,
+    "confirmed" : "false",
+    "needsRollover" : "false",
+    "duties" : [ ],
+    "blockedDays" : {
+      "dateList" : [ ],
+      "personNricList" : [ ]
+    }
+  },
+  "nextMonth" : {
+    "year" : 2019,
+    "monthIndex" : 4,
+    "firstDayWeekIndex" : 4,
+    "confirmed" : "false",
+    "needsRollover" : "false",
+    "duties" : [ ],
+    "blockedDays" : {
+      "dateList" : [ "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 " ],
+      "personNricList" : [ "S9673566K" ]
+    }
+  },
+  "dutyStorage" : {
+    "dutyStorageList" : []
+  }
+}
