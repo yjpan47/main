@@ -25,8 +25,8 @@ public class CalendarView extends UiPart<Region> {
     private static final String FXML = "CalendarView.fxml";
     private static final String LARGE_BLANK_SPACE = "                       ";
     private static final String[] dayArray = {LARGE_BLANK_SPACE + "SUN",
-            LARGE_BLANK_SPACE + "MON ", LARGE_BLANK_SPACE + "TUE", LARGE_BLANK_SPACE + "WED",
-            LARGE_BLANK_SPACE + "THU", LARGE_BLANK_SPACE + "FRI", LARGE_BLANK_SPACE + "SAT"};
+        LARGE_BLANK_SPACE + "MON ", LARGE_BLANK_SPACE + "TUE", LARGE_BLANK_SPACE + "WED",
+        LARGE_BLANK_SPACE + "THU", LARGE_BLANK_SPACE + "FRI", LARGE_BLANK_SPACE + "SAT"};
     private static final String[] monthArray =
         {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
     private Label[] dateLabels;
