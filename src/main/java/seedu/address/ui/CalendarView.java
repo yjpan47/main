@@ -95,7 +95,7 @@ public class CalendarView extends UiPart<Region> {
             Duty duty = dutyMonth.getScheduledDuties().get(i - 1);
 
             ObservableList<String> obsListDuty = FXCollections.observableArrayList(
-                    duty.getPersons().stream().map(Person::toStringWithNRIC).collect(Collectors.toList()));
+                    duty.getPersons().stream().map(Person::toStringWithNric).collect(Collectors.toList()));
             ListView tempDuty = new ListView(obsListDuty);
             VBox vBox = new VBox();
             vBox.getChildren().addAll(label, tempDuty);

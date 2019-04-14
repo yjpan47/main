@@ -165,7 +165,7 @@ public class Person {
      * Represents a Person with his NRIC number
      * @return a representation of a person with NRIC number
      */
-    public String toStringWithNRIC() {
+    public String toStringWithNric() {
         return String.format("%s [%s]", this.toString(), this.getNric().value);
     }
 
