@@ -87,7 +87,7 @@ public class SwapCommand extends Command {
 
         model.addSwapRequest(userName, allocatedDate, requestedDate);
         model.commitPersonnelDatabase();
-        return new CommandResult(String.format(MESSAGE_SUCCESS));
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     @Override
