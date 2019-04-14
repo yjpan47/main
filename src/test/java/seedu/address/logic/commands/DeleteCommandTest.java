@@ -48,7 +48,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_validDeleteSelf_success() {
+    public void executeValidDeleteSelfSuccess() {
         Person personToDelete = TypicalPersons.ADMIN_TAN;
         int personIndexInt = TypicalPersons.getTypicalPersons().indexOf(personToDelete);
         // Index is from zero based since we iterated from the actual list.

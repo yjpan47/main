@@ -48,7 +48,7 @@ public class DeleteCommandParserTest {
     }
 
     @Test
-    public void parse_noUser_throwsParseException() {
+    public void parseNoUserThrowsParseException() {
         assertParseFailure(parser, "1", MESSAGE_NO_AUTHORITY_PARSE, null, GENERAL_USER);
     }
 }
