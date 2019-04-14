@@ -119,8 +119,7 @@ public class Person {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getNric().equals(this.getNric());
+        return otherPerson.getNric().equals(this.getNric());
     }
 
     /**
@@ -158,9 +157,17 @@ public class Person {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(this.getRank().toString() + " " + this.getName().toString());
-        return builder.toString();
+        return (this.getRank().toString() + " " + this.getName().toString());
     }
+
+    /**
+     * Represents a Person with his NRIC number
+     * @return a representation of a person with NRIC number
+     */
+    public String toStringWithNric() {
+        return String.format("%s [%s]", this.toString(), this.getNric().value);
+    }
+
+
 
 }

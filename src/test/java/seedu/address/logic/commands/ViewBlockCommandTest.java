@@ -1,13 +1,11 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-//import static seedu.address.logic.commands.ViewBlockCommand.MESSAGE_TOO_MANY_BLOCKED_DATES;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccessGeneral;
+import static seedu.address.logic.commands.ViewBlockCommand.MESSAGE_BLOCKED_DATES;
+import static seedu.address.testutil.TypicalPersons.GENERAL_DAN;
+import static seedu.address.testutil.TypicalPersons.GENERAL_DAN_USERNAME;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersonnelDatabase;
-
-//import java.util.ArrayList;
-//import java.util.Arrays;
-//import java.util.Collections;
-//import java.util.List;
 
 import org.junit.Test;
 
@@ -28,5 +26,8 @@ public class ViewBlockCommandTest {
     public void execute() {
         assertCommandFailure(new ViewBlockCommand("Admin"), model, new CommandHistory(),
                 Messages.MESSAGE_NO_AUTHORITY);
+        assertCommandSuccessGeneral(new ViewBlockCommand(GENERAL_DAN_USERNAME), model, new CommandHistory(),
+                new CommandResult(String.format(MESSAGE_BLOCKED_DATES
+                        + "\n" + model.getNextDutyMonth().getBlockedDates().get(GENERAL_DAN))), model);
     }
 }

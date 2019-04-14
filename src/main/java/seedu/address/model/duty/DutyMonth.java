@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
 
+import seedu.address.commons.util.CalendarUtil;
 import seedu.address.commons.util.DateUtil;
 import seedu.address.model.person.Person;
 /**
@@ -65,14 +66,25 @@ public class DutyMonth {
     }
 
     /**
-     * Constructor for making a dummy copy of the dutyMonth for the purpose of scheduling
+     * Constructor for making a copy of the dutyMonth to commit
      * @param dutyMonth to be copied.
      */
-    public DutyMonth(DutyMonth dutyMonth) {
+    public DutyMonth(DutyMonth dutyMonth, boolean toCommit) {
+
         this.year = dutyMonth.getYear();
         this.monthIndex = dutyMonth.getMonthIndex();
         this.firstDayOfWeekIndex = dutyMonth.getFirstDayOfWeekIndex();
-        this.blockedDays = new HashMap<>(dutyMonth.getBlockedDates());
+
+        if (toCommit) {
+            this.scheduledDuties = new ArrayList<>(dutyMonth.getScheduledDuties());
+            this.confirmed = dutyMonth.isConfirmed();
+            for (Person person : dutyMonth.getBlockedDates().keySet()) {
+                this.blockedDays.put(person, new ArrayList<>(dutyMonth.getBlockedDates().get(person)));
+            }
+        } else {
+            this.blockedDays = new HashMap<>(dutyMonth.getBlockedDates());
+            this.confirmed = false;
+        }
     }
 
     /**
@@ -88,8 +100,14 @@ public class DutyMonth {
             throw new InvalidParameterException("Invalid Date");
         }
     }
+
+    /**
+     * Removed Blocked days from a person
+     */
     public void removeBlockedDays(Person person) {
-        this.blockedDays.get(person).clear();
+        if (this.blockedDays.get(person) != null) {
+            this.blockedDays.get(person).clear();
+        }
     }
 
     /**
@@ -149,6 +167,7 @@ public class DutyMonth {
         this.scheduledDuties.addAll(dutyList);
         this.scheduledDuties.sort(Comparator.comparingInt(Duty::getDayIndex));
     }
+
     /**
      * Checks if a person can be assigned to a duty on a given day
      */
@@ -162,8 +181,9 @@ public class DutyMonth {
                     || !this.blockedDays.get(person).contains(duty.getDayIndex());
         }
     }
+
     /**
-     * Generates duty object for the month
+     * Generates duties for the month
      */
     private List<Duty> generateAllDuties(DutySettings dutySettings) {
         List<Duty> duties = new ArrayList<>();
@@ -178,6 +198,13 @@ public class DutyMonth {
         Collections.shuffle(duties);
         duties.sort((d1, d2) -> (d2.getPoints() - d1.getPoints()));
         return duties;
+    }
+
+    /**
+     * Clears all duties in the month
+     */
+    public void clearAllDuties() {
+        this.scheduledDuties = new ArrayList<>();
     }
 
     public int getFirstDayOfWeekIndex() {
@@ -203,6 +230,7 @@ public class DutyMonth {
     public HashMap<Person, List<Integer>> getBlockedDates() {
         return this.blockedDays;
     }
+
     /**
      * Prints the scheduled duties for the DutyMonth
      */
@@ -210,28 +238,31 @@ public class DutyMonth {
 
         StringBuilder sb = new StringBuilder();
 
+        if (this.getUnfilledDuties().size() > 0) {
+            sb.append("--- WARNING: THESE DUTIES ARE NOT COMPLETELY UNFILLED! ---\n");
+            for (Duty duty : this.getUnfilledDuties()) {
+                sb.append(String.format("%s | Filled: (%d/%d)\n", duty, duty.getPersons().size(), duty.getCapacity()));
+            }
+            sb.append("\nUse <settings> command to change manpower requirements "
+                    + "or <add> command to add more persons.\n\n");
+        }
+
         sb.append(String.format("---- Duty Roster for %1$s %2$s  ---- \n",
                 DateUtil.getMonth(this.monthIndex), this.year));
 
         for (Duty duty : this.getScheduledDuties()) {
-            sb.append(String.format("%-3d %-10s (%d/%d) : [",
-                    duty.getDayIndex(), DateUtil.getDayOfWeek(duty.getDayOfWeekIndex()),
-                    duty.getPersons().size(), duty.getCapacity()));
-
-            for (Person person : duty.getPersons()) {
-                sb.append(String.format("%s %s , ", person.getRank(), person.getName()));
-            }
-
-            sb.append(" ]\n");
+            sb.append(String.format("%s | %s | %s\n", duty, duty.getStatus(), duty.getPersons()));
         }
+
         return sb.toString();
     }
+
     /**
-     * Prints the points allocated to the duty personnel for that month
+     * Prints the points allocated to duty personnel for that month
      */
     public String printPoints(DutyStorage dutyStorage) {
         StringBuilder sb = new StringBuilder();
-        sb.append("--- Points Awarded ----\n");
+        sb.append("--- POINTS AWARDED ----\n");
 
         Set<Person> personsThisMonth = new HashSet<>();
         for (Duty duty : this.scheduledDuties) {
@@ -244,10 +275,8 @@ public class DutyMonth {
                     .filter(duty -> duty.getPersons().contains(person))
                     .mapToInt(Duty::getPoints)
                     .sum();
-            sb.append(String.format("%3s %-20s %3d       + %-2d\n",
-                    person.getRank(), person.getName(),
-                    pointsInThePast,
-                    pointsThisMonth));
+            sb.append(String.format("%s | Points Accumulated: %d | Points Awarded: %d\n",
+                    person, pointsInThePast, pointsThisMonth));
         }
         return sb.toString();
     }
@@ -280,15 +309,66 @@ public class DutyMonth {
         }
         return false;
     }
+
     /**
-     * Swaps duty for two persons
+     * Return list of unfilled duties after scheduling
+     * @return list of unfilled duties
      */
-    public void swap(Person t1, Person t2, DutyStorage dutyStorage) {
+    public List<Duty> getUnfilledDuties() {
+        List<Duty> unfilledDuties = new ArrayList<>();
         for (Duty duty : this.getScheduledDuties()) {
-            duty.replacePerson(t1, t2);
-            duty.replacePerson(t2, t1);
+            if (!duty.isFilled()) {
+                unfilledDuties.add(duty);
+            }
         }
+        return unfilledDuties;
+    }
+
+    /**
+     * Swap duties between two persons
+     * @param p1 person 1 to be swapped
+     * @param d1 person 1 current duty
+     * @param p2 person 2 to be swapped
+     * @param d2 person 2 current duty
+     * @param dutyStorage dutyStorage
+     */
+    public void swap(Person p1, Duty d1, Person p2, Duty d2, DutyStorage dutyStorage) {
+        if (this.isConfirmed()) {
+            for (Duty duty : this.getScheduledDuties()) {
+                if (duty.equals(d1)) {
+                    duty.replacePerson(p1, p2);
+                }
+                if (duty.equals(d2)) {
+                    duty.replacePerson(p2, p1);
+                }
+            }
+            dutyStorage.undo();
+            dutyStorage.update(this.getScheduledDuties());
+        }
+    }
+
+    /**
+     * Swap duties between two persons based on their allocated days.
+     * @param t1 person 1 to be swapped
+     * @param t2 person 2 to be swapped
+     * @param dayOne person 1's duty day
+     * @param dayTwo person 2's duty day
+     * @param dutyStorage dutyStorage
+     */
+    public void swap(Person t1, Person t2, int dayOne, int dayTwo, DutyStorage dutyStorage) {
+        Duty dutyOne = this.getScheduledDuties().get(dayOne - 1);
+        Duty dutyTwo = this.getScheduledDuties().get(dayTwo - 1);
+        dutyOne.replacePerson(t1, t2);
+        dutyTwo.replacePerson(t2, t1);
         dutyStorage.undo();
         dutyStorage.update(this.getScheduledDuties());
+    }
+
+    /**
+     * Get the number of days in this month
+     * @return number of days
+     */
+    public int getNumberOfDays() {
+        return CalendarUtil.getNumOfDays(this.year, this.monthIndex);
     }
 }

@@ -79,9 +79,9 @@ public class DutyCalendar {
      */
     public void setDutyCalendar(DutyCalendar dutyCalendar) {
         if (dutyCalendar.getCurrentMonth().getMonthIndex() == CalendarUtil.getCurrentMonth()) {
-            this.currentMonth = dutyCalendar.getCurrentMonth();
-            this.nextMonth = dutyCalendar.getNextMonth();
-            this.dutyStorage = dutyCalendar.getDutyStorage();
+            this.currentMonth = new DutyMonth(dutyCalendar.getCurrentMonth(), true);
+            this.nextMonth = new DutyMonth(dutyCalendar.getNextMonth(), true);
+            this.dutyStorage = new DutyStorage(dutyCalendar.getDutyStorage());
         } else {
             this.rollover(dutyCalendar);
         }
@@ -105,7 +105,7 @@ public class DutyCalendar {
      */
     public void scheduleDutyForNextMonth(List<Person> persons,
                                          DutySettings dutySettings, DutyStorage dutyStorage) {
-        this.dummyNextMonth = new DutyMonth(nextMonth);
+        this.dummyNextMonth = new DutyMonth(nextMonth, false);
         dummyNextMonth.schedule(persons, dutySettings, dutyStorage);
     }
 

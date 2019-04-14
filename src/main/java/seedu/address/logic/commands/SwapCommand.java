@@ -37,7 +37,7 @@ public class SwapCommand extends Command {
     private final String userName;
 
     /**
-     * Creates a SwapCommand to swap the specified {@code Person}
+     * Creates a SwapCommand to request to swap duties.
      */
     public SwapCommand(LocalDate allocatedDate, LocalDate requestedDate, String userName) {
         requireNonNull(allocatedDate);
@@ -46,8 +46,13 @@ public class SwapCommand extends Command {
         this.requestedDate = requestedDate;
         this.userName = userName;
     }
+
     /**
-     * Executes the command
+     * Executes the SwapCommand.
+     * @param model
+     * @param history
+     * @return the command result
+     * @throws CommandException
      */
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
