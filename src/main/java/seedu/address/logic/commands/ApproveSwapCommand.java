@@ -43,8 +43,12 @@ public class ApproveSwapCommand extends Command {
         this.index = index;
     }
 
-    /*
-     * Executes the command to the model and updates command history.
+    /**
+     * Executes the ApproveSwapCommand.
+     * @param model
+     * @param history
+     * @return the command result
+     * @throws CommandException
      */
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);

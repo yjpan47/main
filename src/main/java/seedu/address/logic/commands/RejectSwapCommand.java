@@ -38,8 +38,12 @@ public class RejectSwapCommand extends Command {
         this.index = index;
     }
 
-    /*
-     * Execute the command in the model.
+    /**
+     * Executes a RejectSwapCommand.
+     * @param model
+     * @param history
+     * @return the command result
+     * @throws CommandException
      */
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
