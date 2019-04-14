@@ -15,8 +15,6 @@ import seedu.address.model.person.Person;
  */
 public class JsonAdaptedDuty {
 
-    //public static final String MISSING_FIELD_MESSAGE_FORMAT = "Duty's %s field is missing!";
-
     private final int year;
     private final int monthIndex;
     private final int dayIndex;
@@ -33,8 +31,9 @@ public class JsonAdaptedDuty {
 
     public JsonAdaptedDuty(@JsonProperty("year") int year, @JsonProperty("monthIndex") int monthIndex,
                            @JsonProperty("dayIndex") int dayIndex, @JsonProperty("dayOfWeekIndex") int dayOfWeekIndex,
-                           @JsonProperty("capacity") int capacity,
-                           @JsonProperty("points") int points, @JsonProperty("persons") List<String> persons) {
+                           @JsonProperty("capacity") int capacity, @JsonProperty("points") int points,
+                           @JsonProperty("persons") List<String> persons) {
+
         this.year = year;
         this.monthIndex = monthIndex;
         this.dayIndex = dayIndex;
@@ -66,13 +65,6 @@ public class JsonAdaptedDuty {
      */
     public Duty toModelType(ObservableList<Person> personList) {
 
-        final int modelYear = year;
-        final int modelMonthIndex = monthIndex;
-        final int modelDayIndex = dayIndex;
-        final int modelDayOfWeekIndex = dayOfWeekIndex;
-        final int modelCapacity = capacity;
-        final int modelPoints = points;
-
         final List<Person> modelPersonList = new ArrayList<>();
         for (String nric : persons) {
             for (Person person : personList) {
@@ -82,8 +74,9 @@ public class JsonAdaptedDuty {
             }
         }
 
-        return new Duty(modelYear, modelMonthIndex, modelDayIndex, modelDayOfWeekIndex,
-                modelCapacity, modelPoints, modelPersonList);
+        return new Duty(year, monthIndex, dayIndex, dayOfWeekIndex,
+                capacity, points, modelPersonList);
+
     }
 
 }

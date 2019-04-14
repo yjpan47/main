@@ -3,6 +3,7 @@ package seedu.address.model.duty;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import seedu.address.commons.util.DateUtil;
 import seedu.address.model.person.Person;
@@ -60,7 +61,7 @@ public class Duty {
      * @param personList this personList
      */
     public Duty(int year, int monthIndex, int dayIndex, int dayOfWeekIndex, int capacity,
-                int points, List<Person> personList) {
+                 int points, List<Person> personList) {
         if (DateUtil.isValidDate(year, monthIndex, dayIndex) && DateUtil.isValidDayOfWeek(dayOfWeekIndex)) {
             this.year = year;
             this.monthIndex = monthIndex;
@@ -104,8 +105,6 @@ public class Duty {
 
         if (target != null) {
             this.persons.remove(target);
-        } else {
-            throw new PersonNotFoundException();
         }
     }
 
@@ -190,8 +189,34 @@ public class Duty {
     public String toString() {
         return String.format("Duty : %d %s %d | ", this.getDayIndex(), this.getMonthString(), this.getYear())
                 + String.format("%s | ", this.getdayOfWeek())
-                + String.format("%d points\n", this.getPoints());
+                + String.format("%d points", this.getPoints());
     }
 
+    public String getStatus() {
+        return String.format("Filled: %d/%d", this.persons.size(), this.getCapacity());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.year, this.monthIndex, this.dayIndex, this.dayOfWeekIndex);
+    }
+
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Duty)) {
+            return false;
+        }
+
+        Duty otherDuty = (Duty) other;
+        return otherDuty.getYear() == this.getYear()
+                && otherDuty.getMonthIndex() == this.getMonthIndex()
+                && otherDuty.getDayIndex() == this.getDayIndex()
+                && otherDuty.getDayOfWeekIndex() == this.getDayOfWeekIndex();
+    }
 }
 
