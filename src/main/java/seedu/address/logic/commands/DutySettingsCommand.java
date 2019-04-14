@@ -11,10 +11,11 @@ import seedu.address.model.duty.DutySettings;
 public class DutySettingsCommand extends Command {
 
     public static final String COMMAND_WORD = "settings";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + " : "
             + "View and update manpower needed and points awarded for duties on given day of week\n"
             + "Manpower can range from 1 to 10. Points can range from 1 to 1000.\n"
-            + "Example: " + COMMAND_WORD + " w/Sun m/3 p/4";
+            + "Example: " + COMMAND_WORD + " d/Sun m/3 p/4";
 
     public static final String MESSAGE_VIEW_SETTINGS = "Duty Settings for each day of the week:\n\n%s";
     public static final String MESSAGE_CHANGE_SETTINGS_SUCCESS = "Settings successfully changed!"

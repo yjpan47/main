@@ -31,6 +31,7 @@ public class SwapCommand extends Command {
     public static final String MESSAGE_INVALID_MONTH = "Invalid month input.";
     public static final String MESSAGE_INVALID_DAY_ALLOCATED = "You do not have duty on the input allocated date.";
     public static final String MESSAGE_INVALID_DAY_REQUESTED = "You already have duty on the input requested date.";
+    public static final String MESSAGE_REQUEST_ALREADY_EXISTS = "You already have made this request.";
 
     private final LocalDate allocatedDate;
     private final LocalDate requestedDate;
@@ -83,6 +84,9 @@ public class SwapCommand extends Command {
         }
         if (model.getDutyCalendar().getNextMonth().isAssignedToDuty(userName, requestedDateDay)) {
             throw new CommandException(MESSAGE_INVALID_DAY_REQUESTED);
+        }
+        if (model.checkSwapRequestExists(userName, allocatedDate, requestedDate)) {
+            throw new CommandException(MESSAGE_REQUEST_ALREADY_EXISTS);
         }
 
         model.addSwapRequest(userName, allocatedDate, requestedDate);

@@ -183,6 +183,17 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
         requests.add(request);
         indicateModified();
     }
+    /**
+     * Checks a swap request to the request list.
+     */
+    public boolean checkRequestExists(Request request) {
+        for (Request existingRequest : requests) {
+            if (existingRequest.equals(request)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * Deletes requests involving the person inputted.
