@@ -107,7 +107,7 @@ public class PersonnelDatabaseParserTest {
             throw new AssertionError("The expected ParseException was not thrown.");
         } catch (ParseException pe) {
             assertEquals(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    DutySettingsCommand.MESSAGE_USAGE),pe.getMessage());
+                    DutySettingsCommand.MESSAGE_USAGE), pe.getMessage());
         }
         try {
             parser.parseCommand(DutySettingsCommand.COMMAND_WORD + " d/1 p/2 m/2",

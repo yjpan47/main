@@ -20,7 +20,8 @@ public class DutySettingsCommandTest {
     @Test
     public void execute() {
         assertCommandSuccess(new DutySettingsCommand(), model, new CommandHistory(),
-                new CommandResult(String.format(MESSAGE_VIEW_SETTINGS, model.getDutySettings().printDayOfWeek())), model);
+                new CommandResult(String.format(MESSAGE_VIEW_SETTINGS,
+                        model.getDutySettings().printDayOfWeek())), model);
         assertCommandFailureGeneral(new DutySettingsCommand(), model, new CommandHistory(),
                 Messages.MESSAGE_NO_AUTHORITY);
     }
