@@ -157,7 +157,6 @@ public class DutyAlgorithmTest {
 
     @Test
     public void scheduleDifferentSettingsTest() {
-        System.out.println(dutyStorage.printPoints());
         Random random = new Random();
         for (int i = 0; i < Test_Frequency; i++) {
             for (int day = 1; day <= DAYS_IN_WEEK; day++) {
