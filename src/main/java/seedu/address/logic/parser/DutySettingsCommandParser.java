@@ -16,7 +16,7 @@ public class DutySettingsCommandParser implements Parser<DutySettingsCommand> {
     private static final Prefix PREFIX_DAY_OF_WEEK = new Prefix("d/");
     private static final Prefix PREFIX_POINTS = new Prefix("p/");
     private static final Prefix PREFIX_CAPACITY = new Prefix("m/");
-    
+
     /**
      * Parses the given {@code String} of arguments in the context of the DutySettingsCommand
      * and returns an DutySettingsCommand object for execution.
