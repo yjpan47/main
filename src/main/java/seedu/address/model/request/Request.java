@@ -1,9 +1,8 @@
 package seedu.address.model.request;
 
-import seedu.address.model.person.Person;
-
 import java.time.LocalDate;
-import java.util.Optional;
+
+import seedu.address.model.person.Person;
 
 /**
  * Request class to get requested info such as duty dates and requester

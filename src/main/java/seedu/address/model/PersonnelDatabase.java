@@ -2,7 +2,6 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -184,6 +183,10 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
         indicateModified();
     }
 
+    /**
+     * Deletes requests involving the person inputted.
+     * @param personToDelete
+     */
     public void deleteRequestsWithPerson(Person personToDelete) {
         List<Request> filteredRequests = requests.stream().filter(req -> !personToDelete.equals(req.getAccepter())
                 && !personToDelete.equals(req.getRequester())).collect(Collectors.toList());

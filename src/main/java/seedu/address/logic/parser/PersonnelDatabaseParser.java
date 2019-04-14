@@ -8,9 +8,6 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.UserType;
 import seedu.address.logic.commands.ApproveSwapCommand;
-import seedu.address.logic.commands.RejectSwapCommand;
-import seedu.address.logic.commands.ViewCurrentCommand;
-import seedu.address.logic.commands.ViewNextCommand;
 import seedu.address.logic.commands.AcceptSwapCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.BlockDateCommand;
@@ -27,6 +24,7 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.PointsCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.RejectSwapCommand;
 import seedu.address.logic.commands.RemoveBlockCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SelectCommand;
@@ -36,7 +34,8 @@ import seedu.address.logic.commands.UnconfirmCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewBlockCommand;
 import seedu.address.logic.commands.ViewCommand;
-
+import seedu.address.logic.commands.ViewCurrentCommand;
+import seedu.address.logic.commands.ViewNextCommand;
 import seedu.address.logic.commands.ViewSwapsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -132,7 +131,7 @@ public class PersonnelDatabaseParser {
 
         case PointsCommand.COMMAND_WORD:
             return new PointsCommandParser().parse(arguments, userType, userName);
-            
+
         case ViewCurrentCommand.COMMAND_WORD:
             return new ViewCurrentCommand();
 

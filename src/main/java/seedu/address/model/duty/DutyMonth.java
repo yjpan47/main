@@ -333,8 +333,8 @@ public class DutyMonth {
     public void swap(Person t1, Person t2, int dayOne, int dayTwo, DutyStorage dutyStorage) {
         Duty dutyOne = this.getScheduledDuties().get(dayOne - 1);
         Duty dutyTwo = this.getScheduledDuties().get(dayTwo - 1);
-            dutyOne.replacePerson(t1, t2);
-            dutyTwo.replacePerson(t2, t1);
+        dutyOne.replacePerson(t1, t2);
+        dutyTwo.replacePerson(t2, t1);
         dutyStorage.undo();
         dutyStorage.update(this.getScheduledDuties());
     }

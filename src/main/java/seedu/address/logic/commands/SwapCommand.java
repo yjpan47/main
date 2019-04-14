@@ -46,8 +46,13 @@ public class SwapCommand extends Command {
         this.requestedDate = requestedDate;
         this.userName = userName;
     }
+
     /**
-     * Executes the command
+     * Executes the SwapCommand.
+     * @param model
+     * @param history
+     * @return the command result
+     * @throws CommandException
      */
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);

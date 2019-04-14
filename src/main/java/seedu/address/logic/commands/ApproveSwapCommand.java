@@ -1,5 +1,11 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
@@ -9,11 +15,7 @@ import seedu.address.model.duty.DutyMonth;
 import seedu.address.model.person.Person;
 import seedu.address.model.request.Request;
 
-import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
 
-import static java.util.Objects.requireNonNull;
 
 
 /**
@@ -41,6 +43,9 @@ public class ApproveSwapCommand extends Command {
         this.index = index;
     }
 
+    /*
+     * Executes the command to the model and updates command history.
+     */
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Request> requests = model.getPersonnelDatabase().getRequestList();
