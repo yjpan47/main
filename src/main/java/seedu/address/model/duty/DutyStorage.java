@@ -13,6 +13,9 @@ import seedu.address.model.person.Person;
  */
 public class DutyStorage {
 
+    private final String Message_Record_Rewarded = "Reward: %d points added";
+    private final String Message_Record_Penalized = "Penalty: %d points deducted";
+
     private HashMap<Person, Integer> dutyPoints;
     private HashMap<Person, List<String>> dutyRecords;
 
@@ -37,9 +40,26 @@ public class DutyStorage {
 
     public DutyStorage(DutyStorage dutyStorage) {
         this.dutyPoints = new HashMap<>(dutyStorage.getDutyPoints());
-        this.dutyRecords = new HashMap<>(dutyStorage.getDutyRecords());
+        this.dutyRecords = new HashMap<>();
+        for (Person person : dutyStorage.getDutyRecords().keySet()) {
+            this.dutyRecords.put(person, new ArrayList<>(dutyStorage.getDutyRecords().get(person)));
+        }
         this.prevDutyPoints = new HashMap<>(dutyStorage.getPrevDutyPoints());
-        this.prevDutyRecords = new HashMap<>(dutyStorage.getPrevDutyRecords());
+        this.prevDutyRecords = new HashMap<>();
+        for (Person person : dutyStorage.getPrevDutyRecords().keySet()) {
+            this.prevDutyRecords.put(person, new ArrayList<>(dutyStorage.getPrevDutyRecords().get(person)));
+        }
+    }
+
+    /**
+     * Adds a person into dutyStorage
+     * @param person the person to be added
+     */
+    public void addPerson(Person person) {
+        this.dutyPoints.put(person, 0);
+        this.dutyRecords.put(person, new ArrayList<>());
+        this.prevDutyPoints.put(person, 0);
+        this.prevDutyRecords.put(person, new ArrayList<>());
     }
 
     /**
@@ -109,12 +129,11 @@ public class DutyStorage {
      */
     public String printPoints() {
         StringBuilder sb = new StringBuilder();
-        sb.append("--- Points Accumulated ----\n");
+        sb.append("--- POINTS ACCUMULATED ----\n");
         for (Person person : this.dutyPoints.keySet()) {
             int points = this.dutyPoints.get(person);
-            sb.append(String.format("%3s %-20s %3d\n",
-                    person.getRank(), person.getName(),
-                    points));
+            sb.append(String.format("%s | Points: %d\n",
+                    person, points));
         }
         return sb.toString();
     }
@@ -124,10 +143,11 @@ public class DutyStorage {
      */
     public String printDetails(Person person) {
         StringBuilder sb = new StringBuilder();
+        sb.append(person).append("\n");
         sb.append(String.format("Points : %d\n", this.dutyPoints.getOrDefault(person, 0)));
-        sb.append("--- All Duties ---\n");
+        sb.append("--- RECORDS ---\n");
         for (String dutyDetails : this.dutyRecords.getOrDefault(person, new ArrayList<>())) {
-            sb.append(dutyDetails);
+            sb.append(dutyDetails).append("\n");
         }
         return sb.toString();
     }
@@ -211,6 +231,66 @@ public class DutyStorage {
             this.dutyRecords.remove(target);
             this.prevDutyPoints.remove(target);
             this.prevDutyRecords.remove(target);
+        }
+    }
+
+    /**
+     * Rewards points to a person
+     * @param target the person to be rewarded
+     * @param points the number of points to be rewarded
+     */
+    public void reward(Person target, int points) {
+        for (Person person : this.dutyPoints.keySet()) {
+            if (person.getNric().toString().equals(target.getNric().toString())) {
+                this.dutyPoints.replace(person, this.dutyPoints.get(person) + points);
+            }
+        }
+        for (Person person : this.dutyRecords.keySet()) {
+            if (person.getNric().toString().equals(target.getNric().toString())) {
+                this.dutyRecords.get(person).add(String.format(Message_Record_Rewarded, points));
+            }
+        }
+
+        for (Person person : this.prevDutyPoints.keySet()) {
+            if (person.getNric().toString().equals(target.getNric().toString())) {
+                this.prevDutyPoints.replace(person, this.prevDutyPoints.get(person) + points);
+            }
+        }
+        for (Person person : this.prevDutyRecords.keySet()) {
+            if (person.getNric().toString().equals(target.getNric().toString())) {
+                this.prevDutyRecords.get(person).add(String.format(Message_Record_Rewarded, points));
+            }
+        }
+    }
+
+    /**
+     * Penalize points to a person
+     * @param target the person to be penalized
+     * @param points the number of points to be penalized
+     */
+    public void penalize(Person target, int points) {
+        for (Person person : this.dutyPoints.keySet()) {
+            if (person.getNric().toString().equals(target.getNric().toString())) {
+                this.dutyPoints.replace(person, this.dutyPoints.get(person) - points);
+            }
+        }
+
+        for (Person person : this.dutyRecords.keySet()) {
+            if (person.getNric().toString().equals(target.getNric().toString())) {
+                this.dutyRecords.get(person).add(String.format(Message_Record_Penalized, points));
+            }
+        }
+
+        for (Person person : this.prevDutyPoints.keySet()) {
+            if (person.getNric().toString().equals(target.getNric().toString())) {
+                this.prevDutyPoints.replace(person, this.prevDutyPoints.get(person) - points);
+                return;
+            }
+        }
+        for (Person person : this.prevDutyRecords.keySet()) {
+            if (person.getNric().toString().equals(target.getNric().toString())) {
+                this.prevDutyRecords.get(person).add(String.format(Message_Record_Penalized, points));
+            }
         }
     }
 }
