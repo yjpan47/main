@@ -104,8 +104,6 @@ public class Duty {
 
         if (target != null) {
             this.persons.remove(target);
-        } else {
-            throw new PersonNotFoundException();
         }
     }
 

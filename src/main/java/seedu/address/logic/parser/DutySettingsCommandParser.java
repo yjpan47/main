@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.security.InvalidParameterException;
+
 import seedu.address.commons.core.UserType;
 import seedu.address.commons.util.DateUtil;
 import seedu.address.logic.commands.DutySettingsCommand;
@@ -14,6 +16,9 @@ public class DutySettingsCommandParser implements Parser<DutySettingsCommand> {
     private static final Prefix PREFIX_DAY_OF_WEEK = new Prefix("d/");
     private static final Prefix PREFIX_POINTS = new Prefix("p/");
     private static final Prefix PREFIX_CAPACITY = new Prefix("m/");
+
+    private static final String MESSAGE_INPUT_OUT_OF_RANGE = "Inputs out of range.";
+
     /**
      * Parses the given {@code String} of arguments in the context of the DutySettingsCommand
      * and returns an DutySettingsCommand object for execution.
@@ -34,8 +39,15 @@ public class DutySettingsCommandParser implements Parser<DutySettingsCommand> {
             int dayOfWeek = DateUtil.getDayOfWeekIndex(argMultimap.getValue(PREFIX_DAY_OF_WEEK).get());
             int capacity = Integer.parseInt(argMultimap.getValue(PREFIX_CAPACITY).get());
             int points = Integer.parseInt(argMultimap.getValue(PREFIX_POINTS).get());
+
+            if (capacity < 0 || points < 0) {
+                throw new IllegalArgumentException();
+            }
+
             return new DutySettingsCommand(dayOfWeek, capacity, points);
-        } catch (NumberFormatException e) {
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(MESSAGE_INPUT_OUT_OF_RANGE);
+        } catch (Exception e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DutySettingsCommand.MESSAGE_USAGE));
         }
     }
