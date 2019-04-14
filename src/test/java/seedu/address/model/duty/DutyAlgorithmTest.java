@@ -129,7 +129,6 @@ public class DutyAlgorithmTest {
             for (Person person : duty.getPersons()) {
                 pointsGained.putIfAbsent(person, 0);
                 pointsGained.replace(person, pointsGained.get(person) + duty.getPoints());
-                assertFalse(duty.getPersonsString(person.getNric().toString()).contains(person.getName().toString()));
                 for (Person p : duty.getPersons()) {
                     if (!p.equals(person)) {
                         assertTrue(duty.getPersonsString(person.getNric().toString()).contains(p.getName().toString()));
