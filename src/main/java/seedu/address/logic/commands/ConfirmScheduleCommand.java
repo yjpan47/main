@@ -51,7 +51,7 @@ public class ConfirmScheduleCommand extends Command {
             return new CommandResult(MESSAGE_NO_SCHEDULE_YET);
         }
 
-        if (!dummyMonth.allDutiesAreFiled()) {
+        if (dummyMonth.getUnfilledDuties().size() > 0) {
             return new CommandResult(MESSAGE_SCHEDULE_NOT_FILLED);
         }
 
