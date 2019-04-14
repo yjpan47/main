@@ -30,7 +30,7 @@ Duty Planner is a desktop address book application used foradding MINDEF personn
 *** Helped other members to write CalendarView.fxml and CalendarView.java
 ** Community:
 *** Helped group 15-3 in their UI component:
-https://github.com/CS2103-AY1819S2-W15-3/main/blob/master/src/main/resources/view/AnalyticsChart.fxml
+https://github.com/CS2103-AY1819S2-W15-3/main/blob/master/src/main/resources/view/AnalyticsChart.fxml[Link]
 
 
 
