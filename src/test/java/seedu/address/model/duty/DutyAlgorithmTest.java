@@ -82,6 +82,7 @@ public class DutyAlgorithmTest {
             -> dutyMonth3.addBlockedDay(TypicalPersons.CARL, 32));
     }
 
+
     @Test
     public void addBlockDayTest() {
         assertTrue(dutyMonth3.getBlockedDates().isEmpty());
@@ -111,7 +112,9 @@ public class DutyAlgorithmTest {
         assertFalse(dutyMonth2.getBlockedDates().get(TypicalPersons.AMY).contains(4));
         assertEquals(dutyMonth2.getBlockedDates().keySet().size(), 1);
         assertEquals(dutyMonth2.getBlockedDates().get(TypicalPersons.AMY).size(), 0);
+
     }
+
 
     @Test
     public void scheduleDefaultSettingsTest() {
