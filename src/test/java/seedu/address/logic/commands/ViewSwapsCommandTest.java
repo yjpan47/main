@@ -10,13 +10,14 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.Test;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
-import seedu.address.model.duty.Duty;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.person.Person;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.duty.Duty;
+import seedu.address.model.person.Person;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ViewSwapsCommand.
@@ -33,7 +34,7 @@ public class ViewSwapsCommandTest {
         int allocatedDayIndex = 0;
         LocalDate allocatedDate = null;
         LocalDate requestedDate = null;
-        Person accepter  = null;
+        Person accepter = null;
         for (Duty duty : duties) {
             if (duty.getPersons().contains(ALICE)) {
                 allocatedDayIndex = duty.getDayIndex();

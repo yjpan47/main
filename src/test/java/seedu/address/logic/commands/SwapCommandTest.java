@@ -10,11 +10,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.Test;
+
 import seedu.address.logic.CommandHistory;
-import seedu.address.model.duty.Duty;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.duty.Duty;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for SwapCommand.
