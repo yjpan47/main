@@ -284,6 +284,11 @@ public class AddCommandTest {
         public void scheduleDutyForNextMonth() {
             throw new AssertionError(CALLED_ERROR);
         }
+
+        @Override
+        public void deleteRequestsWithPerson(Person person) {
+            throw new AssertionError(CALLED_ERROR);
+        }
     }
 
     /**

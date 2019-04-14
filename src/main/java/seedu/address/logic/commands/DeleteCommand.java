@@ -57,6 +57,8 @@ public class DeleteCommand extends Command {
         dutyMonth.unconfirm();
         dutyStorage.undo();
 
+        model.deleteRequestsWithPerson(personToDelete);
+
         model.commitPersonnelDatabase();
         if (userNameDeleted.equals(userName)) {
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete),

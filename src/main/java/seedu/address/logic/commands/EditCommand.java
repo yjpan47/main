@@ -37,6 +37,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Rank;
 import seedu.address.model.person.Section;
+import seedu.address.model.request.Request;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -147,6 +148,15 @@ public class EditCommand extends Command {
             }
         }
         dutyStorage.replacePerson(personToEdit, editedPerson);
+
+        List<Request> requests = model.getPersonnelDatabase().getRequestList();
+        for (Request req : requests) {
+            if (req.getRequester().equals(personToEdit)) {
+                req.setRequester(editedPerson);
+            } else if (req.getAccepter().equals(personToEdit)) {
+                req.setAccepter(editedPerson);
+            }
+        }
 
         model.commitPersonnelDatabase();
         if (editedNricUserType) {

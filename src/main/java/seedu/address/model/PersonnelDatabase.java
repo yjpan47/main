@@ -2,9 +2,9 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.beans.InvalidationListener;
 import javafx.collections.ObservableList;
@@ -86,6 +86,9 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
      */
     public void setRequests(List<Request> requestList) {
         this.requests.clear();
+        requestList = requestList.stream()
+                .filter(req -> req.getAllocatedDate().getMonthValue() - 1
+                        == (getDutyCalendar().getCurrentMonthIndex() + 1) % 12).collect(Collectors.toList());
         this.requests.addAll(requestList);
         indicateModified();
     }
@@ -173,20 +176,23 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
         indicateModified();
     }
 
-
-    /**
-     * Adds a swap request to the request list by fields.
-     */
-    public void addRequest(String nric, LocalDate allocatedDate, LocalDate requestedDate) {
-        requests.add(new Request(nric, allocatedDate, requestedDate));
-        indicateModified();
-    }
-
     /**
      * Adds a swap request to the request list.
      */
     public void addRequest(Request request) {
         requests.add(request);
+        indicateModified();
+    }
+
+    /**
+     * Deletes requests involving the person inputted.
+     * @param personToDelete
+     */
+    public void deleteRequestsWithPerson(Person personToDelete) {
+        List<Request> filteredRequests = requests.stream().filter(req -> !personToDelete.equals(req.getAccepter())
+                && !personToDelete.equals(req.getRequester())).collect(Collectors.toList());
+        requests.clear();
+        requests.addAll(filteredRequests);
         indicateModified();
     }
 
