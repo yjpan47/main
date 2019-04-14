@@ -251,7 +251,7 @@ Edits the company of the user to be `Hotel`, clears all existing tags, and chang
 The user can block dates and set which dates they are unavailable to duties for the upcoming month. A user can block up to 15 days. +
 Format: `block DATE DATE DATE ...`
 
-[IMPORTANT] This command can only be entered if next month's duty schedule has not been confirmed yet.
+This command can only be entered if next month's duty schedule has not been confirmed yet.
 If it has been confirmed please request a swap on the day you wish to duties.
 
 Example:
