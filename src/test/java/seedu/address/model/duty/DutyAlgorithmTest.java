@@ -1,13 +1,13 @@
 package seedu.address.model.duty;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.security.InvalidParameterException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,10 +18,10 @@ import seedu.address.testutil.TypicalPersons;
 
 public class DutyAlgorithmTest {
 
-    private final int TEST_FREQUENCY = 1000;
-    private final int DAYS_IN_WEEK = 7;
-    private final int RANDOM_POINTS_LIMIT = 99;
-    private final int RANDOM_CAPACITY_LIMIT = 9;
+    private static final int Test_Frequency = 1000;
+    private static final int DAYS_IN_WEEK = 7;
+    private static final int RANDOM_POINTS_LIMIT = 99;
+    private static final int RANDOM_CAPACITY_LIMIT = 9;
 
     private DutyMonth dutyMonth1;
     private DutyMonth dutyMonth2;
@@ -51,14 +51,14 @@ public class DutyAlgorithmTest {
     @Test
     public void dutyMonthContructorTest() {
 
-        Assert.assertThrows(InvalidParameterException.class,
-                () -> new DutyMonth(2020, 12, 2));
-        Assert.assertThrows(InvalidParameterException.class,
-                () -> new DutyMonth(1999, 11, 8));
-        Assert.assertThrows(InvalidParameterException.class,
-                () -> new DutyMonth(2010, -1, 4));
-        Assert.assertThrows(InvalidParameterException.class,
-                () -> new DutyMonth(2018, 4, 0));
+        Assert.assertThrows(InvalidParameterException.class, ()
+                -> new DutyMonth(2020, 12, 2));
+        Assert.assertThrows(InvalidParameterException.class, ()
+                -> new DutyMonth(1999, 11, 8));
+        Assert.assertThrows(InvalidParameterException.class, ()
+                -> new DutyMonth(2010, -1, 4));
+        Assert.assertThrows(InvalidParameterException.class, ()
+                -> new DutyMonth(2018, 4, 0));
 
         assertEquals(dutyMonth1.getYear(), 2018);
         assertEquals(dutyMonth2.getYear(), 2019);
@@ -156,7 +156,7 @@ public class DutyAlgorithmTest {
     @Test
     public void scheduleDifferentSettingsTest() {
         Random random = new Random();
-        for (int i = 0; i < TEST_FREQUENCY; i++) {
+        for (int i = 0; i < Test_Frequency; i++) {
             for (int day = 1; day <= DAYS_IN_WEEK; day++) {
                 int rpoints = random.nextInt(RANDOM_POINTS_LIMIT) + 1;
                 int rcapacity = random.nextInt(RANDOM_CAPACITY_LIMIT) + 1;
