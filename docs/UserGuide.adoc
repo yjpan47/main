@@ -47,7 +47,6 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 === Log in
 ****
 * For Practical Exam: You may use an administrator account with Username: Admin, and Password: Admin
-* For Practical Exam: In personnel list, the password of the users will be listed for your convenience.
 * If you close the login window, you are still able to view the personnel list and the calendar duty list. However, you will not be able to use any commands.
 ****
 Logs user into account +
@@ -89,7 +88,7 @@ Format: `list`
 Brings up calendar view, with all duties for the current month. +
 Format: `viewCurrent`
 
-==== View all duties for enxt month: `viewNext`
+==== View all duties for next month: `viewNext`
 Brings up calendar view, with all duties for the next month. +
 Format: `viewNext`
 
@@ -260,6 +259,7 @@ Format: `delete INDEX`
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* Note that the program will exit if you delete your own account.
 ****
 
 Examples:
@@ -288,6 +288,7 @@ Format: `edit INDEX [nr/NRIC] [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONE
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person's tags by typing `t/` without specifying any tags after it.
 * For account type field specified by `u/`, A corresponds to an Admin account, G corresponds to a general account.
+* The program will exit if you delete your own NRIC or change your usertype to a general account.
 ****
 
 Examples:
@@ -349,6 +350,8 @@ Your password is also your NRIC by default, unless you or your administrator cha
 
 * *Viewing help* : `help` +
 * *Viewing own duties* : `view` +
+* *View all duties for current month* : `viewCurrent` +
+* *View all duties for next month* : `viewNext` +
 * *Viewing other's duties* : `view NRIC` +
 * *Blocking dates* : `bd DATE DATE DATE …` +
 * *Make swap request* : `swap` +
