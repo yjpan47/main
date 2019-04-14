@@ -47,8 +47,7 @@ public class ConfirmScheduleCommand extends Command {
 
         DutyMonth dummyMonth = model.getDutyCalendar().getDummyNextMonth();
 
-        if (dummyMonth.getScheduledDuties() == null) {
-
+        if (dummyMonth == null || dummyMonth.getScheduledDuties() == null) {
             return new CommandResult(MESSAGE_NO_SCHEDULE_YET);
         }
 

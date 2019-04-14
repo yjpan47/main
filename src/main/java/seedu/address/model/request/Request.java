@@ -2,33 +2,34 @@ package seedu.address.model.request;
 
 import java.time.LocalDate;
 
+import seedu.address.model.person.Person;
+
 /**
- * Request class to get requested info such as duty dates and requesterNric
+ * Request class to get requested info such as duty dates and requester
  */
 public class Request {
-    public static final String EMPTY_ACCEPTER_FIELD = "EMPTY";
 
-    private String requesterNric;
+    private Person requester;
     private LocalDate allocatedDate;
     private LocalDate requestedDate;
-    private String accepterNric;
+    private Person accepter;
 
-    public Request(String requesterNric, LocalDate allocatedDate, LocalDate requestedDate) {
-        this.requesterNric = requesterNric;
+    public Request(Person requester, LocalDate allocatedDate, LocalDate requestedDate) {
+        this.requester = requester;
         this.allocatedDate = allocatedDate;
         this.requestedDate = requestedDate;
-        this.accepterNric = EMPTY_ACCEPTER_FIELD;
+        this.accepter = null;
     }
 
-    public Request(String requesterNric, LocalDate allocatedDate, LocalDate requestedDate, String accepterNric) {
-        this.requesterNric = requesterNric;
+    public Request(Person requester, LocalDate allocatedDate, LocalDate requestedDate, Person accepter) {
+        this.requester = requester;
         this.allocatedDate = allocatedDate;
         this.requestedDate = requestedDate;
-        this.accepterNric = accepterNric;
+        this.accepter = accepter;
     }
 
     public String getRequesterNric() {
-        return requesterNric;
+        return requester.getNric().toString();
     }
 
     public LocalDate getAllocatedDate() {
@@ -40,14 +41,39 @@ public class Request {
     }
 
     public boolean isAccepterValid() {
-        return !getAccepterNric().equals(EMPTY_ACCEPTER_FIELD);
+        return accepter != null;
     }
 
     public String getAccepterNric() {
-        return accepterNric;
+        return accepter.getNric().toString();
     }
 
-    public void setAccepterNric(String accepterNric) {
-        this.accepterNric = accepterNric;
+    public Person getRequester() {
+        return requester;
+    }
+
+    public void setRequester(Person requester) {
+        this.requester = requester;
+    }
+
+    public Person getAccepter() {
+        return accepter;
+    }
+
+    public void setAccepter(Person accepter) {
+        this.accepter = accepter;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getRequesterNric()).append(" requests a swap from ")
+                .append(getAllocatedDate().toString()).append(" to ")
+                .append(getRequestedDate().toString());
+        if (isAccepterValid()) {
+            sb.append(". ").append(getAccepterNric()).append(" has accepted");
+        }
+
+        return sb.toString();
     }
 }

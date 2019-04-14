@@ -7,10 +7,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.UserType;
-import seedu.address.logic.ViewCurrentCommand;
-import seedu.address.logic.ViewNextCommand;
 import seedu.address.logic.commands.AcceptSwapCommand;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.ApproveSwapCommand;
 import seedu.address.logic.commands.BlockDateCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -26,6 +25,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.PenalizeCommand;
 import seedu.address.logic.commands.PointsCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.RejectSwapCommand;
 import seedu.address.logic.commands.RemoveBlockCommand;
 import seedu.address.logic.commands.RewardCommand;
 import seedu.address.logic.commands.ScheduleCommand;
@@ -36,7 +36,9 @@ import seedu.address.logic.commands.UnconfirmCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewBlockCommand;
 import seedu.address.logic.commands.ViewCommand;
-
+import seedu.address.logic.commands.ViewCurrentCommand;
+import seedu.address.logic.commands.ViewNextCommand;
+import seedu.address.logic.commands.ViewSwapsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -137,6 +139,15 @@ public class PersonnelDatabaseParser {
 
         case ViewNextCommand.COMMAND_WORD:
             return new ViewNextCommand();
+
+        case ViewSwapsCommand.COMMAND_WORD:
+            return new ViewSwapsCommand();
+
+        case ApproveSwapCommand.COMMAND_WORD:
+            return new ApproveSwapCommandParser().parse(arguments, userType, userName);
+
+        case RejectSwapCommand.COMMAND_WORD:
+            return new RejectSwapCommandParser().parse(arguments, userType, userName);
 
         case RewardCommand.COMMAND_WORD:
             return new RewardCommandParser().parse(arguments, userType, userName);
