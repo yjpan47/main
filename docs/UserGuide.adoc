@@ -61,11 +61,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 === Log in
 ****
 * For Practical Exam: You may use an administrator account with Username: Admin, and Password: Admin
-
-* For Practical Exam: In personnel list, the password of the users will be listed for your convenience.
-* If you close the login window, you are still able to view the personnel list and the calendar duty list.
- However, you will not be able to use any commands.
-* If you close the login window, you are still able to view the personnel list and the calendar duty list. However, you will not be able to use any commands.
+* If you close the login window, you are still able to view the personnel list and the calendar duty list. However, you will not be able to use any commands. You may simply close the window to exit the program.
 
 ****
 
@@ -105,6 +101,7 @@ Format: `help`
 Lists out all users with their details. +
 Format: `list`
 
+// tag::viewMonths[]
 ==== View all duties for current month: `viewCurrent`
 Brings up calendar view, with all duties for the current month. +
 Format: `viewCurrent`
@@ -112,6 +109,7 @@ Format: `viewCurrent`
 ==== View all duties for next month: `viewNext`
 Brings up calendar view, with all duties for the next month. +
 Format: `viewNext`
+// end::viewMonths[]
 
 ==== View duties assigned to user : `view`
 The user can see their details about their own duties assigned to them and their upcoming duties ranked by recency. +
@@ -359,6 +357,7 @@ Format: `edit INDEX [nr/NRIC] [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONE
 * You can remove all the person's tags by typing `t/` without specifying any tags after it.
 * For account type field specified by `u/`, A corresponds to an Admin account, G corresponds to a general account.
 * The program will exit if you delete your own NRIC or change your usertype to a general account.
+* If you edit another user's NRIC, the user's password does not automatically change to that NRIC (since the user might choose to have his own password). If you really do want to change the password to the new NRIC, please specify it in the pw/ field.
 ****
 
 Examples:
