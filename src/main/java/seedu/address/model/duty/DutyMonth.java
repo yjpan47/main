@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
 
+import seedu.address.commons.util.CalendarUtil;
 import seedu.address.commons.util.DateUtil;
 import seedu.address.model.person.Person;
 /**
@@ -113,6 +114,14 @@ public class DutyMonth {
             this.blockedDays.get(person).clear();
         }
     }
+
+    /**
+     * Remove duties from the list
+     */
+    public void removeDuty(Duty duty) {
+        this.scheduledDuties.remove(duty);
+    }
+
     /**
      * Schedule allocates duties for the DutyMonth
      */
@@ -170,6 +179,7 @@ public class DutyMonth {
         this.scheduledDuties.addAll(dutyList);
         this.scheduledDuties.sort(Comparator.comparingInt(Duty::getDayIndex));
     }
+
     /**
      * Checks if a person can be assigned to a duty on a given day
      */
@@ -183,6 +193,7 @@ public class DutyMonth {
                     || !this.blockedDays.get(person).contains(duty.getDayIndex());
         }
     }
+
     /**
      * Generates duty object for the month
      */
@@ -221,9 +232,19 @@ public class DutyMonth {
         return this.scheduledDuties;
     }
 
+    public boolean allDutiesAreFiled() {
+        for (Duty duty : this.scheduledDuties) {
+            if (!duty.isFilled()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public HashMap<Person, List<Integer>> getBlockedDates() {
         return this.blockedDays;
     }
+
     /**
      * Prints the scheduled duties for the DutyMonth
      */
@@ -247,6 +268,7 @@ public class DutyMonth {
         }
         return sb.toString();
     }
+
     /**
      * Prints the points allocated to the duty personnel for that month
      */
@@ -301,6 +323,7 @@ public class DutyMonth {
         }
         return false;
     }
+
     /**
      * Swaps duty for two persons
      */
@@ -311,5 +334,9 @@ public class DutyMonth {
         }
         dutyStorage.undo();
         dutyStorage.update(this.getScheduledDuties());
+    }
+
+    public int getNumberOfDays() {
+        return CalendarUtil.getNumOfDays(this.year, this.monthIndex);
     }
 }

@@ -1,5 +1,6 @@
 package seedu.address.commons.util;
 
+import java.time.YearMonth;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
@@ -19,6 +20,11 @@ public class CalendarUtil {
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.setTimeZone(TimeZone.getTimeZone("GMT+8"));
         return calendar.get(Calendar.YEAR);
+    }
+
+    public static int getNumOfDays(int year, int month) {
+        YearMonth yearMonthInstance = YearMonth.of(year, month);
+        return yearMonthInstance.lengthOfMonth();
     }
 
     /**
