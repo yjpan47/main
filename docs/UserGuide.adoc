@@ -84,6 +84,7 @@ Format: `help`
 Lists out all users with their details. +
 Format: `list`
 
+// tag::viewMonths[]
 ==== View all duties for current month: `viewCurrent`
 Brings up calendar view, with all duties for the current month. +
 Format: `viewCurrent`
@@ -91,6 +92,7 @@ Format: `viewCurrent`
 ==== View all duties for next month: `viewNext`
 Brings up calendar view, with all duties for the next month. +
 Format: `viewNext`
+// end::viewMonths[]
 
 ==== View duties assigned to user : `view`
 The user can see their details about their own duties assigned to them and their upcoming duties ranked by recency. +
