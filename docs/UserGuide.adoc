@@ -461,7 +461,7 @@ Calling `schedule` after next month's duties have already been confirm will only
 // end::scheduleAdmin[]
 
 // tag::confirmAdmin[]
-==== Confirm a Schedule : `confirm`
+==== Confirm a schedule : `confirm`
 Confirms the duty schedule that was previously generated (from the `schedule` command) for the upcoming month.
 
 Format: `confirm`
