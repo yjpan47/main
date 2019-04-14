@@ -7,6 +7,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 //import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DATE;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_CONSTRAINTS_DATE;
+import static seedu.address.logic.parser.DutySettingsCommandParser.MESSAGE_INPUT_OUT_OF_RANGE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -30,7 +31,9 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.PenalizeCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.RewardCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SwapCommand;
@@ -38,6 +41,7 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Person;
 //import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -148,6 +152,80 @@ public class PersonnelDatabaseParserTest {
     }
 
     @Test
+    public void parseCommand_Reward() throws Exception {
+        Person person = new PersonBuilder().build();
+        try {
+            parser.parseCommand(RewardCommand.COMMAND_WORD, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME);
+            throw new AssertionError("The expected ParseException was not thrown.");
+        } catch (ParseException pe) {
+            assertEquals(new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    RewardCommand.MESSAGE_USAGE)).getMessage(), pe.getMessage());
+        }
+        try {
+            parser.parseCommand(RewardCommand.COMMAND_WORD + " i/1 p", UserType.ADMIN,
+                    UserType.DEFAULT_ADMIN_USERNAME);
+            throw new AssertionError("The expected ParseException was not thrown.");
+        } catch (ParseException pe) {
+            assertEquals(new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    RewardCommand.MESSAGE_USAGE)).getMessage(), pe.getMessage());
+        }
+        try {
+            parser.parseCommand(RewardCommand.COMMAND_WORD, UserType.GENERAL, person.getNric().toString());
+            throw new AssertionError("The expected ParseException was not thrown.");
+        } catch (ParseException pe) {
+            assertEquals(new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    RewardCommand.MESSAGE_USAGE)).getMessage(), pe.getMessage());
+        }
+    }
+
+    @Test
+    public void parseCommand_Penalize() throws Exception {
+        Person person = new PersonBuilder().build();
+        try {
+            parser.parseCommand(PenalizeCommand.COMMAND_WORD, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME);
+            throw new AssertionError("The expected ParseException was not thrown.");
+        } catch (ParseException pe) {
+            assertEquals(new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    PenalizeCommand.MESSAGE_USAGE)).getMessage(), pe.getMessage());
+        }
+        try {
+            parser.parseCommand(PenalizeCommand.COMMAND_WORD + " i/1 p", UserType.ADMIN,
+                    UserType.DEFAULT_ADMIN_USERNAME);
+            throw new AssertionError("The expected ParseException was not thrown.");
+        } catch (ParseException pe) {
+            assertEquals(new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    PenalizeCommand.MESSAGE_USAGE)).getMessage(), pe.getMessage());
+        }
+        try {
+            parser.parseCommand(PenalizeCommand.COMMAND_WORD, UserType.GENERAL, person.getNric().toString());
+            throw new AssertionError("The expected ParseException was not thrown.");
+        } catch (ParseException pe) {
+            assertEquals(new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    PenalizeCommand.MESSAGE_USAGE)).getMessage(), pe.getMessage());
+        }
+    }
+
+    @Test
+    public void parseCommand_DutySettings() throws Exception {
+        Person person = new PersonBuilder().build();
+        try {
+            parser.parseCommand(DutySettingsCommand.COMMAND_WORD + " d/Sunday p/-1 m/-1",
+                    UserType.GENERAL, person.getNric().toString());
+            throw new AssertionError("The expected ParseException was not thrown.");
+        } catch (ParseException pe) {
+            assertEquals(String.format(MESSAGE_INPUT_OUT_OF_RANGE), pe.getMessage());
+        }
+        try {
+            parser.parseCommand(DutySettingsCommand.COMMAND_WORD + " d/1 p/2 m/2",
+                    UserType.GENERAL, person.getNric().toString());
+            throw new AssertionError("The expected ParseException was not thrown.");
+        } catch (ParseException pe) {
+            assertEquals(new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DutySettingsCommand.MESSAGE_USAGE)).getMessage(), pe.getMessage());
+        }
+    }
+    
+    @Test
     public void parseCommand_history() throws Exception {
         assertTrue(parser.parseCommand(HistoryCommand.COMMAND_WORD, UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME)
                 instanceof HistoryCommand);
@@ -228,4 +306,5 @@ public class PersonnelDatabaseParserTest {
         thrown.expectMessage(MESSAGE_UNKNOWN_COMMAND);
         parser.parseCommand("unknownCommand", UserType.ADMIN, UserType.DEFAULT_ADMIN_USERNAME);
     }
+
 }

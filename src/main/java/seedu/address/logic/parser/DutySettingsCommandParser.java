@@ -15,7 +15,7 @@ public class DutySettingsCommandParser implements Parser<DutySettingsCommand> {
     private static final Prefix PREFIX_POINTS = new Prefix("p/");
     private static final Prefix PREFIX_CAPACITY = new Prefix("m/");
 
-    private static final String MESSAGE_INPUT_OUT_OF_RANGE = "Inputs out of range.";
+    public static final String MESSAGE_INPUT_OUT_OF_RANGE = "Inputs out of range.";
 
     /**
      * Parses the given {@code String} of arguments in the context of the DutySettingsCommand
