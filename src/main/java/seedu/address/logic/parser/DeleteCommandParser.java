@@ -20,7 +20,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args, UserType userType, String userName) throws ParseException {
         if (userType == UserType.ADMIN) {
-            return adminParse(args);
+            return adminParse(args, userName);
         } else {
             throw new ParseException(MESSAGE_NO_AUTHORITY_PARSE);
         }
@@ -31,10 +31,10 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * and returns an DeleteCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public DeleteCommand adminParse(String args) throws ParseException {
+    public DeleteCommand adminParse(String args, String userName) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
-            return new DeleteCommand(index);
+            return new DeleteCommand(index, userName);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
