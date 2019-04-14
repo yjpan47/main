@@ -126,11 +126,10 @@ public class EditCommand extends Command {
         String editedPersonUserName = editedPerson.getNric().value;
         UserType persontoEditUserType = personToEdit.getUserType();
         UserType editedPersonUserType = editedPerson.getUserType();
-        if (personToEditUserName.equals(userName)) {
-            if (!editedPersonUserName.equals(personToEditUserName)
-                    || !editedPersonUserType.equals(persontoEditUserType)) {
-                editedNricUserType = true;
-            }
+        if (personToEditUserName.equals(userName)
+                && (!editedPersonUserName.equals(personToEditUserName)
+                || !editedPersonUserType.equals(persontoEditUserType))) {
+            editedNricUserType = true;
         }
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
