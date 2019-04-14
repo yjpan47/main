@@ -176,26 +176,26 @@ public class DutyAlgorithmTest {
         }
     }
     @Test
-    public void dutyMonthPrintDutiesTest(){
+    public void dutyMonthPrintDutiesTest() {
         String output = "---- Duty Roster for February 2018  ---- \n";
-        assertEquals(dutyMonth1.printDuties(),output);
+        assertEquals(dutyMonth1.printDuties(), output);
     }
 
     @Test
-    public void dutyMonthPrintPointsTest(){
+    public void dutyMonthPrintPointsTest() {
         String output = "--- POINTS AWARDED ----\n";
-        assertEquals(dutyMonth1.printPoints(dutyStorage),output);
+        assertEquals(dutyMonth1.printPoints(dutyStorage), output);
     }
     @Test
-    public void dutyStoragePrintDetailsTest(){
+    public void dutyStoragePrintDetailsTest() {
         String output = "PTE Benson Meier\n" + "Points : 0\n" + "--- RECORDS ---\n";
-        assertEquals(dutyStorage.printDetails(personList.get(1)),output);
+        assertEquals(dutyStorage.printDetails(personList.get(1)), output);
     }
 
     @Test
-    public void dutyStoragePrintPointsTest(){
+    public void dutyStoragePrintPointsTest() {
         String output = "--- POINTS ACCUMULATED ----\n";
-        assertEquals(dutyStorage.printPoints(),output);
+        assertEquals(dutyStorage.printPoints(), output);
     }
 
 
