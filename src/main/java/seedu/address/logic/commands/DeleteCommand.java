@@ -9,7 +9,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.duty.Duty;
 import seedu.address.model.duty.DutyMonth;
 import seedu.address.model.duty.DutyStorage;
 import seedu.address.model.person.Person;
@@ -49,9 +48,7 @@ public class DeleteCommand extends Command {
 
         DutyMonth dutyMonth = model.getDutyCalendar().getNextMonth();
         DutyStorage dutyStorage = model.getDutyStorage();
-        for (Duty duty : dutyMonth.getScheduledDuties()) {
-            duty.removePerson(personToDelete);
-        }
+        dutyMonth.clearAllDuties();
         dutyStorage.removePerson(personToDelete);
         dutyMonth.unconfirm();
         dutyStorage.undo();

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
 
+import seedu.address.commons.util.CalendarUtil;
 import seedu.address.commons.util.DateUtil;
 import seedu.address.model.person.Person;
 /**
@@ -108,6 +109,7 @@ public class DutyMonth {
             this.blockedDays.get(person).clear();
         }
     }
+
     /**
      * Schedule allocates duties for the DutyMonth
      */
@@ -165,6 +167,7 @@ public class DutyMonth {
         this.scheduledDuties.addAll(dutyList);
         this.scheduledDuties.sort(Comparator.comparingInt(Duty::getDayIndex));
     }
+
     /**
      * Checks if a person can be assigned to a duty on a given day
      */
@@ -178,6 +181,7 @@ public class DutyMonth {
                     || !this.blockedDays.get(person).contains(duty.getDayIndex());
         }
     }
+
     /**
      * Generates duty object for the month
      */
@@ -194,6 +198,13 @@ public class DutyMonth {
         Collections.shuffle(duties);
         duties.sort((d1, d2) -> (d2.getPoints() - d1.getPoints()));
         return duties;
+    }
+
+    /**
+     * Clears all duties in the month
+     */
+    public void clearAllDuties() {
+        this.scheduledDuties = new ArrayList<>();
     }
 
     public int getFirstDayOfWeekIndex() {
@@ -214,6 +225,18 @@ public class DutyMonth {
 
     public List<Duty> getScheduledDuties() {
         return this.scheduledDuties;
+    }
+
+    /**
+     * Returns if all duties in the month are filled.
+     */
+    public boolean allDutiesAreFiled() {
+        for (Duty duty : this.scheduledDuties) {
+            if (!duty.isFilled()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public HashMap<Person, List<Integer>> getBlockedDates() {
@@ -244,6 +267,7 @@ public class DutyMonth {
 
         return sb.toString();
     }
+
     /**
      * Prints the points allocated to the duty personnel for that month
      */
@@ -319,5 +343,9 @@ public class DutyMonth {
         } else {
             throw new IllegalAccessException("Schedule has yet being confirmed!");
         }
+    }
+
+    public int getNumberOfDays() {
+        return CalendarUtil.getNumOfDays(this.year, this.monthIndex);
     }
 }

@@ -48,11 +48,17 @@ public class ConfirmScheduleCommand extends Command {
         DutyMonth dummyMonth = model.getDutyCalendar().getDummyNextMonth();
 
         if (dummyMonth.getScheduledDuties() == null) {
+
             return new CommandResult(MESSAGE_NO_SCHEDULE_YET);
         }
 
         if (dummyMonth.getUnfilledDuties().size() > 0) {
             return new CommandResult(MESSAGE_SCHEDULE_NOT_FILLED);
+
+            return new CommandResult(NO_SCHEDULE_YET);
+        } else if (!dummyMonth.allDutiesAreFiled()) {
+            return new CommandResult(NOT_ENOUGH_DUTIES);
+
         }
 
         dutyStorage.update(dummyMonth.getScheduledDuties());

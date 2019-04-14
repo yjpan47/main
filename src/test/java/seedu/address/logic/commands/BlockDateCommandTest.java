@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.BlockDateCommand.MESSAGE_BLOCK_DATES_SUCCESS;
+import static seedu.address.logic.commands.BlockDateCommand.MESSAGE_DUTY_CONFIRMED;
 import static seedu.address.logic.commands.BlockDateCommand.MESSAGE_TOO_MANY_BLOCKED_DATES;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureGeneral;
@@ -40,6 +41,7 @@ public class BlockDateCommandTest {
 
         assertCommandFailure(new BlockDateCommand(blockedDates, GENERAL_DAN_USERNAME), model,
                 new CommandHistory(), Messages.MESSAGE_NO_AUTHORITY_PARSE);
+
         blockedDates.remove(1);
         blockedDates.remove(1);
         blockedDates.remove(1);
@@ -48,5 +50,9 @@ public class BlockDateCommandTest {
         blockedDates.remove(1);
         assertCommandSuccessGeneral(new BlockDateCommand(blockedDates, GENERAL_DAN_USERNAME), model,
                 new CommandHistory(), MESSAGE_BLOCK_DATES_SUCCESS, model);
+        model.getNextDutyMonth().confirm();
+        assertCommandFailureGeneral(new BlockDateCommand(blockedDates, GENERAL_DAN_USERNAME), model,
+                new CommandHistory(), MESSAGE_DUTY_CONFIRMED);
+
     }
 }
