@@ -13,6 +13,9 @@ import seedu.address.model.person.Person;
  */
 public class DutyStorage {
 
+    private final String Message_Record_Rewarded = "Reward: %d points added";
+    private final String Message_Record_Penalized = "Penalty: %d points deducted";
+
     private HashMap<Person, Integer> dutyPoints;
     private HashMap<Person, List<String>> dutyRecords;
 
@@ -242,10 +245,9 @@ public class DutyStorage {
                 this.dutyPoints.replace(person, this.dutyPoints.get(person) + points);
             }
         }
-        String RECORD_REWARDED = "Reward: %d points added";
         for (Person person : this.dutyRecords.keySet()) {
             if (person.getNric().toString().equals(target.getNric().toString())) {
-                this.dutyRecords.get(person).add(String.format(RECORD_REWARDED, points));
+                this.dutyRecords.get(person).add(String.format(Message_Record_Rewarded, points));
             }
         }
 
@@ -256,7 +258,7 @@ public class DutyStorage {
         }
         for (Person person : this.prevDutyRecords.keySet()) {
             if (person.getNric().toString().equals(target.getNric().toString())) {
-                this.prevDutyRecords.get(person).add(String.format(RECORD_REWARDED, points));
+                this.prevDutyRecords.get(person).add(String.format(Message_Record_Rewarded, points));
             }
         }
     }
@@ -273,10 +275,9 @@ public class DutyStorage {
             }
         }
 
-        String RECORD_PENALIZED = "Penalty: %d points deducted";
         for (Person person : this.dutyRecords.keySet()) {
             if (person.getNric().toString().equals(target.getNric().toString())) {
-                this.dutyRecords.get(person).add(String.format(RECORD_PENALIZED, points));
+                this.dutyRecords.get(person).add(String.format(Message_Record_Penalized, points));
             }
         }
 
@@ -288,7 +289,7 @@ public class DutyStorage {
         }
         for (Person person : this.prevDutyRecords.keySet()) {
             if (person.getNric().toString().equals(target.getNric().toString())) {
-                this.prevDutyRecords.get(person).add(String.format(RECORD_PENALIZED, points));
+                this.prevDutyRecords.get(person).add(String.format(Message_Record_Penalized, points));
             }
         }
     }

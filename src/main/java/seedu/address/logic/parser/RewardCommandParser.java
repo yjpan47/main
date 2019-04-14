@@ -43,7 +43,7 @@ public class RewardCommandParser implements Parser<RewardCommand> {
             }
             return new RewardCommand(points, indexes);
         } catch (InvalidParameterException pe) {
-           throw new ParseException(MESSAGE_POINTS_OUT_OF_RANGE);
+            throw new ParseException(MESSAGE_POINTS_OUT_OF_RANGE);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RewardCommand.MESSAGE_USAGE), pe);
 
