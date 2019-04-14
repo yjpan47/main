@@ -186,7 +186,8 @@ public class ModelManager implements Model {
     }
     @Override
     public boolean checkSwapRequestExists(String nric, LocalDate allocatedDate, LocalDate requestedDate) {
-        return versionedPersonnelDatabase.checkRequestExists(new Request(findPerson(nric), allocatedDate, requestedDate));
+        return versionedPersonnelDatabase.checkRequestExists(new Request(findPerson(nric),
+                allocatedDate, requestedDate));
     }
 
     @Override

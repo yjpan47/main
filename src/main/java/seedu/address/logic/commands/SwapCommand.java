@@ -85,7 +85,7 @@ public class SwapCommand extends Command {
         if (model.getDutyCalendar().getNextMonth().isAssignedToDuty(userName, requestedDateDay)) {
             throw new CommandException(MESSAGE_INVALID_DAY_REQUESTED);
         }
-        if (model.checkSwapRequestExists(userName,allocatedDate, requestedDate)){
+        if (model.checkSwapRequestExists(userName, allocatedDate, requestedDate)) {
             throw new CommandException(MESSAGE_REQUEST_ALREADY_EXISTS);
         }
 

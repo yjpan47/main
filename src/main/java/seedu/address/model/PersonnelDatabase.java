@@ -188,7 +188,7 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
      */
     public boolean checkRequestExists(Request request) {
         for (Request existingRequest : requests) {
-            if (existingRequest.equals(request)){
+            if (existingRequest.equals(request)) {
                 return true;
             }
         }
