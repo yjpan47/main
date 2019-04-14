@@ -348,7 +348,12 @@ public class DutyMonth {
     }
 
     /**
-     * Swaps duty for two persons
+     * Swap duties between two persons based on their allocated days.
+     * @param t1 person 1 to be swapped
+     * @param t2 person 2 to be swapped
+     * @param dayOne person 1's duty day
+     * @param dayTwo person 2's duty day
+     * @param dutyStorage dutyStorage
      */
     public void swap(Person t1, Person t2, int dayOne, int dayTwo, DutyStorage dutyStorage) {
         Duty dutyOne = this.getScheduledDuties().get(dayOne - 1);

@@ -7,9 +7,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.UserType;
+import seedu.address.logic.commands.ApproveSwapCommand;
 import seedu.address.logic.commands.AcceptSwapCommand;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ApproveSwapCommand;
 import seedu.address.logic.commands.BlockDateCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -140,12 +140,6 @@ public class PersonnelDatabaseParser {
         case ViewNextCommand.COMMAND_WORD:
             return new ViewNextCommand();
 
-        case RewardCommand.COMMAND_WORD:
-            return new RewardCommandParser().parse(arguments, userType, userName);
-
-        case PenalizeCommand.COMMAND_WORD:
-            return new PenalizeCommandParser().parse(arguments, userType, userName);
-
         case ViewSwapsCommand.COMMAND_WORD:
             return new ViewSwapsCommand();
 
@@ -154,6 +148,12 @@ public class PersonnelDatabaseParser {
 
         case RejectSwapCommand.COMMAND_WORD:
             return new RejectSwapCommandParser().parse(arguments, userType, userName);
+
+        case RewardCommand.COMMAND_WORD:
+            return new RewardCommandParser().parse(arguments, userType, userName);
+
+        case PenalizeCommand.COMMAND_WORD:
+            return new PenalizeCommandParser().parse(arguments, userType, userName);
 
         case ViewBlockCommand.COMMAND_WORD:
             return new ViewBlockCommand(userName);
