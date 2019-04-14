@@ -19,10 +19,11 @@ By: `CS2103 W15-4`      Since: `Feb 2019`      Licence: `MIT`
 == Introduction
 
 MINDEF Duty Planner is a platform to assist military units in the SAF in the assignment of daily guard duties amongst the servicemen. +
- The application is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
- The software is designed to automate the process of fairly assigning duties to available servicemen for an entire month. +
- The application can be used by both Commanders and servicemen to plan and view duties with various specific commands for each type of user.
- To start using MINDEF Duty Planner you can go to <<Quick Start>>
+The application is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+The software is designed to automate the process of fairly assigning duties to available servicemen for an entire month. +
+The application can be used by both Commanders and servicemen to plan and view duties with various specific commands for each type of user. +
+To start using MINDEF Duty Planner you can go to <<Quick Start>> +
+To see a summary list of commands you can go to <<Command Summary>>
 
 == Notation
 
@@ -247,24 +248,45 @@ Edits the phone number and rank of the user to be `84523546` and `CPL` respectiv
 Edits the company of the user to be `Hotel`, clears all existing tags, and changes password to 'pass'.
 // end::editGeneral[]
 
-==== Block dates : `block`
+==== Block dates : `block` +
 The user can block dates and set which dates they are unavailable to duties for the upcoming month. A user can block up to 15 days. +
 Format: `block DATE DATE DATE ...`
 
+[NOTE]
+====
+The date entered must be a valid number for the upcoming month. For example if the next month is February, block 30 is an invalid input.
+====
+
+[WARNING]
+====
 This command can only be entered if next month's duty schedule has not been confirmed yet.
 If it has been confirmed please request a swap on the day you wish to duties.
+====
+
+If the user has successfully blocked dates they will not be scheduled for duties on the blocked days in the upcoming month. +
 
 Example:
 
 * `block 3 6 15 21 30`
 
-==== View blocked dates : `viewblock`
+
+==== View blocked dates : `viewblock` +
+
 The user can view the dates they have blocked for the upcoming month. +
+The blocked dates for the upcoming month will then be printed out for the user to see. +
+
 Format: `viewblock`
 
-==== Remove blocked dates : `removeblock`
-The user can remove the dates they have blocked for the upcoming month. +
+==== Remove blocked dates : `removeblock` +
+
+The user can remove the dates they have blocked for the upcoming month. This will remove all blocked days from the upcoming month. +
+
 Format: `removeblock`
+
+[NOTE]
+====
+A specific date cannot be removed from the list of blocked dates. If a user wishes to remove only a certain day he can removeblock and run the block command again.
+====
 
 === Admin Features
 
