@@ -302,8 +302,7 @@ Format: `add nr/NRIC c/COMPANY s/SECTION r/RANK n/NAME p/PHONE [t/TAG]`
 Each of the following fields entered by the user following each prefix are compulsory, and must adhere to the following format (Only the Tag field is optional): +
 
 ****
-* `NRIC` should be of the format [S/T/F/G][7
-][A-Z].
+* `NRIC` should be of the format [S/T/F/G][7][A-Z].
 * `Company` can take any value and should not be blank.
 * `Section` can take any value and should not be blank.
 * `Rank` must be composed of 3 alphanumerical characters, either digits or uppercase letters.
@@ -369,7 +368,7 @@ Examples:
 * `edit 2 p/84523546 r/CPL u/A` +
 Edits the phone number and rank of the 2nd person to be `84523546` and `CPL` respectively, and grants the person's account administrator privileges.
 * `edit 1 c/Hotel t/ pw/pass` +
-Edits the company of the 1st person to be `Hotel`, clears all existing tags, and changes passworrd to 'pass'.
+Edits the company of the 1st person to be `Hotel`, clears all existing tags, and changes password to 'pass'.
 // end::editAdmin[]
 
 ==== Scheduling duties : `schedule`
@@ -399,6 +398,32 @@ Subsequent attempts to call schedule command will not result in any new duty all
 ****
 
 Format: `confirm`
+
+==== Duty Settings Command : `settings`
+This command allows you to view and modify the number of points and manpower required for each day. +
+There are two ways to call this function. +
+
+* Entering `settings` will allow you to view the manpower and points required for each day. +
+* Entering `settings d/DAY m/MANPOWER p/POINTS` will allow you to modify the manpower and points for the entered day. +
+Points and manpower entered have to be positive integers. Day has to be a valid day of the week from Monday to Sunday.
+
+Example: +
+`settings d/Monday m/1 p/1`'
+
+==== View Swap Commands : `viewSwaps`
+Used to view all the swap requests that have been submitted by personnel. The Admin User can then accept or reject the swap
+
+Format : `viewSwaps`
+
+==== Accept Swap Commands : `acceptSwap`
+The Admin User can use this command to accept a certain swap at the given index on the swap requests list.
+
+Format : `acceptSwap i/INDEX`
+
+==== Reject Swap Commands : `rejectSwap`
+The Admin User can use this command to reject a certain swap at the given index on the swap requests list.
+
+Format : `rejectSwap i/INDEX`
 
 === Saving the data
 
@@ -453,3 +478,7 @@ Your password is also your NRIC by default, unless you or your administrator cha
 * *Scheduling duties* : `schedule` +
 * *Confirm schedule* : `confirm` +
 * *Clear entries* : `clear` +
+* *Duty Settings* : `settings` or `settings d/DAY m/MANPOWER p/POINTS`
+* *View Swaps* : `viewSwaps`
+* *Accept Swaps* : `acceptSwap i/INDEX`
+* *Reject Swaps* : `rejectSwap i/INDEX`

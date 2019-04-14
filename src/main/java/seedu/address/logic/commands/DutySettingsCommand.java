@@ -12,7 +12,7 @@ public class DutySettingsCommand extends Command {
 
     public static final String COMMAND_WORD = "settings";
     public static final String MESSAGE_USAGE = COMMAND_WORD + " Update manpower needed and points awarded for duties "
-            + "Example: " + COMMAND_WORD + "w/Sunday m/3 p/4";
+            + "Example: " + COMMAND_WORD + " d/Sunday m/3 p/4";
 
     public static final String VIEW_SETTINGS = "Duty Settings for each day of the week:\n\n%s";
     public static final String CHANGE_SETTINGS_SUCCESS = "Settings successfully changed!\n\n%s";
