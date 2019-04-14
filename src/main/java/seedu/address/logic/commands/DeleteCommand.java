@@ -49,11 +49,7 @@ public class DeleteCommand extends Command {
 
         DutyMonth dutyMonth = model.getDutyCalendar().getNextMonth();
         DutyStorage dutyStorage = model.getDutyStorage();
-        for (Duty duty : dutyMonth.getScheduledDuties()) {
-            if (duty.contains(personToDelete)) {
-                duty.removePerson(personToDelete);
-            }
-        }
+        dutyMonth.clearAllDuties();
         dutyStorage.removePerson(personToDelete);
         dutyMonth.unconfirm();
         dutyStorage.undo();

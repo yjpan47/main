@@ -116,13 +116,6 @@ public class DutyMonth {
     }
 
     /**
-     * Remove duties from the list
-     */
-    public void removeDuty(Duty duty) {
-        this.scheduledDuties.remove(duty);
-    }
-
-    /**
      * Schedule allocates duties for the DutyMonth
      */
     public void schedule(List<Person> persons, DutySettings dutySettings, DutyStorage dutyStorage) {
@@ -210,6 +203,13 @@ public class DutyMonth {
         Collections.shuffle(duties);
         duties.sort((d1, d2) -> (d2.getPoints() - d1.getPoints()));
         return duties;
+    }
+
+    /**
+     * Clears all duties in the month
+     */
+    public void clearAllDuties() {
+        this.scheduledDuties = new ArrayList<>();
     }
 
     public int getFirstDayOfWeekIndex() {
