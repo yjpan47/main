@@ -422,7 +422,7 @@ Penalize 4 points for the 3th person on the contact list.
 // end::penalizeAdmin[]
 
 // tag::settingsAdmin[]
-==== View and edit duty settings (points and manpower needs for each day of the week) : `settings`
+==== View and edit duty settings (points and manpower needed for each day of the week) : `settings`
 View and edit duty settings. Duty settings refer to the *manpower needed* and *points rewarded* for each duty based on the day of the week (e.g. Sunday, Monday, etc)
 
 Format: `settings [d/DAYOFWEEK m/MANPOWER p/POINTS]`
