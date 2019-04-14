@@ -207,6 +207,9 @@ public class DutyAlgorithmTest {
     @Test
     public void dutyStorageRewardTest() {
         Random random = new Random();
+        for (Person p : personList) {
+            dutyStorage.addPerson(p);
+        }
         dutyMonth3.schedule(personList, dutySettings, dutyStorage);
         dutyStorage.update(dutyMonth3.getScheduledDuties());
         for (Person person : TypicalPersons.getTypicalPersons()) {
@@ -221,6 +224,9 @@ public class DutyAlgorithmTest {
     @Test
     public void dutyStoragePenalizeTest() {
         Random random = new Random();
+        for (Person p : personList) {
+            dutyStorage.addPerson(p);
+        }
         dutyMonth4.schedule(personList, dutySettings, dutyStorage);
         dutyStorage.update(dutyMonth4.getScheduledDuties());
         for (Person person : TypicalPersons.getTypicalPersons()) {
