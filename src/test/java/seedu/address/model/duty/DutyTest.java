@@ -37,11 +37,6 @@ public class DutyTest {
     }
 
     @Test
-    public void removeNonExistentPersonThrowsPersonNotFoundException() {
-        Assert.assertThrows(PersonNotFoundException.class, () -> duty.removePerson(DANIEL));
-    }
-
-    @Test
     public void replacePerson() {
         duty.replacePerson(BENSON, DANIEL);
         assertFalse(duty.contains(BENSON));

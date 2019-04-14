@@ -19,6 +19,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.UiCommandInteraction;
 import seedu.address.commons.core.UserType;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -119,9 +120,18 @@ public class EditCommand extends Command {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-
+        boolean editedNricUserType = false;
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        String personToEditUserName = personToEdit.getNric().value;
+        String editedPersonUserName = editedPerson.getNric().value;
+        UserType persontoEditUserType = personToEdit.getUserType();
+        UserType editedPersonUserType = editedPerson.getUserType();
+        if (personToEditUserName.equals(userName)
+                && (!editedPersonUserName.equals(personToEditUserName)
+                || !editedPersonUserType.equals(persontoEditUserType))) {
+            editedNricUserType = true;
+        }
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -149,6 +159,10 @@ public class EditCommand extends Command {
         }
 
         model.commitPersonnelDatabase();
+        if (editedNricUserType) {
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson),
+                    UiCommandInteraction.EXIT);
+        }
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 

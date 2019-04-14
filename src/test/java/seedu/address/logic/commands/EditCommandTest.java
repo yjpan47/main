@@ -19,6 +19,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalPersonnelDatabase;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.UiCommandInteraction;
 import seedu.address.commons.core.UserType;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
@@ -30,6 +31,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TypicalPersons;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.
@@ -52,6 +54,44 @@ public class EditCommandTest {
         expectedModel.commitPersonnelDatabase();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void executeAdminSelfNricSuccess() {
+        Person personToEdit = TypicalPersons.ADMIN_TAN;
+        int personIndexInt = TypicalPersons.getTypicalPersons().indexOf(personToEdit);
+        // Index is from zero based since we iterated from the actual list.
+        Index personIndex = Index.fromZeroBased(personIndexInt);
+        Person editedPerson = new PersonBuilder().withUserType(UserType.ADMIN).build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
+        EditCommand editCommand = new EditCommand(personIndex, descriptor, TypicalPersons.ADMIN_TAN_USERNAME);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, UiCommandInteraction.EXIT);
+        Model expectedModel = new ModelManager(new PersonnelDatabase(model.getPersonnelDatabase()), new UserPrefs());
+        expectedModel.setPerson(model.getFilteredPersonList().get(personIndexInt), editedPerson);
+        expectedModel.commitPersonnelDatabase();
+
+        assertCommandSuccess(editCommand, model, commandHistory, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void executeAdminSelfUserTypeSuccess() {
+        Person personToEdit = TypicalPersons.ADMIN_TAN;
+        int personIndexInt = TypicalPersons.getTypicalPersons().indexOf(personToEdit);
+        // Index is from zero based since we iterated from the actual list.
+        Index personIndex = Index.fromZeroBased(personIndexInt);
+        Person editedPerson = new PersonBuilder().withUserType(UserType.ADMIN).withNric("S9876541L").build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
+        EditCommand editCommand = new EditCommand(personIndex, descriptor, TypicalPersons.ADMIN_TAN_USERNAME);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, UiCommandInteraction.EXIT);
+        Model expectedModel = new ModelManager(new PersonnelDatabase(model.getPersonnelDatabase()), new UserPrefs());
+        expectedModel.setPerson(model.getFilteredPersonList().get(personIndexInt), editedPerson);
+        expectedModel.commitPersonnelDatabase();
+
+        assertCommandSuccess(editCommand, model, commandHistory, expectedCommandResult, expectedModel);
     }
 
     @Test
