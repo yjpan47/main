@@ -893,18 +893,26 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
-|Priority |As a ... |I want to ... |So that I can...
-|`* * *` |Administrator |see Admin Help |refer to instructions specific to the administrator privileges
+|Priority |As a(an) ... |I want to ... |So that I can...
+|`* * *` |admin |see Admin Help |refer to instructions specific to the administrator privileges
 
-|`* * *` |Administrator |choose 2 users to swap duties |allow them to have their desired duty slot
+|`* * *` |admin |choose 2 users to swap duties |allow them to have their desired duty slot
+
+|`* * *` |admin |schedule the duties automatically |save time on scheduling
+
+|`* * *` |admin |make sure that the scheduling is correct and fair |
+
+|`* *` |admin |promote a general user to an admin |let the user do admin work
+
+|`* * *` |admin |add a new person |
+
+|`* * *` |admin |delete a person |remove entries that I no longer need
+
+|`* * *` |admin |let only admins to use certain commands |the database will be protected
 
 |`* * *` |user |log in |access my information
 
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
-
-|`* * *` |user |add a new person |
-
-|`* * *` |user |delete a person |remove entries that I no longer need
 
 |`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
 
@@ -912,25 +920,32 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
-|=======================================================================
+|`*` |user with many persons in the personnel database |sort persons by name |locate a person easily
 
-_{More to be added}_
+|`* * *` |user |block certain dates |choose not to do duty on certain dates
+
+|`*` |user with duties |see my own duties |
+
+|`* * *` |visual user |see all the duties in a user-friendly form |understand the whole schedule better
+
+|`* * *` |general user |edit my own details |
+
+|=======================================================================
 
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `PersonnelDatabase` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Delete person
+=== Use case 1 (Admin): Delete person
 
 *MSS*
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  PersonnelDatabase shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  PersonnelDatabase deletes the person
 +
 Use case ends.
 
@@ -944,11 +959,177 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. PersonnelDatabase shows an error message.
 +
 Use case resumes at step 2.
 
-_{More to be added}_
+[discrete]
+=== Use case 2 (Admin): Delete person after schedule for next month is confirmed
+
+*MSS*
+
+1.
+2.
+3.
+4.
++
+Use case ends.
+
+*Extensions*
+
+[discrete]
+=== Use case 3 (Admin): Add person
+
+*MSS*
+
+1.
+2.
+3.
+4.
++
+Use case ends.
+
+*Extensions*
+
+[discrete]
+=== Use case 4 (Admin): Edit person
+
+*MSS*
+
+1.
+2.
+3.
+4.
++
+Use case ends.
+
+*Extensions*
+
+[discrete]
+=== Use case 5 (Admin): See all duties planned for current and next month in the calendar
+
+*MSS*
+
+1.
+2.
+3.
+4.
++
+Use case ends.
+
+*Extensions*
+
+[discrete]
+=== Use case 6 (Admin): See duties assigned to specific user
+
+*MSS*
+
+1.
+2.
+3.
+4.
++
+Use case ends.
+
+*Extensions*
+
+[discrete]
+=== Use case 7 (Admin): Schedule duties
+
+*MSS*
+
+1.
+2.
+3.
+4.
++
+Use case ends.
+
+*Extensions*
+
+[discrete]
+=== Use case 8 (Admin): Clear all the database, including duties
+
+*MSS*
+
+1.
+2.
+3.
+4.
++
+Use case ends.
+
+*Extensions*
+
+[discrete]
+=== Use case 9 (Admin): Approve swapping of duties
+
+*MSS*
+
+1.
+2.
+3.
+4.
++
+Use case ends.
+
+*Extensions*
+
+[discrete]
+=== Use case 10 (General user): See own duties
+
+*MSS*
+
+1.
+2.
+3.
+4.
++
+Use case ends.
+
+*Extensions*
+
+[discrete]
+=== Use case 11 (General user): Block some dates for duties next month
+
+*MSS*
+
+1.
+2.
+3.
+4.
++
+Use case ends.
+
+*Extensions*
+
+[discrete]
+=== Use case 12 (General user): Log into the system
+
+*MSS*
+
+1.
+2.
+3.
+4.
++
+Use case ends.
+
+*Extensions*
+
+[discrete]
+=== Use case 13 (General user): Exit the system
+
+*MSS*
+
+1.
+2.
+3.
+4.
++
+Use case ends.
+
+*Extensions*
 
 [appendix]
 == Non Functional Requirements

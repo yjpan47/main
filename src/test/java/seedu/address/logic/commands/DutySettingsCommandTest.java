@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureGeneral;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-//import static seedu.address.logic.commands.DutySettingsCommand.CHANGE_SETTINGS_SUCCESS;
 import static seedu.address.logic.commands.DutySettingsCommand.VIEW_SETTINGS;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersonnelDatabase;
 
@@ -14,13 +13,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
-
-
-
-
 public class DutySettingsCommandTest {
 
-    private Model model = new ModelManager(getTypicalPersonnelDatabase(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalPersonnelDatabase(), new UserPrefs());
 
     @Test
     public void execute() {
