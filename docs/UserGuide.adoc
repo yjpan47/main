@@ -123,14 +123,6 @@ Example:
 
 * `view S9012345L`
 
-==== Make a swap request with another user : `swap`
-The user can request for a duty swap with another user. This will be subject to the agreement of the other user and approval of the admin (i.e. commander). +
-The other user and admin will be notified upon login and they will be prompted to accept or decline the request. +
-Format: `swap ad/CURRENTDUTYDATE rd/DESIREDDUTYDATE
-
-Example:
-
-* `swap ad/14022019 rd/21022019 t/Please help a bro out!`
 
 ==== Locating persons by name: `find`
 
@@ -245,6 +237,20 @@ Edits the phone number and rank of the user to be `84523546` and `CPL` respectiv
 * `edit c/Hotel t/ pw/pass` +
 Edits the company of the user to be `Hotel`, clears all existing tags, and changes password to 'pass'.
 // end::editGeneral[]
+
+==== Make a swap request with another user : `swap`
+The user can request for a duty swap with another user. This will be subject to the agreement of the other user and approval of the admin (i.e. commander). +
+The other user and admin will be notified upon login and they will be prompted to accept or decline the request. +
+Format: `swap ad/CURRENTDUTYDATE rd/DESIREDDUTYDATE
+
+Example:
+
+* `swap ad/14022019 rd/21022019 t/Please help a bro out!`
+
+==== Approve Swap Command : `acceptSwap`
+The General User can use this command to accept a certain swap at the given index on the open Swap Requests list.
+
+Format : `approveSwap i/INDEX`
 
 ==== Block dates : `block` +
 The user can block dates and set which dates they are unavailable to duties for the upcoming month. A user can block up to 15 days. +
@@ -410,17 +416,17 @@ Points and manpower entered have to be positive integers. Day has to be a valid 
 Example: +
 `settings d/Monday m/1 p/1`'
 
-==== View Swap Commands : `viewSwaps`
+==== View Swap Command : `viewSwaps`
 Used to view all the swap requests that have been submitted by personnel. The Admin User can then accept or reject the swap
 
 Format : `viewSwaps`
 
-==== Accept Swap Commands : `acceptSwap`
-The Admin User can use this command to accept a certain swap at the given index on the swap requests list.
+==== Approve Swap Command : `approveSwap`
+The Admin User can use this command to approve a certain swap at the given index on the requested Swap list.
 
-Format : `acceptSwap i/INDEX`
+Format : `approveSwap i/INDEX`
 
-==== Reject Swap Commands : `rejectSwap`
+==== Reject Swap Command : `rejectSwap`
 The Admin User can use this command to reject a certain swap at the given index on the swap requests list.
 
 Format : `rejectSwap i/INDEX`
@@ -470,6 +476,7 @@ Your password is also your NRIC by default, unless you or your administrator cha
 * *Block dates* : `block` +
 * *View Blocked Dates* : `viewblock` +
 * *Remove Blocked Dates* : `removeblock` +
+* *Accept Swaps* : `acceptSwap i/INDEX`
 
 === Admin accounts
 * *Add a user* : `add nr/NRIC c/COMPANY s/SECTION r/RANK n/NAME p/PHONE [t/TAG]` +
@@ -480,5 +487,5 @@ Your password is also your NRIC by default, unless you or your administrator cha
 * *Clear entries* : `clear` +
 * *Duty Settings* : `settings` or `settings d/DAY m/MANPOWER p/POINTS`
 * *View Swaps* : `viewSwaps`
-* *Accept Swaps* : `acceptSwap i/INDEX`
+* *Approve Swaps* : `ApproveSwap i/INDEX`
 * *Reject Swaps* : `rejectSwap i/INDEX`
