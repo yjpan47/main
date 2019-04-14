@@ -45,7 +45,7 @@ public class JsonSerializablePersonnelDatabaseTest {
 
     @Test
     public void toModelType_typicalPersonsWithDutyFile_success() throws Exception {
-       JsonSerializablePersonnelDatabase dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSON_FILE_WITH_DUTY,
+        JsonSerializablePersonnelDatabase dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSON_FILE_WITH_DUTY,
                 JsonSerializablePersonnelDatabase.class).get();
         PersonnelDatabase personnelDatabaseFromFile = dataFromFile.toModelType();
         PersonnelDatabase typicalPersonsPersonnelDatabase = TypicalPersons.getTypicalPersonnelDatabase();
