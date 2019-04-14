@@ -14,7 +14,7 @@ import seedu.address.model.PersonnelDatabase;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Personnel database has been cleared!";
 
     @Override
     public CommandResult executeAdmin(Model model, CommandHistory history) {
