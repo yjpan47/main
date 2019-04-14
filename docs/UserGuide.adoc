@@ -381,10 +381,14 @@ Edits the company of the 1st person to be `Hotel`, clears all existing tags, and
 ==== View duty points : `points`
 Displays the duty points accumulated by each person. Additional records of each person (i.e. duties allocated, points rewarded, points penalized) can also be viewed.
 
+// tag::pointsAdmin[]
+==== View duty points : `points`
+Displays the duty points accumulated by each person. Additional records of each person (i.e. duties allocated, points rewarded, points penalized) can also be viewed.
+
 Format:  `points [INDEX]`
 
 [NOTE]
-Note that calling the command without index (`points`) provides a list of all persons and their accumulated duty points while calling the command with index (`points INDEX`) provides the accumulated duty points of an individual person and his record (i.e. duties, points rewarded, points penalized). 
+Calling the command without index (`points`) provides a list of all persons and their accumulated duty points while calling the command with index (`points INDEX`) provides the accumulated duty points of an individual person and his record (i.e. duties, points rewarded, points penalized). 
 
 Examples:
 
@@ -401,7 +405,8 @@ Manually reward duty points to a person or a list of persons.
 
 Format: `reward i/INDEX [INDEX] [INDEX] ... p/POINTS`
 
-Note that points rewarded can range from 1 to 100 for each command call.
+[NOTE]
+Points rewarded can range from 1 to 100 for each command call.
 
 Examples:
 
@@ -417,7 +422,8 @@ Manually penalize duty points for a person or a list of persons.
 
 Format: `penalize i/INDEX [INDEX] [INDEX] ... p/POINTS`
 
-Note that points penalized can range from 1 to 100 for each command call. The duty points of a person can fall to less than zero.
+[NOTE]
+Points penalized can range from 1 to 100 for each command call. The duty points of a person can fall to less than zero.
 
 Examples:
 
@@ -437,8 +443,10 @@ Format: `settings [d/DAYOFWEEK m/MANPOWER p/POINTS]`
 `MANPOWER`: Number ranging from 1 to 10 +
 `POINTS`: Number ranging from 1 to 100
 
+[NOTE]
 Calling the command `settings` alone displays the current duty settings while calling the command `settings` with the day of the week, manpower and points enables the editing of the duty settings.
 
+[NOTE]
 Note that updated duty settings will only take effect the next time a schedule is confirmed. If schedule for next month has already been confirmed, the confirmed schedule will still follow the specifications of the previous duty settings.
 
 Examples:
@@ -459,11 +467,12 @@ Format: `schedule`
 
 The algorithm is optimized such that a person with low duty points will be allocated to duties which rewards high points and possibly be given more duties. It automatically attempts to balance out the points of each person after scheduling.
 
-Note that `schedule` merely provides a viable duty schedule and *does not confirm the schedule* to the calendar. Duty points have also yet been updated. The schedule generated is not deterministic and calling `schedule` again will regenerate a new duty schedule.
+[NOTE]
+The command `schedule` merely provides a viable duty schedule and *does not confirm the schedule* to the calendar. Duty points have also yet been updated. The schedule generated is not deterministic and calling `schedule` again will regenerate a new duty schedule.
 
-Once a satisfactory duty schedule is generated, the administrator can go ahead to confirm the duty schedule. (See <<Confirm a schedule>>)
+Once a satisfactory duty schedule is generated, the administrator can go ahead to confirm the duty schedule. (See 4.4.10 Confirm a schedule)
 
-=== Saving the data
+[NOTE]
 Calling `schedule` after next month's duties have already been confirm will only display the confirmed duty schedule.
 // end::scheduleAdmin[]
 
@@ -472,20 +481,9 @@ Calling `schedule` after next month's duties have already been confirm will only
 Confirms the duty schedule that was previously generated (from the `schedule` command) for the upcoming month.
 
 Format: `confirm`
+
 A confirmed duty schedule can be viewed on the calendar (using the `viewNext` command). Duty points will be updated accordingly to reward those who were assigned duties.
 // end::confirmAdmin[]
-
-
-==== Duty Settings Command : `settings`
-This command allows you to view and modify the number of points and manpower required for each day. +
-There are two ways to call this function. +
-
-* Entering `settings` will allow you to view the manpower and points required for each day. +
-* Entering `settings d/DAY m/MANPOWER p/POINTS` will allow you to modify the manpower and points for the entered day. +
-Points and manpower entered have to be positive integers. Day has to be a valid day of the week from Monday to Sunday.
-
-Example: +
-`settings d/Monday m/1 p/1`'
 
 ==== View Swap Command : `viewSwaps`
 Used to view all the swap requests that have been submitted by personnel. The Admin User can then accept or reject the swap
