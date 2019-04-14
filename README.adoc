@@ -7,8 +7,6 @@ https://ci.appveyor.com/project/cs2103ez/main[image:https://ci.appveyor.com/api/
 https://coveralls.io/github/CS2103-AY1819S2-W15-4/main?branch=master[image:https://coveralls.io/repos/github/CS2103-AY1819S2-W15-4/main/badge.svg?branch=master[Coverage Status]]
 https://www.codacy.com/app/cs2103ez/main?utm_source=github.com&utm_medium=referral&utm_content=CS2103-AY1819S2-W15-4/main&utm_campaign=Badge_Grade[image:https://api.codacy.com/project/badge/Grade/fc0b7775cf7f4fdeaf08776f3d8e364a[Codacy Badge]]
 
-[![Coverage Status](https://coveralls.io/repos/github/CS2103-AY1819S2-W15-4/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103-AY1819S2-W15-4/main?branch=master)
-
 ifdef::env-github[]
 image::docs/images/Ui.png[width="600"]
 endif::[]
