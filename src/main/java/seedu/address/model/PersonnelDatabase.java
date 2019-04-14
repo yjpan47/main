@@ -147,6 +147,7 @@ public class PersonnelDatabase implements ReadOnlyPersonnelDatabase {
      */
     public void addPerson(Person p) {
         persons.add(p);
+        dutyCalendar.getDutyStorage().addPerson(p);
         indicateModified();
     }
 

@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.UiCommandInteraction;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -29,9 +30,11 @@ public class DeleteCommand extends Command {
             + "Please run \"schedule\" again.";
 
     private final Index targetIndex;
+    private final String userName;
 
-    public DeleteCommand(Index targetIndex) {
+    public DeleteCommand(Index targetIndex, String userName) {
         this.targetIndex = targetIndex;
+        this.userName = userName;
     }
 
     @Override
@@ -44,6 +47,7 @@ public class DeleteCommand extends Command {
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        String userNameDeleted = personToDelete.getNric().value;
         model.deletePerson(personToDelete);
 
         DutyMonth dutyMonth = model.getDutyCalendar().getNextMonth();
@@ -54,6 +58,10 @@ public class DeleteCommand extends Command {
         dutyStorage.undo();
 
         model.commitPersonnelDatabase();
+        if (userNameDeleted.equals(userName)) {
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete),
+                    UiCommandInteraction.EXIT);
+        }
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
     }
 

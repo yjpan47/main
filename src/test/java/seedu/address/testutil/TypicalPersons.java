@@ -63,8 +63,8 @@ public class TypicalPersons {
     public static final Person GEORGE = new PersonBuilder().withNric("T0065782J").withCompany("1st")
             .withSection("2").withRank("CFC").withName("George Best")
             .withPhone("+942442").withPassword("T0065782J").withUserType(UserType.GENERAL).build();
-    public static final Person GENERAL_DAN = new PersonBuilder().withNric(GENERAL_DAN_USERNAME).withCompany("3rd")
-            .withSection("5").withRank("LTC").withName("Dan").withPhone("98765432")
+    public static final Person GENERAL_GOH = new PersonBuilder().withNric(GENERAL_DAN_USERNAME).withCompany("3rd")
+            .withSection("5").withRank("LTC").withName("Goh").withPhone("98765432")
             .withPassword(GENERAL_DAN_PASSWORD).withUserType(UserType.GENERAL).build();
     public static final Person ADMIN_TAN = new PersonBuilder().withNric(ADMIN_TAN_USERNAME).withCompany("7th")
             .withSection("4").withRank("CFC").withName("Tan").withPhone("12345678")
@@ -130,7 +130,7 @@ public class TypicalPersons {
 
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE,
-                GENERAL_DAN, ADMIN_TAN));
+                GENERAL_GOH, ADMIN_TAN));
     }
 
     public static String getTypicalPersonNric(int i) {
