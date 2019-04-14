@@ -1,6 +1,6 @@
 package seedu.address.storage;
 
-//import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,8 +11,8 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
-//import seedu.address.model.PersonnelDatabase;
-//import seedu.address.testutil.TypicalPersons;
+import seedu.address.model.PersonnelDatabase;
+import seedu.address.testutil.TypicalPersons;
 
 public class JsonSerializablePersonnelDatabaseTest {
 
@@ -34,32 +34,32 @@ public class JsonSerializablePersonnelDatabaseTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    //@Test
-    //public void toModelType_typicalPersonsFile_success() throws Exception {
-    //    JsonSerializablePersonnelDatabase dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
-    //            JsonSerializablePersonnelDatabase.class).get();
-    //    PersonnelDatabase personnelDatabaseFromFile = dataFromFile.toModelType();
-    //    PersonnelDatabase typicalPersonsPersonnelDatabase = TypicalPersons.getTypicalPersonnelDatabase();
-    //    assertEquals(personnelDatabaseFromFile, typicalPersonsPersonnelDatabase);
-    //}
+    @Test
+    public void toModelType_typicalPersonsFile_success() throws Exception {
+        JsonSerializablePersonnelDatabase dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
+                JsonSerializablePersonnelDatabase.class).get();
+        PersonnelDatabase personnelDatabaseFromFile = dataFromFile.toModelType();
+        PersonnelDatabase typicalPersonsPersonnelDatabase = TypicalPersons.getTypicalPersonnelDatabase();
+        assertEquals(personnelDatabaseFromFile, typicalPersonsPersonnelDatabase);
+    }
 
-    //@Test
-    //public void toModelType_typicalPersonsWithDutyFile_success() throws Exception {
-    //   JsonSerializablePersonnelDatabase dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSON_FILE_WITH_DUTY,
-    //            JsonSerializablePersonnelDatabase.class).get();
-    //    PersonnelDatabase personnelDatabaseFromFile = dataFromFile.toModelType();
-    //    PersonnelDatabase typicalPersonsPersonnelDatabase = TypicalPersons.getTypicalPersonnelDatabase();
-    //    assertEquals(personnelDatabaseFromFile, typicalPersonsPersonnelDatabase);
-    //}
+    @Test
+    public void toModelType_typicalPersonsWithDutyFile_success() throws Exception {
+       JsonSerializablePersonnelDatabase dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSON_FILE_WITH_DUTY,
+                JsonSerializablePersonnelDatabase.class).get();
+        PersonnelDatabase personnelDatabaseFromFile = dataFromFile.toModelType();
+        PersonnelDatabase typicalPersonsPersonnelDatabase = TypicalPersons.getTypicalPersonnelDatabase();
+        assertEquals(personnelDatabaseFromFile, typicalPersonsPersonnelDatabase);
+    }
 
-    //@Test
-    //public void toModelType_typicalPersonsWithBlockedDatesFile_success() throws Exception {
-    //    JsonSerializablePersonnelDatabase dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSON_FILE_WITH_BLOCKED_DATES,
-    //            JsonSerializablePersonnelDatabase.class).get();
-    //    PersonnelDatabase personnelDatabaseFromFile = dataFromFile.toModelType();
-    //    PersonnelDatabase typicalPersonsPersonnelDatabase = TypicalPersons.getTypicalPersonnelDatabase();
-    //    assertEquals(personnelDatabaseFromFile, typicalPersonsPersonnelDatabase);
-    //}
+    @Test
+    public void toModelType_typicalPersonsWithBlockedDatesFile_success() throws Exception {
+        JsonSerializablePersonnelDatabase dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSON_FILE_WITH_BLOCKED_DATES,
+                JsonSerializablePersonnelDatabase.class).get();
+        PersonnelDatabase personnelDatabaseFromFile = dataFromFile.toModelType();
+        PersonnelDatabase typicalPersonsPersonnelDatabase = TypicalPersons.getTypicalPersonnelDatabase();
+        assertEquals(personnelDatabaseFromFile, typicalPersonsPersonnelDatabase);
+    }
 
     @Test
     public void toModelType_invalidDutyMonthIndexFile_success() throws Exception {
