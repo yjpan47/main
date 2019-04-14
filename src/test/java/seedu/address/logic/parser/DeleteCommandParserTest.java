@@ -32,7 +32,7 @@ public class DeleteCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_specific_admin_returnsDeleteCommand() {
+    public void parseValidArgsSpecificAdminReturnsDeleteCommand() {
         assertParseSuccess(parser, "2", new DeleteCommand(INDEX_SECOND_PERSON,
                 TypicalPersons.ADMIN_TAN_USERNAME), UserType.ADMIN, TypicalPersons.ADMIN_TAN_USERNAME);
     }

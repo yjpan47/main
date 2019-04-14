@@ -127,8 +127,8 @@ public class EditCommand extends Command {
         UserType persontoEditUserType = personToEdit.getUserType();
         UserType editedPersonUserType = editedPerson.getUserType();
         if (personToEditUserName.equals(userName)) {
-            if (!editedPersonUserName.equals(personToEditUserName) ||
-                    !editedPersonUserType.equals(persontoEditUserType)) {
+            if (!editedPersonUserName.equals(personToEditUserName)
+                    || !editedPersonUserType.equals(persontoEditUserType)) {
                 editedNricUserType = true;
             }
         }
