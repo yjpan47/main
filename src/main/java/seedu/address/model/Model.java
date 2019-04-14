@@ -190,6 +190,10 @@ public interface Model {
      * Add a swap request to the model
      */
     void addSwapRequest(String nric, LocalDate allocatedDate, LocalDate requestedDate);
+    /**
+     * Checks a swap request to the model
+     */
+    boolean checkSwapRequestExists(String nric, LocalDate allocatedDate, LocalDate requestedDate);
 
     /**
      * Delete a person from requests containing that person.
