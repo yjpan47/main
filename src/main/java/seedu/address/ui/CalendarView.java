@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -92,7 +93,9 @@ public class CalendarView extends UiPart<Region> {
             int column = (firstIndex + i - 2) % 7;
             Label label = new Label(Integer.toString(i));
             Duty duty = dutyMonth.getScheduledDuties().get(i - 1);
-            ObservableList<Person> obsListDuty = FXCollections.observableArrayList(duty.getPersons());
+
+            ObservableList<String> obsListDuty = FXCollections.observableArrayList(
+                    duty.getPersons().stream().map(Person::toStringWithNRIC).collect(Collectors.toList()));
             ListView tempDuty = new ListView(obsListDuty);
             VBox vBox = new VBox();
             vBox.getChildren().addAll(label, tempDuty);

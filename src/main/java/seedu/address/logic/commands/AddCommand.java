@@ -39,9 +39,9 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_TAG + "injury";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s\n"
-            + "Please run \"schedule\" again.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New person added: %1$s\n";
+    public static final String MESSAGE_RUN_SCHEDULE_AGAIN = "Schedule unconfirmed! Please run <schedule> again.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists";
 
     private final Person toAdd;
 
@@ -63,11 +63,14 @@ public class AddCommand extends Command {
 
         model.addPerson(toAdd);
 
+        boolean isConfirmed = model.getDutyCalendar().getNextMonth().isConfirmed();
+
         model.getDutyCalendar().getNextMonth().unconfirm();
         model.getDutyCalendar().getDutyStorage().undo();
 
         model.commitPersonnelDatabase();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return (isConfirmed ? new CommandResult(String.format(MESSAGE_SUCCESS + MESSAGE_RUN_SCHEDULE_AGAIN, toAdd))
+                : new CommandResult(String.format(MESSAGE_SUCCESS, toAdd)));
     }
 
     @Override
