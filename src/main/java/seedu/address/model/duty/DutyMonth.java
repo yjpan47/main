@@ -251,7 +251,7 @@ public class DutyMonth {
                 DateUtil.getMonth(this.monthIndex), this.year));
 
         for (Duty duty : this.getScheduledDuties()) {
-            sb.append(String.format("%s | %s | %s \n", duty, duty.getStatus(), duty.getPersons()));
+            sb.append(String.format("%s | %s | %s\n", duty, duty.getStatus(), duty.getPersons()));
         }
 
         return sb.toString();
