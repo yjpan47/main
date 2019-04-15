@@ -4,8 +4,8 @@
   #site-header
     nav.navbar.navbar-light.bg-light
       .container
-        - if attr? 'site-name'
-            a.navbar-brand href=(site_url 'index.html') =(attr 'site-name')
+        - if attr? 'Duty Planner'
+            a.navbar-brand href=(site_url 'index.html') =(attr 'Duty Planner')
         ul.navbar-nav
           li.nav-item
             =nav_link('UserGuide', 'UserGuide.html', 'User Guide')
