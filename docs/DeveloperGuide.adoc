@@ -284,32 +284,32 @@ DutyMonth has a Hashmap<Person, List<Integer>> blockedDays object to allow it to
 
 Step 6 : +
 The algorithm for scheduling was then modified to prevent the user from not doing duties on their blockedDays. This was done with the assistance of the HashMap.
-During scheduling when a person is assigned to a day the model checks the list of blocked dates. If the person has a blocked day on the assigned duty, they are assigned a new one. 
-Someone else will then replace them in the previously assigned duty. 
-A more detailed explanation of the scheduling algorithm is in <<Duty Settings>>. 
+During scheduling when a person is assigned to a day the model checks the list of blocked dates. If the person has a blocked day on the assigned duty, they are assigned a new one.
+Someone else will then replace them in the previously assigned duty.
+A more detailed explanation of the scheduling algorithm is in <<Duty Settings>>.
 
 ==== Design Considerations:
 * Alternative 1 (current implementation): BlockDateCommand takes in a few dates they are then stored in the personnel database as a Hashmap.
-** Pros : 
+** Pros :
 *** Easy to implement as a new Command. Parsers have already been set up in address book and adding a new command is relatively easy to implement.
 ***The command storing the Integer List in the PersonnelDatabase in a HashMap is also convenient for the other commands such as `viewblock` and `removeblock.
 ***The Hashmap allows easy referencing for these commands. The Hashmap also allows for easier scheduling when the scheduler is run.
 
-** Cons : 
+** Cons :
 *** The BlockDateCommand would directly modify the HashMap in the PersonnelDatabase and this would go against the n-tier architecture of the PersonnelDatabase Program. This would break the abstraction principle
 
 **Implemented Fix for Cons :
-*** To combat the above issue, Model was given methods to add the blockedDates into the Personnel Database rather than the command itself. 
-This allows the logic to pass the dates to the model which would then integrate it into the Personnel Database. 
+*** To combat the above issue, Model was given methods to add the blockedDates into the Personnel Database rather than the command itself.
+This allows the logic to pass the dates to the model which would then integrate it into the Personnel Database.
 
  * Alternative 2 (current implementation): BlockDateCommand takes in a few dates they are then stored as a new Class called BlockedDates
-** Pros : 
+** Pros :
 *** Easy to implement as a new Command. Parsers have already been set up in address book and adding a new command is relatively easy to implement.
-*** Would be clear what the BlockedDate Class does and also if other forms of dates such as AppointmentDates have to be added in later this would help with integrating them. 
+*** Would be clear what the BlockedDate Class does and also if other forms of dates such as AppointmentDates have to be added in later this would help with integrating them.
 
-** Cons : 
+** Cons :
 *** The implementation of a BlockedDate Class would complicated the process of integrating into the schedule much harder.
-Implementing the BlockedDate into the algorithm would be a lot harder and would take more time and effort 
+Implementing the BlockedDate into the algorithm would be a lot harder and would take more time and effort.
 
 
  
@@ -1128,11 +1128,10 @@ Use case resumes at step 2.
 
 *MSS*
 
-1.
-2.
-3.
-4.
-+
+1. User requests to schedule for the next month
+2. User the confirm the schedule
+3. User deletes a person from the database
+4. Schedule is now unconfirmed and has to be run again+
 Use case ends.
 
 *Extensions*
@@ -1254,7 +1253,7 @@ Use case ends.
 
 *MSS*
 
-1. User requests to block certain dates in the upcoming month of duties. 
+1. User requests to block certain dates in the upcoming month of duties.
 2. PersonnelDatabase takes in the given dates and shows a success message.
 3. User will then not be scheduled for duties in the upcoming month when schedule is run.
 +
@@ -1298,7 +1297,7 @@ Use case ends.
 1. User requests to see the blocked dates in the upcoming month.
 2. PersonnelDatabase shows the use the blocked days he had entered previously.
 3. User requests to remove the blocked dates in the upcoming month.
-4. PersonnelDatabase deletes all blocked dates for the user. 
+4. PersonnelDatabase deletes all blocked dates for the user.
 +
 Use case ends.
 
@@ -1395,14 +1394,14 @@ _{ more test cases ... }_
 .. Test case : block 1 5 6
 Expected : The person has succesfully blocked days in the upcoming month and when schedule is run he will not be assigned duties on those days.
 
-.. Test case : block -1 
+.. Test case : block -1
 Expected : CommandException will be thrown to show invalid date. No dates will be blocked.
 
 .. Test case : block 33
 Expected : CommandException will be thrown to show invalid date. No dates will be blocked.
 
 .. Test case : block 6 (Logged in as an Admin)
-Expected : CommandException will be thrown to show invalid authority. No dates will be blocked. 
+Expected : CommandException will be thrown to show invalid authority. No dates will be blocked.
 
 .. Test case : block 6 (Schedule already confirmed)
-Expected : CommandException will be thrown to show confirmed schedule. No dates will be blocked. 
+Expected : CommandException will be thrown to show confirmed schedule. No dates will be blocked.
