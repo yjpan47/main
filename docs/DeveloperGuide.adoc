@@ -385,7 +385,7 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: `config.json`).
 
-//tag::dutyPackage[]
+// tag::dutyCalendar[]
 === Duty Package
 
 ==== Implementation
@@ -463,9 +463,7 @@ The sequence diagram above shows how the `schedule` operation works.
 
 It is worth noting that `schedule` operation does not finalize the duty schedule for next month. Therefore, `dutyCalendar` has to instantiates a new  `dummyNextMonth` for the operation.
 
-
 Subsequent calling of the `confirm` operation will allow the `nextMonth` object to point to the latest `dummyNextMonth`, and invoke `dutyStorage` to update duty points and records.
-
 
 ==== Schedule Algorithm
 
