@@ -9,16 +9,16 @@
 
 == Overview
 
-MINDEF Duty Planner is a desktop application used to help military units in the Singapore Armed Forces organise and plan monthly duties for their servicemen. It has various features and functions for administator (i.e. commander) as well as the duty personnel (i.e. servicemen). The user interacts with the application using a Command Line Interface (CLI) with a Graphic User Interface (GUI) created with JavaFX. It is written in Java, and has about 10kLoC.
+MINDEF Duty Planner is a desktop application used to help military units in the Singapore Armed Forces organise and plan monthly duties for their servicemen. It has various features and functions for administrator (i.e. commander) as well as the duty personnel (i.e. servicemen). The user interacts with the application using a Command Line Interface (CLI) with a Graphic User Interface (GUI) created with JavaFX. It is written in Java, and has about 10kLoC.
 
 The Duty Planner is modified and upgraded from SE-EDU Address Book 4.
 
 == Summary of contributions
 
 * *Major enhancement*: Creation of the duty package module
-** What it does: A duty package with classes (i.e. Duty, DutyMonth, DutySettings, DutyStorage) in charge of setting up the duties of a month and assigning them to person, as well as contain vital functions needed for the duty features to be implemented.
-*** Duty : A duty class that characterizes the attributes of a duty including the exact date, points awarded, manpower needed and a list of person eventually being assigned to that duty.
-*** DutyMonth : Represents a month in the calendar and is the main driver class behind the scheduling of duties. It initializes all duties and assigns them to person. Stores vital information such as the list of duties and the blocked dates of each person.
+** What it does: The duty package consists of classes (i.e. Duty, DutyMonth, DutySettings, DutyStorage) responsible for setting up the duties of a month and assigning them to persons, as well as contains vital functions needed for the duty features to be implemented.
+*** `Duty` : A class that characterizes the attributes of a duty including the exact date, points awarded, manpower needed and a list of person eventually being assigned to that duty.
+*** `DutyMonth` : Represents a month in the calendar and is the main driver class behind the scheduling of duties. It instantiates all `Duty` objects and assigns each  `Person`. Stores vital information such as the list of duties and the blocked dates of each person.
 *** DutySettings : Classfied as a UserPref which contains information about the manpower needs and points assigned to duties from each day of the week. Enable modification to the the mnapower needs and points assigned to each duty based on the day of the week.
 *** DutyStorage : Accumulates and stores the duty points earned by all the persons.
 ** Justification: The duty package provides the backend support for all duty-related features and commands.
