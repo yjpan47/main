@@ -264,7 +264,6 @@ The LogicManager then passes the command text, userName and userType to Personne
 Using certain command words, the PersonnelDatabase Parser determines what the command is and then passes the parsed commandText, userName and userType to the BlockDateCommandParser.
 
 Step 3 : +
-The BlockDateCommandParser
 The BlockDateCommandParser takes in the dates list as a String and parses it into a Integer List which is used in the model.
 The BlockDateCommandParser then passes in the Integer List, userType and userName to BlockDateCommand.
 It checks for valid Integer inputs for days in the next month and will throw an exception if the dates entered are not valid
@@ -287,7 +286,34 @@ Step 5 : +
 The BlockDateCommand then passes the Integer List to the model where it is stored in a Hashmap in DutyMonth.
 DutyMonth has a Hashmap<Person, List<Integer>> blockedDays object to allow it to store the blockedDays of every person for the upcoming month.
 
+Step 6 : +
+The algorithm for scheduling was then modified to prevent the user from not doing duties on their blockedDays. This was done with the assistance of the HashMap.
+During scheduling when a person is assigned to a day the model checks the list of blocked dates. If the person has a blocked day on the assigned duty, they are assigned a new one.
+Someone else will then replace them in the previously assigned duty.
+A more detailed explanation of the scheduling algorithm is in <<Duty Settings>>.
 
+==== Design Considerations:
+* Alternative 1 (current implementation): BlockDateCommand takes in a few dates they are then stored in the personnel database as a Hashmap.
+** Pros :
+*** Easy to implement as a new Command. Parsers have already been set up in address book and adding a new command is relatively easy to implement.
+***The command storing the Integer List in the PersonnelDatabase in a HashMap is also convenient for the other commands such as `viewblock` and `removeblock.
+***The Hashmap allows easy referencing for these commands. The Hashmap also allows for easier scheduling when the scheduler is run.
+
+** Cons :
+*** The BlockDateCommand would directly modify the HashMap in the PersonnelDatabase and this would go against the n-tier architecture of the PersonnelDatabase Program. This would break the abstraction principle
+
+**Implemented Fix for Cons :
+*** To combat the above issue, Model was given methods to add the blockedDates into the Personnel Database rather than the command itself.
+This allows the logic to pass the dates to the model which would then integrate it into the Personnel Database.
+
+ * Alternative 2 (current implementation): BlockDateCommand takes in a few dates they are then stored as a new Class called BlockedDates
+** Pros :
+*** Easy to implement as a new Command. Parsers have already been set up in address book and adding a new command is relatively easy to implement.
+*** Would be clear what the BlockedDate Class does and also if other forms of dates such as AppointmentDates have to be added in later this would help with integrating them.
+
+** Cons :
+*** The implementation of a BlockedDate Class would complicated the process of integrating into the schedule much harder.
+Implementing the BlockedDate into the algorithm would be a lot harder and would take more time and effort.
 
 // tag::undoredo[]
 === Undo/Redo feature
@@ -395,6 +421,7 @@ Certain properties of the application can be controlled (e.g user prefs file loc
 
 ==== Implementation
 
+
 image::DutyPackage.png[width:"600"]
 
 The diagram above shows the high-level structure of the duty components.
@@ -460,6 +487,7 @@ The diagram above shows the high-level structure of the duty components.
 ==== Duty Settings
 
 `DutySettings` class is an attribute under `UserPrefs`. It stores information regarding the manpower needed and duty points to be rewarded for each duty based on the day of the week.
+
 
 It is accessed when duties are generated to ensure the appropriate attributes (capacity and points) given to each duty.
 
@@ -681,7 +709,7 @@ These template files are written in a mixture of https://www.ruby-lang.org[Ruby]
 ====
 Modifying the template files in link:{repoURL}/docs/templates[`docs/templates`] requires some knowledge and experience with Ruby and Asciidoctor's API.
 You should only modify them if you need greater control over the site's layout than what stylesheets can provide.
-The SE-EDU team does not provide support for modified template files.
+The [W15 - 4] team does not provide support for modified template files.
 ====
 
 [[Testing]]
@@ -805,6 +833,7 @@ Do take a look at <<Design-Logic>> before attempting to modify the `Logic` compo
 ****
 
 [discrete]
+
 ==== `Model` component
 
 *Scenario:* You are in charge of `model`. One day, the `logic`-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the address book, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.
@@ -1103,6 +1132,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |general user |edit my own details |
 
+|`* *`|general user |view my blocked dates|
+
 |=======================================================================
 // end::userstories[]
 [appendix]
@@ -1144,6 +1175,7 @@ Use case resumes at step 2.
 
 *MSS*
 
+
 1. PersonnelDatabase already has confirmed duty schedule
 2. User requests to list persons
 3. PersonnelDatabase shows a list of persons
@@ -1166,50 +1198,19 @@ Use case resumes at step 3.
 
 // end::usecase2[]
 
+// tag::usecase3[]
 [discrete]
-=== Use case 3 (Admin): Add person
+=== Use case 3 (Admin): See all duties planned for current and next month in the calendar
 
 *MSS*
 
-1.
-2.
-3.
-4.
-+
+1. Admin requests to see duties planned for this month by entering viewCurrent.
+2. Calendar UI shows the current month's duties.
+3. Admin requests to see duties planned for the next month by entering viewNext.
+4. Calendar UI shows the next month's duties. +
 Use case ends.
 
 *Extensions*
-
-[discrete]
-=== Use case 4 (Admin): Edit person
-
-*MSS*
-
-1.
-2.
-3.
-4.
-+
-Use case ends.
-
-*Extensions*
-
-// tag::usecase5[]
-
-[discrete]
-=== Use case 5 (Admin): See all duties planned for current and next month in the calendar
-
-*MSS*
-
-1. User requests to see duties planned for the current month.
-2. PersonnelDatabase shows the calendar of the current month with all the duties.
-3. User requests to see duties planned for the next month.
-4. PersonnelDatabase shows the calendar of the next month with all the duties.
-+
-Use case ends.
-
-*Extensions*
-
 [none]
 * 2a. There are no duties planned for the current month.
 +
@@ -1217,14 +1218,31 @@ Use case ends.
 ** 2a1. PersonnelDatabase still shows the calendar of the current month, but without the duties.
 +
 Use case resumes at step 3.
+// end::usecase3[]
 
+// tag::usecase4[]
 [discrete]
-=== Use case 6 (Admin): See duties assigned to specific user
+=== Use case 4 (Admin): See duties assigned to specific user
 
 *MSS*
 
-1. User requests to see all the duties assigned to a specific user.
-2. PersonnelDatabase shows all the duties assigned to the specific user
+1. Admin requests to see the duties assigned to a specific person for the next month.
+3. MainWindow UI shows the user the person duties for the nextMonth. +
+Use case ends.
+
+*Extensions*
+// end::usecase4[]
+
+// tag::usecase5[]
+[discrete]
+=== Use case 5 (Admin): Schedule duties
+
+*MSS*
+
+1. User requests to see duties planned for the current month.
+2. PersonnelDatabase shows the calendar of the current month with all the duties.
+3. User requests to see duties planned for the next month.
+4. PersonnelDatabase shows the calendar of the next month with all the duties.
 +
 Use case ends.
 
@@ -1244,59 +1262,43 @@ Use case ends.
 ** 2b1. PersonnelDatabase shows an error message indicating that the user is not assigned to any duties.
 +
 Use case ends.
+*Extensions*
+
+
+
+[discrete]
+=== Use case 6 (Admin): Clear all the database, including duties
+
+*MSS*
+
+
+1. Admin requests to clear all personnel and duties from database.
+2. All data including personnel and upcoming duties is wiped and shown on the MainWindow UI
+
+
 // end::usecase5[]
 
 [discrete]
-=== Use case 7 (Admin): Schedule duties
+=== Use case 7 (Admin): Approve swapping of duties
 
 *MSS*
 
 1.
 2.
 3.
-4.
-+
+4. +
 Use case ends.
 
 *Extensions*
 
 [discrete]
-=== Use case 8 (Admin): Clear all the database, including duties
-
-*MSS*
-
-1.
-2.
-3.
-4.
-+
-Use case ends.
-
-*Extensions*
-
-[discrete]
-=== Use case 9 (Admin): Approve swapping of duties
-
-*MSS*
-
-1.
-2.
-3.
-4.
-+
-Use case ends.
-
-*Extensions*
-
-// tag::usecase10[]
-
-[discrete]
-=== Use case 10 (General user): See own duties
+=== Use case 8 (General user): See own duties
 
 *MSS*
 
 1. User requests to see his own duties.
 2. PersonnelDatabase shows all the duties the user is assigned to.
+
 +
 Use case ends.
 
@@ -1316,49 +1318,61 @@ Use case ends.
 ** 2b1. PersonnelDatabase shows an error message indicating that the user is not assigned to any duties.
 +
 Use case ends
-// end::usecase10[]
 
-[discrete]
-=== Use case 11 (General user): Block some dates for duties next month
-
-*MSS*
-
-1.
-2.
-3.
-4.
 +
 Use case ends.
 
 *Extensions*
 
 [discrete]
-=== Use case 12 (General user): Log into the system
+=== Use case 9 (General user): Block some dates for duties next month
 
 *MSS*
 
-1.
-2.
-3.
-4.
+1. User requests to block certain dates in the upcoming month of duties.
+2. PersonnelDatabase takes in the given dates and shows a success message.
+3. User will then not be scheduled for duties in the upcoming month when schedule is run.
 +
 Use case ends.
 
 *Extensions*
 
 [discrete]
-=== Use case 13 (General user): Exit the system
+=== Use case 10 (General user): Log into the system
 
 *MSS*
 
-1.
-2.
-3.
-4.
+
+1. A general user requests to log in to the system.
+2. The general use has not changed their password and so enters their NRIC as the username and password.
+3. The user is logged into the database.
+
+[discrete]
+=== Use case 11 (General user): Exit the system
+
+*MSS*
+
+1. A user requests to close the system and types exit.
+2. The Application closes.
 +
 Use case ends.
 
 *Extensions*
+
+[discrete]
+=== Use case 12 (General user): remove my own blocked dates
+
+*MSS*
+
+1. User requests to see the blocked dates in the upcoming month.
+2. PersonnelDatabase shows the use the blocked days he had entered previously.
+3. User requests to remove the blocked dates in the upcoming month.
+4. PersonnelDatabase deletes all blocked dates for the user.
++
+Use case ends.
+
+*Extensions*
+
 
 [appendix]
 == Non Functional Requirements
@@ -1442,3 +1456,22 @@ _{ more test cases ... }_
 .. _{explain how to simulate a missing/corrupted file and the expected behavior}_
 
 _{ more test cases ... }_
+
+=== BlockDateCommand Tests
+
+. Prerequisites: You need to be logged in as a general user before you can block dates. If there are no personnel Database you can add some by loggin in as an Admin first
+
+.. Test case : block 1 5 6
+Expected : The person has succesfully blocked days in the upcoming month and when schedule is run he will not be assigned duties on those days.
+
+.. Test case : block -1
+Expected : CommandException will be thrown to show invalid date. No dates will be blocked.
+
+.. Test case : block 33
+Expected : CommandException will be thrown to show invalid date. No dates will be blocked.
+
+.. Test case : block 6 (Logged in as an Admin)
+Expected : CommandException will be thrown to show invalid authority. No dates will be blocked.
+
+.. Test case : block 6 (Schedule already confirmed)
+Expected : CommandException will be thrown to show confirmed schedule. No dates will be blocked.
