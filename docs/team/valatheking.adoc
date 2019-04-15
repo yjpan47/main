@@ -199,6 +199,29 @@ This allows the logic to pass the dates to the model which would then integrate 
 *** The implementation of a BlockedDate Class would complicated the process of integrating into the schedule much harder.
 Implementing the BlockedDate into the algorithm would be a lot harder and would take more time and effort
 
+=== Use case 3 (Admin): See all duties planned for current and next month in the calendar
+
+*MSS*
+
+1. Admin requests to see duties planned for this month by entering viewCurrent.
+2. Calendar UI shows the current month's duties.
+3. Admin requests to see duties planned for the next month by entering viewNext.
+4. Calendar UI shows the next month's duties. +
+Use case ends.
+
+*Extensions*
+
+[discrete]
+=== Use case 4 (Admin): See duties assigned to specific user
+
+*MSS*
+
+1. Admin requests to see the duties assigned to a specific person for the next month.
+3. MainWindow UI shows the user the person duties for the nextMonth. +
+Use case ends.
+
+*Extensions*
+
 === Use case 11 (General user): Block some dates for duties next month
 
 *MSS*

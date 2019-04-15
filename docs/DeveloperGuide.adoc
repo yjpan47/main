@@ -670,7 +670,7 @@ These template files are written in a mixture of https://www.ruby-lang.org[Ruby]
 ====
 Modifying the template files in link:{repoURL}/docs/templates[`docs/templates`] requires some knowledge and experience with Ruby and Asciidoctor's API.
 You should only modify them if you need greater control over the site's layout than what stylesheets can provide.
-The SE-EDU team does not provide support for modified template files.
+The [W15 - 4] team does not provide support for modified template files.
 ====
 
 [[Testing]]
@@ -1169,15 +1169,21 @@ Use case resumes at step 3.
 Use case ends.
 
 *Extensions*
+[none]
+* 2a. There are no duties planned for the current month.
++
+[none]
+** 2a1. PersonnelDatabase still shows the calendar of the current month, but without the duties.
++
+Use case resumes at step 3.
 
 [discrete]
 === Use case 4 (Admin): See duties assigned to specific user
 
 *MSS*
 
-1. Admin wants to see the duties assigned to a specific person for the next month.
-2. He types in view NRIC to see their duties.
-3. Alll their duties for the next month all listed. +
+1. Admin requests to see the duties assigned to a specific person for the next month.
+3. MainWindow UI shows the user the person duties for the nextMonth. +
 Use case ends.
 
 *Extensions*
@@ -1197,32 +1203,6 @@ Use case ends.
 *Extensions*
 
 [none]
-* 2a. There are no duties planned for the current month.
-+
-[none]
-** 2a1. PersonnelDatabase still shows the calendar of the current month, but without the duties.
-+
-Use case resumes at step 3.
-
-[discrete]
-=== Use case 6 (Admin): Clear all the database, including duties
-
-*MSS*
-
-
-1. Admin wants to clear all personnel and duties from database.
-2. Admin requests a clear command.
-3. All data including personnel and upcoming duties is wiped.
-
-1. User requests to see all the duties assigned to a specific user.
-2. PersonnelDatabase shows all the duties assigned to the specific user
-
-+
-Use case ends.
-
-*Extensions*
-
-[none]
 * 2a. The user does not exist.
 +
 [none]
@@ -1236,6 +1216,20 @@ Use case ends.
 ** 2b1. PersonnelDatabase shows an error message indicating that the user is not assigned to any duties.
 +
 Use case ends.
+*Extensions*
+
+
+
+[discrete]
+=== Use case 6 (Admin): Clear all the database, including duties
+
+*MSS*
+
+
+1. Admin requests to clear all personnel and duties from database.
+2. All data including personnel and upcoming duties is wiped and shown on the MainWindow UI
+
+
 // end::usecase5[]
 
 [discrete]
