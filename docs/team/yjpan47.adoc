@@ -52,27 +52,7 @@ The Duty Planner is modified and upgraded from SE-EDU Address Book 4.
 ** What it does: A class that contains static methods to assist in validation of date parameters and other date related functions.
 ** Justification: Contains commonly used functions that aids the developers and prevent duplicate codes.
 
-* *Code contributed*:
-** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/duty/Duty.java
-** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/duty/DutyMonth.java
-** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/duty/DutySettings.java
-** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/duty/DutyStorage.java
-** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/DutyCalendar.java
-** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/commands/ScheduleCommand.java
-** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/commands/ConfirmScheduleCommand.java
-** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/commands/DutySettingsCommand.java
-** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/parser/DutySettingsCommandParser.java
-** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/commands/PointsCommand.java
-** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/parser/PointsCommandParser.java
-** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/commands/RewardCommand.java
-** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/parser/RewardCommandParser.java
-** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/commands/PenalizeCommand.java
-** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/parser/PenalizeCommandParser.java
-** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/storage/JsonAdaptedDutyStorage.java
-** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/storage/JsonAdaptedDutyStoragePerson.java
-** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/commons/util/DateUtil.java
-** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/UserPrefs.java
-** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/PersonnelDatabase.java
+* *Code contributed*: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=yjpan47&sort=displayName&since=2019-02-10&until=2019-04-03&timeframe=day&reverse=false&repoSort=true[Code]]
 
 * Project management:
 ** Managed releases `v1.1`
