@@ -175,6 +175,68 @@ public class DutyAlgorithmTest {
             }
         }
     }
+    @Test
+    public void dutyMonthPrintDutiesTest() {
+        String expected = "---- Duty Roster for February 2018  ---- \n";
+        assertEquals(dutyMonth1.printDuties(), expected);
+        dutyMonth4.schedule(personList, dutySettings, dutyStorage);
+    }
+
+    @Test
+    public void dutyMonthPrintPointsTest() {
+        String expected = "--- POINTS AWARDED ----\n";
+        assertEquals(dutyMonth1.printPoints(dutyStorage), expected);
+        dutyMonth5.schedule(personList, dutySettings, dutyStorage);
+        for (Person p : personList) {
+            assertTrue(dutyMonth5.printPoints(dutyStorage).contains(p.toString()));
+        }
+    }
+
+    @Test
+    public void dutyStoragePrintDetailsTest() {
+        String output = "PTE Benson Meier\n" + "Points : 0\n" + "--- RECORDS ---\n";
+        assertEquals(dutyStorage.printDetails(personList.get(1)), output);
+    }
+
+    @Test
+    public void dutyStoragePrintPointsTest() {
+        String output = "--- POINTS ACCUMULATED ----\n";
+        assertEquals(dutyStorage.printPoints(), output);
+    }
+
+    @Test
+    public void dutyStorageRewardTest() {
+        Random random = new Random();
+        for (Person p : personList) {
+            dutyStorage.addPerson(p);
+        }
+        dutyMonth3.schedule(personList, dutySettings, dutyStorage);
+        dutyStorage.update(dutyMonth3.getScheduledDuties());
+        for (Person person : TypicalPersons.getTypicalPersons()) {
+            int before = dutyStorage.getPoints(person);
+            int points = random.nextInt(RANDOM_POINTS_LIMIT);
+            dutyStorage.reward(person, points);
+            int after = dutyStorage.getPoints(person);
+            assertEquals(before + points, after);
+        }
+    }
+
+    @Test
+    public void dutyStoragePenalizeTest() {
+        Random random = new Random();
+        for (Person p : personList) {
+            dutyStorage.addPerson(p);
+        }
+        dutyMonth4.schedule(personList, dutySettings, dutyStorage);
+        dutyStorage.update(dutyMonth4.getScheduledDuties());
+        for (Person person : TypicalPersons.getTypicalPersons()) {
+            int before = dutyStorage.getPoints(person);
+            int points = random.nextInt(RANDOM_POINTS_LIMIT);
+            dutyStorage.penalize(person, points);
+            int after = dutyStorage.getPoints(person);
+            assertEquals(before - points, after);
+        }
+    }
 }
 
 

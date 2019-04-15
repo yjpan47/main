@@ -16,6 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class RewardCommandParser implements Parser<RewardCommand> {
 
+    private static final int MAX_REWARD_POINTS = 100;
     private static final Prefix PREFIX_INDEXES = new Prefix("i/");
     private static final Prefix PREFIX_POINTS = new Prefix("p/");
 
@@ -33,7 +34,7 @@ public class RewardCommandParser implements Parser<RewardCommand> {
         try {
             int points = Integer.parseInt(argMultimap.getValue(PREFIX_POINTS).get());
 
-            if (points <= 0) {
+            if (points <= 0 || points > MAX_REWARD_POINTS) {
                 throw new InvalidParameterException();
             }
 

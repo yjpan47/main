@@ -76,4 +76,12 @@ public class Request {
 
         return sb.toString();
     }
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || other instanceof Request // instanceof handles nulls
+                && requester.equals(((Request) other).requester)
+                && allocatedDate.equals(((Request) other).allocatedDate)
+                && requestedDate.equals(((Request) other).requestedDate);
+    }
 }

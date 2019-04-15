@@ -11,11 +11,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class DutySettingsCommandParser implements Parser<DutySettingsCommand> {
 
+    private static final int MAX_CAPACITY = 10;
+    private static final int MAX_POINTS = 100;
     private static final Prefix PREFIX_DAY_OF_WEEK = new Prefix("d/");
     private static final Prefix PREFIX_POINTS = new Prefix("p/");
     private static final Prefix PREFIX_CAPACITY = new Prefix("m/");
-
-    private static final String MESSAGE_INPUT_OUT_OF_RANGE = "Inputs out of range.";
 
     /**
      * Parses the given {@code String} of arguments in the context of the DutySettingsCommand
@@ -38,13 +38,11 @@ public class DutySettingsCommandParser implements Parser<DutySettingsCommand> {
             int capacity = Integer.parseInt(argMultimap.getValue(PREFIX_CAPACITY).get());
             int points = Integer.parseInt(argMultimap.getValue(PREFIX_POINTS).get());
 
-            if (capacity < 0 || points < 0) {
+            if (capacity <= 0 || capacity > MAX_CAPACITY || points <= 0 || points > MAX_POINTS) {
                 throw new IllegalArgumentException();
             }
 
             return new DutySettingsCommand(dayOfWeek, capacity, points);
-        } catch (IllegalArgumentException e) {
-            throw new ParseException(MESSAGE_INPUT_OUT_OF_RANGE);
         } catch (Exception e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DutySettingsCommand.MESSAGE_USAGE));
         }

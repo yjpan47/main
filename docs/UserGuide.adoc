@@ -19,10 +19,11 @@ By: `CS2103 W15-4`      Since: `Feb 2019`      Licence: `MIT`
 == Introduction
 
 MINDEF Duty Planner is a platform to assist military units in the SAF in the assignment of daily guard duties amongst the servicemen. +
- The application is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
- The software is designed to automate the process of fairly assigning duties to available servicemen for an entire month. +
- The application can be used by both Commanders and servicemen to plan and view duties with various specific commands for each type of user.
- To start using MINDEF Duty Planner you can go to <<Quick Start>>
+The application is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+The software is designed to automate the process of fairly assigning duties to available servicemen for an entire month. +
+The application can be used by both Commanders and servicemen to plan and view duties with various specific commands for each type of user. +
+To start using MINDEF Duty Planner you can go to <<Quick Start>> +
+To see a summary list of commands you can go to <<Command Summary>>
 
 == Notation
 
@@ -45,7 +46,7 @@ can be pressed to invoke a described function.
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all contacts
+* *`list`* : lists all personnel
 * **`add`**`n/John Doe nr/S9012345N p/98765432 c/Echo s/2 r/CFC t/injured`  : adds a personnel named `John Doe` to the Personnel Database.
 * **`delete`**`3` : deletes the 3rd contact shown in the current list
 * *`exit`* : exits the app
@@ -60,11 +61,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 === Log in
 ****
 * For Practical Exam: You may use an administrator account with Username: Admin, and Password: Admin
-
-* For Practical Exam: In personnel list, the password of the users will be listed for your convenience.
-* If you close the login window, you are still able to view the personnel list and the calendar duty list.
- However, you will not be able to use any commands.
-* If you close the login window, you are still able to view the personnel list and the calendar duty list. However, you will not be able to use any commands.
+* If you close the login window, you are still able to view the personnel list and the calendar duty list. However, you will not be able to use any commands. You may simply close the window to exit the program.
 
 ****
 
@@ -104,6 +101,7 @@ Format: `help`
 Lists out all users with their details. +
 Format: `list`
 
+// tag::viewMonths[]
 ==== View all duties for current month: `viewCurrent`
 Brings up calendar view, with all duties for the current month. +
 Format: `viewCurrent`
@@ -111,6 +109,7 @@ Format: `viewCurrent`
 ==== View all duties for next month: `viewNext`
 Brings up calendar view, with all duties for the next month. +
 Format: `viewNext`
+// end::viewMonths[]
 
 ==== View duties assigned to user : `view`
 The user can see their details about their own duties assigned to them and their upcoming duties ranked by recency. +
@@ -124,24 +123,6 @@ Example:
 
 * `view S9012345L`
 
-==== View roster : `roster` `Not implemented yet`
-The user can see the full duty rosters for particular months. +
-Format: `roster MONTH`
-
-Example:
-
-* `roster February`
-
-
-
-==== Make a swap request with another user : `swap`
-The user can request for a duty swap with another user. This will be subject to the agreement of the other user and approval of the admin (i.e. commander). +
-The other user and admin will be notified upon login and they will be prompted to accept or decline the request. +
-Format: `swap ad/CURRENTDUTYDATE rd/DESIREDDUTYDATE
-
-Example:
-
-* `swap ad/14022019 rd/21022019 t/Please help a bro out!`
 
 ==== Locating persons by name: `find`
 
@@ -180,8 +161,14 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: +
+those commands that modify the personnel database's person list (`add`, `delete`, `edit` and `clear`), +
+`confirm` command for scheduling
 ====
+
+****
+* `schedule` command cannot be undo'd, because it does not modify the personnel database directly until confirmed.
+****
 
 Examples:
 
@@ -221,6 +208,10 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `delete 1` command) +
 `redo` (reapplies the `clear` command) +
 
+* `schedule` +
+`confirm` +
+`undo` (reverses the `confirm` command)
+
 ==== Exit : `exit`
 Exits the program. User will be logged out automatically. +
 Format: `exit`
@@ -247,24 +238,59 @@ Edits the phone number and rank of the user to be `84523546` and `CPL` respectiv
 Edits the company of the user to be `Hotel`, clears all existing tags, and changes password to 'pass'.
 // end::editGeneral[]
 
-==== Block dates : `block`
+==== Make a swap request with another user : `swap`
+The user can request for a duty swap with another user. This will be subject to the agreement of the other user and approval of the admin (i.e. commander). +
+The other user and admin will be notified upon login and they will be prompted to accept or decline the request. +
+Format: `swap ad/CURRENTDUTYDATE rd/DESIREDDUTYDATE
+
+Example:
+
+* `swap ad/14022019 rd/21022019 t/Please help a bro out!`
+
+==== Approve Swap Command : `acceptSwap`
+The General User can use this command to accept a certain swap at the given index on the open Swap Requests list.
+
+Format : `approveSwap i/INDEX`
+
+==== Block dates : `block` +
 The user can block dates and set which dates they are unavailable to duties for the upcoming month. A user can block up to 15 days. +
 Format: `block DATE DATE DATE ...`
 
+[NOTE]
+====
+The date entered must be a valid number for the upcoming month. For example if the next month is February, block 30 is an invalid input.
+====
+
+[WARNING]
+====
 This command can only be entered if next month's duty schedule has not been confirmed yet.
 If it has been confirmed please request a swap on the day you wish to duties.
+====
+
+If the user has successfully blocked dates they will not be scheduled for duties on the blocked days in the upcoming month. +
 
 Example:
 
 * `block 3 6 15 21 30`
 
-==== View blocked dates : `viewblock`
+
+==== View blocked dates : `viewblock` +
+
 The user can view the dates they have blocked for the upcoming month. +
+The blocked dates for the upcoming month will then be printed out for the user to see. +
+
 Format: `viewblock`
 
-==== Remove blocked dates : `removeblock`
-The user can remove the dates they have blocked for the upcoming month. +
+==== Remove blocked dates : `removeblock` +
+
+The user can remove the dates they have blocked for the upcoming month. This will remove all blocked days from the upcoming month. +
+
 Format: `removeblock`
+
+[NOTE]
+====
+A specific date cannot be removed from the list of blocked dates. If a user wishes to remove only a certain day he can removeblock and run the block command again.
+====
 
 === Admin Features
 
@@ -279,6 +305,22 @@ Format: `add nr/NRIC c/COMPANY s/SECTION r/RANK n/NAME p/PHONE [t/TAG]`
 * Tag always has to be the last field. eg. `add nr/NRIC c/COMPANY s/SECTION r/RANK n/NAME [t/TAG] p/PHONE` will not work.
 ****
 
+Each of the following fields entered by the user following each prefix are compulsory, and must adhere to the following format (Only the Tag field is optional): +
+
+****
+* `NRIC` should be of the format [S/T/F/G][7][A-Z].
+* `Company` can take any value and should not be blank.
+* `Section` can take any value and should not be blank.
+* `Rank` must be composed of 3 alphanumerical characters, either digits or uppercase letters.
+* `Name` should only contain alphanumeric characters and spaces, and it should not be blank.
+* `Phone` should only contain numbers and a plus in front , and it should be at least 3 digits long and a maximum of 20 digits long
+****
+
+Example:
+
+* `add nr/S9012345L c/Echo s/2 r/CFC n/William Tan p/91234567 t/injured` +
+Adds CFC William Tan in Echo Company Section 2 into the database.
+
 // end::add[]
 ==== Deleting a person : `delete`
 
@@ -289,8 +331,13 @@ Format: `delete INDEX`
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
-* Note that the program will exit if you delete your own account.
 ****
+
+[WARNING]
+====
+Note that the program will exit if you delete your own account.
+====
+
 
 Examples:
 
@@ -319,6 +366,7 @@ Format: `edit INDEX [nr/NRIC] [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONE
 * You can remove all the person's tags by typing `t/` without specifying any tags after it.
 * For account type field specified by `u/`, A corresponds to an Admin account, G corresponds to a general account.
 * The program will exit if you delete your own NRIC or change your usertype to a general account.
+* If you edit another user's NRIC, the user's password does not automatically change to that NRIC (since the user might choose to have his own password). If you really do want to change the password to the new NRIC, please specify it in the pw/ field.
 ****
 
 Examples:
@@ -326,35 +374,125 @@ Examples:
 * `edit 2 p/84523546 r/CPL u/A` +
 Edits the phone number and rank of the 2nd person to be `84523546` and `CPL` respectively, and grants the person's account administrator privileges.
 * `edit 1 c/Hotel t/ pw/pass` +
-Edits the company of the 1st person to be `Hotel`, clears all existing tags, and changes passworrd to 'pass'.
+Edits the company of the 1st person to be `Hotel`, clears all existing tags, and changes password to 'pass'.
 // end::editAdmin[]
 
-==== Scheduling duties : `schedule`
-This command invokes the scheduling algorithm for the upcoming month. It generates a viable duty schedule roster where each duty slot for the upcoming month will be filled by the people currently in the database. ++
+// tag::pointsAdmin[]
+==== View duty points : `points`
+Displays the duty points accumulated by each person. Additional records of each person (i.e. duties allocated, points rewarded, points penalized) can also be viewed.
 
-.In order to ensure fair scheduling system,
-. We introduce a point system to each individual such that a servicemen can earn points by doing duties. The points awarded to servicemen are cumulative, thus the points awarded are carried over to the next month. +
-. Each duty is worth a certain number of points and a person gains that amount of points by doing that duty. For example, if all Sunday duties are worth 4 points, a servicemen who is assigned a Sunday duty will by awarded 4 points. +
-. Before the scheduling command is called, each person has the opportunity to indicate the days in which they are unavailable to do duty. (See 3.2.8 block command)  +
+Format:  `points [INDEX]`
+
+[NOTE]
+Calling the command without index (`points`) provides a list of all persons and their accumulated duty points while calling the command with index (`points INDEX`) provides the accumulated duty points of an individual person and his record (i.e. duties, points rewarded, points penalized).
+
+Examples:
+
+* `points 2` +
+Retrieves the duty points of the 2nd person on the contact list, as well as his records with information such as duties allocated, points rewards and points penalized.
+* `points` +
+Displays a list of all persons and their respective duty points.
+// end::pointsAdmin[]
 
 
-The algorithm is optimized such that persons with low points will be allocated to duties with high points. It automatically attempts to balance out the points of each person by the end of the month. +
+// tag::rewardAdmin[]
+==== Reward points : `reward`
+Manually reward duty points to a person or a list of persons.
 
-The duty schedule generated by the schedule command is not deterministic, calling schedule command multiple times generates different duty allocation. +
+Format: `reward i/INDEX [INDEX] [INDEX] ... p/POINTS`
 
-Calling the schedule command merely generates a viable schedule, but does not finalize the schedule (i.e. points awarded to each person is yet to be added). Schedule generated is also not deterministic, calling schedule command multiple times generates different duty allocation. Thus, the admin can call schedule command continuously until a satisfactory schedule is produced. To finalize the schedule, use the confirm command. (See 3.4.6 confirm schedule) +
+* Points rewarded can range from 1 to 100 for each command call.
+
+Examples:
+
+* `reward i/1 2 4 5 p/20` +
+Rewards 20 points each to the 1st, 2nd, 4th and 5th person on the contact list.
+* `reward i/3 p/4` +
+Rewards 4 points to the 3th person on the contact list.
+// end::rewardAdmin[]
+
+// tag::penalizeAdmin[]
+==== Penalize points : `penalize`
+Manually penalize duty points for a person or a list of persons.
+
+Format: `penalize i/INDEX [INDEX] [INDEX] ... p/POINTS`
+
+* Points penalized can range from 1 to 100 for each command call.
+* The duty points of a person can fall to less than zero.
+
+Examples:
+
+* `penalize i/1 2 4 5 p/20` +
+Penalize 20 points each for the 1st, 2nd, 4th and 5th person on the contact list.
+* `penalize i/3 p/4` +
+Penalize 4 points for the 3th person on the contact list.
+// end::penalizeAdmin[]
+
+// tag::settingsAdmin[]
+==== View and edit duty settings (points and manpower needed for each day of the week) : `settings`
+View and edit duty settings. Duty settings refer to the *manpower needed* and *points rewarded* for each duty based on the day of the week (e.g. Sunday, Monday, etc)
+
+Format: `settings [d/DAYOFWEEK m/MANPOWER p/POINTS]`
+
+* `DAYOFWEEK`: Mon / Tue / Wed / Thur / Fri / Sat / Sun (full spelling e.g. Monday, Tuesday etc. works as well) +
+* `MANPOWER`: Number ranging from 1 to 10 +
+* `POINTS`: Number ranging from 1 to 100
+
+[NOTE]
+Calling the command `settings` alone displays the current duty settings while calling the command `settings` with the day of the week, manpower and points enables the editing of the duty settings.
+
+[NOTE]
+The updated duty settings will only take effect the next time a schedule is confirmed. If schedule for next month has already been confirmed, the confirmed schedule will still follow the specifications of the previous duty settings.
+
+Examples:
+
+* `settings` +
+Displays the duty settings - for each day of the week, the manpower needed and points to be rewarded.
+* `settings d/sun m/3 p/4` +
+Duty settings edited. Sunday duties now require 3 persons and 4 points will be rewarded to each person assigned a Sunday duty.
+* `settings d/monday m/2 p/3` +
+Duty settings edited. Monday duties now require 2 persons and 3 points will be rewarded to each person assigned a Monday duty.
+// end::settingsAdmin[]
+
+// tag::scheduleAdmin[]
+==== Schedule duties : `schedule`
+Creates a viable duty schedule for the upcoming month. The scheduling algorithm takes into account the manpower needs of each duty day, blocked dates of each person, the current duty points of each person and points rewarded for each duty to generate a fair schedule.
 
 Format: `schedule`
 
-==== Confirm a Schedule : `confirm`
-Confirm and finalize the last generated duty schedule (from the schedule command) for the upcoming month. +
-Subsequent attempts to call schedule command will not result in any new duty allocation produced. +
+The algorithm is optimized such that a person with low duty points will be allocated to duties which rewards high points and possibly be given more duties. It automatically attempts to balance out the points of each person after scheduling.
+
+[NOTE]
+The command `schedule` merely provides a viable duty schedule and *does not confirm the schedule* to the calendar. Duty points have also yet been updated. The schedule generated is not deterministic and calling `schedule` again will regenerate a new duty schedule.
+
+Once a satisfactory duty schedule is generated, the administrator can go ahead to confirm the duty schedule. (See 4.4.10 Confirm a schedule)
+
+Calling `schedule` after next month's duties have already been confirm will only display the confirmed duty schedule.
+// end::scheduleAdmin[]
+
+// tag::confirmAdmin[]
+==== Confirm a schedule : `confirm`
+Confirms the duty schedule that was previously generated (from the `schedule` command) for the upcoming month.
+
 Format: `confirm`
 
-=== Saving the data
+A confirmed duty schedule can be viewed on the calendar (using the `viewNext` command). Duty points will be updated accordingly to reward those who were assigned duties.
+// end::confirmAdmin[]
 
-Duty roster personnel list and the duties allocated are saved in the hard disk automatically after any command that changes the data. +
-There is no need to save manually.
+==== View Swap Command : `viewSwaps`
+Used to view all the swap requests that have been submitted by personnel. The Admin User can then accept or reject the swap
+
+Format : `viewSwaps`
+
+==== Approve Swap Command : `approveSwap`
+The Admin User can use this command to approve a certain swap at the given index on the requested Swap list.
+
+Format : `approveSwap i/INDEX`
+
+==== Reject Swap Command : `rejectSwap`
+The Admin User can use this command to reject a certain swap at the given index on the swap requests list.
+
+Format : `rejectSwap i/INDEX`
 
 == FAQ
 
@@ -362,7 +500,7 @@ There is no need to save manually.
 *A*: Use "swap" command to request a swap. If you receive no updates about it, contact your administrator.
 
 *Q*: What is the main feature of this app? +
-*A*: The main feature is the automated scheduling algorithm, which significantly minimizes the amount of work that the admin has to do.
+*A*: The main feature is the automated duty allocation system, which significantly minimizes the amount of work that the admin has to do.
 
 *Q*: What is my username and password? +
 *A*: Your username is by default your NRIC, used so prevalently in the SAF. +
@@ -396,6 +534,7 @@ Your password is also your NRIC by default, unless you or your administrator cha
 * *Block dates* : `block` +
 * *View Blocked Dates* : `viewblock` +
 * *Remove Blocked Dates* : `removeblock` +
+* *Accept Swaps* : `acceptSwap i/INDEX`
 
 === Admin accounts
 * *Add a user* : `add nr/NRIC c/COMPANY s/SECTION r/RANK n/NAME p/PHONE [t/TAG]` +
@@ -404,3 +543,7 @@ Your password is also your NRIC by default, unless you or your administrator cha
 * *Scheduling duties* : `schedule` +
 * *Confirm schedule* : `confirm` +
 * *Clear entries* : `clear` +
+* *Duty Settings* : `settings` or `settings d/DAY m/MANPOWER p/POINTS`
+* *View Swaps* : `viewSwaps`
+* *Approve Swaps* : `ApproveSwap i/INDEX`
+* *Reject Swaps* : `rejectSwap i/INDEX`
