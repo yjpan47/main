@@ -236,6 +236,55 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+//tag::blockDates[]
+=== Block Dates Feature
+==== Current Implementation
+
+The block dates feature is facilitated by PersonnelDatabase and was implemented for general users as they cannot be expected to do duties any time during the upcoming month.
+They may have certain dates that are busy or do not wish to do duties and as such they can block the dates in the PersonnelDatabase.
+
+Block Dates was done by adding 3 new commands to the `Logic` which are `BlockDateCommand`, `ViewBlockCommand`, `RemoveBlockCommand`.
+Modifications and methods were also added in `Model` and `Storage` to implement the blocking of dates in Duty planning and storage.
+
+`BlockDateCommand` works like other commands in the Duty Planner. The command is read a text string from the MainWindow in UI.
+The sequence diagram for the interaction is below.
+
+image::BlockDateStateDiagram.png[width="800"]
+
+
+Step 1 : +
+As seen in the diagram above. The MainWindow calls the execute Command in Logic and passes in the command text, userName and userType of the logged in user.
+
+Step 2 : +
+The LogicManager then passes the command text, userName and userType to PersonnelDatabaseParser and it determines the type of command by parsing the String input.
+Using certain command words, the PersonnelDatabase Parser determines what the command is and then passes the parsed commandText, userName and userType to the BlockDateCommandParser.
+
+Step 3 : +
+The BlockDateCommandParser
+The BlockDateCommandParser takes in the dates list as a String and parses it into a Integer List which is used in the model.
+The BlockDateCommandParser then passes in the Integer List, userType and userName to BlockDateCommand.
+It checks for valid Integer inputs for days in the next month and will throw an exception if the dates entered are not valid
+
+Step 4 : +
+The logic for BlockDateCommand follows the activity diagram below.
+
+image::BlockDateActivityDiagram.png[width="800"]
+
+****
+* The first check is the userType, if you are an Admin you will not be able to access this command
+* The second check is to see the schedule has already been confirmed for nex month. If so the user cannot block any dates for the upcoming month
+* The third check is to see the number of dates blocked and if they are more than 15, an exception will be thrown.
+This is to ensure that commander have enough people to schedule duties. You can change this number if you wish to do so by updating the
+MAX_BLOCKS_NUMBER in BlockDateCommand
+* If the user passes all check the Command will enter Step 5
+****
+
+Step 5 : +
+The BlockDateCommand then passes the Integer List to the model where it is stored in a Hashmap in DutyMonth.
+DutyMonth has a Hashmap<Person, List<Integer>> blockedDays object to allow it to store the blockedDays of every person for the upcoming month.
+
+
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
