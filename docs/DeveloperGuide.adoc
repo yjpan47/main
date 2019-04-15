@@ -968,14 +968,25 @@ Use case resumes at step 2.
 
 *MSS*
 
-1.
-2.
-3.
-4.
+1. PersonnelDatabase already has confirmed duty schedule
+2. User requests to list persons
+3. PersonnelDatabase shows a list of persons
+2. User requests to delete a specific person in the list
+3. PersonnelDatabase deletes the person
+4. PersonnelDatabase deletes the confirmed duty schedule
+5. PersonnelDatabase asks the user to schedule the duties again
 +
 Use case ends.
 
 *Extensions*
+
+[none]
+* 2a. The given index is invalid.
++
+[none]
+** 2a1. PersonnelDatabase shows an error message.
++
+Use case resumes at step 3.
 
 [discrete]
 === Use case 3 (Admin): Add person
@@ -1010,28 +1021,49 @@ Use case ends.
 
 *MSS*
 
-1.
-2.
-3.
-4.
+1. User requests to see duties planned for the current month.
+2. PersonnelDatabase shows the calendar of the current month with all the duties.
+3. User requests to see duties planned for the next month.
+4. PersonnelDatabase shows the calendar of the next month with all the duties.
 +
 Use case ends.
 
 *Extensions*
+
+[none]
+* 2a. There are no duties planned for the current month.
++
+[none]
+** 2a1. PersonnelDatabase still shows the calendar of the current month, but without the duties.
++
+Use case resumes at step 3.
 
 [discrete]
 === Use case 6 (Admin): See duties assigned to specific user
 
 *MSS*
 
-1.
-2.
-3.
-4.
+1. User requests to see all the duties assigned to a specific user.
+2. PersonnelDatabase shows all the duties assigned to the specific user
 +
 Use case ends.
 
 *Extensions*
+
+[none]
+* 2a. The user does not exist.
++
+[none]
+** 2a1. PersonnelDatabase shows an error message indicating that no such user is found.
++
+Use case ends.
+
+* 2b. The user does not have any duties.
++
+[none]
+** 2b1. PersonnelDatabase shows an error message indicating that the user is not assigned to any duties.
++
+Use case ends.
 
 [discrete]
 === Use case 7 (Admin): Schedule duties
@@ -1080,14 +1112,27 @@ Use case ends.
 
 *MSS*
 
-1.
-2.
-3.
-4.
+1. User requests to see his own duties.
+2. PersonnelDatabase shows all the duties the user is assigned to.
 +
 Use case ends.
 
 *Extensions*
+
+[none]
+* 2a. The user is the master admin.
++
+[none]
+** 2a1. PersonnelDatabase reminds the user that the master admin cannot be assigned to duties.
++
+Use case ends.
+
+* 2b. The user is not assigned to any duties.
++
+[none]
+** 2b1. PersonnelDatabase shows an error message indicating that the user is not assigned to any duties.
++
+Use case ends
 
 [discrete]
 === Use case 11 (General user): Block some dates for duties next month
