@@ -451,7 +451,7 @@ The diagram above shows the high-level structure of the duty components.
 
 `DutySettings` class is an attribute under `UserPrefs`. It stores information regarding the manpower needed and duty points to be rewarded for each duty based on the day of the week.
 
-It is accessed when duties are generated to ensure the appropriate attributes (capacity and points) given to each duty.  
+It is accessed when duties are generated to ensure the appropriate attributes (capacity and points) given to each duty.
 
 ==== Schedule Command
 
