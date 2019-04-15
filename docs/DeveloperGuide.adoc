@@ -424,10 +424,9 @@ Certain properties of the application can be controlled (e.g user prefs file loc
 image::DutyPackage.png[width:"600"]
 
 The diagram above shows the high-level structure of the duty components.
-// end::dutyPackageDiagram[]
+// end::dutyDiagram[]
 
 // tag::dutyCalendar[]
-
 ==== Duty Calendar
 
 `DutyCalendar` is an attribute of `PersonalDatabase`. It comprises of three `DutyMonth` objects -- namely `currentMonth`, `nextMonth` and `dummyNextMonth` and a `DutyStorage` object -- `dutyStorage`.
@@ -448,7 +447,7 @@ The diagram above shows the high-level structure of the duty components.
 * `DutyCalendar#confirm()` -- confirms the latest duty schedule by allowing `nextMonth` to point to the current instantiation of `dummyNextMonth`.
 // end::dutyCalendar[]
 
-// tag::dutymonth[]
+// tag::dutyMonth[]
 ==== Duty Month
 
 `DutyMonth` class represents all duty-related information for a particular month. It contains the following key information:
@@ -465,7 +464,7 @@ The diagram above shows the high-level structure of the duty components.
 * `DutyMonth#removeBlockedDays(person)` -- remove all blocked days for a particular person, indicating that the person can now be assigned duty on any day of the month.
 * `DutyMonth#schedule(personList, dutySettings, dutyStorage)` -- invokes the scheduling alogorithm. Generate all duties for the particular month and assign person from personList to the duties.
 * `DutyMonth#confirm()` -- sets the state of the `DutyMonth` to confirmed. Duty allocation is finalized.
-// end::dutymonth[]
+// end::dutyMonth[]
 
 // tag::duty[]
 ==== Duty
