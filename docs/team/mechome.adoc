@@ -13,8 +13,8 @@ MINDEF Duty Planner is a platform to assist military units in the SAF in the ass
 
 == Summary of contributions
 
-* *Major enhancement*: Added *the ability to request swapping of duties (using the 'swap' command), respond to swap requests (using the 'acceptswap' command) and approve or reject swap requests.*
-** What it does: allows a user who is a particular person in the personnel database to request for a swap of his duty with another person's duty. Both duties have to be in the current month or the next month.
+* *Major enhancement*: Added the ability to request swapping of duties (using the 'swap' command), respond to swap requests (using the 'acceptSwap' command), view paired swaps (using the 'viewSwaps' command) and approve or reject swap requests (using the 'approveSwap' or 'rejectSwap' command).
+** What it does: allows a user who is a particular person in the personnel database to request for a swap of his duty with another person's duty. Both duties have to be in the next month.
 ** Justification: This feature is very useful for a serviceman who is suddenly unavailable to perform guard duty due to ad hoc reasons. He can broadcast his swap request onto the app in the large panel on the bottom right and other servicemen can view his request and respond if they are willing and able to swap with him. After that, an admin user will approve or reject the swap.
 ** Highlights: This functionality is very convenient for the users because it requires no verbal communication at all and the process is completely streamlined to be performed on the app. Physical or verbal communication is only necessary if there are disputes. This enhancement involves changes in logic (commands), UI (browser panel), storage (storing of requests) and model (structure of requests). Implementing this feature required understanding how and when saving to a json file happens so as to trigger the save event when needed. It was also difficult to convert the browser panel from an object that displays web pages to a text object, having no prior experience in GUI.
 ** Credits: _Valavan for the idea of swap requests and my team for helping me to develop the idea_
@@ -43,9 +43,16 @@ MINDEF Duty Planner is a platform to assist military units in the SAF in the ass
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
+include::../UserGuide.adoc[tag=swap]
+
+include::../UserGuide.adoc[tag=adminswap]
+
 == Contributions to the Developer Guide
 
 |===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.
+|Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.
 |===
+
+include::../DeveloperGuide.adoc[tag=swap]
+
 
