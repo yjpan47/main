@@ -390,7 +390,6 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: `config.json`).
 
 // tag::dutyDiagram[]
-
 === Duty Package
 
 ==== Implementation
@@ -1137,6 +1136,7 @@ Use case resumes at step 2.
 // end::usecase1[]
 
 // tag::usecase2[]
+
 [discrete]
 === Use case 2 (Admin): Delete person after schedule for next month is confirmed
 
@@ -1161,6 +1161,7 @@ Use case ends.
 ** 2a1. PersonnelDatabase shows an error message.
 +
 Use case resumes at step 3.
+
 // end::usecase2[]
 
 [discrete]
@@ -1190,6 +1191,7 @@ Use case ends.
 Use case ends.
 
 *Extensions*
+
 // tag::usecase5[]
 
 [discrete]
