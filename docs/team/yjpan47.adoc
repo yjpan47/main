@@ -60,7 +60,7 @@ The Duty Planner is modified and upgraded from SE-EDU Address Book 4.
 * Documentation:
 ** Major updates to the User Guide: +
 https://github.com/yjpan47/main/blob/master/docs/UserGuide.adoc
-** Updated developer guide to include explanation of the schedule algorithm: +
+** Updated Developer Guide to include Duty Package: +
 https://github.com/yjpan47/main/blob/master/docs/DeveloperGuide.adoc
 
 
