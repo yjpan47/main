@@ -18,7 +18,7 @@ public class ConfirmScheduleCommand extends Command {
     public static final String COMMAND_WORD = "confirm";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + "Confirms previously generated schedule\n";
+            + "Confirms the schedule that was previously generated\n";
 
     public static final String SCHEDULE_SUCCESS = "Schedule for %s %s confirmed!\n"
             + "Open calendar and type <viewNext> to view next month's schedule!\n"

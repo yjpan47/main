@@ -16,6 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class PenalizeCommandParser implements Parser<PenalizeCommand> {
 
+    private static final int MAX_PENALIZE_POINTS = 100;
     private static final Prefix PREFIX_INDEXES = new Prefix("i/");
     private static final Prefix PREFIX_POINTS = new Prefix("p/");
 
@@ -30,12 +31,11 @@ public class PenalizeCommandParser implements Parser<PenalizeCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PenalizeCommand.MESSAGE_USAGE));
         }
 
-        int points = Integer.parseInt(argMultimap.getValue(PREFIX_POINTS).get());
-        if (points <= 0) {
-            throw new InvalidParameterException();
-        }
-
         try {
+            int points = Integer.parseInt(argMultimap.getValue(PREFIX_POINTS).get());
+            if (points <= 0 || points > MAX_PENALIZE_POINTS) {
+                throw new InvalidParameterException();
+            }
             HashSet<Index> indexes = new HashSet<>();
             for (String s : argMultimap.getValue(PREFIX_INDEXES).get().split(" ")) {
                 indexes.add(ParserUtil.parseIndex(s));

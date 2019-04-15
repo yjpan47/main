@@ -184,6 +184,11 @@ public class ModelManager implements Model {
     public void addSwapRequest(String nric, LocalDate allocatedDate, LocalDate requestedDate) {
         versionedPersonnelDatabase.addRequest(new Request(findPerson(nric), allocatedDate, requestedDate));
     }
+    @Override
+    public boolean checkSwapRequestExists(String nric, LocalDate allocatedDate, LocalDate requestedDate) {
+        return versionedPersonnelDatabase.checkRequestExists(new Request(findPerson(nric),
+                allocatedDate, requestedDate));
+    }
 
     @Override
     public void deleteRequestsWithPerson(Person personToDelete) {

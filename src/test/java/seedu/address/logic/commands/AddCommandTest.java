@@ -289,6 +289,12 @@ public class AddCommandTest {
         public void deleteRequestsWithPerson(Person person) {
             throw new AssertionError(CALLED_ERROR);
         }
+
+        @Override
+        public boolean checkSwapRequestExists(String nric, LocalDate allocatedDate, LocalDate requestedDate) {
+            throw new AssertionError(CALLED_ERROR);
+        }
+
     }
 
     /**

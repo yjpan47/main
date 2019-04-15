@@ -30,7 +30,7 @@
         </children>
     </VBox>
     <ScrollPane fx:id="scrollPane" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" prefHeight="300" minWidth="210.0">
-        <GridPane gridLinesVisible="true" fx:id="gridPaneBottom" prefHeight="300" prefWidth="1000" BorderPane.alignment="CENTER" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+        <GridPane gridLinesVisible="true" fx:id="gridPaneBottom" prefHeight="200" prefWidth="1000" BorderPane.alignment="CENTER" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
             <columnConstraints>
                 <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" />
                 <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" />
