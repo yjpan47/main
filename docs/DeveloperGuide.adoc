@@ -389,7 +389,7 @@ Certain properties of the application can be controlled (e.g user prefs file loc
 
 === Implementation
 
-The diagram above shows the high-level structure of the duty components. 
+The diagram above shows the high-level structure of the duty components.
 
 ==== Duty Calendar
 
@@ -397,18 +397,18 @@ The diagram above shows the high-level structure of the duty components.
 
 * `currentMonth` represents the current month.
 * `nextMonth` represents the upcoming month.
-* `dummyNextMonth` is a dummy `DutyMonth` object that mirrors the contents of `nextMonth`. 
+* `dummyNextMonth` is a dummy `DutyMonth` object that mirrors the contents of `nextMonth`.
 ** It is instantiated each time `schedule` command is called. The scheduling alogorithm is invoked to produce a viable duty schedule in `dummyNextMonth`.
-** When `confirm` command is called, `nextMonth` will point to the `dummyNextMonth`. 
+** When `confirm` command is called, `nextMonth` will point to the `dummyNextMonth`.
 * `dutyStorage` stores the accumulated duty points and duty records of each person.
 
 `DutyCalendar` implements the following operations:
 
-* `DutyCalendar#rollover()` -- replaces `currentMonth` with `nextMonth` and a new `nextMonth` object will be instantiated. `rollover()` will be called automatically when the application begins and the `currentMonth` object no longer correspond to the actual current month in real time. 
+* `DutyCalendar#rollover()` -- replaces `currentMonth` with `nextMonth` and a new `nextMonth` object will be instantiated. `rollover()` will be called automatically when the application begins and the `currentMonth` object no longer correspond to the actual current month in real time.
 
-* `DutyCalendar#scheduleDutyForNextMonth()` -- instantiates `dummyNextMonth` and runs the scheduling algorithm on it. 
+* `DutyCalendar#scheduleDutyForNextMonth()` -- instantiates `dummyNextMonth` and runs the scheduling algorithm on it.
 
-* `DutyCalendar#confirm()` -- confirms the latest duty schedule by allowing `nextMonth` to point to the current instantiation of `dummyNextMonth`. 
+* `DutyCalendar#confirm()` -- confirms the latest duty schedule by allowing `nextMonth` to point to the current instantiation of `dummyNextMonth`.
 
 ==== Duty Month
 
@@ -417,8 +417,8 @@ The diagram above shows the high-level structure of the duty components.
 * The blocked days of every person for duties in the month.
 * A list of scheduled duties implemented as a `Duty` object list
 ** At the construction of the `DutyMonth`, the list is empty.
-** When the `schedule` method is called, `Duty` objects are be instantiated and appended to the list. The list will contain the same number of `Duty` objects as the number of days in the month. 
-* A boolean `confirm` state -- denoting whether the duty allocation for the month is confimed. 
+** When the `schedule` method is called, `Duty` objects are be instantiated and appended to the list. The list will contain the same number of `Duty` objects as the number of days in the month.
+* A boolean `confirm` state -- denoting whether the duty allocation for the month is confimed.
 
 `DutyMonth` class contains the following key operations:
 
@@ -431,7 +431,7 @@ The diagram above shows the high-level structure of the duty components.
 
 `Duty` class represents a duty for a day. It contains the following information:
 
-* List of `Person` allocated to the duty. 
+* List of `Person` allocated to the duty.
 * Capacity -- number of persons needed for the duty.
 * Points -- number of  points to be rewarded to each person assigned to the duty.
 
@@ -446,9 +446,9 @@ The diagram above shows the high-level structure of the duty components.
 
 ==== Duty Settings
 
-`DutySettings` class is an attribute under `UserPrefs`. It stores information regarding the manpower needed and duty points to be rewarded for each duty based on the day of the week. 
+`DutySettings` class is an attribute under `UserPrefs`. It stores information regarding the manpower needed and duty points to be rewarded for each duty based on the day of the week.
 
-It is accessed when duties are generated to ensure the appropriate attributes (capacity and points) given to each duty.  
+It is accessed when duties are generated to ensure the appropriate attributes (capacity and points) given to each duty.
 
 *Scheduling Algorithm*
 
