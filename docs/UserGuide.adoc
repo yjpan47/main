@@ -154,6 +154,7 @@ Format: `history`
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
 
+// tag::undo[]
 ==== Undoing previous command : `undo`
 
 Restores the address book to the state before the previous _undoable_ command was executed. +
@@ -184,7 +185,8 @@ The `undo` command fails as there are no undoable commands executed previously.
 * `delete 1` +
 `clear` +
 `undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
+`undo` (reverses the `delete 1` command)
+// end::undo[]
 
 ==== Redoing the previously undone command : `redo`
 
@@ -488,14 +490,16 @@ Once a satisfactory duty schedule is generated, the administrator can go ahead t
 Calling `schedule` after next month's duties have already been confirm will only display the confirmed duty schedule.
 // end::scheduleAdmin[]
 
-// tag::confirmAdmin[]
+// tag::confirmAdmin1[]
 ==== Confirm a schedule : `confirm`
 Confirms the duty schedule that was previously generated (from the `schedule` command) for the upcoming month.
 
 Format: `confirm`
+// end::confirmAdmin1[]
 
+// tag::confirmAdmin2[]
 A confirmed duty schedule can be viewed on the calendar (using the `viewNext` command). Duty points will be updated accordingly to reward those who were assigned duties.
-// end::confirmAdmin[]
+// end::confirmAdmin2[]
 
 ==== View Swaps Command : `viewSwaps`
 Used to view all the swap requests that have a requester-accepter pair. The list will be shown in the results display. The Admin User can then accept or reject the swap using the AcceptSwap or RejectSwap command.
