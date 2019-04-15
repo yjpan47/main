@@ -389,7 +389,7 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: `config.json`).
 
-// tag::dutyPackage[]
+// tag::dutyPackageDiagram[]
 
 === Duty Package
 
@@ -398,8 +398,10 @@ Certain properties of the application can be controlled (e.g user prefs file loc
 image::DutyPackage.png[width:"600"]
 
 The diagram above shows the high-level structure of the duty components.
+// end::dutyPackageDiagram[]
 
 // tag::dutyCalendar[]
+
 ==== Duty Calendar
 
 `DutyCalendar` is an attribute of `PersonalDatabase`. It comprises of three `DutyMonth` objects -- namely `currentMonth`, `nextMonth` and `dummyNextMonth` and a `DutyStorage` object -- `dutyStorage`.
@@ -420,6 +422,7 @@ The diagram above shows the high-level structure of the duty components.
 * `DutyCalendar#confirm()` -- confirms the latest duty schedule by allowing `nextMonth` to point to the current instantiation of `dummyNextMonth`.
 // end::dutyCalendar[]
 
+// tag::dutyPackage[]
 ==== Duty Month
 
 `DutyMonth` class represents all duty-related information for a particular month. It contains the following key information:
@@ -1135,6 +1138,7 @@ Use case resumes at step 2.
 // end::usecase1[]
 
 // tag::usecase2[]
+
 [discrete]
 === Use case 2 (Admin): Delete person after schedule for next month is confirmed
 
@@ -1159,6 +1163,7 @@ Use case ends.
 ** 2a1. PersonnelDatabase shows an error message.
 +
 Use case resumes at step 3.
+
 // end::usecase2[]
 
 [discrete]
@@ -1188,6 +1193,7 @@ Use case ends.
 Use case ends.
 
 *Extensions*
+
 // tag::usecase5[]
 
 [discrete]
