@@ -113,6 +113,16 @@ include::../DeveloperGuide.adoc[tag=dutyDiagram]
 
 include::../DeveloperGuide.adoc[tag=dutyPackage]
 
+include::../DeveloperGuide.adoc[tag=scheduleManualTest]
+
+include::../DeveloperGuide.adoc[tag=confirmScheduleManualTest]
+
+include::../DeveloperGuide.adoc[tag=rewardManualTest]
+
+include::../DeveloperGuide.adoc[tag=penalizeManualTest]
+
+include::../DeveloperGuide.adoc[tag=settingsManualTest]
+
 == PROJECT: PowerPointLabs
 
 ---

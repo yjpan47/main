@@ -385,7 +385,7 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: `config.json`).
 
-// tag::dutyPackage[]
+// tag::dutyDiagram[]
 === Duty Package
 
 ==== Implementation
@@ -1338,6 +1338,7 @@ _{ more test cases ... }_
 
 _{ more test cases ... }_
 
+// tag::scheduleManualTest[]
 === Schedule duties for next month
 
 . Schedule duties for the next month.
@@ -1346,7 +1347,9 @@ _{ more test cases ... }_
 .. Test case: `schedule` +
    Expected: The schedule for the next month should be generated. +
    Scroll down to see the duty roster and points to be awarded to the persons.
+// end::scheduleManualTest[]
 
+// tag::confirmScheduleManualTest[]
 === Confirm schedule for next month
 
 . Confirm a schedule for next month.
@@ -1356,7 +1359,9 @@ _{ more test cases ... }_
    Expected: Schedule has been successfully confirmed. +
    Scroll down to see the duty roster and total points accumulated for the persons. +
    Call `viewNext` to see the confirmed schedule on the calendar.
+// end::confirmScheduleManualTest[]
 
+// tag::rewardManualTest[]
 === Reward points to persons
 
 . Rewards points to a person or a list of persons
@@ -1366,7 +1371,9 @@ _{ more test cases ... }_
    Expected: 1st person on the contact list has his duty points increase by 10. Call `points` again to verify. +
 .. Test case: `reward i/1 2 4 p/30` +
    Expected: 1st, 3nd and 4th persons on the contact list have their duty points increase by 30 each. Call `points` again to verify. +
+// end::rewardManualTest[]
 
+// tag::penalizeManualTest[]
 === Penalize points to persons
 
 . Penalize points to a person or a list of persons
@@ -1376,7 +1383,9 @@ _{ more test cases ... }_
    Expected: 1st person on the contact list has his duty points decrease by 15. Call `points` again to verify. +
 .. Test case: `penalize i/2 3 p/5` +
    Expected: 2nd and 3rd persons on the contact list have their duty points decrease by 5 each. Call `points` again to verify. +
+// end::penalizeManualTest[]
 
+// tag::settingsManualTest[]
 === Change duty settings
 
 . Change duty settings
@@ -1386,5 +1395,6 @@ _{ more test cases ... }_
    Expected: Duty settings get displayed, indicating the manpower needed and points rewarded for duties based on which day of the week the duty falls on. These numbers should tally with the observations from calling `schedule` previously. +
 .. Test case: `settings d/sun p/10 m/5` +
    Expected: Sunday duties now require 5 persons and worth 10 points each. Call `schedule` again and observe the duty roster result. The new duty roster should provide information that tallies with the changed duty settings +
+// end::settingsManualTest[]
 
 _{ more test cases ... }_
