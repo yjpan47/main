@@ -238,6 +238,7 @@ Edits the phone number and rank of the user to be `84523546` and `CPL` respectiv
 Edits the company of the user to be `Hotel`, clears all existing tags, and changes password to 'pass'.
 // end::editGeneral[]
 
+// tag::swap[]
 ==== Make an open swap request : `swap`
 The user can request for a duty swap with another user for the next month by keying in his current duty date and his requested date. This request will appear on the browser panel on the bottom right of the app for all to see. Another user can use the acceptSwap command to agree to the swap request. This is then subject to the approval of an admin user (i.e. commander). +
 
@@ -269,6 +270,7 @@ Example:
 
 * 'acceptSwap 1'
 
+// end::swap[]
 ==== Block dates : `block` +
 The user can block dates and set which dates they are unavailable to duties for the upcoming month. A user can block up to 15 days. +
 Format: `block DATE DATE DATE ...`
@@ -497,6 +499,7 @@ Format: `confirm`
 A confirmed duty schedule can be viewed on the calendar (using the `viewNext` command). Duty points will be updated accordingly to reward those who were assigned duties.
 // end::confirmAdmin[]
 
+// tag::adminswap[]
 ==== View Swaps Command : `viewSwaps`
 Used to view all the swap requests that have a requester-accepter pair. The list will be shown in the results display. The Admin User can then accept or reject the swap using the AcceptSwap or RejectSwap command.
 
@@ -528,8 +531,9 @@ Format : `rejectSwap INDEX`
 * The reject swap request will still work even if the list is not showing at the results display. The index will refer to the request that would be in the list if the list were displayed (The order of the list does not change)
 ****
 
-Example:
-* 'rejectSwap 1'
+Example:'rejectSwap 1'
+
+// end::adminswap[]
 
 == FAQ
 
@@ -566,12 +570,12 @@ Your password is also your NRIC by default, unless you or your administrator cha
 * *Redo command* : `redo` +
 * *Exit* : `exit` +
 
-=== General accounts
+=== General / non-master admin accounts
 * *Edit own info* : `edit [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONE] [t/TAG] [pw/PASSWORD]` +
 * *Block dates* : `block` +
 * *View Blocked Dates* : `viewblock` +
 * *Remove Blocked Dates* : `removeblock` +
-* *Accept Swaps* : `acceptSwap i/INDEX`
+* *Accept Swaps* : `acceptSwap INDEX`
 
 === Admin accounts
 * *Add a user* : `add nr/NRIC c/COMPANY s/SECTION r/RANK n/NAME p/PHONE [t/TAG]` +
@@ -582,5 +586,5 @@ Your password is also your NRIC by default, unless you or your administrator cha
 * *Clear entries* : `clear` +
 * *Duty Settings* : `settings` or `settings d/DAY m/MANPOWER p/POINTS`
 * *View Swaps* : `viewSwaps`
-* *Approve Swaps* : `ApproveSwap i/INDEX`
-* *Reject Swaps* : `rejectSwap i/INDEX`
+* *Approve Swaps* : `ApproveSwap INDEX`
+* *Reject Swaps* : `rejectSwap INDEX`
