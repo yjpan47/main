@@ -271,12 +271,12 @@ public class DutyMonth {
 
         for (Person person : personsThisMonth) {
             int pointsInThePast = dutyStorage.getPoints(person);
-            int pointsThisMonth = this.getScheduledDuties().stream()
+            int pointsGained = this.getScheduledDuties().stream()
                     .filter(duty -> duty.getPersons().contains(person))
                     .mapToInt(Duty::getPoints)
                     .sum();
             sb.append(String.format("%s | Points Accumulated: %d | Points Awarded: %d\n",
-                    person, pointsInThePast, pointsThisMonth));
+                    person, pointsInThePast, pointsGained));
         }
         return sb.toString();
     }
