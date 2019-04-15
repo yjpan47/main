@@ -353,6 +353,7 @@ Format: `delete INDEX`
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* The program will close if you delete yourself from the duty planner.
 ****
 
 [WARNING]
@@ -387,7 +388,7 @@ Format: `edit INDEX [nr/NRIC] [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONE
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person's tags by typing `t/` without specifying any tags after it.
 * For account type field specified by `u/`, A corresponds to an Admin account, G corresponds to a general account.
-* The program will exit if you delete your own NRIC or change your usertype to a general account.
+* The program will exit if you edit your own NRIC or change your usertype to a general account.
 * If you edit another user's NRIC, the user's password does not automatically change to that NRIC (since the user might choose to have his own password). If you really do want to change the password to the new NRIC, please specify it in the pw/ field.
 ****
 
