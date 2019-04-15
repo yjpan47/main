@@ -31,7 +31,7 @@ Duty Planner is a desktop address book application used foradding MINDEF personn
 ** Community:
 *** Helped group 15-3 in their UI component:
 https://github.com/CS2103-AY1819S2-W15-3/main/blob/master/src/main/resources/view/AnalyticsChart.fxml[Link]
-
+*** Some members of our team did cross-testing (not including PE and mock PE) with another team (W16-1). Reported bugs for the other team: [https://github.com/CS2103-AY1819S2-W16-1/main/issues/223[#223]], [https://github.com/CS2103-AY1819S2-W16-1/main/issues/224[#224]]
 
 
 == Contributions to the User Guide
