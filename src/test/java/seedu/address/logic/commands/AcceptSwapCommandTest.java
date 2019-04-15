@@ -12,6 +12,7 @@ import org.junit.Test;
 
 //import seedu.address.commons.core.index.Index;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -46,7 +47,7 @@ public class AcceptSwapCommandTest {
             if (!duty.getPersons().contains(ALICE)) {
                 requestedDate = LocalDate.of(nextMonthYear, nextMonthIndex, duty.getDayIndex());
                 for (Person person : duty.getPersons()) {
-                    if (!duties.get(allocatedDayIndex - 1).contains(person)) {
+                    if (!duties.get(allocatedDayIndex - 1).getPersons().contains(person)) {
                         accepter = person;
                         break;
                     }
@@ -57,7 +58,7 @@ public class AcceptSwapCommandTest {
         CommandHistory ch = new CommandHistory();
         assertCommandSuccessGeneral(new SwapCommand(allocatedDate, requestedDate, ALICE_NRIC), model,
                 ch, new CommandResult(SwapCommand.MESSAGE_SUCCESS), model);
-        //assertCommandSuccessGeneral(new AcceptSwapCommand(accepter.getNric().toString(), Index.fromOneBased(1)),
-        // model, ch, new CommandResult(AcceptSwapCommand.MESSAGE_SUCCESS), model);
+        assertCommandSuccessGeneral(new AcceptSwapCommand(accepter.getNric().toString(), Index.fromOneBased(1)),
+                model, ch, new CommandResult(AcceptSwapCommand.MESSAGE_SUCCESS), model);
     }
 }

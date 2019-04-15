@@ -39,8 +39,8 @@ can be pressed to invoke a described function.
 .  Ensure you have Java version `9` or later installed in your Computer.
 .  Log in into the system as an admin or a general user. NRIC corresponds to the username. Both the NRIC and the password are case-sensitive.
 
-* For admin account: NRIC is Admin, password is Admin
-* For general account: NRIC is the user's NRIC, password is NRIC by default which can be changed.
+* For master admin account: username is Admin, password is Admin
+* For other admin or general account: username is the user's NRIC, password is NRIC by default which can be changed.
 
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -97,8 +97,8 @@ Lists out a list of commands & instructions +
 Format: `help`
 
 
-==== List all the users: `list`
-Lists out all users with their details. +
+==== List all the personnel: `list`
+Lists out all personnel in the database with their details. +
 Format: `list`
 
 // tag::viewMonths[]
@@ -116,7 +116,7 @@ The user can see their details about their own duties assigned to them and their
 Format: `view`
 
 ==== View duties assigned to other users : `view`
-The user can see their details about their own duties assigned to other users. +
+The user can see the details of duties assigned to another user by keying in their NRIC. +
 Format: `view NRIC`
 
 Example:
@@ -216,12 +216,12 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Exits the program. User will be logged out automatically. +
 Format: `exit`
 
-=== General User Features
+=== General / Non-master Admin User Features
 
 // tag::editGeneral[]
 ==== Edit own details : `edit`
 Edits user's own details. Can edit one or more fields. +
-Format: `edit INDEX [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONE] [t/TAG] [pw/PASSWORD]`
+Format: `edit [c/COMPANY] [s/SECTION] [r/RANK] [n/NAME] [p/PHONE] [t/TAG] [pw/PASSWORD]`
 
 ****
 * At least one of the optional fields must be provided.
@@ -238,19 +238,36 @@ Edits the phone number and rank of the user to be `84523546` and `CPL` respectiv
 Edits the company of the user to be `Hotel`, clears all existing tags, and changes password to 'pass'.
 // end::editGeneral[]
 
-==== Make a swap request with another user : `swap`
-The user can request for a duty swap with another user. This will be subject to the agreement of the other user and approval of the admin (i.e. commander). +
-The other user and admin will be notified upon login and they will be prompted to accept or decline the request. +
-Format: `swap ad/CURRENTDUTYDATE rd/DESIREDDUTYDATE
+==== Make an open swap request : `swap`
+The user can request for a duty swap with another user for the next month by keying in his current duty date and his requested date. This request will appear on the browser panel on the bottom right of the app for all to see. Another user can use the acceptSwap command to agree to the swap request. This is then subject to the approval of an admin user (i.e. commander). +
+
+Format: `swap ad/ALLOCATEDDUTYDATE (DDMMYY) rd/REQUESTEDDUTYDATE (DDMMYY)
+
+****
+* The command is only valid if the user has a duty allocated on the ad/ date and does not have a duty on the rd/ date. Otherwise, an error message will be shown.
+* At the start of a new month, all existing swaps, open or paired, will be deleted.
+* The user must refrain from requesting for two swaps for a duty on the same day. The code to restrict this behaviour will be implemented in v2.0.
+****
 
 Example:
 
-* `swap ad/14022019 rd/21022019 t/Please help a bro out!`
+* `swap ad/140219 rd/210219`
 
-==== Approve Swap Command : `acceptSwap`
-The General User can use this command to accept a certain swap at the given index on the open Swap Requests list.
+==== Accept Swap Command : `acceptSwap`
+The user can use this command to respond to and accept a certain swap at the given index on the open swap request list in the browser panel.
 
-Format : `approveSwap i/INDEX`
+Format : `acceptSwap INDEX`
+
+****
+* The command is only valid if the user has a duty allocated on the rd/ date and does not have a duty on the ad/ date. Otherwise, an error message will be shown.
+* A non-positive index or an index which exceeds the list size will result in an error message.
+* At the start of a new month, all existing swaps, open or paired, will be deleted.
+* The user must refrain from accepting two swaps for a duty on the same day. The code to restrict this behaviour will be implemented in v2.0.
+****
+
+Example:
+
+* 'acceptSwap 1'
 
 ==== Block dates : `block` +
 The user can block dates and set which dates they are unavailable to duties for the upcoming month. A user can block up to 15 days. +
@@ -296,12 +313,13 @@ A specific date cannot be removed from the list of blocked dates. If a user wish
 
 // tag::add[]
 ==== Adding a user : `add`
-Add a user to the system with the corresponding NRIC, password, company, section, rank, name and contact number. +
+Add a user to the system with the corresponding NRIC, company, section, rank, name and contact number. +
 Format: `add nr/NRIC c/COMPANY s/SECTION r/RANK n/NAME p/PHONE [t/TAG]`
 
 ****
 * By default, the user will be a General type account, and the password will be the NRIC.
 * Password and account type can be changed using the `edit` command.
+* The entries can be in any order, except for tag, which must be at the end.
 * Tag always has to be the last field. eg. `add nr/NRIC c/COMPANY s/SECTION r/RANK n/NAME [t/TAG] p/PHONE` will not work.
 ****
 
@@ -479,20 +497,39 @@ Format: `confirm`
 A confirmed duty schedule can be viewed on the calendar (using the `viewNext` command). Duty points will be updated accordingly to reward those who were assigned duties.
 // end::confirmAdmin[]
 
-==== View Swap Command : `viewSwaps`
-Used to view all the swap requests that have been submitted by personnel. The Admin User can then accept or reject the swap
+==== View Swaps Command : `viewSwaps`
+Used to view all the swap requests that have a requester-accepter pair. The list will be shown in the results display. The Admin User can then accept or reject the swap using the AcceptSwap or RejectSwap command.
 
 Format : `viewSwaps`
 
 ==== Approve Swap Command : `approveSwap`
-The Admin User can use this command to approve a certain swap at the given index on the requested Swap list.
+The Admin User can use this command to approve a certain swap at the given index in the list of paired swap requests in the results display after a viewSwaps command. This will edit the duties in the schedule as well as the points for each user. Thereafter, the request will be deleted.
 
-Format : `approveSwap i/INDEX`
+Format : `approveSwap INDEX`
+
+****
+* A non-positive index or an index which exceeds the list size will result in an error message.
+* At the start of a new month, all existing swaps, open or paired, will be deleted.
+* The users involved in the swap request must refrain from making or accepting two swaps for a duty on the same day. The code to restrict this behaviour will be implemented in v2.0.
+* The approve swap request will still work even if the list is not showing at the results display. The index will refer to the request that would be in the list if the list were displayed (The order of the list does not change)
+****
+
+Example: 'approveSwap 1' +
 
 ==== Reject Swap Command : `rejectSwap`
-The Admin User can use this command to reject a certain swap at the given index on the swap requests list.
+The Admin User can use this command to reject a certain swap at the given index in the list of paired swap requests in the results display after a viewSwaps command. Thereafter, the request will be deleted.
 
-Format : `rejectSwap i/INDEX`
+Format : `rejectSwap INDEX`
+
+****
+* A non-positive index or an index which exceeds the list size will result in an error message.
+* At the start of a new month, all existing swaps, open or paired, will be deleted.
+* The users involved in the swap request must refrain from making or accepting two swaps for a duty on the same day. The code to restrict this behaviour will be implemented in v2.0.
+* The reject swap request will still work even if the list is not showing at the results display. The index will refer to the request that would be in the list if the list were displayed (The order of the list does not change)
+****
+
+Example:
+* 'rejectSwap 1'
 
 == FAQ
 
@@ -523,7 +560,7 @@ Your password is also your NRIC by default, unless you or your administrator cha
 * *Viewing other's duties* : `view NRIC` +
 * *Make swap request* : `swap` +
 * *List all the users* : `list` +
-* *Locate person by name* : `find` +
+* *Locate person by name* : `find KEYWORD [MORE_KEYWORDS]` +
 * *List entered commands* : `history` +
 * *Undo command* : `undo` +
 * *Redo command* : `redo` +
