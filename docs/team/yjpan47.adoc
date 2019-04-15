@@ -3,7 +3,7 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: AddressBook - Level 4
+== PROJECT: Duty Planner
 
 ---
 
@@ -22,22 +22,35 @@ The Duty Planner is modified and upgraded from SE-EDU Address Book 4.
 *** `DutySettings` : Contains information about the manpower needed and points assigned to duties based the day of the week. Enable modification to the the manpower needed and points assigned to each duty based on the day of the week.
 *** `DutyStorage` : Accumulates and stores the duty points and duty records of all the persons.
 ** Justification: The duty package provides the backend support for all duty-related features and commands.
-** Highlights: The package contain functions assessed by many commands (i.e. BlockDateCommmand, ViewCommand, ScheduleCommand, DutySettingCommand).
-** Credits: {Fellow teammate Yoon Ki Hyun for working together on the DutyMonth and Duty}
+** Highlights: The package contain functions assessed by many commands (i.e. BlockDateCommmand, ScheduleCommand, DutySettingsCommand, ViewCommand, PointsCommand, RewardCommand, PenalizeCommand).
+** Credits: {Teammate Yoon Ki Hyun for working together on the DutyMonth and Duty}
 
-* *Major enhancement*: Schedule and confirm command
+* *Major enhancement*: `ScheduleCommand` and `ConfirmScheduleCommand`
 ** What it does: The schedule command that invokes the schedule algorithm to generate a viable duty allocation for the upcoming month. The confirm command finalizes the schedule and updates the existing duty points of each person.
-** Justification: Enable duties to be scheduled to persons.
-** Highlight: Need to ensure that the command references the correct dutyMonth and duty points of each person do not get updated until confirm command is called.
+** Justification: Enable duties to be created and scheduled.
+** Highlights: The main feature of the application.
 
-* *Major enhancement*: Settings command
-** What it does: Enable the administrator to adjust the desired manpower for duties based on the day of the week. Eanble the administrator to adjust the points to be awarded for doing duties based on the daty of the week.
-** Justification: Allows the user to have flexibility to change the duty allocation system.
-** Highlight: Need to ensure that the scheduling algorithm is compatible with adjustable duty points and duty capacities.
+* *Major enhancement*: `SettingsCommand`
+** What it does: Enable the administrator to adjust the desired manpower for duties based on the day of the week. Enable the administrator to adjust the points to be awarded for doing duties based on the duty of the week.
+** Justification: Allows the administrator to have flexibility to change the duty allocation system.
+** Highlights: Need to ensure that the scheduling algorithm is compatible with adjustable duty points and duty capacities.
 
-* *Minor enhancement*: DateUtil common
+* *Major enhancement*: `PointsCommand`
+** What it does: Enable the administrator to view duty points and duty records of all persons.
+** Justification: Allows more duty-related information to be viewed.
+
+* *Major enhancement*: `RewardCommand` and `PenalizeCommand`
+** What it does: Enable the administrator to reward and penalize points from a person or a list of persons.
+** Justification: Allows the administrator the autonomy to manually update duty points.
+** Highlight: Enabled us to better test the effectiveness of the scheduling algorithm in obscure situations (i.e. one person having points significantly higher or lower points than the rest).
+
+* *Minor enhancement*: Storage for `DutyStorage` -- `JsonAdaptedDutyStorage`
+** What it does: Ensures that duty points and duty records are saved in the system when the application closes.
+** Justification: This allows users to open the application with previously saved duty information instead of resetting each time the application reopens.
+
+* *Minor enhancement*: `DateUtil` Common
 ** What it does: A class that contains static methods to assist in validation of date parameters and other date related functions.
-** Justification: Contains commonly used functionalities that aids the developers and prevent duplicate code.
+** Justification: Contains commonly used functions that aids the developers and prevent duplicate codes.
 
 * *Code contributed*:
 ** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/duty/Duty.java
@@ -45,11 +58,19 @@ The Duty Planner is modified and upgraded from SE-EDU Address Book 4.
 ** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/duty/DutySettings.java
 ** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/duty/DutyStorage.java
 ** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/DutyCalendar.java
-** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/commons/util/DateUtil.java
 ** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/commands/ScheduleCommand.java
 ** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/commands/ConfirmScheduleCommand.java
 ** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/commands/DutySettingsCommand.java
 ** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/parser/DutySettingsCommandParser.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/commands/PointsCommand.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/parser/PointsCommandParser.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/commands/RewardCommand.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/parser/RewardCommandParser.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/commands/PenalizeCommand.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/logic/parser/PenalizeCommandParser.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/storage/JsonAdaptedDutyStorage.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/storage/JsonAdaptedDutyStoragePerson.java
+** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/commons/util/DateUtil.java
 ** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/UserPrefs.java
 ** https://github.com/yjpan47/main/blob/master/src/main/java/seedu/address/model/PersonnelDatabase.java
 
@@ -87,6 +108,8 @@ include::../UserGuide.adoc[tag=confirmAdmin]
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
+
+include::../DeveloperGuide.adoc[tag=dutyDiagram]
 
 include::../DeveloperGuide.adoc[tag=dutyPackage]
 
