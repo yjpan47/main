@@ -385,9 +385,12 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: `config.json`).
 
+//tag::dutyPackage[]
 === Duty Package
 
-=== Implementation
+==== Implementation
+
+image::DutyPackage.png[width:"600"]
 
 The diagram above shows the high-level structure of the duty components. 
 
@@ -450,28 +453,43 @@ The diagram above shows the high-level structure of the duty components.
 
 It is accessed when duties are generated to ensure the appropriate attributes (capacity and points) given to each duty.  
 
-*Scheduling Algorithm*
+==== Schedule Command
 
-* To ensure a system where duties are allocated fairly to the people:
-** We make use of the point system in which each individual can earn points by doing duties. The points awarded to servicemen are cumulative, thus the points awarded are carried over to the next month. Points of each person is stored in DutyStorage.
-** Each duty is worth a certain number of points and a person gains that amount of points by doing that duty. The points allocated to each duty is retrieved from DutySettings.
-** Before the scheduling command is called, each person has the opportunity to indicate the days in which they are unavailable to do duty.
+The `schedule` command is called by the admin to generate a viable duty schedule for the upcoming month.
 
-* Appoach
-** A priority queue of all people based on their accumulated points with the lowest at the head of the queue.
-** A list of duties will be generated and sorted by their points allocated in descending order.
-** Starting from the top of the list of duties, the priority queue will be continuously polled to look for the instances of compatible duty-person pairing. For a duty-person pair to be compatible, it requries the duty to not contain the person and the person to not block the day of the duty. Once a duty is completedly filled, it moves on to the next duty in the list. The person will be added back into the priority queue with an adjusted duty point, thus most likely pushed to the back of the queue, allowing others to be assigned duties.
-** Ideally, people with lower accumulated points will be assigned to duties with higher points allocated. This allows the scheduler to automatically balance the points of each person by the end of the month.
+image::ScheduleCommand.png[width="800"]
 
-==== Design Considerations
-===== Aspect: need for DutyDate classes
+The sequence diagram above shows how the `schedule` operation works.
 
-* **Alternative 1 (current choice):** `Duty` class also plays the role of `DutyDate` class
-** Pros: one less layer for simplicity
-** Cons: less flexible for extension of the project, hard to ensure that each `DutyMonth` contains the correct number of `Duty` objects
-* **Alternative 2:** create a separate `DutyDate` class that contains `Duty` as an attribute
-** Pros: Easy indexing and reference for UI and other purposes
-** Cons: `DutyDate` class does not have other roles, can be redundant
+It is worth noting that `schedule` operation does not finalize the duty schedule for next month. Therefore, `dutyCalendar` has to instantiates a new  `dummyNextMonth` for the operation.
+
+
+Subsequent calling of the `confirm` operation will allow the `nextMonth` object to point to the latest `dummyNextMonth`, and invoke `dutyStorage` to update duty points and records.
+
+
+==== Schedule Algorithm
+
+image::ScheduleAlgorithm.jpg[width = "600"]
+
+The sequence diagram above provides a simplified illustration of the `schedule` method in `DutyMonth`.
+
+To ensure a system where duties are allocated fairly,
+
+* We employ a point system where each person can gain points by doing duties.
+* The points awarded are cumulative -- can be carried over to the next month. Duty points accumulated are stored in `DutyStorage`.
+* Each duty is worth a certain number of points and a person gains that amount of points by doing that duty. The points allocated to each duty is retrieved from `DutySettings`.
+* Before the `schedule` command is called, each person has the opportunity to indicate the days he are unavailable for duty.
+
+Approach
+
+* Generate a list of `Duty` objects sorted by their points in descending order.
+* Generate a priority queue of all `Person` objects, queued based on their accumulated duty points with the lowest at the head of the queue.
+* Iterate through the list of `Duty` objects. At each iteration,
+** Poll the priority queue of `Person` continuously until an instance of a compatible duty-person pairing.
+** A compatible pairing consists of conditions such as the `Person` not having blocked the day of the `Duty` and the `Duty` does not already contain the `Person`.
+** Iteration continues after the `Duty` is filled or priority queue of `Person` becomes empty (cannot find compatible `Person`).
+* The algorithm ensures that a person with low accumulated duty points will be assigned to duties that rewards higher points and assigned to more duties. This allows the scheduler to automatically balance the duty points of each person by the end of the month.
+// end::dutyPackage[]
 
 // tag::login[]
 === Logging in and account authority feature
