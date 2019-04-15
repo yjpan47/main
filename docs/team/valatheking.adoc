@@ -124,6 +124,14 @@ A specific date cannot be removed from the list of blocked dates. If a user wish
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
+
+.Component interactions for `delete 1` command
+image::SDforDeletePerson.png[width="800"]
+
+.Structure of the Model Component
+image::ModelClassDiagram.png[width="800"]
+
+The sections below give more details of each component.
 === Block Dates Feature
 ==== Current Implementation
 

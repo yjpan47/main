@@ -1193,6 +1193,7 @@ Use case ends.
 Use case resumes at step 3.
 // end::usecase2[]
 
+// tag::usecase3[]
 [discrete]
 === Use case 3 (Admin): See all duties planned for current and next month in the calendar
 
@@ -1212,7 +1213,9 @@ Use case ends.
 ** 2a1. PersonnelDatabase still shows the calendar of the current month, but without the duties.
 +
 Use case resumes at step 3.
+// end::usecase3[]
 
+// tag::usecase4[]
 [discrete]
 === Use case 4 (Admin): See duties assigned to specific user
 
@@ -1223,8 +1226,9 @@ Use case resumes at step 3.
 Use case ends.
 
 *Extensions*
-// tag::usecase5[]
+// end::usecase4[]
 
+// tag::usecase5[]
 [discrete]
 === Use case 5 (Admin): Schedule duties
 
@@ -1309,7 +1313,6 @@ Use case ends.
 ** 2b1. PersonnelDatabase shows an error message indicating that the user is not assigned to any duties.
 +
 Use case ends
-// end::usecase10[]
 
 +
 Use case ends.
@@ -1329,24 +1332,22 @@ Use case ends.
 
 *Extensions*
 
-// tag::usecase10[]
 [discrete]
 === Use case 10 (General user): Log into the system
 
 *MSS*
 
 
-1. A general user wants to log in to the system.
-2. He has not changed his password and so enters his NRIC as the username and password.
-3. The user is logged into the database
-=======
+1. A general user requests to log in to the system.
+2. The general use has not changed their password and so enters their NRIC as the username and password.
+3. The user is logged into the database.
 
 [discrete]
 === Use case 11 (General user): Exit the system
 
 *MSS*
 
-1. A user wants to close the system and types exit.
+1. A user requests to close the system and types exit.
 2. The Application closes.
 +
 Use case ends.
