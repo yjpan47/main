@@ -457,7 +457,7 @@ It is accessed when duties are generated to ensure the appropriate attributes (c
 
 The `schedule` command is called by the admin to generate a viable duty schedule for the upcoming month.
 
-image::ScheduleCommand.png[width="800"]
+image::ScheduleCommand.png[width="1000"]
 
 The sequence diagram above shows how the `schedule` operation works.
 
@@ -469,7 +469,7 @@ Subsequent calling of the `confirm` operation will allow the `nextMonth` object 
 
 ==== Schedule Algorithm
 
-image::ScheduleAlgorithm.jpg[width = "600"]
+image::ScheduleAlgorithm.jpg[width = "500"]
 
 The sequence diagram above provides a simplified illustration of the `schedule` method in `DutyMonth`.
 
