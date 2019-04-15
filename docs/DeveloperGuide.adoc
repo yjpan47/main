@@ -489,6 +489,22 @@ Approach
 ** A compatible pairing consists of conditions such as the `Person` not having blocked the day of the `Duty` and the `Duty` does not already contain the `Person`.
 ** Iteration continues after the `Duty` is filled or priority queue of `Person` becomes empty (cannot find compatible `Person`).
 * The algorithm ensures that a person with low accumulated duty points will be assigned to duties that rewards higher points and assigned to more duties. This allows the scheduler to automatically balance the duty points of each person by the end of the month.
+
+==== Design Considerations
+
+===== Aspect: Storing duty points of each person
+
+Alternative 1 (current choice):
+
+* Stored in external `DutyStorage` object with HashMap attribute.
+** Pros: Reduce number of  dependencies -- `Person` class is completely freed from any duty information. Duty package operates independently.
+** Cons: A lot of inefficiencies when querying duty points.
+
+Alternative 2:
+
+* Enable `Person` class to contain duty related information. For example, adding a duty point attribute to `Person`.
+** Pros: Simple and efficient indexing and referencing.
+** Cons: Increase level of dependencies. Could potentially result in circular dependencies between `Duty` and `Person`.
 // end::dutyPackage[]
 
 // tag::login[]
