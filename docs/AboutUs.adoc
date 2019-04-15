@@ -48,7 +48,7 @@ Responsibilities: UI and authentication
 
 === Yoon KI Hyun
 image::dreampursuer95.png[width="150", align="left"]
-{empty}[https://github.com/dreampursuer95[github]] [<<dreampursuer#, portfolio>>]
+{empty}[https://github.com/dreampursuer95[github]] [<<dreampursuer95#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Duty model and storage
