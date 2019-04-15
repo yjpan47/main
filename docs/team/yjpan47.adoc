@@ -88,21 +88,7 @@ include::../UserGuide.adoc[tag=confirmAdmin]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-*Algorithm*
-
-* Each Person is assigned a duty score that is initialized at a fixed value. Each Person can earn duty points by covering
-duties. Weekday duties are worth 2 points; Friday duties are worth 3 points; Weekend duties are worth 4 points.
-
-* Preparation of data
-1. The list of persons will be sorted according to their points in ascending order.
-2. The list of duties will be sorted in the order Weekend >> Friday >> Weekday.
-3. Person with lower duty points will be assigned to weekend duties
-
-* Assignment
-1. Starting from the top of the duties list, the first person from the persons list who is available (didn't block out the date) for that day will be assigned
-the duty. This ensures that lower score persons are given priority for weekend duties.
-2. The algorithm ensure that the duty score of the persons will be normalized as much as possible at the end of each month.
-
+include::../DeveloperGuide.adoc[tag=dutyPackage]
 
 == PROJECT: PowerPointLabs
 

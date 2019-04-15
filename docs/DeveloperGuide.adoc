@@ -469,7 +469,7 @@ Subsequent calling of the `confirm` operation will allow the `nextMonth` object 
 
 ==== Schedule Algorithm
 
-image::ScheduleAlgorithm.jpg[width = "500"]
+image::ScheduleAlgorithm.jpg[width = "600"]
 
 The sequence diagram above provides a simplified illustration of the `schedule` method in `DutyMonth`.
 
