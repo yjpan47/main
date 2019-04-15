@@ -311,12 +311,6 @@ This allows the logic to pass the dates to the model which would then integrate 
 *** The implementation of a BlockedDate Class would complicated the process of integrating into the schedule much harder.
 Implementing the BlockedDate into the algorithm would be a lot harder and would take more time and effort.
 
-
- 
-
-
-
-
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
@@ -790,6 +784,7 @@ Do take a look at <<Design-Logic>> before attempting to modify the `Logic` compo
 ****
 
 [discrete]
+
 ==== `Model` component
 
 *Scenario:* You are in charge of `model`. One day, the `logic`-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the address book, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.
@@ -1196,8 +1191,7 @@ Use case ends.
 1.
 2.
 3.
-4.
-+
+4. +
 Use case ends.
 
 *Extensions*

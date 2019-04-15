@@ -178,7 +178,7 @@ A more detailed explanation of the scheduling algorithm is in <<Duty Settings>>.
 
 ==== Design Considerations:
 * Alternative 1 (current implementation): BlockDateCommand takes in a few dates they are then stored in the personnel database as a Hashmap.
-** Pros : 
+** Pros :
 *** Easy to implement as a new Command. Parsers have already been set up in address book and adding a new command is relatively easy to implement.
 ***The command storing the Integer List in the PersonnelDatabase in a HashMap is also convenient for the other commands such as `viewblock` and `removeblock.
 ***The Hashmap allows easy referencing for these commands. The Hashmap also allows for easier scheduling when the scheduler is run.
@@ -191,11 +191,11 @@ A more detailed explanation of the scheduling algorithm is in <<Duty Settings>>.
 This allows the logic to pass the dates to the model which would then integrate it into the Personnel Database.
 
  * Alternative 2 (current implementation): BlockDateCommand takes in a few dates they are then stored as a new Class called BlockedDates
-** Pros : 
+** Pros :
 *** Easy to implement as a new Command. Parsers have already been set up in address book and adding a new command is relatively easy to implement.
 *** Would be clear what the BlockedDate Class does and also if other forms of dates such as AppointmentDates have to be added in later this would help with integrating them.
 
-** Cons : 
+** Cons :
 *** The implementation of a BlockedDate Class would complicated the process of integrating into the schedule much harder.
 Implementing the BlockedDate into the algorithm would be a lot harder and would take more time and effort
 
