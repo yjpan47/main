@@ -236,6 +236,55 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+//tag::blockDates[]
+=== Block Dates Feature
+==== Current Implementation
+
+The block dates feature is facilitated by PersonnelDatabase and was implemented for general users as they cannot be expected to do duties any time during the upcoming month.
+They may have certain dates that are busy or do not wish to do duties and as such they can block the dates in the PersonnelDatabase.
+
+Block Dates was done by adding 3 new commands to the `Logic` which are `BlockDateCommand`, `ViewBlockCommand`, `RemoveBlockCommand`.
+Modifications and methods were also added in `Model` and `Storage` to implement the blocking of dates in Duty planning and storage.
+
+`BlockDateCommand` works like other commands in the Duty Planner. The command is read a text string from the MainWindow in UI.
+The sequence diagram for the interaction is below.
+
+image::BlockDateStateDiagram.png[width="800"]
+
+
+Step 1 : +
+As seen in the diagram above. The MainWindow calls the execute Command in Logic and passes in the command text, userName and userType of the logged in user.
+
+Step 2 : +
+The LogicManager then passes the command text, userName and userType to PersonnelDatabaseParser and it determines the type of command by parsing the String input.
+Using certain command words, the PersonnelDatabase Parser determines what the command is and then passes the parsed commandText, userName and userType to the BlockDateCommandParser.
+
+Step 3 : +
+The BlockDateCommandParser
+The BlockDateCommandParser takes in the dates list as a String and parses it into a Integer List which is used in the model.
+The BlockDateCommandParser then passes in the Integer List, userType and userName to BlockDateCommand.
+It checks for valid Integer inputs for days in the next month and will throw an exception if the dates entered are not valid
+
+Step 4 : +
+The logic for BlockDateCommand follows the activity diagram below.
+
+image::BlockDateActivityDiagram.png[width="800"]
+
+****
+* The first check is the userType, if you are an Admin you will not be able to access this command
+* The second check is to see the schedule has already been confirmed for nex month. If so the user cannot block any dates for the upcoming month
+* The third check is to see the number of dates blocked and if they are more than 15, an exception will be thrown.
+This is to ensure that commander have enough people to schedule duties. You can change this number if you wish to do so by updating the
+MAX_BLOCKS_NUMBER in BlockDateCommand
+* If the user passes all check the Command will enter Step 5
+****
+
+Step 5 : +
+The BlockDateCommand then passes the Integer List to the model where it is stored in a Hashmap in DutyMonth.
+DutyMonth has a Hashmap<Person, List<Integer>> blockedDays object to allow it to store the blockedDays of every person for the upcoming month.
+
+
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
@@ -336,56 +385,125 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: `config.json`).
 
+// tag::dutyPackage[]
 === Duty Package
 
-==== Current Implementation
+==== Implementation
 
-*DutyCalendar and other relevant classes*
+image::DutyPackage.png[width:"600"]
 
-The class that contains all the information about duties is `DutyCalendar` which has been included as an attribute within `PersonnelDatabase`. `DutyCalendar` contains two `DutyMonth` objects, named `currentMonth` and `nextMonth` respectively. It implements the following operations:
+The diagram above shows the high-level structure of the duty components.
 
-* `DutyCalendar#rollover()` -- replaces `currentMonth` with `nextMonth`, run duty allocation algorithm on `nextMonth` automatically to allocate duties based on the current state of the month such as blocked dates of each personnel. New empty `nextMonth` object will be instantiated.
+==== Duty Calendar
 
-These operation are to be exposed in the `Model` interface as `Model#rolloverDutyCalendar()` *for v1.3*.
+`DutyCalendar` is an attribute of `PersonalDatabase`. It comprises of three `DutyMonth` objects -- namely `currentMonth`, `nextMonth` and `dummyNextMonth` and a `DutyStorage` object -- `dutyStorage`.
 
-Each `DutyMonth` class will contain the same number of `Duty` objects as the number of days in the month. For example, if it is January, it should contain exactly 31 `Duty` classes, and any less or more will raise an Exception.
-'DutyMonth' class contains the following operations:
+* `currentMonth` represents the current month.
+* `nextMonth` represents the upcoming month.
+* `dummyNextMonth` is a dummy `DutyMonth` object that mirrors the contents of `nextMonth`.
+** It is instantiated each time `schedule` command is called. The scheduling alogorithm is invoked to produce a viable duty schedule in `dummyNextMonth`.
+** When `confirm` command is called, `nextMonth` will point to the `dummyNextMonth`.
+* `dutyStorage` stores the accumulated duty points and duty records of each person.
 
-* `DutyMonth#addBlockedDay()` -- method for block dates command to use. Enables a particular Person to block a particular day
-* `DutyMonth#schedule()` -- schedules duties. Details explained below.
-* `DutyMonth#generateAllDuties()` -- based on the settings, this method generates duties for the particular month with customised capacity and number of points awarded
+`DutyCalendar` implements the following operations:
 
-Each `Duty` class should contain the details such as the day index, list of `Person`s in duty that day and a list of `Person`s who have blocked that particular date. More details are to be confirm *by v1.3*.
-`Duty` class contains the following operation:
+* `DutyCalendar#rollover()` -- replaces `currentMonth` with `nextMonth` and a new `nextMonth` object will be instantiated. `rollover()` will be called automatically when the application begins and the `currentMonth` object no longer correspond to the actual current month in real time.
 
-* `Duty#getPersonsString()` -- method for the view command. Returns the string of all the personnels allocated to that particular duty, minus the NRIC of the person passed as the parameter
+* `DutyCalendar#scheduleDutyForNextMonth()` -- instantiates `dummyNextMonth` and runs the scheduling algorithm on it.
 
-`DutySettings` class enables the users to customise the number of points and manpower requied for each duty day
+* `DutyCalendar#confirm()` -- confirms the latest duty schedule by allowing `nextMonth` to point to the current instantiation of `dummyNextMonth`.
 
-`DutyStorage` class stores the accumulated points of each person.
+==== Duty Month
 
-*Scheduling Algorithm*
+`DutyMonth` class represents all duty-related information for a particular month. It contains the following key information:
 
-* To ensure a system where duties are allocated fairly to the people:
-** We make use of the point system in which each individual can earn points by doing duties. The points awarded to servicemen are cumulative, thus the points awarded are carried over to the next month. Points of each person is stored in DutyStorage.
-** Each duty is worth a certain number of points and a person gains that amount of points by doing that duty. The points allocated to each duty is retrieved from DutySettings.
-** Before the scheduling command is called, each person has the opportunity to indicate the days in which they are unavailable to do duty.
+* The blocked days of every person for duties in the month.
+* A list of scheduled duties implemented as a `Duty` object list
+** At the construction of the `DutyMonth`, the list is empty.
+** When the `schedule` method is called, `Duty` objects are be instantiated and appended to the list. The list will contain the same number of `Duty` objects as the number of days in the month.
+* A boolean `confirm` state -- denoting whether the duty allocation for the month is confimed.
 
-* Approach
-** A priority queue of all people based on their accumulated points with the lowest at the head of the queue.
-** A list of duties will be generated and sorted by their points allocated in descending order.
-** Starting from the top of the list of duties, the priority queue will be continuously polled to look for the instances of compatible duty-person pairing. For a duty-person pair to be compatible, it requires the duty to not contain the person and the person to not block the day of the duty. Once a duty is completely filled, it moves on to the next duty in the list. The person will be added back into the priority queue with an adjusted duty point, thus most likely pushed to the back of the queue, allowing others to be assigned duties.
-** Ideally, people with lower accumulated points will be assigned to duties with higher points allocated. This allows the scheduler to automatically balance the points of each person by the end of the month.
+`DutyMonth` class contains the following key operations:
+
+* `DutyMonth#addBlockedDay(person, day)` -- adds a blocked day to a particular person, indicating that the person cannot be assigned duty on that particular day of the month.
+* `DutyMonth#removeBlockedDays(person)` -- remove all blocked days for a particular person, indicating that the person can now be assigned duty on any day of the month.
+* `DutyMonth#schedule(personList, dutySettings, dutyStorage)` -- invokes the scheduling alogorithm. Generate all duties for the particular month and assign person from personList to the duties.
+* `DutyMonth#confirm()` -- sets the state of the `DutyMonth` to confirmed. Duty allocation is finalized.
+
+==== Duty
+
+`Duty` class represents a duty for a day. It contains the following information:
+
+* List of `Person` allocated to the duty.
+* Capacity -- number of persons needed for the duty.
+* Points -- number of  points to be rewarded to each person assigned to the duty.
+
+==== Duty Storage
+
+`DutyMonth` class stores the accumulated duty points and duty records of every person. It has the following key operations:
+
+* `DutyStorage#update(dutieslist)` -- updates the duty points and records from a list of scheduled duties. Used when schedules are confirmed and finalized.
+* `DutyStorage#undo(dutieslist)` -- restore to previous state of duty points and records. Used when previous confirmed duty schedule has to be undone.
+* `DutyStorage#reward(person, point)` -- adds duty points to a particular person.
+* `DutyStorage#penalize(person, point)` -- deducts duty points from a particular person.
+
+==== Duty Settings
+
+`DutySettings` class is an attribute under `UserPrefs`. It stores information regarding the manpower needed and duty points to be rewarded for each duty based on the day of the week.
+
+It is accessed when duties are generated to ensure the appropriate attributes (capacity and points) given to each duty.
+
+==== Schedule Command
+
+The `schedule` command is called by the admin to generate a viable duty schedule for the upcoming month.
+
+image::ScheduleCommand.png[width="1000"]
+
+The sequence diagram above shows how the `schedule` operation works.
+
+It is worth noting that `schedule` operation does not finalize the duty schedule for next month. Therefore, `dutyCalendar` has to instantiates a new  `dummyNextMonth` for the operation.
+
+Subsequent calling of the `confirm` operation will allow the `nextMonth` object to point to the latest `dummyNextMonth`, and invoke `dutyStorage` to update duty points and records.
+
+==== Schedule Algorithm
+
+image::ScheduleAlgorithm.jpg[width = "600"]
+
+The sequence diagram above provides a simplified illustration of the `schedule` method in `DutyMonth`.
+
+To ensure a system where duties are allocated fairly,
+
+* We employ a point system where each person can gain points by doing duties.
+* The points awarded are cumulative -- can be carried over to the next month. Duty points accumulated are stored in `DutyStorage`.
+* Each duty is worth a certain number of points and a person gains that amount of points by doing that duty. The points allocated to each duty is retrieved from `DutySettings`.
+* Before the `schedule` command is called, each person has the opportunity to indicate the days he are unavailable for duty.
+
+Approach
+
+* Generate a list of `Duty` objects sorted by their points in descending order.
+* Generate a priority queue of all `Person` objects, queued based on their accumulated duty points with the lowest at the head of the queue.
+* Iterate through the list of `Duty` objects. At each iteration,
+** Poll the priority queue of `Person` continuously until an instance of a compatible duty-person pairing.
+** A compatible pairing consists of conditions such as the `Person` not having blocked the day of the `Duty` and the `Duty` does not already contain the `Person`.
+** Iteration continues after the `Duty` is filled or priority queue of `Person` becomes empty (cannot find compatible `Person`).
+* The algorithm ensures that a person with low accumulated duty points will be assigned to duties that rewards higher points and assigned to more duties. This allows the scheduler to automatically balance the duty points of each person by the end of the month.
 
 ==== Design Considerations
-===== Aspect: need for DutyDate classes
 
-* **Alternative 1 (current choice):** `Duty` class also plays the role of `DutyDate` class
-** Pros: one less layer for simplicity
-** Cons: less flexible for extension of the project, hard to ensure that each `DutyMonth` contains the correct number of `Duty` objects
-* **Alternative 2:** create a separate `DutyDate` class that contains `Duty` as an attribute
-** Pros: Easy indexing and reference for UI and other purposes
-** Cons: `DutyDate` class does not have other roles, can be redundant
+===== Aspect: Storing duty points of each person
+
+Alternative 1 (current choice):
+
+* Stored in external `DutyStorage` object with HashMap attribute.
+** Pros: Reduce number of  dependencies -- `Person` class is completely freed from any duty information. Duty package operates independently.
+** Cons: A lot of inefficiencies when querying duty points.
+
+Alternative 2:
+
+* Enable `Person` class to contain duty related information. For example, adding a duty point attribute to `Person`.
+** Pros: Simple and efficient indexing and referencing.
+** Cons: Increase level of dependencies. Could potentially result in circular dependencies between `Duty` and `Person`.
+// end::dutyPackage[]
 
 // tag::swap[]
 === Request for swapping of duties
@@ -424,6 +542,10 @@ The admin user can then use 'approveSwap' or 'rejectSwap' to approve or reject a
 // tag::login[]
 === Logging in and account authority feature
 ==== Current Implementation
+* Note that in this segment, NRIC and Username may be used interchangeably, since the username is always the NRIC, unless using the default Admin account.
+
+image::LoginSequenceDiagramDG.png[width="800"]
+
 There are currently 2 User Types found in commons.core.index: UserType.ADMIN and UserType.General. Each NRIC account will be assigned to one of these user types that correspond to different authorities.
 Note that Admin type user accounts are not only have access to more commands, but some commands (such as edit) have more functionalities as well. The Command class implements AdminCommand and GeneralCommand interfaces.
 
@@ -433,12 +555,14 @@ to ensure the user does not have access to the wrong authority level.
 ==== Design Considerations
 ===== Aspect: handling logging in and UserType
 
-* **Alternative 1 (current choice):** LogIn box handles logic of finding account, MainWindow has a User field.
-** Pros: one less layer for simplicity
-** Cons: UI best not to handle logic, User Type might be changed, which could be bad for administrator security.
-* **Alternative 2:** Logging in is like a command that is handled by logic, after which Main Window is initialized with the UserType and NRIC.
-** Pros: Logic operations now handled by Logic class, UserType and NRIC can be final attribute to make sure no one gets the wrong account/ permission for each window.
-** Cons: Command from logging in should be different from 'command' class to prevent undos or redos from happening.
+* **Alternative 1 (current choice):** LogIn box handles logic of finding account, MainWindow has UserType and NRIC field.
+** Pros: MainWindow initialized with a final UserType and NRIC field, which in turn creates a commandbox with a final UserType and NRIC field, which is safer for the commands, making sure the commands will be created as an AdminCommand or GeneralCommand correctly.
+** Cons: UI best not to handle logic, UserType or NRIC of user might be might be changed, but since the UserType and NRIC fields in the MainWindow are final, they cannot be changed. This might mess up some commands or functionalities that target the admin's own account.
+** Implemented fix for cons: Login Box does not store Logic, but rather logic has a method to find the account given the NRIC and password, but LoginBox has a functional interface of the method as a field.
+To handle security concerns of the user changing his own NRIC or UserType, the program automatically exits once an admin account changes his own UserType or NRIC, or an admin deletes his own account.
+* **Alternative 2:** Logging in is now a command, where LoginCommand extends Command. After which the MainWindow creates the initializes the CommandBox with UserType and NRIC.
+** Pros: This is easier to implement, since the command functionality has already been set up. Logic operations now handled by Logic class, UserType and NRIC can be final attribute of CommandBox as well. After the admin changes his own UserType or NRIC, a new commandbox may be initialized with the new fields, instead of exiting the program.
+** Cons: Difficult to hide the password text this way, as we have to change how the command box textArea functions to hide password text.
 // end::login[]
 
 == Documentation
@@ -960,7 +1084,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`*` |user with duties |see my own duties |
 
-|`* * *` |visual user |see all the duties in a user-friendly form |understand the whole schedule better
+|`* * *` |visual user |see all the duties in a user-friendly form |understand the whole better
 
 |`* * *` |general user |edit my own details |
 

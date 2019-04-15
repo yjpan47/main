@@ -13,6 +13,7 @@ import seedu.address.model.person.Person;
  */
 public class BlockDateCommand extends Command {
 
+    public static final int MAX_BLOCK_NUMBER = 15;
     public static final String COMMAND_WORD = "block";
     public static final String MESSAGE_USAGE = COMMAND_WORD + " Blocks out certain duty dates for the upcoming "
             + "month for the current person using.\n"
@@ -40,7 +41,7 @@ public class BlockDateCommand extends Command {
         if (nextMonth.isConfirmed()) {
             throw new CommandException(MESSAGE_DUTY_CONFIRMED);
         }
-        if (blockedDates.size() > 15) {
+        if (blockedDates.size() > MAX_BLOCK_NUMBER) {
             throw new CommandException(MESSAGE_TOO_MANY_BLOCKED_DATES);
         }
         for (Integer blockedDay : blockedDates) {
