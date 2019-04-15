@@ -15,18 +15,17 @@ Duty Planner is a desktop application used to organise and plan duties for army 
 
 * *Major enhancement*: model and storage of *Duty system* as a whole
 ** What it does: Duty system is a whole new feature added into the system to represent the real-life duty allocation system used in the army and other organisations. The duties created can also be saved and loaded just like the list of personnels.
-** Justification: This feature is the main focus of our project as a Duty Planner, as we need an effective system of duties in order to introduce new commands that deal with them.
+** Justification: This feature is the main focus of our project as a Duty Planner, as we need an effective system and model of duties in order to introduce new commands that deal with them.
 ** Highlights: This enhancement required creating new classes solely for the purpose of building, managing and storing the duties. The duty system has also been added to the existing address book class (renamed to personnel database), which now contains DutyCalendar class as an attribute.
 ** Credits: _{Fellow teammate Pan Yongjing for working together on the DutyMonth and Duty classes}_
 
 * *Minor enhancement*: added a view command that allows the users to check his own list of duties as well as his fellow soldiers'.
 
-* *Code contributed*: [https://github.com/dreampursuer95/main/tree/master/src/main/java/seedu/address/logic/commands, https://github.com/dreampursuer95/main/blob/master/src/main/java/seedu/address/storage/JsonAdaptedDuty.java, https://github.com/dreampursuer95/main/blob/master/src/main/java/seedu/address/storage/JsonAdaptedDutyMonth.java, https://github.com/dreampursuer95/main/blob/master/src/main/java/seedu/address/storage/JsonAdaptedHashMapUnit.java, https://github.com/dreampursuer95/main/blob/master/src/main/java/seedu/address/storage/JsonSerializablePersonnelDatabase.java, https://github.com/dreampursuer95/main/blob/master/src/main/java/seedu/address/model/DutyCalendar.java, https://github.com/dreampursuer95/main/blob/master/src/main/java/seedu/address/model/PersonnelDatabase.java, https://github.com/dreampursuer95/main/blob/master/src/main/java/seedu/address/model/duty/Duty.java, https://github.com/dreampursuer95/main/blob/master/src/main/java/seedu/address/model/duty/DutyMonth.java, https://github.com/dreampursuer95/main/blob/master/src/main/java/seedu/address/commons/util/CalendarUtil.java, https://github.com/dreampursuer95/main/blob/master/src/main/java/seedu/address/logic/parser/ViewCommandParser.java, https://github.com/dreampursuer95/main/blob/master/src/main/java/seedu/address/logic/commands/ViewCommand.java] [https://github.com/dreampursuer95/main/blob/master/src/test/java/seedu/address/commons/util/CalendarUtilTest.java]
+* *Code contributed*: https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=dreampursuer95&sort=displayName&since=2019-02-10&until=2019-04-15&timeframe=day&reverse=false&repoSort=true
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.0` - `v1.1rc` (2 releases) on GitHub
 *** Set up the group Github account and the main repository
 *** Set up Travis testing within our own repository
 ** Enhancements to existing features:
@@ -42,16 +41,22 @@ Duty Planner is a desktop application used to organise and plan duties for army 
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
+include::../UserGuide.adoc[tag=undo]
+include::../UserGuide.adoc[tag=confirmAdmin2]
+
 == Contributions to the Developer Guide
 
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
-Section 3.5
-
-
-== PROJECT: PowerPointLabs
+include::../DeveloperGuide.adoc[tag=modeldiagram]
+include::../DeveloperGuide.adoc[tag=storagediagram]
+include::../DeveloperGuide.adoc[tag=dutyCalendar]
+include::../DeveloperGuide.adoc[tag=userstories]
+include::../DeveloperGuide.adoc[tag=usecase1]
+include::../DeveloperGuide.adoc[tag=usecase2]
+include::../DeveloperGuide.adoc[tag=usecase5]
+include::../DeveloperGuide.adoc[tag=usecase10]
 
 ---

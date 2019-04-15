@@ -111,7 +111,21 @@ include::../UserGuide.adoc[tag=confirmAdmin]
 
 include::../DeveloperGuide.adoc[tag=dutyDiagram]
 
-include::../DeveloperGuide.adoc[tag=dutyPackage]
+include::../DeveloperGuide.adoc[tag=dutyMonth]
+
+include::../DeveloperGuide.adoc[tag=duty]
+
+include::../DeveloperGuide.adoc[tag=dutyStorage]
+
+include::../DeveloperGuide.adoc[tag=dutySettings]
+
+include::../DeveloperGuide.adoc[tag=dutyDiagram]
+
+include::../DeveloperGuide.adoc[tag=scheduleCommand]
+
+include::../DeveloperGuide.adoc[tag=scheduleAlgorithm]
+
+include::../DeveloperGuide.adoc[tag=dutyDesign]
 
 include::../DeveloperGuide.adoc[tag=scheduleManualTest]
 
