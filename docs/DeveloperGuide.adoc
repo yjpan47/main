@@ -1467,7 +1467,6 @@ _{ more test cases ... }_
 
 _{ more test cases ... }_
 
-<<<<<<< HEAD
 // tag::scheduleManualTest[]
 === Schedule duties for next month
 
@@ -1527,14 +1526,12 @@ _{ more test cases ... }_
    Expected: Sunday duties now require 5 persons and worth 10 points each. Call `schedule` again and observe the duty roster result. The new duty roster should provide information that tallies with the changed duty settings +
 // end::settingsManualTest[]
 
-_{ more test cases ... }_
-=======
 === BlockDateCommand Tests
 
-. Prerequisites: You need to be logged in as a general user before you can block dates. If there are no personnel Database you can add some by loggin in as an Admin first
+. Prerequisites: You need to be logged in as a general user before you can block dates. If there are no personnel Database you can add some by login in as an Admin first
 
 .. Test case : block 1 5 6
-Expected : The person has succesfully blocked days in the upcoming month and when schedule is run he will not be assigned duties on those days.
+Expected : The person has successfully blocked days in the upcoming month and when schedule is run he will not be assigned duties on those days.
 
 .. Test case : block -1
 Expected : CommandException will be thrown to show invalid date. No dates will be blocked.
@@ -1547,4 +1544,3 @@ Expected : CommandException will be thrown to show invalid authority. No dates w
 
 .. Test case : block 6 (Schedule already confirmed)
 Expected : CommandException will be thrown to show confirmed schedule. No dates will be blocked.
->>>>>>> cdb6180b41056e120b9ce1c7f300eb16621966d9
