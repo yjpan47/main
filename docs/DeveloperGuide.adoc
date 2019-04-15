@@ -400,6 +400,8 @@ Note that Admin type user accounts are not only have access to more commands, bu
 Upon entering the username and password into the LoginBox, the LogicManager searches the list of personnel until it finds a personnel with the same username and (hashed) password.
 This returns the username and UserType of the account, and initializes the MainWindow with the username and Usertype as fields. The MainWindow then initializes the commandbox with these fields as well: the usertype so that the commands are executed using executeAdmin() or executeGeneral(), and the nric for several commands that require it to execute (for example, using the "Edit" command as a general account, since the account can only affect its own information.
 
+image::DeleteCommandFinalDG.png[width="900"]
+
 The execute Command in logic will decide to initialize the commands as either AdminCommand or GeneralCommand,
 to ensure the user does not have access to the wrong authority level.
 
