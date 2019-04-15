@@ -515,6 +515,40 @@ Approach
 ** Cons: Increase level of dependencies. Could potentially result in circular dependencies between `Duty` and `Person`.
 // end::dutyPackage[]
 
+// tag::swap[]
+=== Request for swapping of duties
+==== Current Implementation
+
+*Swap Request Creation*
+
+There is currently a Java class called Request in the request folder in the model package. This request represents a swap request that a duty personnel submits using the 'swap' command. It has 4 fields, the requester Person object, the allocated date (out of which the requester wants to swap) as a java.time.LocalDate object, the requested date (into which the requester wants to swap) also as a LocalDate object, and the accepter Person object, which could be null.
+
+A Request object is created when the 'swap' command is entered by a non-master-admin user. Since he is an actual human user with an associated Person object and NRIC, he is able to request a swap if he is unwilling or unable to do his current allocated duty. This must happen after the duties are scheduled. Otherwise, the list of duties associated with the user is empty and a swap request cannot be made.
+
+The swap command is wrapped in a SwapCommand object that extends the abstract class Command, just like any other command. The user inputs 2 dates, his allocated and requested date, and the 2 dates are parsed as LocalDate objects, from which the Request object is made.
+
+Thereafter, the Request object is added to the personnel database through the model so the personnel database now contains the request in a list.
+
+After this, the new personnel database is committed (making it undoable) and the listener in LogicManager is informed. As a result, the new personnel database is saved into the JSON file. Finally, the browser panel is refreshed to reflect the newest request list.
+
+The browser panel was transformed from implementing FXML WebView to FXML TextArea. After the request list is updated, a new string is passed to the TextArea field for it to display in the browser panel.
+
+*Accept Swap Command*
+
+Next, there is a command 'acceptSwap' that allows a non-master-admin user to accept a swap that another user has requested (we call this an open swap.) The list of open swaps would be on the list in the browser panel and the 'acceptSwap' command takes in a positive integer as argument and this integer refers to the index number of the request in the request list.
+
+Again, this is encapsulated in an AcceptSwapCommand object, which extends the abstract Command class. An AcceptSwapCommand constructor takes in the index mentioned above and the username (i.e NRIC) of the current user. It sets the accepter Person in the relevant Request object to be the current user.
+
+*View Swaps Command*
+
+The 'viewSwaps' command is only for admin users. It takes in no arguments and it is for admin users to view all the swap requests which have found an accepter (From now on we call these paired requests.) This command is encapsulated in the ViewSwapsCommand object. When this ViewSwapsCommand object is executed by the LogicManager, a string showing all the paired requests pending approval is generated and passed into the TextArea of the ResultDisplay. This allows the admin user to view the requests and then proceed to approve or reject them.
+
+*Approve / Reject Swap Command*
+
+The admin user can then use 'approveSwap' or 'rejectSwap' to approve or reject a paired swap in the list displayed in the ResultDisplay after executing the viewSwaps command. These are encapsulated in the ApproveSwapCommand and RejectSwapCommand classes.
+
+// end::swap[]
+
 // tag::login[]
 === Logging in and account authority feature
 ==== Current Implementation
