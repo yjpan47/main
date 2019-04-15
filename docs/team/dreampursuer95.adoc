@@ -52,7 +52,7 @@ include::../UserGuide.adoc[tag=confirmAdmin2]
 
 include::../DeveloperGuide.adoc[tag=modeldiagram]
 include::../DeveloperGuide.adoc[tag=storagediagram]
-include::../DeveloperGuide.adoc[tag=dutycalendar]
+include::../DeveloperGuide.adoc[tag=dutyCalendar]
 include::../DeveloperGuide.adoc[tag=userstories]
 include::../DeveloperGuide.adoc[tag=usecase1]
 include::../DeveloperGuide.adoc[tag=usecase2]
