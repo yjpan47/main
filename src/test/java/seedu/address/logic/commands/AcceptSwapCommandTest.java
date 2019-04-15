@@ -45,7 +45,7 @@ public class AcceptSwapCommandTest {
             if (!duty.getPersons().contains(ALICE)) {
                 requestedDate = LocalDate.of(nextMonthYear, nextMonthIndex, duty.getDayIndex());
                 for (Person person : duty.getPersons()) {
-                    if (!duties.get(allocatedDayIndex - 1).contains(person)) {
+                    if (!duties.get(allocatedDayIndex - 1).getPersons().contains(person)) {
                         accepter = person;
                         break;
                     }
