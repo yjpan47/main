@@ -435,7 +435,6 @@ The diagram above shows the high-level structure of the duty components.
 * `DutyMonth#schedule(personList, dutySettings, dutyStorage)` -- invokes the scheduling alogorithm. Generate all duties for the particular month and assign person from personList to the duties.
 * `DutyMonth#confirm()` -- sets the state of the `DutyMonth` to confirmed. Duty allocation is finalized.
 
-=======
 ==== Duty
 
 `Duty` class represents a duty for a day. It contains the following information:
