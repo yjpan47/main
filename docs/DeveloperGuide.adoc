@@ -387,31 +387,68 @@ Certain properties of the application can be controlled (e.g user prefs file loc
 
 === Duty Package
 
-==== Current Implementation
+=== Implementation
 
-*DutyCalendar and other relevant classes*
+The diagram above shows the high-level structure of the duty components. 
 
-The class that contains all the information about duties is `DutyCalendar` which has been included as an attribute within `PersonnelDatabase`. `DutyCalendar` contains two `DutyMonth` objects, named `currentMonth` and `nextMonth` respectively. It implements the following operations:
+==== Duty Calendar
 
-* `DutyCalendar#rollover()` -- replaces `currentMonth` with `nextMonth`, run duty allocation algorithm on `nextMonth` automatically to allocate duties based on the current state of the month such as blocked dates of each personnel. New empty `nextMonth` object will be instantiated.
+`DutyCalendar` is an attribute of `PersonalDatabase`. It comprises of three `DutyMonth` objects -- namely `currentMonth`, `nextMonth` and `dummyNextMonth` and a `DutyStorage` object -- `dutyStorage`.
 
-These operation are to be exposed in the `Model` interface as `Model#rolloverDutyCalendar()` *for v1.3*.
+* `currentMonth` represents the current month.
+* `nextMonth` represents the upcoming month.
+* `dummyNextMonth` is a dummy `DutyMonth` object that mirrors the contents of `nextMonth`. 
+** It is instantiated each time `schedule` command is called. The scheduling alogorithm is invoked to produce a viable duty schedule in `dummyNextMonth`.
+** When `confirm` command is called, `nextMonth` will point to the `dummyNextMonth`. 
+* `dutyStorage` stores the accumulated duty points and duty records of each person.
 
-Each `DutyMonth` class will contain the same number of `Duty` objects as the number of days in the month. For example, if it is January, it should contain exactly 31 `Duty` classes, and any less or more will raise an Exception.
-'DutyMonth' class contains the following operations:
+`DutyCalendar` implements the following operations:
 
-* `DutyMonth#addBlockedDay()` -- method for block dates command to use. Enables a particular Person to block a particular day
-* `DutyMonth#schedule()` -- schedules duties. Details explained below.
-* `DutyMonth#generateAllDuties()` -- based on the settings, this method generates duties for the particular month with customised capacity and number of points awarded
+* `DutyCalendar#rollover()` -- replaces `currentMonth` with `nextMonth` and a new `nextMonth` object will be instantiated. `rollover()` will be called automatically when the application begins and the `currentMonth` object no longer correspond to the actual current month in real time. 
 
-Each `Duty` class should contain the details such as the day index, list of `Person`s in duty that day and a list of `Person`s who have blocked that particular date. More details are to be confirm *by v1.3*.
-`Duty` class contains the following operation:
+* `DutyCalendar#scheduleDutyForNextMonth()` -- instantiates `dummyNextMonth` and runs the scheduling algorithm on it. 
 
-* `Duty#getPersonsString()` -- method for the view command. Returns the string of all the personnels allocated to that particular duty, minus the NRIC of the person passed as the parameter
+* `DutyCalendar#confirm()` -- confirms the latest duty schedule by allowing `nextMonth` to point to the current instantiation of `dummyNextMonth`. 
 
-`DutySettings` class enables the users to customise the number of points and manpower requied for each duty day
+==== Duty Month
 
-`DutyStorage` class stores the accumulated points of each person.
+`DutyMonth` class represents all duty-related information for a particular month. It contains the following key information:
+
+* The blocked days of every person for duties in the month.
+* A list of scheduled duties implemented as a `Duty` object list
+** At the construction of the `DutyMonth`, the list is empty.
+** When the `schedule` method is called, `Duty` objects are be instantiated and appended to the list. The list will contain the same number of `Duty` objects as the number of days in the month. 
+* A boolean `confirm` state -- denoting whether the duty allocation for the month is confimed. 
+
+`DutyMonth` class contains the following key operations:
+
+* `DutyMonth#addBlockedDay(person, day)` -- adds a blocked day to a particular person, indicating that the person cannot be assigned duty on that particular day of the month.
+* `DutyMonth#removeBlockedDays(person)` -- remove all blocked days for a particular person, indicating that the person can now be assigned duty on any day of the month.
+* `DutyMonth#schedule(personList, dutySettings, dutyStorage)` -- invokes the scheduling alogorithm. Generate all duties for the particular month and assign person from personList to the duties.
+* `DutyMonth#confirm()` -- sets the state of the `DutyMonth` to confirmed. Duty allocation is finalized.
+
+==== Duty
+
+`Duty` class represents a duty for a day. It contains the following information:
+
+* List of `Person` allocated to the duty. 
+* Capacity -- number of persons needed for the duty.
+* Points -- number of  points to be rewarded to each person assigned to the duty.
+
+==== Duty Storage
+
+`DutyMonth` class stores the accumulated duty points and duty records of every person. It has the following key operations:
+
+* `DutyStorage#update(dutieslist)` -- updates the duty points and records from a list of scheduled duties. Used when schedules are confirmed and finalized.
+* `DutyStorage#undo(dutieslist)` -- restore to previous state of duty points and records. Used when previous confirmed duty schedule has to be undone.
+* `DutyStorage#reward(person, point)` -- adds duty points to a particular person.
+* `DutyStorage#penalize(person, point)` -- deducts duty points from a particular person.
+
+==== Duty Settings
+
+`DutySettings` class is an attribute under `UserPrefs`. It stores information regarding the manpower needed and duty points to be rewarded for each duty based on the day of the week. 
+
+It is accessed when duties are generated to ensure the appropriate attributes (capacity and points) given to each duty.  
 
 *Scheduling Algorithm*
 
@@ -981,7 +1018,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`*` |user with duties |see my own duties |
 
-|`* * *` |visual user |see all the duties in a user-friendly form |understand the whole schedule better
+|`* * *` |visual user |see all the duties in a user-friendly form |understand the whole better
 
 |`* * *` |general user |edit my own details |
 
